@@ -25,10 +25,11 @@
   .logo {
     height: inherit;
     margin-right: 2rem;
+    display:flex;
   }
 
   .logo img {
-    width: 15rem;
+    width: 3rem;
     height: inherit;
     object-fit: contain;
   }
@@ -62,9 +63,11 @@
 }
 
 .navigation-menu-main {
-  padding-left: 0;
+  padding-top:0.8rem;
+  padding-left: 3.8rem;
   margin-right: 2rem;
   flex-grow: 1;
+  width:100%;
 
   li {
     display: inline-block;

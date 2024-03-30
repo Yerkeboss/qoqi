@@ -1,11 +1,11 @@
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  databaseURL: import.meta.env.VITE_FIREBASE_DB_URL,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MSG_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
+  apiKey: "AIzaSyDy3xluL4d7RDcIT7rh4RNm0ZWrseWBMe0",
+  authDomain: "qoqiqaz7.firebaseapp.com",
+  projectId: "qoqiqaz7",
+  databaseURL: "gs://qoqiqaz7.appspot.com",
+  storageBucket: "qoqiqaz7.appspot.com",
+  messagingSenderId: "850938383658",
+  appId: "1:850938383658:web:f8d90558ef56953454e253"
 };
 
 export default firebaseConfig;

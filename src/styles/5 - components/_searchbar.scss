@@ -1,5 +1,5 @@
 .searchbar {
-  width: 400px;
+  // width: 400px;
   display: flex;
   position: relative;
 }
@@ -11,6 +11,7 @@
 .searchbar-input {
   width: 100%;
   background: $white;
+  
 }
 
 .searchbar-recent {
@@ -21,6 +22,7 @@
   background: $white;
   box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
   display: none;
+  
 }
 
 .searchbar-recent-header {
@@ -72,10 +74,10 @@
 
 .searchbar-icon {
   position: absolute;
-  left: $m-size;
+  right: $m-size;
   top: 0;
   bottom: 0;
   margin: auto;
   color: #7a7a7a;
-  font-size: 1.6rem;
+  font-size: 2rem;
 }

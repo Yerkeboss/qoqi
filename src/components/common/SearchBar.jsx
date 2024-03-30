@@ -1,15 +1,19 @@
 /* eslint-disable react/no-array-index-key */
-import { SearchOutlined } from '@ant-design/icons';
-import React, { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { clearRecentSearch, removeSelectedRecent } from '@/redux/actions/filterActions';
+import { SearchOutlined } from "@ant-design/icons";
+import React, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import {
+  clearRecentSearch,
+  removeSelectedRecent,
+} from "@/redux/actions/filterActions";
 
 const SearchBar = () => {
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
+  const [isInputOpen, setIsInputOpen] = useState(false);
   const { filter, isLoading } = useSelector((state) => ({
     filter: state.filter,
-    isLoading: state.app.loading
+    isLoading: state.app.loading,
   }));
   const searchbarRef = useRef(null);
   const history = useHistory();
@@ -26,10 +30,10 @@ const SearchBar = () => {
     if (e.keyCode === 13) {
       // dispatch(setTextFilter(searchInput));
       e.target.blur();
-      searchbarRef.current.classList.remove('is-open-recent-search');
+      searchbarRef.current.classList.remove("is-open-recent-search");
 
       if (isMobile) {
-        history.push('/');
+        history.push("/");
       }
 
       history.push(`/search/${searchInput.trim().toLowerCase()}`);
@@ -37,11 +41,11 @@ const SearchBar = () => {
   };
 
   const recentSearchClickHandler = (e) => {
-    const searchBar = e.target.closest('.searchbar');
+    const searchBar = e.target.closest(".searchbar");
 
     if (!searchBar) {
-      searchbarRef.current.classList.remove('is-open-recent-search');
-      document.removeEventListener('click', recentSearchClickHandler);
+      searchbarRef.current.classList.remove("is-open-recent-search");
+      document.removeEventListener("click", recentSearchClickHandler);
     }
   };
 
@@ -49,14 +53,14 @@ const SearchBar = () => {
     e.target.select();
 
     if (filter.recent.length !== 0) {
-      searchbarRef.current.classList.add('is-open-recent-search');
-      document.addEventListener('click', recentSearchClickHandler);
+      searchbarRef.current.classList.add("is-open-recent-search");
+      document.addEventListener("click", recentSearchClickHandler);
     }
   };
 
   const onClickRecentSearch = (keyword) => {
     // dispatch(setTextFilter(keyword));
-    searchbarRef.current.classList.remove('is-open-recent-search');
+    searchbarRef.current.classList.remove("is-open-recent-search");
     history.push(`/search/${keyword.trim().toLowerCase()}`);
   };
 
@@ -64,20 +68,31 @@ const SearchBar = () => {
     dispatch(clearRecentSearch());
   };
 
+  const toggleInput = () => {
+    setIsInputOpen(!isInputOpen);
+    if (isInputOpen) {
+      setSearchInput(""); // Clear input when closing
+    }
+  };
+
   return (
     <>
       <div className="searchbar" ref={searchbarRef}>
-        <SearchOutlined className="searchbar-icon" />
-        <input
-          className="search-input searchbar-input"
-          onChange={onSearchChange}
-          onKeyUp={onKeyUp}
-          onFocus={onFocusInput}
-          placeholder="Search product..."
-          readOnly={isLoading}
-          type="text"
-          value={searchInput}
-        />
+        <div className="search-icon" onClick={toggleInput}>
+          <SearchOutlined className="searchbar-icon" />
+        </div>
+        {isInputOpen && (
+          <input
+            className="search-input searchbar-input"
+            onChange={onSearchChange}
+            onKeyUp={onKeyUp}
+            onFocus={onFocusInput}
+            placeholder="Search product..."
+            readOnly={isLoading}
+            type="text"
+            value={searchInput}
+          />
+        )}
         {filter.recent.length !== 0 && (
           <div className="searchbar-recent">
             <div className="searchbar-recent-header">
