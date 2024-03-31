@@ -88,15 +88,15 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="navigation-menu-active" to={ROUTE.SHOP}>
-            Мероприятия
-          </NavLink>
-        </li>
-        <li>
           <NavLink
             activeClassName="navigation-menu-active"
             to={ROUTE.FEATURED_PRODUCTS}
           >
+            Мероприятия
+          </NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName="navigation-menu-active" to={ROUTE.SHOP}>
             МаркетПлэйс
           </NavLink>
         </li>
@@ -125,10 +125,9 @@ const Navigation = () => {
           </button>
         </FiltersToggle>
       )}
-   <SearchBar />   
+      <SearchBar />
       <ul className="navigation-menu">
-        <li className="navigation-menu-item">   
-               
+        <li className="navigation-menu-item">
           <BasketToggle>
             {({ onClickToggle }) => (
               <button
@@ -156,7 +155,7 @@ const Navigation = () => {
                 onClick={onClickLink}
                 to={ROUTE.SIGNUP}
               >
-                Sign Up
+                Зарегистрироваться
               </Link>
             )}
             {pathname !== ROUTE.SIGNIN && (
@@ -165,7 +164,7 @@ const Navigation = () => {
                 onClick={onClickLink}
                 to={ROUTE.SIGNIN}
               >
-                Sign In
+                Вход
               </Link>
             )}
           </li>

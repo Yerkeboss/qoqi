@@ -29,7 +29,7 @@ const SignIn = ({ history }) => {
   const dispatch = useDispatch();
 
   useScrollTop();
-  useDocumentTitle('Sign In | Salinaka');
+  useDocumentTitle('Вход | Qoqiqaz');
 
   useEffect(() => () => {
     dispatch(setAuthStatus(null));
@@ -65,7 +65,7 @@ const SignIn = ({ history }) => {
           )}
           <div className={`auth ${authStatus?.message && (!authStatus?.success && 'input-error')}`}>
             <div className="auth-main">
-              <h3>Sign in to Salinaka</h3>
+              <h3>Вход в Qoqiqaz</h3>
               <br />
               <div className="auth-wrapper">
                 <Formik
@@ -94,7 +94,7 @@ const SignIn = ({ history }) => {
                           disabled={isAuthenticating}
                           name="password"
                           type="password"
-                          label="Password"
+                          label="Пароль"
                           placeholder="Your Password"
                           component={CustomInput}
                         />
@@ -106,14 +106,14 @@ const SignIn = ({ history }) => {
                           style={{ textDecoration: 'underline' }}
                           to={FORGOT_PASSWORD}
                         >
-                          <span>Forgot password?</span>
+                          <span>Забыли пароль?</span>
                         </Link>
                         <button
                           className="button auth-button"
                           disabled={isAuthenticating}
                           type="submit"
                         >
-                          {isAuthenticating ? 'Signing In' : 'Sign In'}
+                          {isAuthenticating ? 'Производиться вход' : 'Вход'}
                           &nbsp;
                           {isAuthenticating ? <LoadingOutlined /> : <ArrowRightOutlined />}
                         </button>
@@ -123,14 +123,14 @@ const SignIn = ({ history }) => {
                 </Formik>
               </div>
             </div>
-            <div className="auth-divider">
+            {/* <div className="auth-divider">
               <h6>OR</h6>
             </div>
-            <SocialLogin isLoading={isAuthenticating} />
+            <SocialLogin isLoading={isAuthenticating} /> */}
           </div>
           <div className="auth-message">
             <span className="auth-info">
-              <strong>Don&apos;t have an account?</strong>
+              <strong>У вас нет&apos; аккаунта?</strong>
             </span>
             <button
               className="button button-small button-border button-border-gray button-icon"
@@ -138,7 +138,7 @@ const SignIn = ({ history }) => {
               onClick={onSignUp}
               type="button"
             >
-              Sign Up
+              Зарегистрироваться
             </button>
           </div>
         </>
