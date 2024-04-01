@@ -7,7 +7,7 @@ const Dashboard = () => {
 
   return (
     <div className="loader">
-      <h2>Welcome to admin dashboard</h2>
+      <h2>Добро пожаловать в портал админа</h2>
     </div>
   );
 };

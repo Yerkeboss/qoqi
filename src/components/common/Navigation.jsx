@@ -120,7 +120,7 @@ const Navigation = () => {
       {(pathname === ROUTE.SHOP || pathname === ROUTE.SEARCH) && (
         <FiltersToggle>
           <button className="button-muted button-small" type="button">
-            Filters &nbsp;
+            Фильтры &nbsp;
             <FilterOutlined />
           </button>
         </FiltersToggle>
