@@ -17,21 +17,21 @@ const Loader = () => (
 
 const UserAccount = () => {
   useScrollTop();
-  useDocumentTitle('My Account | Salinaka');
+  useDocumentTitle('Мой аккаунт | Qoqiqaz');
 
   return (
     <UserTab>
-      <div index={0} label="Account">
+      <div index={0} label="Аккаунт">
         <Suspense fallback={<Loader />}>
           <UserAccountTab />
         </Suspense>
       </div>
-      <div index={1} label="My Wish List">
+      <div index={1} label="Избранное">
         <Suspense fallback={<Loader />}>
           <UserWishListTab />
         </Suspense>
       </div>
-      <div index={2} label="My Orders">
+      <div index={2} label="Мои Заказы">
         <Suspense fallback={<Loader />}>
           <UserOrdersTab />
         </Suspense>

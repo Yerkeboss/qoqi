@@ -16,8 +16,8 @@ const EditForm = ({ isLoading, authProvider }) => {
         disabled={isLoading}
         name="fullname"
         type="text"
-        label="* Full Name"
-        placeholder="Enter your full name"
+        label="Полное имя"
+        placeholder="Введите свое полное имя"
         component={CustomInput}
         style={{ textTransform: 'capitalize' }}
       />
@@ -25,7 +25,7 @@ const EditForm = ({ isLoading, authProvider }) => {
         disabled={authProvider !== 'password' || isLoading}
         name="email"
         type="email"
-        label="* Email Address"
+        label="* Email"
         placeholder="test@example.com"
         component={CustomInput}
       />
@@ -33,8 +33,8 @@ const EditForm = ({ isLoading, authProvider }) => {
         disabled={isLoading}
         name="address"
         type="text"
-        label="Address (Will be used for checkout)"
-        placeholder="#245 Brgy. Maligalig, Arayat Pampanga, Philippines"
+        label="Aдрес"
+        placeholder="Алматы Казахстан"
         component={CustomInput}
         style={{ textTransform: 'capitalize' }}
       />
@@ -42,7 +42,7 @@ const EditForm = ({ isLoading, authProvider }) => {
         defaultValue={values.mobile}
         name="mobile"
         disabled={isLoading}
-        label="Mobile Number (Will be used for checkout)"
+        label="Телефон"
       />
       <br />
       <div className="edit-user-action">
@@ -54,7 +54,7 @@ const EditForm = ({ isLoading, authProvider }) => {
         >
           <ArrowLeftOutlined />
           &nbsp;
-          Back to Profile
+          Вернуться в профиль
         </button>
         <button
           className="button w-100-mobile"
@@ -64,7 +64,7 @@ const EditForm = ({ isLoading, authProvider }) => {
         >
           {isLoading ? <LoadingOutlined /> : <CheckOutlined />}
                     &nbsp;
-          {isLoading ? 'Updating Profile' : 'Update Profile'}
+          {isLoading ? 'Обновляется' : 'Обновить профиль'}
         </button>
       </div>
     </div>

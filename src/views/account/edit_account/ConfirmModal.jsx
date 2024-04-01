@@ -14,13 +14,13 @@ const ConfirmModal = ({ onConfirmUpdate, modal }) => {
       onRequestClose={modal.onCloseModal}
     >
       <div className="text-center padding-l">
-        <h4>Confirm Update</h4>
+        <h4>Подтвердить</h4>
         <p>
-          To continue updating profile including your &nbsp;
+          Чтобы продолжить обновления вашего аккаунта включая email &nbsp;
           <strong>email</strong>
           ,
           <br />
-          please confirm by entering your password
+          пожалуйста подтвердите это своим паролем
         </p>
         <input
           className="input-form d-block"
@@ -43,7 +43,7 @@ const ConfirmModal = ({ onConfirmUpdate, modal }) => {
         >
           <CheckOutlined />
           &nbsp;
-          Confirm
+          Подтвердить
         </button>
       </div>
       <button
