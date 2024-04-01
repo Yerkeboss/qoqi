@@ -93,12 +93,12 @@ const Filters = ({ closeModal }) => {
             onChange={onBrandFilterChange}
           >
             <option value="">Все категории</option>
-            <option value="Photos">Photos</option>
-            <option value="Музыка">Музыка</option>
-            <option value="Дизайн">Дизайн</option>
-            <option value="Иллюстрации">Иллюстрации</option>
-            <option value="Анимации">Анимации</option>
-            <option value="Инсталяции">Инсталяции</option>
+            <option value="фотографии">Фотографии</option>
+            <option value="музыка">Музыка</option>
+            <option value="дизайн">Дизайн</option>
+            <option value="иллюстрации">Иллюстрации</option>
+            <option value="анимации">Анимации</option>
+            <option value="инсталяции">Инсталяции</option>
             <option value="3D">3D</option>
           </select>
         )}

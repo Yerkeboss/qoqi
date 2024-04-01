@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 
 // Default brand names that I used. You can use what you want
 const brandOptions = [
-  { value: 'Photos', label: 'Photos' },
+  { value: 'Фотографии', label: 'Фотографии' },
   { value: 'Музыка', label: 'Музыка' },
   { value: 'Дизайн', label: 'Дизайн' },
   { value: 'Иллюстрации', label: 'Иллюстрации' },
