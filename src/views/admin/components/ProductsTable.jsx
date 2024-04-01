@@ -9,20 +9,20 @@ const ProductsTable = ({ filteredProducts }) => (
       <div className="grid grid-product grid-count-6">
         <div className="grid-col" />
         <div className="grid-col">
-          <h5>Name</h5>
+          <h5>Название</h5>
         </div>
         <div className="grid-col">
-          <h5>Brand</h5>
+          <h5>Категория</h5>
         </div>
         <div className="grid-col">
-          <h5>Price</h5>
+          <h5>Цена</h5>
         </div>
         <div className="grid-col">
-          <h5>Date Added</h5>
+          <h5>Дата публикаций</h5>
         </div>
-        <div className="grid-col">
+        {/* <div className="grid-col">
           <h5>Qty</h5>
-        </div>
+        </div> */}
       </div>
     )}
     {filteredProducts.length === 0 ? new Array(10).fill({}).map((product, index) => (

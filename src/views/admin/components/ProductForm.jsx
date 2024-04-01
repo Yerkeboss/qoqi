@@ -14,10 +14,13 @@ import * as Yup from 'yup';
 
 // Default brand names that I used. You can use what you want
 const brandOptions = [
-  { value: 'Salt Maalat', label: 'Salt Maalat' },
-  { value: 'Betsin Maalat', label: 'Betsin Maalat' },
-  { value: 'Sexbomb', label: 'Sexbomb' },
-  { value: 'Black Kibal', label: 'Black Kibal' }
+  { value: 'Photos', label: 'Photos' },
+  { value: 'Музыка', label: 'Музыка' },
+  { value: 'Дизайн', label: 'Дизайн' },
+  { value: 'Иллюстрации', label: 'Иллюстрации' },
+  { value: 'Анимации', label: 'Анимации' },
+  { value: 'Инсталяции', label: 'Инсталяции' },
+  { value: '3D', label: '3D' }
 ];
 
 const FormSchema = Yup.object().shape({
@@ -32,21 +35,21 @@ const FormSchema = Yup.object().shape({
     .required('Price is required.'),
   description: Yup.string()
     .required('Description is required.'),
-  maxQuantity: Yup.number()
-    .positive('Max quantity is invalid.')
-    .integer('Max quantity should be an integer.')
-    .required('Max quantity is required.'),
-  keywords: Yup.array()
-    .of(Yup.string())
-    .min(1, 'Please enter at least 1 keyword for this product.'),
-  sizes: Yup.array()
-    .of(Yup.number())
-    .min(1, 'Please enter a size for this product.'),
+  // maxQuantity: Yup.number()
+  //   .positive('Max quantity is invalid.')
+  //   .integer('Max quantity should be an integer.')
+  //   .required('Max quantity is required.'),
+  // keywords: Yup.array()
+  //   .of(Yup.string())
+  //   .min(1, 'Please enter at least 1 keyword for this product.'),
+  // sizes: Yup.array()
+  //   .of(Yup.number())
+  //   .min(1, 'Please enter a size for this product.'),
   isFeatured: Yup.boolean(),
   isRecommended: Yup.boolean(),
-  availableColors: Yup.array()
-    .of(Yup.string().required())
-    .min(1, 'Please add a default color for this product.')
+  // availableColors: Yup.array()
+  //   .of(Yup.string().required())
+  //   .min(1, 'Please add a default color for this product.')
 });
 
 const ProductForm = ({ product, onSubmit, isLoading }) => {
@@ -54,13 +57,13 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
     name: product?.name || '',
     brand: product?.brand || '',
     price: product?.price || 0,
-    maxQuantity: product?.maxQuantity || 0,
+    // maxQuantity: product?.maxQuantity || 0,
     description: product?.description || '',
-    keywords: product?.keywords || [],
-    sizes: product?.sizes || [],
+    // keywords: product?.keywords || [],
+    // sizes: product?.sizes || [],
     isFeatured: product?.isFeatured || false,
     isRecommended: product?.isRecommended || false,
-    availableColors: product?.availableColors || []
+    // availableColors: product?.availableColors || []
   };
 
   const {
@@ -105,8 +108,8 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     disabled={isLoading}
                     name="name"
                     type="text"
-                    label="* Product Name"
-                    placeholder="Gago"
+                    label="* Название работы"
+                    placeholder="Мона Лиза"
                     style={{ textTransform: 'capitalize' }}
                     component={CustomInput}
                   />
@@ -120,7 +123,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     options={brandOptions}
                     disabled={isLoading}
                     placeholder="Select/Create Brand"
-                    label="* Brand"
+                    label="* Категория"
                   />
                 </div>
               </div>
@@ -130,7 +133,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                   name="description"
                   id="description"
                   rows={3}
-                  label="* Product Description"
+                  label="* Описание работы"
                   component={CustomTextarea}
                 />
               </div>
@@ -141,11 +144,11 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     name="price"
                     id="price"
                     type="number"
-                    label="* Price"
+                    label="* Цена"
                     component={CustomInput}
                   />
                 </div>
-                &nbsp;
+                {/* &nbsp;
                 <div className="product-form-field">
                   <Field
                     disabled={isLoading}
@@ -155,10 +158,10 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     label="* Max Quantity"
                     component={CustomInput}
                   />
-                </div>
+                </div> */}
               </div>
               <div className="d-flex">
-                <div className="product-form-field">
+                {/* <div className="product-form-field">
                   <CustomCreatableSelect
                     defaultValue={values.keywords.map((key) => ({ value: key, label: key }))}
                     name="keywords"
@@ -168,8 +171,8 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     placeholder="Create/Select Keywords"
                     label="* Keywords"
                   />
-                </div>
-                &nbsp;
+                </div> */}
+                {/* &nbsp;
                 <div className="product-form-field">
                   <CustomCreatableSelect
                     defaultValue={values.keywords.map((key) => ({ value: key, label: key }))}
@@ -181,17 +184,18 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     placeholder="Create/Select Sizes"
                     label="* Sizes (Millimeter)"
                   />
-                </div>
+                </div> */}
               </div>
-              <div className="product-form-field">
+              {/* <div className="product-form-field">
                 <FieldArray
                   name="availableColors"
                   disabled={isLoading}
                   component={CustomColorInput}
                 />
-              </div>
+              </div> */}
               <div className="product-form-field">
-                <span className="d-block padding-s">Image Collection</span>
+                <br/>
+                {/* <span className="d-block padding-s">Коллекция фотографий</span> */}
                 {!isFileLoading && (
                   <label htmlFor="product-input-file-collection">
                     <input
@@ -203,7 +207,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                       readOnly={isLoading}
                       type="file"
                     />
-                    Choose Images
+                    Выберите изображения
                   </label>
                 )}
               </div>
@@ -244,7 +248,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                   />
                   <label htmlFor="featured">
                     <h5 className="d-flex-grow-1 margin-0">
-                      &nbsp; Add to Featured &nbsp;
+                      &nbsp; Добавить в популярное &nbsp;
                     </h5>
                   </label>
                 </div>
@@ -258,13 +262,11 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                   />
                   <label htmlFor="recommended">
                     <h5 className="d-flex-grow-1 margin-0">
-                      &nbsp; Add to Recommended &nbsp;
+                      &nbsp; Добавить в рекомендации &nbsp;
                     </h5>
                   </label>
                 </div>
               </div>
-              <br />
-              <br />
               <br />
               <div className="product-form-field product-form-submit">
                 <button
@@ -274,14 +276,14 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                 >
                   {isLoading ? <LoadingOutlined /> : <CheckOutlined />}
                   &nbsp;
-                  {isLoading ? 'Saving Product' : 'Save Product'}
+                  {isLoading ? 'Загружается' : 'Добавить работу'}
                 </button>
               </div>
             </div>
             {/* ----THUBMNAIL ---- */}
             <div className="product-form-file">
               <div className="product-form-field">
-                <span className="d-block padding-s">* Thumbnail</span>
+                <span className="d-block padding-s">* Миниатюра</span>
                 {!isFileLoading && (
                   <label htmlFor="product-input-file">
                     <input
@@ -292,7 +294,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                       readOnly={isLoading}
                       type="file"
                     />
-                    Choose Image
+                    Выберите изображение
                   </label>
                 )}
               </div>
@@ -318,16 +320,16 @@ ProductForm.propTypes = {
     name: PropType.string,
     brand: PropType.string,
     price: PropType.number,
-    maxQuantity: PropType.number,
+    // maxQuantity: PropType.number,
     description: PropType.string,
-    keywords: PropType.arrayOf(PropType.string),
+    // keywords: PropType.arrayOf(PropType.string),
     imageCollection: PropType.arrayOf(PropType.object),
-    sizes: PropType.arrayOf(PropType.string),
+    // sizes: PropType.arrayOf(PropType.string),
     image: PropType.string,
     imageUrl: PropType.string,
     isFeatured: PropType.bool,
     isRecommended: PropType.bool,
-    availableColors: PropType.arrayOf(PropType.string)
+    // availableColors: PropType.arrayOf(PropType.string)
   }).isRequired,
   onSubmit: PropType.func.isRequired,
   isLoading: PropType.bool.isRequired

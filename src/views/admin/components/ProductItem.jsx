@@ -64,9 +64,9 @@ const ProductItem = ({ product }) => {
               {product.dateAdded ? displayDate(product.dateAdded) : <Skeleton width={30} />}
             </span>
           </div>
-          <div className="grid-col">
+          {/* <div className="grid-col">
             <span>{product.maxQuantity || <Skeleton width={20} />}</span>
-          </div>
+          </div> */}
         </div>
         {product.id && (
           <div className="item-action">
@@ -75,7 +75,7 @@ const ProductItem = ({ product }) => {
               onClick={onClickEdit}
               type="button"
             >
-              Edit
+              Изменить
             </button>
             &nbsp;
             <button
@@ -83,16 +83,16 @@ const ProductItem = ({ product }) => {
               onClick={onDeleteProduct}
               type="button"
             >
-              Delete
+              Удалить
             </button>
             <div className="item-action-confirm">
-              <h5>Are you sure you want to delete this?</h5>
+              <h5>Вы уверены что хотите удалить?</h5>
               <button
                 className="button button-small button-border"
                 onClick={onCancelDelete}
                 type="button"
               >
-                No
+                Нет
               </button>
               &nbsp;
               <button
@@ -100,7 +100,7 @@ const ProductItem = ({ product }) => {
                 onClick={onConfirmDelete}
                 type="button"
               >
-                Yes
+                Да
               </button>
             </div>
           </div>
@@ -116,17 +116,17 @@ ProductItem.propTypes = {
     name: PropType.string,
     brand: PropType.string,
     price: PropType.number,
-    maxQuantity: PropType.number,
+    // maxQuantity: PropType.number,
     description: PropType.string,
-    keywords: PropType.arrayOf(PropType.string),
+    // keywords: PropType.arrayOf(PropType.string),
     imageCollection: PropType.arrayOf(PropType.object),
-    sizes: PropType.arrayOf(PropType.string),
+    // sizes: PropType.arrayOf(PropType.string),
     image: PropType.string,
     imageUrl: PropType.string,
     isFeatured: PropType.bool,
     isRecommended: PropType.bool,
     dateAdded: PropType.number,
-    availableColors: PropType.arrayOf(PropType.string)
+    // availableColors: PropType.arrayOf(PropType.string)
   }).isRequired
 };
 
