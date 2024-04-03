@@ -32,7 +32,6 @@ const ProductItem = ({ product, isItemOnBasket, addToBasket }) => {
           boxShadow: product && itemOnBasket ? '0 10px 15px rgba(0, 0, 0, .07)' : 'none'
         }}
       >
-        <p>ProductItem</p>
         {itemOnBasket && <CheckOutlined className="fa fa-check product-card-check" />}
         <div
           className="product-card-content"

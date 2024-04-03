@@ -59,7 +59,7 @@ const EventList = (props) => {
           >
             {isFetching ? 'Fetching Items...' : 'Show More Items'}
           </button>
-          <p>Event List</p>
+      
      
         </div>
       )}

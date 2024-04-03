@@ -58,7 +58,6 @@ const ProductList = (props) => {
           >
             {isFetching ? 'Fetching Items...' : 'Show More Items'}
           </button>
-          <p>Product List</p>
         </div>
       )}
     </Boundary>

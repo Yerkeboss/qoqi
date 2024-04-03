@@ -6,12 +6,12 @@ const EventGrid = ({ events }) => {
   // const { addToBasket, isItemOnBasket } = useBasket();
 
   return (
-    <div className="product-grid">
+    <div className="event-grid">
       {events.length === 0
         ? new Array(12).fill({}).map((event, index) => (
             <EventItem
               // eslint-disable-next-line react/no-array-index-key
-              key={`product-skeleton ${index}`}
+              key={`event-skeleton ${index}`}
               event={event}
             />
           ))
@@ -23,7 +23,7 @@ const EventGrid = ({ events }) => {
               event={event}
             />
           ))}
-             <p>eventgrid</p>
+             
     </div>
   );
 };

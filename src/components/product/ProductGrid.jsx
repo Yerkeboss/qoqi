@@ -24,7 +24,6 @@ const ProductGrid = ({ products }) => {
               product={product}
             />
           ))}
-             <p>productgrid</p>
     </div>
   );
 };

@@ -1,42 +1,105 @@
-import { ArrowRightOutlined } from '@ant-design/icons';
-import { MessageDisplay } from '@/components/common';
-import { ProductShowcaseGrid } from '@/components/product';
-import { FEATURED_PRODUCTS, RECOMMENDED_PRODUCTS, SHOP } from '@/constants/routes';
+import { ArrowRightOutlined } from "@ant-design/icons";
+import { MessageDisplay } from "@/components/common";
+import { ProductShowcaseGrid } from "@/components/product";
 import {
-  useDocumentTitle, useFeaturedProducts, useRecommendedProducts, useScrollTop
-} from '@/hooks';
-import bannerImg from '@/images/banner-girl.png';
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+  FEATURED_PRODUCTS,
+  RECOMMENDED_PRODUCTS,
+  SHOP,
+} from "@/constants/routes";
+import {
+  useDocumentTitle,
+  useFeaturedProducts,
+  useRecommendedProducts,
+  useScrollTop,
+} from "@/hooks";
+import bannerImg from "@/images/banner-girl.png";
+import React from "react";
+import { Link } from "react-router-dom";
+import { shallowEqual, useSelector } from "react-redux";
+import { selectFilter } from "@/selectors/selectorEvent";
+import { AppliedFilters, ProductGrid, ProductList } from "@/components/product";
+import {
+  EventAppliedFilters,
+  EventGrid,
+  EventList,
+} from "@/components/eventss";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Home = () => {
-  useDocumentTitle('Qoqiqaz | Home');
+  useDocumentTitle("Qoqiqaz | Home");
   useScrollTop();
+
+  const store = useSelector(
+    (state) => ({
+      filteredProducts: selectFilter(state.products.items, state.filter),
+      products: state.products,
+      requestStatus: state.app.requestStatus,
+      isLoading: state.app.loading,
+    }),
+    shallowEqual
+  );
+
+  const store2 = useSelector(
+    (state) => ({
+      filteredEvents: selectFilter(state.events.items, state.filter),
+      events: state.events,
+      requestStatus: state.app.requestStatus,
+      isLoading: state.app.loading,
+    }),
+    shallowEqual
+  );
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+  };
 
   const {
     featuredProducts,
     fetchFeaturedProducts,
     isLoading: isLoadingFeatured,
-    error: errorFeatured
+    error: errorFeatured,
   } = useFeaturedProducts(6);
   const {
     recommendedProducts,
     fetchRecommendedProducts,
     isLoading: isLoadingRecommended,
-    error: errorRecommended
+    error: errorRecommended,
   } = useRecommendedProducts(6);
 
   return (
     <main className="content">
       <div className="home">
+        <h2>Мероприятия</h2>
+        <EventAppliedFilters
+          filteredEventsCount={store2.filteredEvents.length}
+        />
+        <EventList {...store2}>
+          <Slider {...settings}>
+            {store2.filteredEvents.map((event) => (
+              <div key={event.id}>
+                <EventGrid events={[event]} />
+              </div>
+            ))}
+          </Slider>
+        </EventList>
 
-        <div className="display">
+        <h2>Галерея лучших работ</h2>
+        <AppliedFilters filteredProductsCount={store.filteredProducts.length} />
+        <ProductList {...store}>
+          <ProductGrid products={store.filteredProducts} />
+        </ProductList>
+        {/* <div className="display">
           <div className="display-header">
             <h1>Featured Products</h1>
             <Link to={FEATURED_PRODUCTS}>See All</Link>
           </div>
-          {(errorFeatured && !isLoadingFeatured) ? (
+          {errorFeatured && !isLoadingFeatured ? (
             <MessageDisplay
               message={errorFeatured}
               action={fetchFeaturedProducts}
@@ -48,13 +111,13 @@ const Home = () => {
               skeletonCount={6}
             />
           )}
-        </div>
-        <div className="display">
+        </div> */}
+        {/* <div className="display">
           <div className="display-header">
             <h1>Recommended Products</h1>
             <Link to={RECOMMENDED_PRODUCTS}>See All</Link>
           </div>
-          {(errorRecommended && !isLoadingRecommended) ? (
+          {errorRecommended && !isLoadingRecommended ? (
             <MessageDisplay
               message={errorRecommended}
               action={fetchRecommendedProducts}
@@ -66,7 +129,7 @@ const Home = () => {
               skeletonCount={6}
             />
           )}
-        </div>
+        </div> */}
       </div>
     </main>
   );
