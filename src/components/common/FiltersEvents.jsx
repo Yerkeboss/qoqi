@@ -4,7 +4,7 @@ import PropType from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, withRouter } from 'react-router-dom';
-import { applyFilterEvents, resetFilterEvents } from '@/redux/actions/filterEventActions';
+import { applyFilter, resetFilter } from '@/redux/actions/filterActions';
 
 const FiltersEvents = ({ closeModal }) => {
   const { filter, isLoading, events } = useSelector((state) => ({
@@ -45,7 +45,7 @@ const FiltersEvents = ({ closeModal }) => {
     const isChanged = Object.keys(field).some((key) => field[key] !== filter[key]);
 
     if (isChanged) {
-      dispatch(applyFilterEvents(field));
+      dispatch(applyFilter(field));
     } else {
       closeModal();
     }
@@ -55,7 +55,7 @@ const FiltersEvents = ({ closeModal }) => {
     const filterFields = ['brand', 'sortBy'];
 
     if (filterFields.some((key) => !!filter[key])) {
-      dispatch(resetFilterEvents());
+      dispatch(resetFilter());
     } else {
       closeModal();
     }
@@ -77,13 +77,9 @@ const FiltersEvents = ({ closeModal }) => {
             onChange={onBrandFilterChange}
           >
             <option value="">Все категории</option>
-            <option value="фотографии">Фотографии</option>
-            <option value="музыка">Музыка</option>
-            <option value="дизайн">Дизайн</option>
-            <option value="иллюстрации">Иллюстрации</option>
-            <option value="анимации">Анимации</option>
-            <option value="инсталяции">Инсталяции</option>
-            <option value="3D">3D</option>
+            <option value="выставка">Выставка</option>
+            <option value="соревнование">Соревнование</option>
+            <option value="аукцион">Аукцион</option>
           </select>
         )}
       </div>

@@ -17,11 +17,12 @@ export default (state = {
 }, action) => {
   switch (action.type) {
     case GET_EVENTS_SUCCESS:
+      const uniqueEvents = action.payload.events.filter(event => !state.items.some(item => item.id === event.id));
       return {
         ...state,
         lastRefKey: action.payload.lastKey,
         total: action.payload.total,
-        items: [...state.items, ...action.payload.events]
+        items: [...state.items, ...uniqueEvents]
       };
     case ADD_EVENT_SUCCESS:
       return {

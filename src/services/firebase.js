@@ -244,10 +244,10 @@ class Firebase {
 
   deleteImageEvents = (id) => this.storage.ref("events").child(id).delete();
 
-  editProductEvents = (id, updates) =>
+  editEvent = (id, updates) =>
     this.db.collection("events").doc(id).update(updates);
 
-  removeProductEvents = (id) => this.db.collection("events").doc(id).delete();
+  removeEvent = (id) => this.db.collection("events").doc(id).delete();
 
 
   // // PRODUCT ACTIONS --------------

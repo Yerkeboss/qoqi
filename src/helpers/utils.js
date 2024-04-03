@@ -48,13 +48,7 @@ export const displayActionMessage = (msg, status = 'info') => {
   span.textContent = msg;
   div.appendChild(span);
 
-
-  if (document.querySelector('.toast')) {
-    document.body.removeChild(document.querySelector('.toast'));
-    document.body.appendChild(div);
-  } else {
-    document.body.appendChild(div);
-  }
+  document.body.appendChild(div);
 
   setTimeout(() => {
     try {
@@ -64,3 +58,4 @@ export const displayActionMessage = (msg, status = 'info') => {
     }
   }, 3000);
 };
+
