@@ -19,11 +19,13 @@ export default (state = {
 }, action) => {
   switch (action.type) {
     case GET_PRODUCTS_SUCCESS:
+      // Check for duplicates before adding products to state
+      const uniqueProducts = action.payload.products.filter(product => !state.items.some(item => item.id === product.id));
       return {
         ...state,
         lastRefKey: action.payload.lastKey,
         total: action.payload.total,
-        items: [...state.items, ...action.payload.products]
+        items: [...state.items, ...uniqueProducts]
       };
     case ADD_PRODUCT_SUCCESS:
       return {
