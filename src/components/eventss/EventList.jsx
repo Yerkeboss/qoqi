@@ -4,23 +4,23 @@ import PropType from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setLoading } from '@/redux/actions/miscActions';
-import { getProducts } from '@/redux/actions/productActions';
+import { getEvents } from '@/redux/actions/eventActions';
 
-const ProductList = (props) => {
+const EventList = (props) => {
   const {
-    products, filteredProducts, isLoading, requestStatus, children
+    events, filteredEvents, isLoading, requestStatus, children
   } = props;
   const [isFetching, setFetching] = useState(false);
   const dispatch = useDispatch();
 
-  const fetchProducts = () => {
+  const fetchEvents = () => {
     setFetching(true);
-    dispatch(getProducts(products.lastRefKey));
+    dispatch(getEvents(events.lastRefKey));
   };
 
   useEffect(() => {
-    if (products.items.length === 0 || !products.lastRefKey) {
-      fetchProducts();
+    if (events.items.length === 0 || !events.lastRefKey) {
+      fetchEvents();
     }
 
     window.scrollTo(0, 0);
@@ -29,17 +29,17 @@ const ProductList = (props) => {
 
   useEffect(() => {
     setFetching(false);
-  }, [products.lastRefKey]);
+  }, [events.lastRefKey]);
 
-  if (filteredProducts.length === 0 && !isLoading) {
+  if (filteredEvents.length === 0 && !isLoading) {
     return (
-      <MessageDisplay message={requestStatus?.message || 'No products found.'} />
+      <MessageDisplay message={requestStatus?.message || 'No events found.'} />
     );
-  } if (filteredProducts.length === 0 && requestStatus) {
+  } if (filteredEvents.length === 0 && requestStatus) {
     return (
       <MessageDisplay
         message={requestStatus?.message || 'Something went wrong :('}
-        action={fetchProducts}
+        action={fetchEvents}
         buttonLabel="Try Again"
       />
     );
@@ -48,30 +48,32 @@ const ProductList = (props) => {
     <Boundary>
       {children}
       {/* Show 'Show More' button if products length is less than total products */}
-      {products.items.length < products.total && (
+      {events.items.length < events.total && (
         <div className="d-flex-center padding-l">
+              
           <button
             className="button button-small"
             disabled={isFetching}
-            onClick={fetchProducts}
+            onClick={fetchEvents}
             type="button"
           >
             {isFetching ? 'Fetching Items...' : 'Show More Items'}
           </button>
-          <p>Product List</p>
+          <p>Event List</p>
+     
         </div>
       )}
     </Boundary>
   );
 };
 
-ProductList.defaultProps = {
+EventList.defaultProps = {
   requestStatus: null
 };
 
-ProductList.propTypes = {
-  products: PropType.object.isRequired,
-  filteredProducts: PropType.array.isRequired,
+EventList.propTypes = {
+  events: PropType.object.isRequired,
+  filteredEvents: PropType.array.isRequired,
   isLoading: PropType.bool.isRequired,
   requestStatus: PropType.string,
   children: PropType.oneOfType([
@@ -80,4 +82,4 @@ ProductList.propTypes = {
   ]).isRequired
 };
 
-export default ProductList;
+export default EventList;

@@ -5,6 +5,8 @@ export { default as Boundary } from './Boundary';
 export { default as ColorChooser } from './ColorChooser';
 export { default as Filters } from './Filters';
 export { default as FiltersToggle } from './FiltersToggle';
+export { default as FiltersEvents } from './FiltersEvents';
+export { default as FiltersToggleEvents } from './FiltersToggleEvents';
 export { default as Footer } from './Footer';
 export { default as ImageLoader } from './ImageLoader';
 export { default as MessageDisplay } from './MessageDisplay';
@@ -14,5 +16,6 @@ export { default as Navigation } from './Navigation';
 export { default as Preloader } from './Preloader';
 export { default as PriceRange } from './PriceRange';
 export { default as SearchBar } from './SearchBar';
+export { default as SearchBarEvents } from './SearchBarEvents';
 export { default as SocialLogin } from './SocialLogin';
 

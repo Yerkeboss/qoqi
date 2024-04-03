@@ -20,9 +20,6 @@ const ProductsTable = ({ filteredProducts }) => (
         <div className="grid-col">
           <h5>Дата публикаций</h5>
         </div>
-        {/* <div className="grid-col">
-          <h5>Qty</h5>
-        </div> */}
       </div>
     )}
     {filteredProducts.length === 0 ? new Array(10).fill({}).map((product, index) => (

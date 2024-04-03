@@ -100,6 +100,18 @@ const AppRouter = () => (
           component={view.EditProduct}
           path={`${ROUTES.EDIT_PRODUCT}/:id`}
         />
+         <AdminRoute
+          component={view.Events}
+          path={ROUTES.ADMIN_EVENTS}
+        />
+        <AdminRoute
+          component={view.AddEvent}
+          path={ROUTES.ADD_EVENT}
+        />
+        <AdminRoute
+          component={view.EditEvent}
+          path={`${ROUTES.EDIT_EVENT}/:id`}
+        />
         <PublicRoute component={view.PageNotFound} />
       </Switch>
       <Footer />

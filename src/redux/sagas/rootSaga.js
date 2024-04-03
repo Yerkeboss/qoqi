@@ -2,6 +2,7 @@ import * as ACTION from '@/constants/constants';
 import { takeLatest } from 'redux-saga/effects';
 import authSaga from './authSaga';
 import productSaga from './productSaga';
+import eventSaga from './eventSaga';
 import profileSaga from './profileSaga';
 
 function* rootSaga() {
@@ -25,6 +26,12 @@ function* rootSaga() {
     ACTION.EDIT_PRODUCT,
     ACTION.GET_PRODUCTS
   ], productSaga);
+  yield takeLatest([
+    ACTION.ADD_EVENT,
+    ACTION.REMOVE_EVENT,
+    ACTION.EDIT_EVENT,
+    ACTION.GET_EVENTS
+  ], eventSaga);
   yield takeLatest([
     ACTION.UPDATE_EMAIL,
     ACTION.UPDATE_PROFILE

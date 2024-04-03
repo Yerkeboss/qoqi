@@ -100,6 +100,156 @@ class Firebase {
   setAuthPersistence = () =>
     this.auth.setPersistence(app.auth.Auth.Persistence.LOCAL);
 
+
+  // // EVENT ACTIONS ----------------
+  getSingleEvent = (id) => this.db.collection("events").doc(id).get();
+
+  getEvents = (lastRefKeyEvents) => {
+    let didTimeoutEvents = false;
+
+    return new Promise((resolve, reject) => {
+      (async () => {
+        if (lastRefKeyEvents) {
+          try {
+            const query = this.db
+              .collection("events")
+              .orderBy(app.firestore.FieldPath.documentId())
+              .startAfter(lastRefKeyEvents)
+              .limit(12);
+
+            const snapshotEvents = await query.get();
+            const events = [];
+            snapshotEvents.forEach((doc) =>
+              events.push({ id: doc.id, ...doc.data() })
+            );
+            const lastKeyEvents = snapshotEvents.docs[snapshotEvents.docs.length - 1];
+
+            resolve({ events, lastKeyEvents });
+          } catch (e) {
+            reject(e?.message || ":( Failed to fetch events.");
+          }
+        } else {
+          const timeoutEvents = setTimeout(() => {
+            didTimeoutEvents = true;
+            reject(new Error("Request timeout, please try again"));
+          }, 15000);
+
+          try {
+            const totalQueryEvents = await this.db.collection("events").get();
+            const totalEvents = totalQueryEvents.docs.length;
+            const queryEvents = this.db
+              .collection("events")
+              .orderBy(app.firestore.FieldPath.documentId())
+              .limit(12);
+            const snapshotEvents = await queryEvents.get();
+
+            clearTimeout(timeoutEvents);
+            if (!didTimeoutEvents) {
+              const events = [];
+              snapshotEvents.forEach((doc) =>
+                events.push({ id: doc.id, ...doc.data() })
+              );
+              const lastKeyEvents = snapshotEvents.docs[snapshotEvents.docs.length - 1];
+
+              resolve({ events, lastKeyEvents, totalEvents });
+            }
+          } catch (e) {
+            if (didTimeoutEvents) return;
+            reject(e?.message || ":( Failed to fetch events.");
+          }
+        }
+      })();
+    });
+  };
+
+  searchEvents = (searchKey) => {
+    let didTimeout = false;
+
+    return new Promise((resolve, reject) => {
+      (async () => {
+        const eventsRef = this.db.collection("events");
+
+        const timeout = setTimeout(() => {
+          didTimeout = true;
+          reject(new Error("Request timeout, please try again"));
+        }, 15000);
+
+        try {
+          const searchedNameRef = eventsRef
+            .orderBy("name_lower")
+            .where("name_lower", ">=", searchKey)
+            .where("name_lower", "<=", `${searchKey}\uf8ff`)
+            .limit(12);
+          const searchedKeywordsRef = eventsRef
+            .orderBy("dateAdded", "desc")
+            .where("keywords", "array-contains-any", searchKey.split(" "))
+            .limit(12);
+
+          // const totalResult = await totalQueryRef.get();
+          const nameSnaps = await searchedNameRef.get();
+          const keywordsSnaps = await searchedKeywordsRef.get();
+          // const total = totalResult.docs.length;
+
+          clearTimeout(timeout);
+          if (!didTimeout) {
+            const searchedNameEvents = [];
+            const searchedKeywordsEvents = [];
+            let lastKey = null;
+
+            if (!nameSnaps.empty) {
+              nameSnaps.forEach((doc) => {
+                searchedNameEvents.push({ id: doc.id, ...doc.data() });
+              });
+              lastKey = nameSnaps.docs[nameSnaps.docs.length - 1];
+            }
+
+            if (!keywordsSnaps.empty) {
+              keywordsSnaps.forEach((doc) => {
+                searchedKeywordsEvents.push({ id: doc.id, ...doc.data() });
+              });
+            }
+
+            // MERGE PRODUCTS
+            const mergedEvents = [
+              ...searchedNameEvents,
+              ...searchedKeywordsEvents,
+            ];
+            const hash = {};
+
+            mergedEvents.forEach((event) => {
+              hash[event.id] = event;
+            });
+
+            resolve({ events: Object.values(hash), lastKey });
+          }
+        } catch (e) {
+          if (didTimeout) return;
+          reject(e);
+        }
+      })();
+    });
+  };
+
+  addEvent = (id, event) =>
+    this.db.collection("events").doc(id).set(event);
+
+  generateKeyEvents = () => this.db.collection("events").doc().id;
+
+  storeImageEvents = async (id, folder, imageFile) => {
+    const snapshotEvents = await this.storage.ref(folder).child(id).put(imageFile);
+    const downloadURL = await snapshotEvents.ref.getDownloadURL();
+
+    return downloadURL;
+  };
+
+  deleteImageEvents = (id) => this.storage.ref("events").child(id).delete();
+
+  editProductEvents = (id, updates) =>
+    this.db.collection("events").doc(id).update(updates);
+
+  removeProductEvents = (id) => this.db.collection("events").doc(id).delete();
+
+
   // // PRODUCT ACTIONS --------------
 
   getSingleProduct = (id) => this.db.collection("products").doc(id).get();
