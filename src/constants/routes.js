@@ -1,5 +1,8 @@
 export const HOME = '/';
 export const SHOP = '/shop';
+export const EVENTS = '/events';
+export const ABOUT = '/about';
+export const EDUCATION = '/education';
 export const FEATURED_PRODUCTS = '/featured';
 export const RECOMMENDED_PRODUCTS = '/recommended';
 export const ACCOUNT = '/account';

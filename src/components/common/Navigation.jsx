@@ -90,7 +90,7 @@ const Navigation = () => {
         <li>
           <NavLink
             activeClassName="navigation-menu-active"
-            to={ROUTE.FEATURED_PRODUCTS}
+            to={ROUTE.EVENTS}
           >
             Мероприятия
           </NavLink>
@@ -103,7 +103,7 @@ const Navigation = () => {
         <li>
           <NavLink
             activeClassName="navigation-menu-active"
-            to={ROUTE.RECOMMENDED_PRODUCTS}
+            to={ROUTE.EDUCATION}
           >
             Обучение
           </NavLink>
@@ -111,7 +111,7 @@ const Navigation = () => {
         <li>
           <NavLink
             activeClassName="navigation-menu-active"
-            to={ROUTE.RECOMMENDED_PRODUCTS}
+            to={ROUTE.ABOUT}
           >
             О нас
           </NavLink>

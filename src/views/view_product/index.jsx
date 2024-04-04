@@ -103,8 +103,6 @@ const ViewProduct = () => {
               <br />
               <div className="divider" />
               <br />
-              <div>
-              </div>
 
               <h1>{displayMoney(product.price)}</h1>
               <div className="product-modal-action">

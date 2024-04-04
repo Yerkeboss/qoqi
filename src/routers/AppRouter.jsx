@@ -34,6 +34,21 @@ const AppRouter = () => (
           exact
           path={ROUTES.SHOP}
         />
+         <Route
+          component={view.About}
+          exact
+          path={ROUTES.ABOUT}
+        />
+        <Route
+          component={view.Education}
+          exact
+          path={ROUTES.EDUCATION}
+        />
+         <Route
+          component={view.Event}
+          exact
+          path={ROUTES.EVENTS}
+        />
         <Route
           component={view.FeaturedProducts}
           exact
@@ -60,6 +75,10 @@ const AppRouter = () => (
         <Route
           component={view.ViewProduct}
           path={ROUTES.VIEW_PRODUCT}
+        />
+        <Route
+          component={view.ViewEvent}
+          path={ROUTES.VIEW_EVENT}
         />
         <ClientRoute
           component={view.UserAccount}

@@ -1,47 +1,22 @@
 import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
-import { ColorChooser, ImageLoader, MessageDisplay } from "@/components/common";
-import { ProductShowcaseGrid } from "@/components/product";
-import { RECOMMENDED_PRODUCTS, SHOP } from "@/constants/routes";
-import { displayMoney } from "@/helpers/utils";
-import {
-  useBasket,
-  useDocumentTitle,
-  useProduct,
-  useRecommendedProducts,
-  useScrollTop,
-} from "@/hooks";
+import { ImageLoader, MessageDisplay } from "@/components/common";
+import { EVENTS } from "@/constants/routes";
+import { useDocumentTitle, useEvent, useScrollTop } from "@/hooks";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Select from "react-select";
 
-const ViewProduct = () => {
+const ViewEvent = () => {
   const { id } = useParams();
-  const { product, isLoading, error } = useProduct(id);
-  const { addToBasket, isItemOnBasket } = useBasket(id);
+  const { event, isLoading, error } = useEvent(id);
   useScrollTop();
-  useDocumentTitle(`Обзор ${product?.name || "Item"}`);
+  useDocumentTitle(`Обзор ${event?.name || "Item"}`);
 
-  const [selectedImage, setSelectedImage] = useState(product?.image || "");
-  const [selectedSize, setSelectedSize] = useState("");
-  const [selectedColor, setSelectedColor] = useState("");
-
-  const {
-    recommendedProducts,
-    fetchRecommendedProducts,
-    isLoading: isLoadingFeatured,
-    error: errorFeatured,
-  } = useRecommendedProducts(6);
-  const colorOverlay = useRef(null);
+  const [selectedImage, setSelectedImage] = useState(event?.image || "");
 
   useEffect(() => {
-    setSelectedImage(product?.image);
-  }, [product]);
-
-  const handleAddToBasket = () => {
-    addToBasket({
-      ...product,
-    });
-  };
+    setSelectedImage(event?.image);
+  }, [event]);
 
   return (
     <main className="content">
@@ -53,18 +28,18 @@ const ViewProduct = () => {
         </div>
       )}
       {error && <MessageDisplay message={error} />}
-      {product && !isLoading && (
+      {event && !isLoading && (
         <div className="product-view">
-          <Link to={SHOP}>
+          <Link to={EVENTS}>
             <h3 className="button-link d-inline-flex">
               <ArrowLeftOutlined />
-              &nbsp; Вернуться в Маркетплэйс
+              &nbsp; Вернуться в Мероприятия
             </h3>
           </Link>
           <div className="product-modal">
-            {product.imageCollection.length !== 0 && (
+            {event.imageCollection.length !== 0 && (
               <div className="product-modal-image-collection">
-                {product.imageCollection.map((image) => (
+                {event.imageCollection.map((image) => (
                   <div
                     className="product-modal-image-collection-wrapper"
                     key={image.id}
@@ -80,48 +55,22 @@ const ViewProduct = () => {
               </div>
             )}
             <div className="product-modal-image-wrapper">
-              {selectedColor && (
-                <input
-                  type="color"
-                  disabled
-                  ref={colorOverlay}
-                  id="color-overlay"
-                />
-              )}
               <ImageLoader
-                alt={product.name}
+                alt={event.name}
                 className="product-modal-image"
                 src={selectedImage}
               />
             </div>
             <div className="product-modal-details">
               <br />
-              <span className="text-subtle">{product.brand}</span>
-              <h1 className="margin-top-0">{product.name}</h1>
-              <span>{product.description}</span>
+              <span className="text-subtle">{event.brand}</span>
+              <h1 className="margin-top-0">{event.name}</h1>
+              <span>{event.description}</span>
               <br />
               <br />
               <div className="divider" />
               <br />
-              <div>
-              </div>
-
-              <h1>{displayMoney(product.price)}</h1>
-              <div className="product-modal-action">
-                <button
-                  className={`button button-small ${
-                    isItemOnBasket(product.id)
-                      ? "button-border button-border-gray"
-                      : ""
-                  }`}
-                  onClick={handleAddToBasket}
-                  type="button"
-                >
-                  {isItemOnBasket(product.id)
-                    ? "Удалить из корзины"
-                    : "Добавить в корзину"}
-                </button>
-              </div>
+              <div></div>
             </div>
           </div>
         </div>
@@ -130,4 +79,4 @@ const ViewProduct = () => {
   );
 };
 
-export default ViewProduct;
+export default ViewEvent;
