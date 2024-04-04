@@ -3,7 +3,7 @@ import { useDocumentTitle, useScrollTop } from "@/hooks";
 import React from "react";
 import { Link } from "react-router-dom";
 import { shallowEqual, useSelector } from "react-redux";
-import { selectFilter } from "@/selectors/selectorEvent";
+import { selectFilterEvents } from "@/selectors/selectorEvent";
 import {
   EventAppliedFilters,
   EventGrid,
@@ -19,7 +19,7 @@ const Event = () => {
 
   const store2 = useSelector(
     (state) => ({
-      filteredEvents: selectFilter(state.events.items, state.filter),
+      filteredEvents: selectFilterEvents(state.events.items, state.filter),
       events: state.events,
       requestStatus: state.app.requestStatus,
       isLoading: state.app.loading,

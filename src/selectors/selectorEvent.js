@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-else-return */
-export const selectFilter = (events, filter) => {
+export const selectFilterEvents = (events, filter) => {
   if (!events || events.length === 0) return [];
 
   const keyword = filter.keyword.toLowerCase();

@@ -28,6 +28,7 @@ function* rootSaga() {
   ], productSaga);
   yield takeLatest([
     ACTION.ADD_EVENT,
+    ACTION.SEARCH_EVENT,
     ACTION.REMOVE_EVENT,
     ACTION.EDIT_EVENT,
     ACTION.GET_EVENTS

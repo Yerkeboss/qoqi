@@ -5,7 +5,7 @@ import { useDocumentTitle, useScrollTop } from "@/hooks";
 import React from "react";
 import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { selectFilter } from "@/selectors/selectorEvent";
+import { selectFilterEvents } from "@/selectors/selectorEvent";
 import { EventsNavbar } from "../components";
 import EventsTable from "../components/EventsTable";
 
@@ -14,7 +14,7 @@ const Events = () => {
   useScrollTop();
 
   const store = useSelector((state) => ({
-    filteredEvents: selectFilter(state.events.items, state.filter),
+    filteredEvents: selectFilterEvents(state.events.items, state.filter),
     requestStatus: state.app.requestStatus,
     isLoading: state.app.loading,
     events: state.events,

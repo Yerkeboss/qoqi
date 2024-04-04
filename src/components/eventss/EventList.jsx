@@ -50,7 +50,6 @@ const EventList = (props) => {
       {/* Show 'Show More' button if products length is less than total products */}
       {events.items.length < events.total && (
         <div className="d-flex-center padding-l">
-              
           <button
             className="button button-small"
             disabled={isFetching}
@@ -59,8 +58,6 @@ const EventList = (props) => {
           >
             {isFetching ? 'Fetching Items...' : 'Show More Items'}
           </button>
-      
-     
         </div>
       )}
     </Boundary>
@@ -83,3 +80,5 @@ EventList.propTypes = {
 };
 
 export default EventList;
+
+

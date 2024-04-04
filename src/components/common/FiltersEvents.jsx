@@ -1,20 +1,23 @@
 /* eslint-disable no-nested-ternary */
-import { useDidMountEvents } from '@/hooks';
-import PropType from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, withRouter } from 'react-router-dom';
-import { applyFilter, resetFilter } from '@/redux/actions/filterActions';
+import { useDidMountEvents } from "@/hooks";
+import PropType from "prop-types";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, withRouter } from "react-router-dom";
+import {
+  applyFilterEvents,
+  resetFilterEvents,
+} from "@/redux/actions/filterEventActions";
 
 const FiltersEvents = ({ closeModal }) => {
   const { filter, isLoading, events } = useSelector((state) => ({
     filter: state.filter,
     isLoading: state.app.loading,
-    events: state.events.items
+    events: state.events.items,
   }));
   const [field, setFilter] = useState({
     brand: filter.brand,
-    sortBy: filter.sortBy
+    sortBy: filter.sortBy,
   });
   const dispatch = useDispatch();
   const history = useHistory();
@@ -22,7 +25,7 @@ const FiltersEvents = ({ closeModal }) => {
 
   useEffect(() => {
     if (didMount && window.screen.width <= 480) {
-      history.push('/');
+      history.push("/");
     }
 
     if (didMount && closeModal) closeModal();
@@ -42,20 +45,22 @@ const FiltersEvents = ({ closeModal }) => {
   };
 
   const onApplyFilter = () => {
-    const isChanged = Object.keys(field).some((key) => field[key] !== filter[key]);
-
+    const isChanged = Object.keys(field).some(
+      (key) => field[key] !== filter[key]
+    );
+    dispatch(applyFilterEvents(field));
     if (isChanged) {
-      dispatch(applyFilter(field));
+      dispatch(applyFilterEvents(field));
     } else {
       closeModal();
     }
   };
 
   const onResetFilter = () => {
-    const filterFields = ['brand', 'sortBy'];
+    const filterFields = ["brand", "sortBy"];
 
     if (filterFields.some((key) => !!filter[key])) {
-      dispatch(resetFilter());
+      dispatch(resetFilterEvents());
     } else {
       closeModal();
     }
@@ -121,7 +126,7 @@ const FiltersEvents = ({ closeModal }) => {
 };
 
 FiltersEvents.propTypes = {
-  closeModal: PropType.func.isRequired
+  closeModal: PropType.func.isRequired,
 };
 
 export default withRouter(FiltersEvents);

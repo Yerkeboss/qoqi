@@ -25,6 +25,11 @@ const AppRouter = () => (
           path={ROUTES.SEARCH}
         />
         <Route
+          component={view.SearchEvent}
+          exact
+          path={ROUTES.SEARCHEVENT}
+        />
+        <Route
           component={view.Home}
           exact
           path={ROUTES.HOME}

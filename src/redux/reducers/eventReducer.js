@@ -1,7 +1,7 @@
 import {
-  ADD_EVENT_SUCCESS,
+  ADD_EVENT_SUCCESS,CLEAR_SEARCH_STATE_EVENTS,
   EDIT_EVENT_SUCCESS,
-  GET_EVENTS_SUCCESS, REMOVE_EVENT_SUCCESS,
+  GET_EVENTS_SUCCESS, REMOVE_EVENT_SUCCESS, SEARCH_EVENT_SUCCESS
 } from '@/constants/constants';
 
 const initState = {
@@ -14,6 +14,7 @@ export default (state = {
   lastRefKey: null,
   total: 0,
   items: [],
+  searchedEvents: initState
 }, action) => {
   switch (action.type) {
     case GET_EVENTS_SUCCESS:
@@ -29,20 +30,20 @@ export default (state = {
         ...state,
         items: [...state.items, action.payload]
       };
-    // case SEARCH_PRODUCT_SUCCESS:
-    //   return {
-    //     ...state,
-    //     searchedProducts: {
-    //       lastRefKey: action.payload.lastKey,
-    //       total: action.payload.total,
-    //       items: [...state.searchedProducts.items, ...action.payload.products]
-    //     }
-    //   };
-    // case CLEAR_SEARCH_STATE:
-    //   return {
-    //     ...state,
-    //     searchedProducts: initState
-    //   };
+    case SEARCH_EVENT_SUCCESS:
+      return {
+        ...state,
+        searchedEvents: {
+          lastRefKey: action.payload.lastKey,
+          total: action.payload.total,
+          items: [...state.searchedEvents.items, ...action.payload.events]
+        }
+      };
+    case CLEAR_SEARCH_STATE_EVENTS:
+      return {
+        ...state,
+        searchedEvents: initState
+      };
     case REMOVE_EVENT_SUCCESS:
       return {
         ...state,

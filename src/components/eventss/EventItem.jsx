@@ -56,3 +56,5 @@ EventItem.propTypes = {
 };
 
 export default EventItem;
+
+

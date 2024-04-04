@@ -19,6 +19,7 @@ export { default as Home } from './home';
 export { default as Event } from './eventss';
 export { default as RecommendedProducts } from './recommended';
 export { default as Search } from './search';
+export { default as SearchEvent } from './searchEvent';
 export { default as Shop } from './shop';
 export { default as About } from './about';
 export {default as Education} from './education';

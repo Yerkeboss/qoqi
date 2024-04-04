@@ -16,7 +16,8 @@ import bannerImg from "@/images/banner-girl.png";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { shallowEqual, useSelector } from "react-redux";
-import { selectFilter } from "@/selectors/selectorEvent";
+import { selectFilter } from "@/selectors/selector";
+import { selectFilterEvents } from "@/selectors/selectorEvent";
 import { AppliedFilters, ProductGrid, ProductList } from "@/components/product";
 import {
   EventAppliedFilters,
@@ -29,6 +30,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
 import { applyFilter } from "../../redux/actions/filterActions";
+import { applyFilterEvents } from "../../redux/actions/filterEventActions";
 
 const Home = () => {
   useDocumentTitle("Qoqiqaz | Home");
@@ -53,13 +55,14 @@ const Home = () => {
 
   const store2 = useSelector(
     (state) => ({
-      filteredEvents: selectFilter(state.events.items, state.filter),
+      filteredEvents: selectFilterEvents(state.events.items, state.filter),
       events: state.events,
       requestStatus: state.app.requestStatus,
       isLoading: state.app.loading,
     }),
     shallowEqual
   );
+
 
   const settings = {
     dots: false,

@@ -16,6 +16,7 @@ export const ADD_EVENT = '/admin/add/event';
 export const EDIT_PRODUCT = '/admin/edit/product';
 export const EDIT_EVENT = '/admin/edit/event';
 export const SEARCH = '/search/:searchKey';
+export const SEARCHEVENT = '/searchEvent/:searchKey';
 export const SIGNIN = '/signin';
 export const SIGNOUT = '/signout';
 export const SIGNUP = '/signup';

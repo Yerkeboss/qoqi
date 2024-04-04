@@ -15,7 +15,7 @@ import { setLoading, setRequestStatus } from '@/redux/actions/miscActions';
 import { history } from '@/routers/AppRouter';
 import firebase from '@/services/firebase';
 import {
-  addEventSuccess, clearSearchState,
+  addEventSuccess, clearSearchStateEvents,
   editEventSuccess, getEventsSuccess,
   removeEventSuccess,searchEventSuccess
 } from '../actions/eventActions';
@@ -176,14 +176,14 @@ function* eventSaga({ type, payload }) {
       try {
         yield initRequest();
         // clear search data
-        yield put(clearSearchState());
+        yield put(clearSearchStateEvents());
 
         const state = yield select();
         const result = yield call(firebase.searchEvents, payload.searchKey);
 
         if (result.events.length === 0) {
           yield handleError({ message: 'No Event found.' });
-          yield put(clearSearchState());
+          yield put(clearSearchStateEvents());
         } else {
           yield put(searchEventSuccess({
             events: result.events,

@@ -2,7 +2,7 @@ import {
   ADD_EVENT,
   ADD_EVENT_SUCCESS,
   CANCEL_GET_EVENTS,
-  CLEAR_SEARCH_STATE,
+  CLEAR_SEARCH_STATE_EVENTS,
   EDIT_EVENT,
   EDIT_EVENT_SUCCESS,
   GET_EVENTS,
@@ -39,13 +39,13 @@ export const searchEvent = (searchKey) => ({
   }
 });
 
-export const searchEventSuccess = (products) => ({
+export const searchEventSuccess = (events) => ({
   type: SEARCH_EVENT_SUCCESS,
-  payload: products
+  payload: events
 });
 
-export const clearSearchState = () => ({
-  type: CLEAR_SEARCH_STATE
+export const clearSearchStateEvents = () => ({
+  type: CLEAR_SEARCH_STATE_EVENTS
 });
 
 export const addEventSuccess = (event) => ({
