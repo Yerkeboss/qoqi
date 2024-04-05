@@ -31,17 +31,21 @@ import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
 import { applyFilter } from "../../redux/actions/filterActions";
 import { applyFilterEvents } from "../../redux/actions/filterEventActions";
-import Carousel from "react-bootstrap/Carousel";
+import Carousel from "react-grid-carousel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
   useDocumentTitle("Qoqiqaz | Home");
   useScrollTop();
   const dispatch = useDispatch();
   const [selectedBrand, setSelectedBrand] = useState("");
+  const [activeButton, setActiveButton] = useState("");
 
   const handleBrandSelect = (brand) => {
     setSelectedBrand(brand);
     dispatch(applyFilter({ brand }));
+    setActiveButton(brand);
   };
 
   const store = useSelector(
@@ -63,102 +67,154 @@ const Home = () => {
     }),
     shallowEqual
   );
+  const [all, setAll] = useState(false);
+  const [photo, setPhoto] = useState(false);
+  const [music, setMusic] = useState(false);
+  const [design, setDesign] = useState(false);
+  const [illustration, setIllustration] = useState(false);
+  const [animation, setAnimation] = useState(false);
+  const [installation, setInstallation] = useState(false);
+  const [D, setD] = useState(false);
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-  };
-  const settings2 = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 3,
-    speed: 500,
-    rows: 2,
-    slidesToScroll: 1,
+  const allFilter = () => {
+    setAll(true);
+    setPhoto(false);
+    setMusic(false);
+    setDesign(false);
   };
 
   return (
     <main className="content">
       <div className="home">
-        <h2>Мероприятия</h2>
-        {/* <EventAppliedFilters
-          filteredEventsCount={store2.filteredEvents.length}
-        /> */}
+        <h2 style={{ marginLeft: "2rem" }}>Мероприятия</h2>
         <EventList {...store2}>
-          <Slider {...settings}>
-            {store2.filteredEvents.map((event) => (
-              <div key={event.id}>
+          <Carousel scrollSnap={true} cols={3} rows={1} gap={10} loop>
+            {store2.filteredEvents.map((event, index) => (
+              <Carousel.Item key={index}>
                 <EventGrid events={[event]} />
-              </div>
+              </Carousel.Item>
             ))}
-          </Slider>
+          </Carousel>
         </EventList>
+        <div style={{ marginLeft: "2rem" }}>
+          <h2>Галерея лучших работ</h2>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <Button
+              style={{
+                width: "30%",
 
-        <h2>Галерея лучших работ</h2>
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <Button
-            className="filter-buttons"
-            onClick={() => handleBrandSelect("")}
-          >
-            Все категории
-          </Button>
-          <Button
-            className="filter-buttons"
-            onClick={() => handleBrandSelect("фотографии")}
-          >
-            Фотографии
-          </Button>
-          <Button
-            className="filter-buttons"
-            onClick={() => handleBrandSelect("музыка")}
-          >
-            Музыка
-          </Button>
-          <Button
-            className="filter-buttons"
-            onClick={() => handleBrandSelect("дизайн")}
-          >
-            Дизайн
-          </Button>
-          <Button
-            className="filter-buttons"
-            onClick={() => handleBrandSelect("иллюстрации")}
-          >
-            Иллюстрации
-          </Button>
-          <Button
-            className="filter-buttons"
-            onClick={() => handleBrandSelect("анимации")}
-          >
-            Анимации
-          </Button>
-          <Button
-            className="filter-buttons"
-            onClick={() => handleBrandSelect("инсталяции")}
-          >
-            Инсталяции
-          </Button>
-          <Button
-            className="filter-buttons"
-            onClick={() => handleBrandSelect("3D")}
-          >
-            3D
-          </Button>
+                backgroundColor: "white",
+                borderRadius: "10px",
+                height: "5rem",
+                border: "1px solid black",
+              }}
+            >
+              <FontAwesomeIcon icon={faEllipsis} />
+            </Button>
+            <Button
+              className={
+                activeButton === "" ? "filter-buttons-active" : "filter-buttons"
+              }
+              onClick={() => handleBrandSelect("")}
+            >
+              Все категории
+            </Button>
+            <Button
+              className={
+                activeButton === "фотографии"
+                  ? "filter-buttons-active"
+                  : "filter-buttons"
+              }
+              onClick={() => handleBrandSelect("фотографии")}
+            >
+              Фотографии
+            </Button>
+            <Button
+              className={
+                activeButton === "музыка"
+                  ? "filter-buttons-active"
+                  : "filter-buttons"
+              }
+              onClick={() => handleBrandSelect("музыка")}
+            >
+              Музыка
+            </Button>
+            <Button
+              className={
+                activeButton === "дизайн"
+                  ? "filter-buttons-active"
+                  : "filter-buttons"
+              }
+              onClick={() => handleBrandSelect("дизайн")}
+            >
+              Дизайн
+            </Button>
+            <Button
+              className={
+                activeButton === "иллюстрации"
+                  ? "filter-buttons-active"
+                  : "filter-buttons"
+              }
+              onClick={() => handleBrandSelect("иллюстрации")}
+            >
+              Иллюстрации
+            </Button>
+            <Button
+              className={
+                activeButton === "анимации"
+                  ? "filter-buttons-active"
+                  : "filter-buttons"
+              }
+              onClick={() => handleBrandSelect("анимации")}
+            >
+              Анимации
+            </Button>
+            <Button
+              className={
+                activeButton === "инсталяции"
+                  ? "filter-buttons-active"
+                  : "filter-buttons"
+              }
+              onClick={() => handleBrandSelect("инсталяции")}
+            >
+              Инсталяции
+            </Button>
+            <Button
+              className={
+                activeButton === "3D"
+                  ? "filter-buttons-active"
+                  : "filter-buttons"
+              }
+              onClick={() => handleBrandSelect("3D")}
+            >
+              3D
+            </Button>
+          </div>
         </div>
         <br />
         <ProductList {...store}>
-          <Slider {...settings2}>
-            {store.filteredProducts.map((product, index) => (
-              <div key={index}>
-                <ProductShowcaseGrid products={[product]} />
-              </div>
-            ))}
-          </Slider>
+          <div className="scrollable-carousel">
+            <Carousel scrollSnap={true} cols={3} rows={2} gap={2} loop>
+              {store.filteredProducts.map((product, index) => (
+                <Carousel.Item key={index}>
+                  <ProductShowcaseGrid products={[product]} />
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          </div>
         </ProductList>
-   
+        <h2 style={{ marginLeft: "2rem" }}>Лучшее за неделю</h2>
+        <ProductList {...store}>
+          <div className="scrollable-carousel">
+            <Carousel scrollSnap={true} cols={2} rows={1} gap={10} loop>
+              {store.filteredProducts.map((product, index) => (
+                <Carousel.Item key={index}>
+                  <ProductShowcaseGrid products={[product]} />
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          </div>
+        </ProductList>
       </div>
     </main>
   );
