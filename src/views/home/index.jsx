@@ -31,6 +31,7 @@ import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
 import { applyFilter } from "../../redux/actions/filterActions";
 import { applyFilterEvents } from "../../redux/actions/filterEventActions";
+import Carousel from "react-bootstrap/Carousel";
 
 const Home = () => {
   useDocumentTitle("Qoqiqaz | Home");
@@ -63,7 +64,6 @@ const Home = () => {
     shallowEqual
   );
 
-
   const settings = {
     dots: false,
     infinite: true,
@@ -71,27 +71,22 @@ const Home = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
   };
-
-  const {
-    featuredProducts,
-    fetchFeaturedProducts,
-    isLoading: isLoadingFeatured,
-    error: errorFeatured,
-  } = useFeaturedProducts(6);
-  const {
-    recommendedProducts,
-    fetchRecommendedProducts,
-    isLoading: isLoadingRecommended,
-    error: errorRecommended,
-  } = useRecommendedProducts(6);
+  const settings2 = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 3,
+    speed: 500,
+    rows: 2,
+    slidesToScroll: 1,
+  };
 
   return (
     <main className="content">
       <div className="home">
         <h2>Мероприятия</h2>
-        <EventAppliedFilters
+        {/* <EventAppliedFilters
           filteredEventsCount={store2.filteredEvents.length}
-        />
+        /> */}
         <EventList {...store2}>
           <Slider {...settings}>
             {store2.filteredEvents.map((event) => (
@@ -104,64 +99,66 @@ const Home = () => {
 
         <h2>Галерея лучших работ</h2>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <Button onClick={() => handleBrandSelect("")}>Все категории</Button>
-          <Button onClick={() => handleBrandSelect("фотографии")}>
+          <Button
+            className="filter-buttons"
+            onClick={() => handleBrandSelect("")}
+          >
+            Все категории
+          </Button>
+          <Button
+            className="filter-buttons"
+            onClick={() => handleBrandSelect("фотографии")}
+          >
             Фотографии
           </Button>
-          <Button onClick={() => handleBrandSelect("музыка")}>Музыка</Button>
-          <Button onClick={() => handleBrandSelect("дизайн")}>Дизайн</Button>
-          <Button onClick={() => handleBrandSelect("иллюстрации")}>
+          <Button
+            className="filter-buttons"
+            onClick={() => handleBrandSelect("музыка")}
+          >
+            Музыка
+          </Button>
+          <Button
+            className="filter-buttons"
+            onClick={() => handleBrandSelect("дизайн")}
+          >
+            Дизайн
+          </Button>
+          <Button
+            className="filter-buttons"
+            onClick={() => handleBrandSelect("иллюстрации")}
+          >
             Иллюстрации
           </Button>
-          <Button onClick={() => handleBrandSelect("анимации")}>
+          <Button
+            className="filter-buttons"
+            onClick={() => handleBrandSelect("анимации")}
+          >
             Анимации
           </Button>
-          <Button onClick={() => handleBrandSelect("инсталяции")}>
+          <Button
+            className="filter-buttons"
+            onClick={() => handleBrandSelect("инсталяции")}
+          >
             Инсталяции
           </Button>
-          <Button onClick={() => handleBrandSelect("3D")}>3D</Button>
+          <Button
+            className="filter-buttons"
+            onClick={() => handleBrandSelect("3D")}
+          >
+            3D
+          </Button>
         </div>
         <br />
-        <AppliedFilters filteredProductsCount={store.filteredProducts.length} />
         <ProductList {...store}>
-          <ProductGrid products={store.filteredProducts} />
+          <Slider {...settings2}>
+            {store.filteredProducts.map((product, index) => (
+              <div key={index}>
+                <ProductShowcaseGrid products={[product]} />
+              </div>
+            ))}
+          </Slider>
         </ProductList>
-        {/* <div className="display">
-          <div className="display-header">
-            <h1>Featured Products</h1>
-            <Link to={FEATURED_PRODUCTS}>See All</Link>
-          </div>
-          {errorFeatured && !isLoadingFeatured ? (
-            <MessageDisplay
-              message={errorFeatured}
-              action={fetchFeaturedProducts}
-              buttonLabel="Try Again"
-            />
-          ) : (
-            <ProductShowcaseGrid
-              products={featuredProducts}
-              skeletonCount={6}
-            />
-          )}
-        </div> */}
-        {/* <div className="display">
-          <div className="display-header">
-            <h1>Recommended Products</h1>
-            <Link to={RECOMMENDED_PRODUCTS}>See All</Link>
-          </div>
-          {errorRecommended && !isLoadingRecommended ? (
-            <MessageDisplay
-              message={errorRecommended}
-              action={fetchRecommendedProducts}
-              buttonLabel="Try Again"
-            />
-          ) : (
-            <ProductShowcaseGrid
-              products={recommendedProducts}
-              skeletonCount={6}
-            />
-          )}
-        </div> */}
+   
       </div>
     </main>
   );

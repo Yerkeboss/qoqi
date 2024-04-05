@@ -1,12 +1,41 @@
 .home {
-    width: 100%;
+  width: 100%;
 }
 
 .home-featured {
-    margin: 5rem;
-    margin-top: 10rem;
+  margin: 5rem;
+  margin-top: 10rem;
 }
 
 .featured {
-    width: 100%;
+  width: 100%;
 }
+
+.filter-buttons {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px;
+}
+
+.carousel-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.carousel-item {
+  width: calc(50% - 10px);
+  margin-bottom: 20px;
+}
+
+.carousel-item:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .carousel-item {
+    width: calc(33.33% - 10px);
+  }
+}
+

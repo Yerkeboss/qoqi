@@ -9,7 +9,9 @@ const ProductFeatured = ({ product }) => {
   const onClickItem = () => {
     if (!product) return;
 
-    history.push(`/product/${product.id}`);
+    if (product.id) {
+      history.push(`/product/${product.id}`);
+    }
   };
 
   return (
@@ -22,12 +24,6 @@ const ProductFeatured = ({ product }) => {
               src={product.image}
             />
           ) : <Skeleton width="100%" height="100%" />}
-        </div>
-        <div className="product-display-details">
-          <h2>{product.name || <Skeleton width={80} />}</h2>
-          <p className="text-subtle text-italic">
-            {product.brand || <Skeleton width={40} />}
-          </p>
         </div>
       </div>
     </SkeletonTheme>
