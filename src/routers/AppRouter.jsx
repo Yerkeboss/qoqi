@@ -107,6 +107,10 @@ const AppRouter = () => (
           component={view.CheckOutStep3}
           path={ROUTES.CHECKOUT_STEP_3}
         />
+        <ClientRoute
+          component={view.AddProduct}
+          path={ROUTES.ADD_PRODUCT_CLIENT}
+        />
         <AdminRoute
           component={view.Dashboard}
           exact

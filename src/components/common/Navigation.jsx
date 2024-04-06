@@ -115,20 +115,14 @@ const Navigation = () => {
           </NavLink>
         </li>
       </ul>
-      {(pathname === ROUTE.SHOP || pathname === ROUTE.SEARCH) && (
-        <FiltersToggle>
-          <button className="button-muted button-small" type="button">
-            Фильтры &nbsp;
-            <FilterOutlined />
-          </button>
-        </FiltersToggle>
-      )}
 
-      
       <ul className="navigation-menu">
-      <SearchBar />
+        <SearchBar />
         <li className="navigation-menu-item">
-          <Button style={{ border: "none", backgroundColor: "#f9f9f9" }}>
+          <NavLink
+            style={{ border: "none", backgroundColor: "#f9f9f9" }}
+            to={ROUTE.ADD_PRODUCT_CLIENT}
+          >
             <FontAwesomeIcon
               icon={faPlus}
               style={{
@@ -138,10 +132,16 @@ const Navigation = () => {
                 marginTop: "0.5rem",
               }}
             />
-          </Button>
+          </NavLink>
         </li>
         <li className="navigation-menu-item">
-          <Button style={{ border: "none", backgroundColor: "#f9f9f9" }}>
+          <Button
+            style={{
+              border: "none",
+              backgroundColor: "#f9f9f9",
+              marginLeft: "1rem",
+            }}
+          >
             <FontAwesomeIcon
               icon={faBell}
               style={{

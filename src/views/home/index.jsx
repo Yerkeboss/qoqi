@@ -132,7 +132,6 @@ const Home = () => {
             <Button
               style={{
                 width: "30%",
-
                 backgroundColor: "white",
                 borderRadius: "10px",
                 height: "5rem",
