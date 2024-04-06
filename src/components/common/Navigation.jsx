@@ -13,6 +13,10 @@ import SearchBar from "./SearchBar";
 import logo1 from "./../../images/logo1.png";
 import logo2 from "./../../images/logo2.png";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import Button from "react-bootstrap/Button";
 
 const Navigation = () => {
   const navbar = useRef(null);
@@ -88,10 +92,7 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink
-            activeClassName="navigation-menu-active"
-            to={ROUTE.EVENTS}
-          >
+          <NavLink activeClassName="navigation-menu-active" to={ROUTE.EVENTS}>
             Мероприятия
           </NavLink>
         </li>
@@ -109,10 +110,7 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink
-            activeClassName="navigation-menu-active"
-            to={ROUTE.ABOUT}
-          >
+          <NavLink activeClassName="navigation-menu-active" to={ROUTE.ABOUT}>
             О нас
           </NavLink>
         </li>
@@ -125,8 +123,36 @@ const Navigation = () => {
           </button>
         </FiltersToggle>
       )}
-      <SearchBar />
+
+      
       <ul className="navigation-menu">
+      <SearchBar />
+        <li className="navigation-menu-item">
+          <Button style={{ border: "none", backgroundColor: "#f9f9f9" }}>
+            <FontAwesomeIcon
+              icon={faPlus}
+              style={{
+                color: "#000000",
+                width: "2rem",
+                height: "2rem",
+                marginTop: "0.5rem",
+              }}
+            />
+          </Button>
+        </li>
+        <li className="navigation-menu-item">
+          <Button style={{ border: "none", backgroundColor: "#f9f9f9" }}>
+            <FontAwesomeIcon
+              icon={faBell}
+              style={{
+                color: "#000000",
+                width: "2rem",
+                height: "2rem",
+                marginTop: "0.5rem",
+              }}
+            />
+          </Button>
+        </li>
         <li className="navigation-menu-item">
           <BasketToggle>
             {({ onClickToggle }) => (
@@ -143,6 +169,7 @@ const Navigation = () => {
             )}
           </BasketToggle>
         </li>
+
         {store.user ? (
           <li className="navigation-menu-item">
             <UserAvatar />

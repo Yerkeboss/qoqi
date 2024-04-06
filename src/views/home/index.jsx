@@ -1,4 +1,4 @@
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { ArrowRightOutlined, ConsoleSqlOutlined } from "@ant-design/icons";
 import { MessageDisplay } from "@/components/common";
 import { ProductShowcaseGrid } from "@/components/product";
 import {
@@ -13,7 +13,7 @@ import {
   useScrollTop,
 } from "@/hooks";
 import bannerImg from "@/images/banner-girl.png";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { shallowEqual, useSelector } from "react-redux";
 import { selectFilter } from "@/selectors/selector";
@@ -28,12 +28,17 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
+import Card from "react-bootstrap/Card";
 import { useDispatch } from "react-redux";
 import { applyFilter } from "../../redux/actions/filterActions";
 import { applyFilterEvents } from "../../redux/actions/filterEventActions";
 import Carousel from "react-grid-carousel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import Box from "@mui/material/Box";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 
 const Home = () => {
   useDocumentTitle("Qoqiqaz | Home");
@@ -41,6 +46,29 @@ const Home = () => {
   const dispatch = useDispatch();
   const [selectedBrand, setSelectedBrand] = useState("");
   const [activeButton, setActiveButton] = useState("");
+  const [isFixed, setIsFixed] = useState(false);
+  const [value, setValue] = React.useState(0);
+  const [rect, setRect] = useState(false);
+  const [pop, setPop] = useState(false);
+  const [res, setRes] = useState(false);
+
+  const toggleRect = () => {
+    setRect(true);
+    setPop(false);
+    setRes(false);
+  };
+
+  const togglePop = () => {
+    setRect(false);
+    setPop(true);
+    setRes(false);
+  };
+
+  const toggleRes = () => {
+    setRect(false);
+    setPop(false);
+    setRes(true);
+  };
 
   const handleBrandSelect = (brand) => {
     setSelectedBrand(brand);
@@ -67,21 +95,23 @@ const Home = () => {
     }),
     shallowEqual
   );
-  const [all, setAll] = useState(false);
-  const [photo, setPhoto] = useState(false);
-  const [music, setMusic] = useState(false);
-  const [design, setDesign] = useState(false);
-  const [illustration, setIllustration] = useState(false);
-  const [animation, setAnimation] = useState(false);
-  const [installation, setInstallation] = useState(false);
-  const [D, setD] = useState(false);
 
-  const allFilter = () => {
-    setAll(true);
-    setPhoto(false);
-    setMusic(false);
-    setDesign(false);
+  // Function to handle scroll event
+  const handleScroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      setIsFixed(true);
+    } else {
+      setIsFixed(false);
+    }
   };
+
+  useEffect(() => {
+    toggleRect();
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <main className="content">
@@ -192,6 +222,67 @@ const Home = () => {
           </div>
         </div>
         <br />
+
+        <Box
+          sx={{
+            position: isFixed ? "fixed" : "absolute",
+            bottom: 670,
+            width: "100%",
+            zIndex: 10000,
+            display: "flex",
+            justifyContent: "flex-start",
+            marginLeft: "2rem", // Aligns items to the left
+          }}
+          style={{ borderRadius: "10rem" }}
+        >
+          <div
+            style={{
+              borderRadius: "10rem",
+              // border: "1px solid",
+              backgroundColor: "white",
+              height: "4rem",
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              onClick={toggleRect}
+              style={{
+                backgroundColor: rect ? "black" : "white",
+                borderRadius: "10rem",
+                color: rect ? "white" : "black",
+                border: "none",
+                height: "4rem",
+              }}
+            >
+              Рекомендации
+            </Button>
+            <Button
+              onClick={togglePop}
+              style={{
+                backgroundColor: pop ? "black" : "white",
+                borderRadius: "10rem",
+                color: pop ? "white" : "black",
+                border: "none",
+                height: "4rem",
+              }}
+            >
+              Популярное
+            </Button>
+            <Button
+              onClick={toggleRes}
+              style={{
+                backgroundColor: res ? "black" : "white",
+                borderRadius: "10rem",
+                color: res ? "white" : "black",
+                border: "none",
+                height: "4rem",
+              }}
+            >
+              Недавние
+            </Button>
+          </div>
+        </Box>
+
         <ProductList {...store}>
           <div className="scrollable-carousel">
             <Carousel scrollSnap={true} cols={3} rows={2} gap={2} loop>

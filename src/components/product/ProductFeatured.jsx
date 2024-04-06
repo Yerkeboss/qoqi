@@ -1,11 +1,15 @@
 import { ImageLoader } from "@/components/common";
 import PropType from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
 const ProductFeatured = ({ product }) => {
   const history = useHistory();
+  const [isHovered, setIsHovered] = useState(false);
+
   const onClickItem = () => {
     if (!product) return;
 
@@ -20,6 +24,8 @@ const ProductFeatured = ({ product }) => {
         className="product-display"
         onClick={onClickItem}
         role="presentation"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
         <div className="product-display-img">
           {product.image ? (
@@ -28,12 +34,30 @@ const ProductFeatured = ({ product }) => {
             <Skeleton width="100%" height="100%" />
           )}
         </div>
-        <div className="product-display-details">
-          <h2>{product.name || <Skeleton width={80} />}</h2>
-          <p className="text-subtle text-italic">
-            {product.brand || <Skeleton width={40} />}
-          </p>
-        </div>
+        {isHovered ? (
+          <div className="product-display-details">
+            <h2>{product.name || <Skeleton width={80} />}</h2>
+            <svg width="100%" height="1" style={{ top: "0" }}>
+              <line
+                x1="0"
+                y1="0"
+                x2="50%"
+                y2="0"
+                stroke="white"
+                strokeWidth="4"
+              />
+            </svg>
+            <p className="text-subtle text-italic">
+              {product.brand || <Skeleton width={40} />}
+            </p>
+            <div style={{ display: "flex", marginLeft: "22rem" }}>
+              <FontAwesomeIcon icon={faThumbsUp} className="white-icon" />
+              <FontAwesomeIcon icon={faEye} className="white-icon" />
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </SkeletonTheme>
   );
