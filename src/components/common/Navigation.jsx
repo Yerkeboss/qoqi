@@ -15,7 +15,7 @@ import logo2 from "./../../images/logo2.png";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faBars } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
 
 const Navigation = () => {
@@ -82,6 +82,19 @@ const Navigation = () => {
         </Link>
       </div>
       <ul className="navigation-menu-main">
+        <li>
+          <Button style={{ border: "none", backgroundColor: "#f9f9f9" }}>
+            <FontAwesomeIcon
+              icon={faBars}
+              style={{
+                color: "#000000",
+                width: "2rem",
+                height: "2rem",
+                marginTop: "0.5rem",
+              }}
+            />
+          </Button>
+        </li>
         <li>
           <NavLink
             activeClassName="navigation-menu-active"
