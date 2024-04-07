@@ -52,18 +52,7 @@ const Event = () => {
     <main className="content">
       <div className="home">
         <h2 style={{ marginLeft: "2rem", marginTop: "5rem" }}>Мероприятия</h2>
-        {/* <EventAppliedFilters
-          filteredEventsCount={store2.filteredEvents.length}
-        />
-        <EventList {...store2}>
-          <div className="event-grid2">
-            {store2.filteredEvents.map((event, index) => (
-              <div className="event-item" key={event.id}>
-                <EventGrid events={[event]} />
-              </div>
-            ))}
-          </div>
-        </EventList> */}
+
         <Carousel cols={3} rows={2} gap={10} loop scrollSnap={true}>
           {events.map((event, index) => (
             <Carousel.Item key={index}>

@@ -13,6 +13,11 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Select from "react-select";
+import Card from "react-bootstrap/Card";
+import { CardBody, CardTitle } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const ViewProduct = () => {
   const { id } = useParams();
@@ -122,6 +127,43 @@ const ViewProduct = () => {
               </div>
             </div>
           </div>
+          <Card style={{ background: "white" }}>
+            <h2 style={{ marginLeft: "3rem" }}>Оценить и оставить отзыв</h2>
+            <CardBody>
+              <div style={{ display: "flex" }}>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <h2 style={{ marginLeft: "3rem" }}>4,8</h2>
+                  <h4 style={{ marginLeft: "3rem" }}>5 отзывов</h4>
+                </div>
+                <Form.Control
+                  size="lg"
+                  type="text"
+                  placeholder="Поделитесь вашими личными впечатлениями"
+                  style={{
+                    borderRadius: "2rem",
+                    marginLeft: "20rem",
+                    width: "50%",
+                  }}
+                />
+                <br />
+              </div>
+
+              <Button
+                style={{
+                  border: "none",
+                  background: "#F28290",
+                  color: "white",
+                  borderRadius: "2rem",
+                  width: "15rem",
+                  height: "5rem",
+                  marginTop: "3rem",
+                  marginLeft: "50rem",
+                }}
+              >
+                Отправить
+              </Button>
+            </CardBody>
+          </Card>
         </div>
       )}
     </main>

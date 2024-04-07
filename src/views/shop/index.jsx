@@ -10,6 +10,7 @@ import Vacancies from "../../components/jobs/Vacancies";
 import Tender from "../../components/tender/Tender";
 import Croud from "../../components/croud/Croud";
 import Charity from "../../components/charity/Charity";
+import MasterForm from "../../components/order/MasterForm";
 
 const Shop = () => {
   useDocumentTitle("Shop | Qoqiqaz");
@@ -249,7 +250,7 @@ const Shop = () => {
 
           {creator && <Creators />}
           {vac && <Vacancies />}
-          {/* {order && <CreateTaskMultiStepFormContainer />} */}
+          {order && <MasterForm />}
           {tender && <Tender />}
           {croud && <Croud />}
           {charity && <Charity />}
