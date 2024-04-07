@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDocumentTitle, useScrollTop } from "@/hooks";
+import Image from "react-bootstrap/Image";
 
 const About = () => {
   useDocumentTitle("AboutUs | Qoqiqaz");
@@ -31,6 +32,8 @@ const About = () => {
         height: "100%",
         display: "flex",
         flexDirection: "column",
+        marginLeft: "2rem",
+        marginTop: "3rem",
       }}
     >
       <div>
@@ -39,10 +42,10 @@ const About = () => {
           <button
             onClick={toggleInfo}
             style={{
-              marginTop: "2rem",
+              // marginTop: "2rem",
               backgroundColor: showInfo ? "#F28290" : "white",
               color: showInfo ? "white" : "black",
-              borderColor: showInfo ? "#F28290" : "black",
+              border: showInfo ? "none" : "black",
               borderRadius: "12px",
             }}
           >
@@ -59,7 +62,7 @@ const About = () => {
           <button
             onClick={toggleContacts}
             style={{
-              marginTop: "2rem",
+              // marginTop: "2rem",
               marginLeft: "2rem",
               backgroundColor: showContacts ? "#F28290" : "white",
               color: showContacts ? "white" : "black",
@@ -90,7 +93,7 @@ const About = () => {
                   border: "1px solid #F28290",
                   backgroundColor: "#F28290",
                   borderRadius: "20px",
-                  height: "30rem",
+                  // height: "30rem",
                 }}
               >
                 <div
@@ -134,12 +137,19 @@ const About = () => {
               <div
                 style={{
                   flex: 1,
-                  border: "1px solid #F28290",
-                  borderRadius: "20px",
-                  marginLeft: "1rem",
+                  // border: "1px solid #F28290",
+                  // borderRadius: "20px",
+                  marginLeft: "2rem",
                 }}
               >
-                <img src="abc.png" />
+                <Image
+                  src="src/images/pexels-fauxels-3184418.jpg"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "2rem",
+                  }}
+                />
               </div>
             </div>
             <div

@@ -1260,6 +1260,20 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@coreui/coreui@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@coreui/coreui/-/coreui-5.0.0.tgz#5e5cfd3ac05250acd3d07dc8cd36a54d2c8ed648"
+  integrity sha512-okQEoPVOqIQOH9aDN9jfgrjuMTgZ1YX/S81wWP5WuMmx5u0s8K+BXXDja5bbl4eP703+rElew/tHqGEAn+89Gw==
+
+"@coreui/react@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@coreui/react/-/react-5.0.0.tgz#23f65ca945ebcf501872ee6482ecea116d6e4f1e"
+  integrity sha512-LnYloIOq3T1mgZNEEoni1yScsg3ad2r/q1tUQt0+HabyiYXV4OVHWXv0Y7sneUWNzv5yx+3BlJldGHVXDRuImQ==
+  dependencies:
+    "@coreui/coreui" "^5.0.0"
+    "@popperjs/core" "^2.11.8"
+    prop-types "^15.8.1"
+
 "@ctrl/tinycolor@^3.4.0":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.4.1.tgz#75b4c27948c81e88ccd3a8902047bcd797f38d32"
@@ -1864,6 +1878,14 @@
     protobufjs "^6.11.3"
     yargs "^16.2.0"
 
+"@headlessui/react@^1.7.18":
+  version "1.7.18"
+  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.7.18.tgz#30af4634d2215b2ca1aa29d07f33d02bea82d9d7"
+  integrity sha512-4i5DOrzwN4qSgNsL4Si61VMkUcWbcSKueUV7sFhpHzQcSShdlHENE5+QBntMSRvHt8NyoFO2AGG8si9lq+w4zQ==
+  dependencies:
+    "@tanstack/react-virtual" "^3.0.0-beta.60"
+    client-only "^0.0.1"
+
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.5.0.tgz#1407967d4c6eecd7388f83acf1eaf4d0c6e58ef9"
@@ -2448,6 +2470,18 @@
   integrity sha512-lruDGw3pnfM3wmZHeW7JuhkGQaJjPyiKjxeGhdmfoOT53Ic9qb5JLDNaK2HUdl1zLDeX28H221UvKjfdvSLVMg==
   dependencies:
     tslib "^2.4.0"
+
+"@tanstack/react-virtual@^3.0.0-beta.60":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-virtual/-/react-virtual-3.2.0.tgz#fb70f9c6baee753a5a0f7618ac886205d5a02af9"
+  integrity sha512-OEdMByf2hEfDa6XDbGlZN8qO6bTjlNKqjM3im9JG+u3mCL8jALy0T/67oDI001raUUPh1Bdmfn4ZvPOV5knpcg==
+  dependencies:
+    "@tanstack/virtual-core" "3.2.0"
+
+"@tanstack/virtual-core@3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.2.0.tgz#874d36135e4badce2719e7bdc556ce240cbaff14"
+  integrity sha512-P5XgYoAw/vfW65byBbJQCw+cagdXDT/qH6wmABiLt4v4YBT2q2vqCOhihe+D1Nt325F/S/0Tkv6C5z0Lv+VBQQ==
 
 "@tootallnate/once@1":
   version "1.1.2"
@@ -3809,6 +3843,11 @@ clean-css@^5.2.2:
   integrity sha512-lCr8OHhiWCTw4v8POJovCoh4T7I9U11yVsPjMWWnnMmp9ZowCxyad1Pathle/9HjaDp+fdQKjO9fQydE6RHTZg==
   dependencies:
     source-map "~0.6.0"
+
+client-only@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/client-only/-/client-only-0.0.1.tgz#38bba5d403c41ab150bff64a95c85013cf73bca1"
+  integrity sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==
 
 cliui@^5.0.0:
   version "5.0.0"
@@ -6372,6 +6411,11 @@ ignore@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.2.0.tgz#6d3bac8fa7fe0d45d9f9be7bac2fc279577e345a"
   integrity sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==
+
+immer@^10.0.4:
+  version "10.0.4"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-10.0.4.tgz#09af41477236b99449f9d705369a4daaf780362b"
+  integrity sha512-cuBuGK40P/sk5IzWa9QPUaAdvPHjkk1c+xYsd9oZw+YQQEV+10G0P5uMpGctZZKnyQ+ibRO08bD25nWLmYi2pw==
 
 immutable@^4.0.0:
   version "4.1.0"
@@ -9284,6 +9328,11 @@ react-grid-carousel@^1.0.1:
     prop-types "^15.7.2"
     smoothscroll-polyfill "^0.4.4"
     styled-components "^4.4.1"
+
+react-hook-form@^7.51.2:
+  version "7.51.2"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.51.2.tgz#79f7f72ee217c5114ff831012d1a7ec344096e7f"
+  integrity sha512-y++lwaWjtzDt/XNnyGDQy6goHskFualmDlf+jzEZvjvz6KWDf7EboL7pUvRCzPTJd0EOPpdekYaQLEvvG6m6HA==
 
 react-input-autosize@^3.0.0:
   version "3.0.0"

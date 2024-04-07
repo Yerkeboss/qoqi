@@ -144,6 +144,7 @@ const Navigation = () => {
                 height: "2rem",
                 marginTop: "0.5rem",
               }}
+              
             />
           </NavLink>
         </li>
@@ -158,11 +159,13 @@ const Navigation = () => {
             <FontAwesomeIcon
               icon={faBell}
               style={{
-                color: "#000000",
+                color:"#CCCCCC",
+                // backgroundColor:"white",
                 width: "2rem",
                 height: "2rem",
                 marginTop: "0.5rem",
               }}
+              
             />
           </Button>
         </li>

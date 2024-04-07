@@ -1,8 +1,24 @@
 .event-grid {
+  width: 112%;
+  height: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  grid-gap: $s-size;
-  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  // grid-gap: 1rem;
+  // margin-left: 2rem;
+  padding: 0;
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+.event-grid2 {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  // grid-gap: 1rem;
+  margin-left: 2rem;
+  padding: 0;
 
   @include mobile {
     grid-template-columns: repeat(2, 1fr) !important;
@@ -56,13 +72,15 @@
 
 .event-card {
   max-width: 100%;
+  width: 90%;
   height: 100%;
+    border:none;
   // margin: auto;
   // animation: slide-up .3s ease;
 
-  &:hover {
-    cursor: pointer;
-  }
+  // &:hover {
+  //   cursor: pointer;
+  // }
 
   @include mobile {
     height: 200px;
@@ -78,7 +96,7 @@
 }
 
 .event-card:hover .event-card-img-wrapper {
-  height: 8rem;
+  // height: 1rem;
   padding: 1rem;
 }
 

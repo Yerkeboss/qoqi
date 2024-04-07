@@ -6,6 +6,11 @@ import { shallowEqual, useSelector } from "react-redux";
 import { selectFilter } from "@/selectors/selector";
 import Button from "react-bootstrap/Button";
 import Creators from "../../components/creator/Creators";
+import Vacancies from "../../components/jobs/Vacancies";
+import Tender from "../../components/tender/Tender";
+import Croud from "../../components/croud/Croud";
+import Charity from "../../components/charity/Charity";
+
 const Shop = () => {
   useDocumentTitle("Shop | Qoqiqaz");
   useScrollTop();
@@ -103,9 +108,29 @@ const Shop = () => {
         {art && (
           <h2 style={{ marginLeft: "2rem", height: "20%" }}>Маркетплейс</h2>
         )}
-         {creator && (
+        {creator && (
           <h2 style={{ marginLeft: "2rem", height: "20%" }}>Найти креатора</h2>
         )}
+        {vac && <h2 style={{ marginLeft: "2rem", height: "20%" }}>Вакансии</h2>}
+        {order && (
+          <h2 style={{ marginLeft: "2rem", height: "20%" }}>
+            Разместить заказ
+          </h2>
+        )}
+        {tender && (
+          <h2 style={{ marginLeft: "2rem", height: "20%" }}>
+            Конкурсы/тендеры
+          </h2>
+        )}
+        {croud && (
+          <h2 style={{ marginLeft: "2rem", height: "20%" }}>Краудсорсинг</h2>
+        )}
+        {charity && (
+          <h2 style={{ marginLeft: "2rem", height: "20%" }}>
+            Благотворительность
+          </h2>
+        )}
+
         <section className="product-list-wrapper">
           <div
             style={{
@@ -221,13 +246,16 @@ const Shop = () => {
               <ProductGrid products={store.filteredProducts} />
             </ProductList>
           )}
-         
-         {creator && <Creators />}
+
+          {creator && <Creators />}
+          {vac && <Vacancies />}
+          {/* {order && <CreateTaskMultiStepFormContainer />} */}
+          {tender && <Tender />}
+          {croud && <Croud />}
+          {charity && <Charity />}
         </section>
-      
       </div>
     </main>
- 
   );
 };
 

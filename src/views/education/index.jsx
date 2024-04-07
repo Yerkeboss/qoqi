@@ -37,17 +37,18 @@ const Education = () => {
     >
       <div>
         <div>
-          <h2>Обучение</h2>
+          <h2 style={{ marginTop: "5rem", marginLeft: "2rem" }}>Обучение</h2>
           <Button
             onClick={toggleInfo}
             style={{
-              marginTop: "2rem",
+              // marginTop: "2rem",
+              marginLeft: "2rem",
               backgroundColor: showInfo ? "#F28290" : "white",
               color: showInfo ? "white" : "black",
-              borderColor: showInfo ? "#F28290" : "black",
+              border: showInfo ? "#F28290" : "black",
               borderRadius: "12px",
-              width:"12rem",
-              height:"5rem",
+              width: "12rem",
+              height: "5rem",
             }}
           >
             Обучиться
@@ -55,14 +56,14 @@ const Education = () => {
           <Button
             onClick={toggleContacts}
             style={{
-              marginTop: "2rem",
+              // marginTop: "2rem",
               marginLeft: "2rem",
               backgroundColor: showContacts ? "#F28290" : "white",
               color: showContacts ? "white" : "black",
               borderColor: showContacts ? "#F28290" : "black",
               borderRadius: "12px",
-              width:"12rem",
-              height:"5rem",
+              width: "12rem",
+              height: "5rem",
             }}
           >
             Обучать
@@ -82,6 +83,8 @@ const Education = () => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
+                marginTop:"1rem",
+                marginLeft: "2rem",
               }}
             >
               <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -182,11 +185,11 @@ const Education = () => {
                         style={{
                           backgroundColor: "#F28290",
                           color: "white",
-                          borderColor: "#F28290",
+                          border: "none",
                           borderRadius: "12px",
                           marginLeft: "4rem",
-                          width:"12rem",
-                          height:"4rem",
+                          width: "12rem",
+                          height: "4rem",
                         }}
                       >
                         Записаться
@@ -196,10 +199,10 @@ const Education = () => {
                           marginLeft: "2rem",
                           backgroundColor: "white",
                           color: "#F28290",
-                          borderColor: "#F28290",
+                          border: "1px solid #F28290",
                           borderRadius: "12px",
-                          width:"12rem",
-                          height:"4rem",
+                          width: "12rem",
+                          height: "4rem",
                         }}
                       >
                         Подробнее
@@ -214,7 +217,7 @@ const Education = () => {
                     border: "1px solid black",
                     borderRadius: "20px",
                     height: "100%",
-                    marginTop:"2rem",
+                    marginTop: "2rem",
                   }}
                 >
                   {" "}
@@ -267,11 +270,11 @@ const Education = () => {
                         style={{
                           backgroundColor: "#F28290",
                           color: "white",
-                          borderColor: "#F28290",
+                          border: "none",
                           borderRadius: "12px",
                           marginLeft: "4rem",
-                          width:"12rem",
-                          height:"4rem",
+                          width: "12rem",
+                          height: "4rem",
                         }}
                       >
                         Записаться
@@ -281,10 +284,10 @@ const Education = () => {
                           marginLeft: "2rem",
                           backgroundColor: "white",
                           color: "#F28290",
-                          borderColor: "#F28290",
+                          border: "1px solid #F28290",
                           borderRadius: "12px",
-                          width:"12rem",
-                          height:"4rem",
+                          width: "12rem",
+                          height: "4rem",
                         }}
                       >
                         Подробнее
@@ -299,7 +302,7 @@ const Education = () => {
                     border: "1px solid black",
                     borderRadius: "20px",
                     height: "100%",
-                    marginTop:"2rem",
+                    marginTop: "2rem",
                   }}
                 >
                   {" "}
@@ -352,11 +355,11 @@ const Education = () => {
                         style={{
                           backgroundColor: "#F28290",
                           color: "white",
-                          borderColor: "#F28290",
+                          border: "none",
                           borderRadius: "12px",
                           marginLeft: "4rem",
-                          width:"12rem",
-                          height:"4rem",
+                          width: "12rem",
+                          height: "4rem",
                         }}
                       >
                         Записаться
@@ -366,10 +369,10 @@ const Education = () => {
                           marginLeft: "2rem",
                           backgroundColor: "white",
                           color: "#F28290",
-                          borderColor: "#F28290",
+                          border: "1px solid #F28290",
                           borderRadius: "12px",
-                          width:"12rem",
-                          height:"4rem",
+                          width: "12rem",
+                          height: "4rem",
                         }}
                       >
                         Подробнее
