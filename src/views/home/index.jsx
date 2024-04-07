@@ -39,6 +39,7 @@ import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import Box from "@mui/material/Box";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import Firebase from "../../services/firebase";
 
 const Home = () => {
   useDocumentTitle("Qoqiqaz | Home");
@@ -51,6 +52,8 @@ const Home = () => {
   const [rect, setRect] = useState(false);
   const [pop, setPop] = useState(false);
   const [res, setRes] = useState(false);
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const toggleRect = () => {
     setRect(true);
@@ -108,24 +111,37 @@ const Home = () => {
   useEffect(() => {
     toggleRect();
     window.addEventListener("scroll", handleScroll);
+    const fetchEvents = async () => {
+      try {
+        setLoading(true);
+        const { events } = await Firebase.getEvents();
+        setEvents(events);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [Firebase]);
 
   return (
     <main className="content">
       <div className="home">
         <h2 style={{ marginLeft: "2rem" }}>Мероприятия</h2>
-        <EventList {...store2}>
-          <Carousel scrollSnap={true} cols={3} rows={1} gap={10} loop>
-            {store2.filteredEvents.map((event, index) => (
-              <Carousel.Item key={index}>
-                <EventGrid events={[event]} />
-              </Carousel.Item>
-            ))}
-          </Carousel>
-        </EventList>
+
+        <Carousel cols={3} rows={1} gap={10} loop scrollSnap={true}>
+          {events.map((event, index) => (
+            <Carousel.Item key={index}>
+              <EventGrid events={[event]} />
+            </Carousel.Item>
+          ))}
+        </Carousel>
+
         <div style={{ marginLeft: "2rem" }}>
           <h2>Галерея лучших работ</h2>
           <div style={{ display: "flex", flexDirection: "row" }}>
