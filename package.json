@@ -12,6 +12,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "vite build  && cd dist && cp index.html 404.html",
     "serve": "vite preview",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.json"
@@ -67,6 +69,7 @@
     "firebase": "^8.4.3",
     "font-awesome": "^4.7.0",
     "formik": "^2.2.6",
+    "gh-pages": "^6.1.1",
     "history": "^4.10.0",
     "immer": "^10.0.4",
     "moment": "^2.29.1",
