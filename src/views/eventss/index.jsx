@@ -38,7 +38,7 @@ const Event = () => {
   return (
     <main className="content">
       <div className="home">
-        <h2>Мероприятия</h2>
+        <h2 style={{ marginLeft: "2rem" }}>Мероприятия</h2>
         <EventAppliedFilters
           filteredEventsCount={store2.filteredEvents.length}
         />

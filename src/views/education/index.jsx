@@ -46,6 +46,8 @@ const Education = () => {
               color: showInfo ? "white" : "black",
               borderColor: showInfo ? "#F28290" : "black",
               borderRadius: "12px",
+              width:"12rem",
+              height:"5rem",
             }}
           >
             Обучиться
@@ -59,6 +61,8 @@ const Education = () => {
               color: showContacts ? "white" : "black",
               borderColor: showContacts ? "#F28290" : "black",
               borderRadius: "12px",
+              width:"12rem",
+              height:"5rem",
             }}
           >
             Обучать
@@ -181,6 +185,8 @@ const Education = () => {
                           borderColor: "#F28290",
                           borderRadius: "12px",
                           marginLeft: "4rem",
+                          width:"12rem",
+                          height:"4rem",
                         }}
                       >
                         Записаться
@@ -192,6 +198,8 @@ const Education = () => {
                           color: "#F28290",
                           borderColor: "#F28290",
                           borderRadius: "12px",
+                          width:"12rem",
+                          height:"4rem",
                         }}
                       >
                         Подробнее
@@ -262,6 +270,8 @@ const Education = () => {
                           borderColor: "#F28290",
                           borderRadius: "12px",
                           marginLeft: "4rem",
+                          width:"12rem",
+                          height:"4rem",
                         }}
                       >
                         Записаться
@@ -273,6 +283,8 @@ const Education = () => {
                           color: "#F28290",
                           borderColor: "#F28290",
                           borderRadius: "12px",
+                          width:"12rem",
+                          height:"4rem",
                         }}
                       >
                         Подробнее
@@ -343,6 +355,8 @@ const Education = () => {
                           borderColor: "#F28290",
                           borderRadius: "12px",
                           marginLeft: "4rem",
+                          width:"12rem",
+                          height:"4rem",
                         }}
                       >
                         Записаться
@@ -354,6 +368,8 @@ const Education = () => {
                           color: "#F28290",
                           borderColor: "#F28290",
                           borderRadius: "12px",
+                          width:"12rem",
+                          height:"4rem",
                         }}
                       >
                         Подробнее

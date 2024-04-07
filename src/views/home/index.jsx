@@ -131,7 +131,7 @@ const Home = () => {
 
   return (
     <main className="content">
-      <div className="home">
+      <div className="home" style = {{marginTop:"3rem"}}>
         <h2 style={{ marginLeft: "2rem" }}>Мероприятия</h2>
 
         <Carousel cols={3} rows={1} gap={10} loop scrollSnap={true}>
