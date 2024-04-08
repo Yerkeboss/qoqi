@@ -65,6 +65,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.18",
     "@mui/material": "^5.15.15",
+    "antd": "^5.16.1",
     "bootstrap": "^5.3.3",
     "firebase": "^8.4.3",
     "font-awesome": "^4.7.0",

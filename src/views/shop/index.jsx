@@ -1,6 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { AppliedFilters, ProductGrid, ProductList } from "@/components/product";
-import { useDocumentTitle, useScrollTop } from "@/hooks";
+import {
+  useDocumentTitle,
+  useFeaturedProducts,
+  useRecommendedProducts,
+  useScrollTop,
+} from "@/hooks";
 import React, { useState, useEffect } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { selectFilter } from "@/selectors/selector";
@@ -11,6 +16,10 @@ import Tender from "../../components/tender/Tender";
 import Croud from "../../components/croud/Croud";
 import Charity from "../../components/charity/Charity";
 import MasterForm from "../../components/order/MasterForm";
+import { ProductShowcaseGrid } from "../../components/product";
+import { MessageDisplay } from "@/components/common";
+import { FEATURED_PRODUCTS } from "@/constants/routes";
+import { Link } from "react-router-dom";
 
 const Shop = () => {
   useDocumentTitle("Shop | Qoqiqaz");
@@ -23,6 +32,13 @@ const Shop = () => {
   const [tender, setTender] = useState(false);
   const [croud, setCroud] = useState(false);
   const [charity, setCharity] = useState(false);
+
+  const {
+    featuredProducts,
+    fetchFeaturedProducts,
+    isLoading: isLoadingFeatured,
+    error: errorFeatured,
+  } = useFeaturedProducts(100);
 
   const toggleArt = () => {
     setArt(true);
@@ -243,9 +259,9 @@ const Shop = () => {
             filteredProductsCount={store.filteredProducts.length}
           /> */}
           {art && (
-            <ProductList {...store}>
-              <ProductGrid products={store.filteredProducts} />
-            </ProductList>
+            // <ProductList {...store}>
+            <ProductGrid products={featuredProducts} />
+            // </ProductList>
           )}
 
           {creator && <Creators />}

@@ -111,7 +111,7 @@ const Navigation = () => {
         </li>
         <li>
           <NavLink activeClassName="navigation-menu-active" to={ROUTE.SHOP}>
-            МаркетПлэйс
+          Маркетплейс
           </NavLink>
         </li>
         <li>

@@ -13,7 +13,7 @@ import {
   useScrollTop,
 } from "@/hooks";
 import bannerImg from "@/images/banner-girl.png";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { shallowEqual, useSelector } from "react-redux";
 import { selectFilter } from "@/selectors/selector";
@@ -42,6 +42,7 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Firebase from "../../services/firebase";
 
 const Home = () => {
+  const navbar = useRef(null);
   useDocumentTitle("Qoqiqaz | Home");
   useScrollTop();
   const dispatch = useDispatch();
@@ -54,6 +55,13 @@ const Home = () => {
   const [res, setRes] = useState(false);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const {
+    featuredProducts,
+    fetchFeaturedProducts,
+    isLoading: isLoadingFeatured,
+    error: errorFeatured,
+  } = useFeaturedProducts(100);
 
   const toggleRect = () => {
     setRect(true);
@@ -101,10 +109,12 @@ const Home = () => {
 
   // Function to handle scroll event
   const handleScroll = () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-      setIsFixed(true);
-    } else {
-      setIsFixed(false);
+    if (navbar.current && window.screen.width > 480) {
+      if (window.pageYOffset >= 70) {
+        navbar.current.classList.add("is-menu-scrolled");
+      } else {
+        navbar.current.classList.remove("is-menu-scrolled");
+      }
     }
   };
 
@@ -131,7 +141,7 @@ const Home = () => {
 
   return (
     <main className="content">
-      <div className="home" style = {{marginTop:"3rem"}}>
+      <div className="home" style={{ marginTop: "3rem" }}>
         <h2 style={{ marginLeft: "2rem" }}>Мероприятия</h2>
 
         <Carousel cols={3} rows={1} gap={10} loop scrollSnap={true}>
@@ -145,17 +155,6 @@ const Home = () => {
         <div style={{ marginLeft: "2rem" }}>
           <h2>Галерея лучших работ</h2>
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <Button
-              style={{
-                width: "30%",
-                backgroundColor: "white",
-                borderRadius: "10px",
-                height: "5rem",
-                border: "1px solid black",
-              }}
-            >
-              <FontAwesomeIcon icon={faEllipsis} />
-            </Button>
             <Button
               className={
                 activeButton === "" ? "filter-buttons-active" : "filter-buttons"
@@ -238,17 +237,40 @@ const Home = () => {
         </div>
         <br />
 
+        <ProductList {...store}>
+          <div className="scrollable-carousel">
+            <Carousel scrollSnap={true} cols={3} rows={2} gap={2} loop>
+              {store.filteredProducts
+                .filter(
+                  (product) =>
+                    !featuredProducts.some((fp) => fp.id === product.id)
+                )
+                .map((product, index) => (
+                  <Carousel.Item key={index}>
+                    <ProductShowcaseGrid products={[product]} />
+                  </Carousel.Item>
+                ))}
+            </Carousel>
+          </div>
+        </ProductList>
         <Box
           sx={{
-            position: isFixed ? "fixed" : "absolute",
-            bottom: 670,
-            width: "100%",
-            zIndex: 10000,
-            display: "flex",
-            justifyContent: "flex-start",
-            marginLeft: "2rem", // Aligns items to the left
+            background: "white",
+            wifth: "15rem",
+            justifyContent: "center",
+            alignItems: "center",
+            height:"5rem"
+
+            // position: isFixed ? "fixed" : "absolute",
+            // bottom: 670,
+            // width: "100%",
+            // zIndex: 10000,
+            // display: "flex",
+            // justifyContent: "flex-start",
+            // marginLeft: "2rem", // Aligns items to the left
           }}
           style={{ borderRadius: "10rem" }}
+          ref={navbar}
         >
           <div
             style={{
@@ -256,7 +278,8 @@ const Home = () => {
               // border: "1px solid",
               backgroundColor: "white",
               height: "4rem",
-              justifyContent: "center",
+              // marginTop:"7%",
+              // justifyContent: "center",
             }}
           >
             <Button
@@ -298,26 +321,20 @@ const Home = () => {
           </div>
         </Box>
 
-        <ProductList {...store}>
-          <div className="scrollable-carousel">
-            <Carousel scrollSnap={true} cols={3} rows={2} gap={2} loop>
-              {store.filteredProducts.map((product, index) => (
-                <Carousel.Item key={index}>
-                  <ProductShowcaseGrid products={[product]} />
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          </div>
-        </ProductList>
         <h2 style={{ marginLeft: "2rem" }}>Лучшее за неделю</h2>
         <ProductList {...store}>
           <div className="scrollable-carousel">
             <Carousel scrollSnap={true} cols={2} rows={1} gap={10} loop>
-              {store.filteredProducts.map((product, index) => (
-                <Carousel.Item key={index}>
-                  <ProductShowcaseGrid products={[product]} />
-                </Carousel.Item>
-              ))}
+              {store.filteredProducts
+                .filter(
+                  (product) =>
+                    !featuredProducts.some((fp) => fp.id === product.id)
+                )
+                .map((product, index) => (
+                  <Carousel.Item key={index}>
+                    <ProductShowcaseGrid products={[product]} />
+                  </Carousel.Item>
+                ))}
             </Carousel>
           </div>
         </ProductList>

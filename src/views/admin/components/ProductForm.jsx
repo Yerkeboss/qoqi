@@ -14,7 +14,9 @@ import * as Yup from "yup";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { Select } from "antd";
 
+const { Option } = Select;
 // Default brand names that I used. You can use what you want
 const brandOptions = [
   { value: "Фотографии", label: "Фотографии" },
@@ -31,10 +33,10 @@ const FormSchema = Yup.object().shape({
     .required("Product name is required.")
     .max(60, "Product name must only be less than 60 characters."),
   brand: Yup.string().required("Brand name is required."),
-  price: Yup.number()
-    .positive("Price is invalid.")
-    .integer("Price should be an integer.")
-    .required("Price is required."),
+  price: Yup.number(),
+  // .positive("Price is invalid.")
+  // .integer("Price should be an integer.")
+  // .required("Price is required."),
   description: Yup.string().required("Description is required."),
   isFeatured: Yup.boolean(),
   isRecommended: Yup.boolean(),
@@ -43,6 +45,11 @@ const FormSchema = Yup.object().shape({
 const ProductForm = ({ product, onSubmit, isLoading }) => {
   const [param, setParam] = useState(false);
   const [description, setDescription] = useState(false);
+  // const [isFeatured, setIsFeatured] = useState(false);
+
+  // const handleFeaturedChange = (e) => {
+  //   setIsFeatured(e.target.checked);
+  // };
 
   const toggleParam = () => {
     setParam(true);
@@ -223,23 +230,45 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                       id="description"
                       rows={3}
                       label="* Описание работы"
-                      style={{borderRadius: "5rem",}}
+                      style={{ borderRadius: "5rem" }}
                       component={CustomTextarea}
                     />
-
                     <div className="d-flex">
                       <div className="product-form-field">
-                        <Field
-                          disabled={isLoading}
-                          name="price"
-                          id="price"
-                          type="number"
-                          style={{borderRadius: "5rem",}}
-                          label="* Цена"
-                          component={CustomInput}
+                        <input
+                          checked={values.isFeatured}
+                          className=""
+                          id="featured"
+                          onChange={(e) =>
+                            setValues({
+                              ...values,
+                              isFeatured: e.target.checked,
+                            })
+                          }
+                          type="checkbox"
                         />
+                        <label htmlFor="featured">
+                          <h5 className="d-flex-grow-1 margin-0">
+                            &nbsp; Добавить в Маркетплейс &nbsp;
+                          </h5>
+                        </label>
                       </div>
                     </div>
+                    {values.isFeatured && (
+                      <div className="d-flex">
+                        <div className="product-form-field">
+                          <Field
+                            disabled={isLoading}
+                            name="price"
+                            id="price"
+                            type="number"
+                            style={{ borderRadius: "5rem" }}
+                            label="Цена"
+                            component={CustomInput}
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
                 {param && (

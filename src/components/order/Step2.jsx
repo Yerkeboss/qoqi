@@ -16,31 +16,31 @@ const Step2 = (props) => {
 
       <FormGroup>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <Label for="username" style={{ background: "none" }}>
+          <Label for="name" style={{ background: "none" }}>
             Название задачи
           </Label>
           <Input
             style={{ borderRadius: "5rem", width: "100%" }}
             type="text"
-            name="username"
-            id="username"
+            name="name"
+            id="name"
             placeholder="Пример: Редизайн сайта"
-            value={props.username} // Prop: The username input data
+            value={props.name} // Prop: The username input data
             onChange={props.handleChange} // Prop: Puts data into the state
           />
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <Label for="username" style={{ background: "none" }}>
+          <Label for="address" style={{ background: "none" }}>
             Где находится ваш офис?
           </Label>
           <div style={{ display: "flex" }}>
             <Input
               style={{ borderRadius: "5rem" }}
               type="text"
-              name="username"
-              id="username"
+              name="address"
+              id="address"
               placeholder="Местонахождение"
-              value={props.username} // Prop: The username input data
+              value={props.address} // Prop: The username input data
               onChange={props.handleChange} // Prop: Puts data into the state
             />
 
@@ -57,17 +57,17 @@ const Step2 = (props) => {
               Удаленная вакансия
             </Button>
           </div>
-          <Label for="username" style={{ background: "none" }}>
+          <Label for="criteria" style={{ background: "none" }}>
             Отметьте основные критерии для вашей вакансии
           </Label>
           <FontAwesomeIcon icon={faSearch} style ={{position:"absolute", bottom:"1rem", left:"2rem"}} />
           <Input
             style={{ borderRadius: "5rem" }}
             type="text"
-            name="username"
-            id="username"
+            name="criteria"
+            id="criteria"
             placeholder="Находите и отмечайте до 4 описаний"
-            value={props.username} // Prop: The username input data
+            value={props.criteria} // Prop: The username input data
             onChange={props.handleChange} // Prop: Puts data into the state
           >
          
