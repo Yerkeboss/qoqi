@@ -259,15 +259,7 @@ const Home = () => {
             wifth: "15rem",
             justifyContent: "center",
             alignItems: "center",
-            height:"5rem"
-
-            // position: isFixed ? "fixed" : "absolute",
-            // bottom: 670,
-            // width: "100%",
-            // zIndex: 10000,
-            // display: "flex",
-            // justifyContent: "flex-start",
-            // marginLeft: "2rem", // Aligns items to the left
+            height: "5rem",
           }}
           style={{ borderRadius: "10rem" }}
           ref={navbar}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDocumentTitle, useScrollTop } from "@/hooks";
 import Image from "react-bootstrap/Image";
+import Card from "react-bootstrap/Card";
 
 const About = () => {
   useDocumentTitle("AboutUs | Qoqiqaz");
@@ -45,7 +46,7 @@ const About = () => {
               // marginTop: "2rem",
               backgroundColor: showInfo ? "#F28290" : "white",
               color: showInfo ? "white" : "black",
-              border: showInfo ? "none" : "black",
+              border: showInfo ? "none" : "1px solid black",
               borderRadius: "12px",
             }}
           >
@@ -66,7 +67,7 @@ const About = () => {
               marginLeft: "2rem",
               backgroundColor: showContacts ? "#F28290" : "white",
               color: showContacts ? "white" : "black",
-              borderColor: showContacts ? "#F28290" : "black",
+              border: showContacts ? "none" : "1px solid black",
               borderRadius: "12px",
             }}
           >
@@ -271,16 +272,50 @@ const About = () => {
           </div>
         )}
         {showContacts && (
-          <div>
-            <div
+          // <div>
+          <div
+            style={{
+              flex: 1,
+              border: "1px solid #F28290",
+              backgroundColor: "#F28290",
+              borderRadius: "20px",
+            }}
+          >
+            <Card
               style={{
-                border: "1px solid black",
-                fontFamily: "Inter",
-                fontWeight: "500",
+                backgroundColor: "#F28290",
+                width: "10rem",
+                borderRadius: "15px",
+                marginLeft: "2rem",
+                height: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop:"2rem",
               }}
             >
-              Contact Info
-            </div>
+              <Card.Title
+                style={{
+                  color: "white",
+                  fontWeight:"4rem"
+                }}
+              >
+               Контакты:
+              </Card.Title>
+              <Card.Body style={{width:"100%"}}>
+                <Card.Text
+                  style={{
+                    color: "white",
+                    fontWeight:"bolder",
+                    width:"25rem",
+                    fontFamily:"sans-serif"
+             
+                  }}
+                >
+                  QOQI <br/> <br/>
+                  пр. Мангилик Ел, 53/1
+                </Card.Text>
+              </Card.Body>
+            </Card>
           </div>
         )}
       </div>

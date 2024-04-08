@@ -8,6 +8,7 @@ import {
   useDocumentTitle,
   useProduct,
   useRecommendedProducts,
+  useFeaturedProducts,
   useScrollTop,
 } from "@/hooks";
 import React, { useEffect, useRef, useState } from "react";
@@ -18,6 +19,15 @@ import { CardBody, CardTitle } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { useSelector } from "react-redux";
+import UserAvatar from "../account/components/UserAvatar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faThumbsUp,
+  faBookmark,
+  faShare,
+  faCartShopping,
+} from "@fortawesome/free-solid-svg-icons";
 
 const ViewProduct = () => {
   const { id } = useParams();
@@ -29,13 +39,32 @@ const ViewProduct = () => {
   const [selectedImage, setSelectedImage] = useState(product?.image || "");
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
+  const [rating, setRating] = useState(0); // State to store the rating
+
+  // Function to handle click on a star
+  const handleStarClick = (value) => {
+    setRating(value);
+  };
+
+  const store = useSelector((state) => ({
+    basketLength: state.basket.length,
+    user: state.auth,
+    isAuthenticating: state.app.isAuthenticating,
+    isLoading: state.app.loading,
+  }));
+
+  const { profile, isAuthenticating } = useSelector((state) => ({
+    profile: state.profile,
+    isAuthenticating: state.app.isAuthenticating,
+  }));
 
   const {
-    recommendedProducts,
-    fetchRecommendedProducts,
+    featuredProducts,
+    fetchFeaturedProducts,
     isLoading: isLoadingFeatured,
     error: errorFeatured,
-  } = useRecommendedProducts(6);
+  } = useFeaturedProducts(100);
+
   const colorOverlay = useRef(null);
 
   useEffect(() => {
@@ -66,33 +95,8 @@ const ViewProduct = () => {
               &nbsp; Вернуться в Маркетплэйс
             </h3>
           </Link>
-          <div className="product-modal">
-            {product.imageCollection.length !== 0 && (
-              <div className="product-modal-image-collection">
-                {product.imageCollection.map((image) => (
-                  <div
-                    className="product-modal-image-collection-wrapper"
-                    key={image.id}
-                    onClick={() => setSelectedImage(image.url)}
-                    role="presentation"
-                  >
-                    <ImageLoader
-                      className="product-modal-image-collection-img"
-                      src={image.url}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+          <div className="product-modal" style = {{background:"white"}}>
             <div className="product-modal-image-wrapper">
-              {selectedColor && (
-                <input
-                  type="color"
-                  disabled
-                  ref={colorOverlay}
-                  id="color-overlay"
-                />
-              )}
               <ImageLoader
                 alt={product.name}
                 className="product-modal-image"
@@ -101,69 +105,201 @@ const ViewProduct = () => {
             </div>
             <div className="product-modal-details">
               <br />
-              <span className="text-subtle">{product.brand}</span>
-              <h1 className="margin-top-0">{product.name}</h1>
-              <span>{product.description}</span>
+              <h1 className="margin">{product.name}</h1>
+              <div style={{ height: "2px", backgroundColor: "black" }} />
+              <div
+                style={{
+                  border: "2px solid black",
+                  height: "4rem",
+                  borderRadius: "3rem",
+                  width: "40%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  display: "flex",
+                  marginTop: "2rem",
+                }}
+              >
+                <p>{product.brand}</p>
+              </div>
               <br />
               <br />
-              <div className="divider" />
-              <br />
-
-              <h1>{displayMoney(product.price)}</h1>
-              <div className="product-modal-action">
-                <button
+              <div
+                style={{
+                  display: "inline-flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "1rem",
+                }}
+              >
+                <div
+                  className="user-nav-img-wrapper"
+                  style={{ marginLeft: "0" }}
+                >
+                  <img alt="" className="user-nav-img" src={profile.avatar} />
+                </div>
+                <h5
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: "2rem",
+                    marginLeft: "2rem",
+                  }}
+                >
+                  {profile.fullname}
+                </h5>
+                <Button
+                  style={{
+                    borderRadius: "5rem",
+                    background: "#F28290",
+                    color: "white",
+                    fontWeight: "500",
+                    height: "4rem",
+                    width: "14rem",
+                    border: "none",
+                    marginLeft: "2rem",
+                  }}
+                >
+                  Подписаться
+                </Button>
+              </div>
+              <div style={{ marginTop: "2rem" }}>
+                {[...Array(5)].map((_, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      cursor: "pointer",
+                      color: index < rating ? "#F28290" : "gray",
+                      fontSize: "3rem",
+                    }}
+                    onClick={() => handleStarClick(index + 1)}
+                  >
+                    ★
+                  </span>
+                ))}
+              </div>
+              <div style={{ display: "flex" }}>
+                <Button
+                  style={{
+                    width: "4rem",
+                    height: "4rem",
+                    marginTop: "1rem",
+                    borderRadius: "5rem",
+                    background: "#F28290",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "none",
+                  }}
+                >
+                  <FontAwesomeIcon
+                    style={{
+                      color: "white",
+                      width: "2rem",
+                      height: "2rem",
+                    }}
+                    icon={faThumbsUp}
+                  />
+                </Button>
+                <Button
+                  style={{
+                    width: "4rem",
+                    height: "4rem",
+                    marginTop: "1rem",
+                    borderRadius: "5rem",
+                    background: "#F28290",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "none",
+                    marginLeft: "1rem",
+                  }}
+                >
+                  <FontAwesomeIcon
+                    style={{
+                      color: "white",
+                      width: "2rem",
+                      height: "2rem",
+                    }}
+                    icon={faBookmark}
+                  />
+                </Button>
+                <Button
+                  style={{
+                    width: "4rem",
+                    height: "4rem",
+                    marginTop: "1rem",
+                    borderRadius: "5rem",
+                    background: "#F28290",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "none",
+                    marginLeft: "1rem",
+                  }}
+                >
+                  <FontAwesomeIcon
+                    style={{
+                      color: "white",
+                      width: "2rem",
+                      height: "2rem",
+                    }}
+                    icon={faShare}
+                  />
+                </Button>
+                <Button
+                  style={{
+                    width: "4rem",
+                    height: "4rem",
+                    marginTop: "1rem",
+                    borderRadius: "5rem",
+                    background: "#F28290",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "none",
+                    marginLeft: "1rem",
+                  }}
+                  type="button"
                   className={`button button-small ${
                     isItemOnBasket(product.id)
                       ? "button-border button-border-gray"
                       : ""
                   }`}
                   onClick={handleAddToBasket}
-                  type="button"
                 >
-                  {isItemOnBasket(product.id)
-                    ? "Удалить из корзины"
-                    : "Добавить в корзину"}
-                </button>
+                  <FontAwesomeIcon
+                    style={{
+                      color: "white",
+                      width: "2rem",
+                      height: "2rem",
+                    }}
+                    icon={faCartShopping}
+                  />
+                  {isItemOnBasket(product.id) ? "+" : ""}
+                </Button>
               </div>
+              <div style={{ display: "flex", marginTop: "3rem" }}>
+                <div
+                  className="user-nav-img-wrapper"
+                  style={{ marginLeft: "0" }}
+                >
+                  <img alt="" className="user-nav-img" src={profile.avatar} />
+                </div>
+                <Form.Group style={{ marginLeft: "2rem" }}>
+                  <Form.Control
+                    style={{ height: "25rem", width:"50rem", borderRadius:"2rem" }}
+                    type="text"
+                    placeholder="Поделитесь ваши личными
+                    впечатлениями"
+                  ></Form.Control>
+                </Form.Group>
+              </div>
+              {featuredProducts.some((fp) => fp.id === product.id) && (
+                <>
+                  <h1>{displayMoney(product.price)}</h1>
+                </>
+              )}
             </div>
           </div>
-          <Card style={{ background: "white" }}>
-            <h2 style={{ marginLeft: "3rem" }}>Оценить и оставить отзыв</h2>
-            <CardBody>
-              <div style={{ display: "flex" }}>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <h2 style={{ marginLeft: "3rem" }}>4,8</h2>
-                  <h4 style={{ marginLeft: "3rem" }}>5 отзывов</h4>
-                </div>
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="Поделитесь вашими личными впечатлениями"
-                  style={{
-                    borderRadius: "2rem",
-                    marginLeft: "20rem",
-                    width: "50%",
-                  }}
-                />
-                <br />
-              </div>
-
-              <Button
-                style={{
-                  border: "none",
-                  background: "#F28290",
-                  color: "white",
-                  borderRadius: "2rem",
-                  width: "15rem",
-                  height: "5rem",
-                  marginTop: "3rem",
-                  marginLeft: "50rem",
-                }}
-              >
-                Отправить
-              </Button>
-            </CardBody>
-          </Card>
         </div>
       )}
     </main>
