@@ -20,7 +20,7 @@ const Step3 = (props) => {
 
       <FormControl
         style={{
-          marginLeft: "2rem",
+          marginLeft: "1rem",
         }}
       >
         <Label for="username" style={{ background: "none" }}>
@@ -69,7 +69,7 @@ const Step3 = (props) => {
             }}
           />
         </RadioGroup>
-        <Label for="username" style={{ background: "none" }}>
+        <Label for="username" style={{ background: "none",marginLeft:"0rem" }}>
           Определите бюджет за ваш проект
         </Label>
         <div style={{ display: "flex" }}>
@@ -97,10 +97,11 @@ const Step3 = (props) => {
             Проектно
           </Button>
          
-        <h4>От</h4>
-        <div style={{ display: "flex" }}>
+
+        <div style={{ display: "flex", bottom:"-1.5rem", left:"23rem", position:"absolute" }}>
+        <h4 style ={{marginLeft:"3rem"}}>От</h4>
         <Input
-            style={{ borderRadius: "5rem" }}
+            style={{ borderRadius: "5rem", marginLeft:"1rem", width:"10rem", height:"5rem", marginTop:"0.3rem"  }}
             type="text"
             name="username"
             id="username"
@@ -108,9 +109,9 @@ const Step3 = (props) => {
             value={props.username} // Prop: The username input data
             onChange={props.handleChange} // Prop: Puts data into the state
           />
-                 <h4>До</h4>
+                 <h4 style ={{marginLeft:"3rem"}}>До</h4>
             <Input
-            style={{ borderRadius: "5rem" }}
+            style={{ borderRadius: "5rem", marginLeft:"1rem", width:"10rem", height:"5rem", marginTop:"0.3rem"  }}
             type="text"
             name="username"
             id="username"

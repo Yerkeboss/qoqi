@@ -25,7 +25,7 @@ const StepTracker = ({ current }) => {
             <div className="checkout-header-icon">
               <h4 className="checkout-header-step">2</h4>
             </div>
-            <h6 className="checkout-header-subtitle">Сведения для доставки</h6>
+            <h6 className="checkout-header-subtitle2">Сведения для доставки</h6>
           </div>
         </li>
         <li className={`checkout-header-list ${className(3)}`}>
@@ -33,7 +33,7 @@ const StepTracker = ({ current }) => {
             <div className="checkout-header-icon">
               <h4 className="checkout-header-step">3</h4>
             </div>
-            <h6 className="checkout-header-subtitle">Оплата</h6>
+            <h6 className="checkout-header-subtitle3">Оплата</h6>
           </div>
         </li>
       </ul>

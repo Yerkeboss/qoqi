@@ -80,10 +80,11 @@ class MasterForm extends Component {
             border: "1px solid #F28290",
             height: "5rem",
             borderRadius: "5rem",
-            marginLeft: "10rem",
+            marginLeft: "7rem",
             position: "absolute",
-            top: "15rem",
+            top: "14rem",
             left: "60rem",
+            width:"10rem"
           }}
           onClick={this._prev}
         >
@@ -106,10 +107,11 @@ class MasterForm extends Component {
             border: "none",
             height: "5rem",
             borderRadius: "5rem",
-            marginLeft: "10rem",
+            marginLeft: "7rem",
             position: "absolute",
-            top: "15rem",
+            top: "14rem",
             left: "72rem",
+            width:"17rem"
           }}
         >
           Следующий шаг
@@ -130,10 +132,11 @@ class MasterForm extends Component {
             border: "none",
             height: "5rem",
             borderRadius: "5rem",
-            marginLeft: "10rem",
+            marginLeft: "7rem",
             position: "absolute",
-            top: "15rem",
+            top: "14rem",
             left: "72rem",
+            width:"23rem"
           }}
           type="submit"
         >

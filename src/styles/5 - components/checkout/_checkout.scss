@@ -66,6 +66,7 @@
 .checkout-header-list {
   display: flex;
   justify-content: center;
+  align-items:center;
 }
 
 .checkout-header-item {
@@ -94,6 +95,22 @@
   color: $gray-20;
   margin-top: $s-size;
   margin-bottom: 0;
+  width:13rem;
+  margin-left:7rem;
+}
+
+.checkout-header-subtitle2 {
+  color: $gray-20;
+  margin-top: $s-size;
+  margin-bottom: 0;
+  width:13rem;
+}
+.checkout-header-subtitle3 {
+  color: $gray-20;
+  margin-top: $s-size;
+  margin-bottom: 0;
+  width:13rem;
+  margin-left:9rem;
 }
 
 .is-active-step .checkout-header-step {
