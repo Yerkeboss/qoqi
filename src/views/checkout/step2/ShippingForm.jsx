@@ -13,8 +13,8 @@ const ShippingForm = () => {
             <Field
               name="fullname"
               type="text"
-              label="* Full Name"
-              placeholder="Enter your full name"
+              label="* Полное имя"
+              placeholder="Введите свое полное имя"
               component={CustomInput}
               style={{ textTransform: 'capitalize' }}
             />
@@ -23,8 +23,8 @@ const ShippingForm = () => {
             <Field
               name="email"
               type="email"
-              label="* Email Address"
-              placeholder="Enter your email address"
+              label="* Email"
+              placeholder="Введите свой email"
               component={CustomInput}
             />
           </div>
@@ -34,8 +34,8 @@ const ShippingForm = () => {
             <Field
               name="address"
               type="text"
-              label="* Shipping Address"
-              placeholder="Enter full shipping address"
+              label="* Сведения для доставки"
+              placeholder="Введите полный адрес"
               component={CustomInput}
             />
           </div>
@@ -55,7 +55,7 @@ const ShippingForm = () => {
                     className="label-input"
                     htmlFor={field.name}
                   >
-                    Shipping Option
+                    Вариант доставки
                   </label>
                 )}
                 <div className="checkout-checkbox-field">
@@ -70,10 +70,10 @@ const ShippingForm = () => {
                   />
                   <label className="d-flex w-100" htmlFor={field.name}>
                     <h5 className="d-flex-grow-1 margin-0">
-                      &nbsp; International Shipping &nbsp;
-                      <span className="text-subtle">7-14 days</span>
+                      &nbsp; Доставка &nbsp;
+                      <span className="text-subtle">7-14 дней</span>
                     </h5>
-                    <h4 className="margin-0">$50.00</h4>
+                    <h4 className="margin-0">KZT50.00</h4>
                   </label>
                 </div>
               </div>

@@ -95,7 +95,7 @@ const ViewProduct = () => {
               &nbsp; Вернуться в Маркетплэйс
             </h3>
           </Link>
-          <div className="product-modal" style = {{background:"white"}}>
+          <div className="product-modal" style={{ background: "white" }}>
             <div className="product-modal-image-wrapper">
               <ImageLoader
                 alt={product.name}
@@ -286,7 +286,14 @@ const ViewProduct = () => {
                 </div>
                 <Form.Group style={{ marginLeft: "2rem" }}>
                   <Form.Control
-                    style={{ height: "25rem", width:"50rem", borderRadius:"2rem" }}
+                    style={{
+                      height: "25rem",
+                      width: "50rem",
+                      borderRadius: "2rem",
+                      textAlign: "left",
+                      paddingLeft: "2rem",
+                      paddingBottom: "20rem",
+                    }}
                     type="text"
                     placeholder="Поделитесь ваши личными
                     впечатлениями"

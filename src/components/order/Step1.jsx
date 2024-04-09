@@ -35,13 +35,13 @@ const Step1 = (props) => {
                 value="photo"
                 control={<Radio />}
                 label="Фотограф"
-                style={{background:"white", border:"1px solid black", width:"28rem", height:"14rem"}}
+                style={{background:"white", border:"1px solid black", width:"28rem", height:"14rem",justifyContent: "center",}}
               />
               <FormControlLabel
                 value="video"
                 control={<Radio />}
                 label="Видеооператор"
-                style={{background:"white", border:"1px solid black", width:"28rem", height:"14rem"}}
+                style={{background:"white", border:"1px solid black", width:"28rem", height:"14rem", justifyContent: "center"}}
               />
             </RadioGroup>
           </div>
@@ -56,13 +56,13 @@ const Step1 = (props) => {
                 value="animator"
                 control={<Radio />}
                 label="Аниматор"
-                style={{background:"white", border:"1px solid black", width:"28rem", height:"14rem"}}
+                style={{background:"white", border:"1px solid black", width:"28rem", height:"14rem", justifyContent: "center"}}
               />
               <FormControlLabel
                 value="illustrator"
                 control={<Radio />}
                 label="Иллюстратор"
-                style={{background:"white", border:"1px solid black", width:"28rem", height:"14rem"}}
+                style={{background:"white", border:"1px solid black", width:"28rem", height:"14rem",justifyContent: "center"}}
               />
             </RadioGroup>
           </div>
@@ -76,13 +76,13 @@ const Step1 = (props) => {
                 value="graphic"
                 control={<Radio />}
                 label="Графический дизайнер"
-                style={{background:"white", border:"1px solid black", width:"28rem", height:"14rem"}}
+                style={{background:"white", border:"1px solid black", width:"28rem", height:"14rem",justifyContent: "center"}}
               />
               <FormControlLabel
                 value="art"
                 control={<Radio />}
                 label="3D Художник"
-                style={{background:"white", border:"1px solid black", width:"28rem", height:"14rem"}}
+                style={{background:"white", border:"1px solid black", width:"28rem", height:"14rem",justifyContent: "center"}}
               />
             </RadioGroup>
           </div>

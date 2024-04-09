@@ -13,19 +13,19 @@ const ShippingTotal = ({ subtotal }) => {
           <tr>
             <td>
               <span className="d-block margin-0 padding-right-s text-right">
-                International Shipping: &nbsp;
+                Доставка &nbsp;
               </span>
             </td>
             <td>
               <h4 className="basket-total-amount text-subtle text-right margin-0 ">
-                {values.isInternational ? '$50.00' : '$0.00'}
+                {values.isInternational ? 'KZT50.00' : 'KZT0.00'}
               </h4>
             </td>
           </tr>
           <tr>
             <td>
               <span className="d-block margin-0 padding-right-s text-right">
-                Subtotal: &nbsp;
+              Промежуточный итог: &nbsp;
               </span>
             </td>
             <td>
@@ -37,7 +37,7 @@ const ShippingTotal = ({ subtotal }) => {
           <tr>
             <td>
               <span className="d-block margin-0 padding-right-s text-right">
-                Total: &nbsp;
+            Итого: &nbsp;
               </span>
             </td>
             <td>

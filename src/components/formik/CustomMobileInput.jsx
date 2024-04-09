@@ -45,7 +45,7 @@ const CustomMobileInput = (props) => {
 };
 
 CustomMobileInput.defaultProps = {
-  label: 'Mobile Number',
+  label: 'Номер мобильного телефона',
   placeholder: '09254461351'
 };
 

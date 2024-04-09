@@ -50,10 +50,7 @@ class MasterForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { email, username, password } = this.state;
-    alert(`Your registration detail: \n 
-      Email: ${email} \n 
-      Username: ${username} \n
-      Password: ${password}`);
+    // alert(`Успешно`);
   };
 
   // Move to the next step
