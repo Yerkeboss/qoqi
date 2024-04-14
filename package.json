@@ -16,7 +16,8 @@
     "deploy": "gh-pages -d build",
     "build": "vite build  && cd dist && cp index.html 404.html",
     "serve": "vite preview",
-    "test": "cross-env NODE_ENV=test jest --config=jest.config.json"
+    "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^2.0.0",
@@ -67,6 +68,7 @@
     "@headlessui/react": "^1.7.18",
     "@mui/material": "^5.15.15",
     "antd": "^5.16.1",
+    "babel-plugin-styled-components": "^2.1.4",
     "bootstrap": "^5.3.3",
     "eslint-plugin-promise": "^6.1.1",
     "firebase": "^8.4.3",
@@ -79,6 +81,7 @@
     "immer": "^10.0.4",
     "moment": "^2.29.1",
     "normalize.css": "^8.0.1",
+    "patch-package": "^8.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-bootstrap": "^2.10.2",

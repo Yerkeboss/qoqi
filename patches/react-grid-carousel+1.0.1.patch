@@ -1,0 +1,79 @@
+diff --git a/node_modules/react-grid-carousel/dist/bundle.js b/node_modules/react-grid-carousel/dist/bundle.js
+index ca7df10..7145c7b 100644
+--- a/node_modules/react-grid-carousel/dist/bundle.js
++++ b/node_modules/react-grid-carousel/dist/bundle.js
+@@ -5,7 +5,16 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
+ var React = require('react');
+ var React__default = _interopDefault(React);
+ var PropTypes = _interopDefault(require('prop-types'));
+-var styled = _interopDefault(require('styled-components'));
++
++var styled2 = require('styled-components')
++var { createGlobalStyle, ServerStyleSheet, StyleSheetManager } = require('styled-components')
++
++let styled = styled2
++
++if (typeof styled2.div !== 'function') {
++  styled = styled2.default
++}
++
+ var smoothscroll = _interopDefault(require('smoothscroll-polyfill'));
+ var debounce = _interopDefault(require('lodash.debounce'));
+ 
+diff --git a/node_modules/react-grid-carousel/src/components/ArrowButton.js b/node_modules/react-grid-carousel/src/components/ArrowButton.js
+index 778933e..cdf2614 100644
+--- a/node_modules/react-grid-carousel/src/components/ArrowButton.js
++++ b/node_modules/react-grid-carousel/src/components/ArrowButton.js
+@@ -1,6 +1,6 @@
+ import React from 'react'
+ import PropTypes from 'prop-types'
+-import styled from 'styled-components'
++import styled from '../styled'
+ 
+ const ButtonWrapper = styled.div`
+   @media screen and (max-width: ${({ mobileBreakpoint }) =>
+diff --git a/node_modules/react-grid-carousel/src/components/Carousel.js b/node_modules/react-grid-carousel/src/components/Carousel.js
+index b4c5fb4..37c69c2 100644
+--- a/node_modules/react-grid-carousel/src/components/Carousel.js
++++ b/node_modules/react-grid-carousel/src/components/Carousel.js
+@@ -1,6 +1,6 @@
+ import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react'
+ import PropTypes from 'prop-types'
+-import styled from 'styled-components'
++import styled from '../styled'
+ import ArrowButton from './ArrowButton'
+ import Dot from './Dot'
+ import smoothscroll from 'smoothscroll-polyfill'
+diff --git a/node_modules/react-grid-carousel/src/components/Dot.js b/node_modules/react-grid-carousel/src/components/Dot.js
+index ca7b35a..5745e9b 100644
+--- a/node_modules/react-grid-carousel/src/components/Dot.js
++++ b/node_modules/react-grid-carousel/src/components/Dot.js
+@@ -1,6 +1,6 @@
+ import React, { useCallback } from 'react'
+ import PropTypes from 'prop-types'
+-import styled from 'styled-components'
++import styled from '../styled'
+ 
+ const DotWrapper = styled.div`
+   display: flex;
+diff --git a/node_modules/react-grid-carousel/src/styled.js b/node_modules/react-grid-carousel/src/styled.js
+new file mode 100644
+index 0000000..b7c6161
+--- /dev/null
++++ b/node_modules/react-grid-carousel/src/styled.js
+@@ -0,0 +1,15 @@
++
++import styled2 from 'styled-components'
++import { createGlobalStyle, ServerStyleSheet, StyleSheetManager } from 'styled-components'
++
++import { isFunction } from '@src/utils/type.js'
++
++let styled = styled2
++
++if (!isFunction(styled2.div)) {
++  styled = styled2.default
++}
++
++export { createGlobalStyle, ServerStyleSheet, StyleSheetManager }
++
++export default styled
