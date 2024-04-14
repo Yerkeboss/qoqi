@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useDocumentTitle, useScrollTop } from "@/hooks";
-import Image from "react-bootstrap/Image";
-import Card from "react-bootstrap/Card";
+import React, { useState, useEffect } from 'react';
+import Image from 'react-bootstrap/Image';
+import Card from 'react-bootstrap/Card';
+import { useDocumentTitle, useScrollTop } from '@/hooks';
 
 const About = () => {
-  useDocumentTitle("AboutUs | Qoqiqaz");
+  useDocumentTitle('AboutUs | Qoqiqaz');
   useScrollTop();
 
   const [showInfo, setShowInfo] = useState(false);
@@ -29,12 +29,12 @@ const About = () => {
     <main
       className="content"
       style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        marginLeft: "2rem",
-        marginTop: "3rem",
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        marginLeft: '2rem',
+        marginTop: '3rem'
       }}
     >
       <div>
@@ -44,17 +44,17 @@ const About = () => {
             onClick={toggleInfo}
             style={{
               // marginTop: "2rem",
-              backgroundColor: showInfo ? "#F28290" : "white",
-              color: showInfo ? "white" : "black",
-              border: showInfo ? "none" : "1px solid black",
-              borderRadius: "12px",
+              backgroundColor: showInfo ? '#F28290' : 'white',
+              color: showInfo ? 'white' : 'black',
+              border: showInfo ? 'none' : '1px solid black',
+              borderRadius: '12px'
             }}
           >
             <p
               style={{
-                color: showInfo ? "white" : "black",
-                fontFamily: "Inter",
-                fontWeight: "500",
+                color: showInfo ? 'white' : 'black',
+                fontFamily: 'Inter',
+                fontWeight: '500'
               }}
             >
               Информация о компании
@@ -64,18 +64,18 @@ const About = () => {
             onClick={toggleContacts}
             style={{
               // marginTop: "2rem",
-              marginLeft: "2rem",
-              backgroundColor: showContacts ? "#F28290" : "white",
-              color: showContacts ? "white" : "black",
-              border: showContacts ? "none" : "1px solid black",
-              borderRadius: "12px",
+              marginLeft: '2rem',
+              backgroundColor: showContacts ? '#F28290' : 'white',
+              color: showContacts ? 'white' : 'black',
+              border: showContacts ? 'none' : '1px solid black',
+              borderRadius: '12px'
             }}
           >
             <p
               style={{
-                color: showContacts ? "white" : "black",
-                fontFamily: "Inter",
-                fontWeight: "500",
+                color: showContacts ? 'white' : 'black',
+                fontFamily: 'Inter',
+                fontWeight: '500'
               }}
             >
               Контакты
@@ -87,44 +87,44 @@ const About = () => {
         </div>
         {showInfo && (
           <div>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: 'flex' }}>
               <div
                 style={{
                   flex: 1,
-                  border: "1px solid #F28290",
-                  backgroundColor: "#F28290",
-                  borderRadius: "20px",
+                  border: '1px solid #F28290',
+                  backgroundColor: '#F28290',
+                  borderRadius: '20px'
                   // height: "30rem",
                 }}
               >
                 <div
                   style={{
-                    backgroundColor: "#FFFBFB",
-                    width: "10rem",
-                    borderRadius: "15px",
-                    marginLeft: "2rem",
-                    height: "3rem",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    backgroundColor: '#FFFBFB',
+                    width: '10rem',
+                    borderRadius: '15px',
+                    marginLeft: '2rem',
+                    height: '3rem',
+                    justifyContent: 'center',
+                    alignItems: 'center'
                   }}
                 >
                   <p
                     style={{
-                      color: "#F28290",
-                      marginLeft: "1rem",
-                      fontFamily: "Inter",
-                      fontWeight: "500",
+                      color: '#F28290',
+                      marginLeft: '1rem',
+                      fontFamily: 'Inter',
+                      fontWeight: '500'
                     }}
                   >
                     Описание
                   </p>
                   <p
                     style={{
-                      color: "white",
-                      width: "60rem",
-                      marginTop: "13rem",
-                      fontFamily: "Inter",
-                      fontWeight: "500",
+                      color: 'white',
+                      width: '60rem',
+                      marginTop: '13rem',
+                      fontFamily: 'Inter',
+                      fontWeight: '500'
                     }}
                   >
                     ACDSSS (Ассоциация креативного развития социальных и
@@ -140,56 +140,56 @@ const About = () => {
                   flex: 1,
                   // border: "1px solid #F28290",
                   // borderRadius: "20px",
-                  marginLeft: "2rem",
+                  marginLeft: '2rem'
                 }}
               >
                 <Image
-                  src="src/images/pexels-fauxels-3184418.jpg"
+                  src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/images%2Fpexels-fauxels-3184418.jpg?alt=media&token=8077d9e9-821e-4edc-a20c-f532dc50e807"
                   style={{
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: "2rem",
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '2rem'
                   }}
                 />
               </div>
             </div>
             <div
               style={{
-                border: "1px solid #F28290",
-                backgroundColor: "#F282904D",
-                height: "18rem",
-                borderRadius: "20px",
-                marginTop: "1rem",
+                border: '1px solid #F28290',
+                backgroundColor: '#F282904D',
+                height: '18rem',
+                borderRadius: '20px',
+                marginTop: '1rem'
               }}
             >
               <div
                 style={{
-                  backgroundColor: "#F28290",
-                  width: "10rem",
-                  borderRadius: "15px",
-                  marginLeft: "2rem",
-                  height: "3rem",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  backgroundColor: '#F28290',
+                  width: '10rem',
+                  borderRadius: '15px',
+                  marginLeft: '2rem',
+                  height: '3rem',
+                  justifyContent: 'center',
+                  alignItems: 'center'
                 }}
               >
                 <p
                   style={{
-                    color: "#FCD7DB",
-                    marginLeft: "3rem",
-                    fontFamily: "Inter",
-                    fontWeight: "500",
+                    color: '#FCD7DB',
+                    marginLeft: '3rem',
+                    fontFamily: 'Inter',
+                    fontWeight: '500'
                   }}
                 >
                   QOQI
                 </p>
                 <p
                   style={{
-                    color: "#F28290",
-                    width: "70rem",
-                    marginTop: "3rem",
-                    fontFamily: "Inter",
-                    fontWeight: "500",
+                    color: '#F28290',
+                    width: '70rem',
+                    marginTop: '3rem',
+                    fontFamily: 'Inter',
+                    fontWeight: '500'
                   }}
                 >
                   QOQI Project – это креативный проект в рамках которого
@@ -199,24 +199,24 @@ const About = () => {
               </div>
             </div>
             <div
-              style={{ display: "flex", marginTop: "1rem", height: "15rem" }}
+              style={{ display: 'flex', marginTop: '1rem', height: '15rem' }}
             >
               <div
                 style={{
                   flex: 1,
-                  border: "1px solid #F28290",
-                  backgroundColor: "#F282904D",
-                  borderRadius: "20px",
+                  border: '1px solid #F28290',
+                  backgroundColor: '#F282904D',
+                  borderRadius: '20px'
                 }}
               >
                 <p
                   style={{
-                    color: "#F28290",
-                    width: "20rem",
-                    marginTop: "1rem",
-                    marginLeft: "2rem",
-                    fontFamily: "Inter",
-                    fontWeight: "500",
+                    color: '#F28290',
+                    width: '20rem',
+                    marginTop: '1rem',
+                    marginLeft: '2rem',
+                    fontFamily: 'Inter',
+                    fontWeight: '500'
                   }}
                 >
                   Events Лекторий, креативный аукцион, зимний каток, летний
@@ -226,20 +226,20 @@ const About = () => {
               <div
                 style={{
                   flex: 1,
-                  border: "1px solid #F28290",
-                  backgroundColor: "#F282904D",
-                  borderRadius: "20px",
-                  marginLeft: "2rem",
+                  border: '1px solid #F28290',
+                  backgroundColor: '#F282904D',
+                  borderRadius: '20px',
+                  marginLeft: '2rem'
                 }}
               >
                 <p
                   style={{
-                    color: "#F28290",
-                    width: "20rem",
-                    marginTop: "1rem",
-                    marginLeft: "3rem",
-                    fontFamily: "Inter",
-                    fontWeight: "500",
+                    color: '#F28290',
+                    width: '20rem',
+                    marginTop: '1rem',
+                    marginLeft: '3rem',
+                    fontFamily: 'Inter',
+                    fontWeight: '500'
                   }}
                 >
                   Создание цифрового контента Подкасты, stand up,
@@ -249,20 +249,20 @@ const About = () => {
               <div
                 style={{
                   flex: 1,
-                  border: "1px solid #F28290",
-                  backgroundColor: "#F282904D",
-                  borderRadius: "20px",
-                  marginLeft: "2rem",
+                  border: '1px solid #F28290',
+                  backgroundColor: '#F282904D',
+                  borderRadius: '20px',
+                  marginLeft: '2rem'
                 }}
               >
                 <p
                   style={{
-                    color: "#F28290",
-                    width: "20rem",
-                    marginTop: "1rem",
-                    marginLeft: "3rem",
-                    fontFamily: "Inter",
-                    fontWeight: "500",
+                    color: '#F28290',
+                    width: '20rem',
+                    marginTop: '1rem',
+                    marginLeft: '3rem',
+                    fontFamily: 'Inter',
+                    fontWeight: '500'
                   }}
                 >
                   Cyber Sport Проведение соревнований по киберспорту
@@ -276,42 +276,46 @@ const About = () => {
           <div
             style={{
               flex: 1,
-              border: "1px solid #F28290",
-              backgroundColor: "#F28290",
-              borderRadius: "20px",
+              border: '1px solid #F28290',
+              backgroundColor: '#F28290',
+              borderRadius: '20px'
             }}
           >
             <Card
               style={{
-                backgroundColor: "#F28290",
-                width: "10rem",
-                borderRadius: "15px",
-                marginLeft: "2rem",
-                height: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop:"2rem",
+                backgroundColor: '#F28290',
+                width: '10rem',
+                borderRadius: '15px',
+                marginLeft: '2rem',
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: '2rem'
               }}
             >
               <Card.Title
                 style={{
-                  color: "white",
-                  fontWeight:"4rem"
+                  color: 'white',
+                  fontWeight: '4rem'
                 }}
               >
-               Контакты:
+                Контакты:
               </Card.Title>
-              <Card.Body style={{width:"100%"}}>
+              <Card.Body style={{ width: '100%' }}>
                 <Card.Text
                   style={{
-                    color: "white",
-                    fontWeight:"bolder",
-                    width:"25rem",
-                    fontFamily:"sans-serif"
-             
+                    color: 'white',
+                    fontWeight: 'bolder',
+                    width: '25rem',
+                    fontFamily: 'sans-serif'
+
                   }}
                 >
-                  QOQI <br/> <br/>
+                  QOQI
+                  {' '}
+                  <br />
+                  {' '}
+                  <br />
                   пр. Мангилик Ел, 53/1
                 </Card.Text>
               </Card.Body>
