@@ -1,6 +1,8 @@
 // 
 // BASE STYLING ---------
 //
+@import url('https://fonts.googleapis.com/css2?family=Suisse+Intl&display=swap');
+
 * {
   box-sizing: border-box;
 }
@@ -30,6 +32,8 @@ p {
   color: $paragraph-color;
   // font-weight: 300;
   line-height: $line-height;
+  font-family: 'Suisse Intl', sans-serif;
+  font-weight: 500;
 }
 
 strong { 

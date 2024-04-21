@@ -1,15 +1,15 @@
-import { LoadingOutlined } from "@ant-design/icons";
-import { useDocumentTitle, useScrollTop } from "@/hooks";
-import React, { lazy, Suspense } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { addProduct } from "@/redux/actions/productActions";
+import { LoadingOutlined } from '@ant-design/icons';
+import React, { lazy, Suspense } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { useDocumentTitle, useScrollTop } from '@/hooks';
+import { addProduct } from '@/redux/actions/productActions';
 
-const ProductForm = lazy(() => import("../components/ProductForm"));
+const ProductForm = lazy(() => import('../components/ProductForm'));
 
 const AddProduct = () => {
   useScrollTop();
-  useDocumentTitle("Add New Product | Qoqiqaz");
+  useDocumentTitle('Add New Product | Qoqiqaz');
   const isLoading = useSelector((state) => state.app.loading);
   const dispatch = useDispatch();
 
@@ -20,30 +20,30 @@ const AddProduct = () => {
   return (
     <div className="product-form-container">
       <Suspense
-        fallback={
-          <div className="loader" style={{ minHeight: "80vh" }}>
+        fallback={(
+          <div className="loader" style={{ minHeight: '80vh' }}>
             <h6>Загружается ... </h6>
             <br />
             <LoadingOutlined />
           </div>
-        }
+        )}
       >
         <ProductForm
           isLoading={isLoading}
           onSubmit={onSubmit}
           product={{
-            name: "",
-            brand: "",
+            name: '',
+            brand: '',
             price: 0,
             maxQuantity: 0,
-            description: "",
+            description: '',
             keywords: [],
             sizes: [],
-            image: "",
+            image: '',
             isFeatured: false,
             isRecommended: false,
             availableColors: [],
-            imageCollection: [],
+            imageCollection: []
           }}
         />
       </Suspense>

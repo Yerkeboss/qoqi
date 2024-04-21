@@ -1,45 +1,113 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { CheckOutlined, LoadingOutlined } from "@ant-design/icons";
-import { ImageLoader } from "@/components/common";
+import { LoadingOutlined } from '@ant-design/icons';
+import {
+  Field, FieldArray, Form, Formik
+} from 'formik';
+import PropType from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import * as Yup from 'yup';
+import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { Select } from 'antd';
+import { useFileHandler } from '@/hooks';
 import {
   CustomCreatableSelect,
   CustomInput,
-  CustomTextarea,
-} from "@/components/formik";
-import { Field, FieldArray, Form, Formik } from "formik";
-import { useFileHandler } from "@/hooks";
-import PropType from "prop-types";
-import React, { useState, useEffect } from "react";
-import * as Yup from "yup";
-import Button from "react-bootstrap/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { Select } from "antd";
+  CustomTextarea
+} from '@/components/formik';
+import { ImageLoader } from '@/components/common';
 
 const { Option } = Select;
 // Default brand names that I used. You can use what you want
 const brandOptions = [
-  { value: "Фотографии", label: "Фотографии" },
-  { value: "Музыка", label: "Музыка" },
-  { value: "Дизайн", label: "Дизайн" },
-  { value: "Иллюстрации", label: "Иллюстрации" },
-  { value: "Анимации", label: "Анимации" },
-  { value: "Инсталяции", label: "Инсталяции" },
-  { value: "3D", label: "3D" },
+  {
+    value: 'Фотографии',
+    label: 'Фотографии'
+  },
+  {
+    value: 'Иллюстрации',
+    label: 'Иллюстрации'
+  },
+  {
+    value: '3D',
+    label: '3D'
+  },
+  {
+    value: 'Аудио',
+    label: 'Аудио'
+  },
+  {
+    value: 'Анимации',
+    label: 'Анимации'
+  },
+  {
+    value: 'Инсталляции',
+    label: 'Инсталляции'
+  },
+  {
+    value: 'Дизайн одежды',
+    label: 'Дизайн одежды'
+  },
+  {
+    value: 'Дизайн интерьера',
+    label: 'Дизайн интерьера'
+  },
+  {
+    value: 'Граффитти',
+    label: 'Граффитти'
+  },
+  {
+    value: 'Арт',
+    label: 'Арт'
+  },
+  {
+    value: 'Реконструкция обьектов',
+    label: 'Реконструкция обьектов'
+  },
+  {
+    value: 'Стримы',
+    label: 'Стримы'
+  },
+  {
+    value: 'Полезные лайфхаки в игре',
+    label: 'Полезные лайфхаки в игре'
+  },
+  {
+    value: 'Новости из игр',
+    label: 'Новости из игр'
+  },
+  {
+    value: 'Блоги',
+    label: 'Блоги'
+  },
+  {
+    value: 'Исследования',
+    label: 'Исследования'
+  },
+  {
+    value: 'Обзоры',
+    label: 'Обзоры'
+  },
+  {
+    value: 'Графичесĸий дизайн',
+    label: 'Графичесĸий дизайн'
+  }
 ];
+
 
 const FormSchema = Yup.object().shape({
   name: Yup.string()
-    .required("Product name is required.")
-    .max(60, "Product name must only be less than 60 characters."),
-  brand: Yup.string().required("Brand name is required."),
+    .required('Product name is required.')
+    .max(60, 'Product name must only be less than 60 characters.'),
+  brand: Yup.string().required('Brand name is required.'),
   price: Yup.number(),
   // .positive("Price is invalid.")
   // .integer("Price should be an integer.")
   // .required("Price is required."),
-  description: Yup.string().required("Description is required."),
+  description: Yup.string().required('Description is required.'),
   isFeatured: Yup.boolean(),
-  isRecommended: Yup.boolean(),
+  isRecommended: Yup.boolean()
 });
 
 const ProductForm = ({ product, onSubmit, isLoading }) => {
@@ -66,19 +134,20 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
   }, []);
 
   const initFormikValues = {
-    name: product?.name || "",
-    brand: product?.brand || "",
+    name: product?.name || '',
+    brand: product?.brand || '',
     price: product?.price || 0,
-    description: product?.description || "",
+    description: product?.description || '',
     isFeatured: product?.isFeatured || false,
-    isRecommended: product?.isRecommended || false,
+    isRecommended: product?.isRecommended || false
   };
 
-  const { imageFile, isFileLoading, onFileChange, removeImage } =
-    useFileHandler({
-      image: {},
-      imageCollection: product?.imageCollection || [],
-    });
+  const {
+    imageFile, isFileLoading, onFileChange, removeImage
+  } = useFileHandler({
+    image: {},
+    imageCollection: product?.imageCollection || []
+  });
 
   const onSubmitForm = (form) => {
     if (imageFile.image.file || product.imageUrl) {
@@ -90,11 +159,11 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
         name_lower: form.name.toLowerCase(),
         dateAdded: new Date().getTime(),
         image: imageFile?.image?.file || product.imageUrl,
-        imageCollection: imageFile.imageCollection,
+        imageCollection: imageFile.imageCollection
       });
     } else {
       // eslint-disable-next-line no-alert
-      alert("Главный файл обязателен");
+      alert('Главный файл обязателен');
     }
   };
 
@@ -110,7 +179,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
           <Form className="product-headline">
             <div>
               <h1>Опубликовать работу</h1>
-              <div style={{ display: "flex" }}>
+              <div style={{ display: 'flex' }}>
                 <h2>Добавьте вложения</h2>
                 <div className="product-submit-button">
                   <button
@@ -118,14 +187,14 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     disabled={isLoading}
                     type="submit"
                   >
-                    {isLoading ? "Загружается" : "Опубликовать"}
+                    {isLoading ? 'Загружается' : 'Опубликовать'}
                     &nbsp;
                     {isLoading ? (
                       <LoadingOutlined />
                     ) : (
                       <FontAwesomeIcon
                         icon={faArrowRight}
-                        style={{ marginLeft: "1rem", width: "10%" }}
+                        style={{ marginLeft: '1rem', width: '10%' }}
                       />
                     )}
                   </button>
@@ -150,13 +219,12 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                         disabled={isLoading}
                         hidden
                         id="product-input-file"
-                        onChange={(e) =>
-                          onFileChange(e, { name: "image", type: "single" })
-                        }
+                        onChange={(e) => onFileChange(e, { name: 'image', type: 'single' })}
                         readOnly={isLoading}
                         type="file"
                       />
-                      {/* <p className="label-image-text"> */}* Перетащите файл
+                      {/* <p className="label-image-text"> */}
+                      * Перетащите файл
                       для загрузки или просмотра
                       {/* </p> */}
                     </label>
@@ -164,14 +232,14 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                 </div>
               </div>
               <div className="product-form-inputs">
-                <div style={{ display: "flex" }}>
+                <div style={{ display: 'flex' }}>
                   <Button
                     className="product-form-buttons"
                     onClick={toggleParam}
                     style={{
                       borderBottom: param
-                        ? "7px solid #F28290"
-                        : "1px solid black",
+                        ? '7px solid #F28290'
+                        : '1px solid black'
                     }}
                   >
                     Параметры
@@ -181,8 +249,8 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     onClick={toggleDescription}
                     style={{
                       borderBottom: description
-                        ? "7px solid #F28290"
-                        : "1px solid black",
+                        ? '7px solid #F28290'
+                        : '1px solid black'
                     }}
                   >
                     Описание
@@ -198,8 +266,8 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                         label="* Название работы"
                         placeholder="Мона Лиза"
                         style={{
-                          textTransform: "capitalize",
-                          borderRadius: "5rem",
+                          textTransform: 'capitalize',
+                          borderRadius: '5rem'
                         }}
                         component={CustomInput}
                       />
@@ -209,7 +277,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                       <CustomCreatableSelect
                         defaultValue={{
                           label: values.brand,
-                          value: values.brand,
+                          value: values.brand
                         }}
                         name="brand"
                         iid="brand"
@@ -217,7 +285,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                         disabled={isLoading}
                         placeholder="Выберите категорию"
                         label="* Категория"
-                        style={{ borderRadius: "5rem" }}
+                        style={{ borderRadius: '5rem' }}
                       />
                     </div>
                   </div>
@@ -230,7 +298,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                       id="description"
                       rows={3}
                       label="* Описание работы"
-                      style={{ borderRadius: "5rem" }}
+                      style={{ borderRadius: '5rem' }}
                       component={CustomTextarea}
                     />
                     <div className="d-flex">
@@ -239,12 +307,10 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                           checked={values.isFeatured}
                           className=""
                           id="featured"
-                          onChange={(e) =>
-                            setValues({
-                              ...values,
-                              isFeatured: e.target.checked,
-                            })
-                          }
+                          onChange={(e) => setValues({
+                            ...values,
+                            isFeatured: e.target.checked
+                          })}
                           type="checkbox"
                         />
                         <label htmlFor="featured">
@@ -262,7 +328,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                             name="price"
                             id="price"
                             type="number"
-                            style={{ borderRadius: "5rem" }}
+                            style={{ borderRadius: '5rem' }}
                             label="Цена"
                             component={CustomInput}
                           />
@@ -281,12 +347,10 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                           hidden
                           id="product-input-file-collection"
                           multiple
-                          onChange={(e) =>
-                            onFileChange(e, {
-                              name: "imageCollection",
-                              type: "multiple",
-                            })
-                          }
+                          onChange={(e) => onFileChange(e, {
+                            name: 'imageCollection',
+                            type: 'multiple'
+                          })}
                           readOnly={isLoading}
                           type="file"
                         />
@@ -298,8 +362,8 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                 {param && (
                   <div className="product-form-collection">
                     <>
-                      {imageFile.imageCollection.length >= 1 &&
-                        imageFile.imageCollection.map((image) => (
+                      {imageFile.imageCollection.length >= 1
+                        && imageFile.imageCollection.map((image) => (
                           <div
                             className="product-form-collection-image"
                             key={image.id}
@@ -307,12 +371,10 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                             <ImageLoader alt="" src={image.url} />
                             <button
                               className="product-form-delete-image"
-                              onClick={() =>
-                                removeImage({
-                                  id: image.id,
-                                  name: "imageCollection",
-                                })
-                              }
+                              onClick={() => removeImage({
+                                id: image.id,
+                                name: 'imageCollection'
+                              })}
                               title="Delete Image"
                               type="button"
                             >
@@ -344,10 +406,10 @@ ProductForm.propTypes = {
     image: PropType.string,
     imageUrl: PropType.string,
     isFeatured: PropType.bool,
-    isRecommended: PropType.bool,
+    isRecommended: PropType.bool
   }).isRequired,
   onSubmit: PropType.func.isRequired,
-  isLoading: PropType.bool.isRequired,
+  isLoading: PropType.bool.isRequired
 };
 
 export default ProductForm;

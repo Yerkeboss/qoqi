@@ -31,7 +31,7 @@ const CustomCreatableSelect = (props) => {
   };
 
   return (
-    <div className="input-group" style={{paddingTop:'1.2rem'}}>
+    <div className="input-group" style={{ paddingTop: '1.2rem' }}>
       {touched && error ? (
         <span className="label-input label-error">{error}</span>
       ) : (
