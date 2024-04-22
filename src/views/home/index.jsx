@@ -7,7 +7,6 @@ import {
 } from '@/components/eventss';
 import {
   ProductShowcaseGrid,
-
   ProductList
 } from '@/components/product';
 import { selectFilterEvents } from '@/selectors/selectorEvent';
@@ -15,7 +14,6 @@ import { selectFilter } from '@/selectors/selector';
 import {
   useDocumentTitle,
   useFeaturedProducts,
-
   useScrollTop
 } from '@/hooks';
 import { applyFilter } from '../../redux/actions/filterActions';
@@ -167,11 +165,10 @@ const Home = () => {
           pop={pop}
           res={res}
         />
-
         <h2 style={{ marginLeft: '2rem' }}>Лучшее за неделю</h2>
         <ProductList {...store}>
           <div className="scrollable-carousel">
-            <Carousel scrollSnap cols={2} rows={1} gap={10} loop>
+            <Carousel scrollSnap cols={3} rows={1} gap={2} loop>
               {store.filteredProducts
                 .filter(
                   (product) => !featuredProducts.some((fp) => fp.id === product.id)

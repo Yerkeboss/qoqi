@@ -1,22 +1,19 @@
 /* eslint-disable indent */
-import { FilterOutlined, ShoppingOutlined } from "@ant-design/icons";
-import * as ROUTE from "@/constants/routes";
-import React, { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import UserAvatar from "@/views/account/components/UserAvatar";
-import BasketToggle from "../basket/BasketToggle";
-import Badge from "./Badge";
-import FiltersToggle from "./FiltersToggle";
-import MobileNavigation from "./MobileNavigation";
-import SearchBar from "./SearchBar";
-import logo1 from "./../../images/logo1.png";
-import logo2 from "./../../images/logo2.png";
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell } from "@fortawesome/free-solid-svg-icons";
-import { faPlus, faBars } from "@fortawesome/free-solid-svg-icons";
-import Button from "react-bootstrap/Button";
+import { ShoppingOutlined } from '@ant-design/icons';
+import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell, faPlus, faBars } from '@fortawesome/free-solid-svg-icons';
+import Button from 'react-bootstrap/Button';
+import * as ROUTE from '@/constants/routes';
+import UserAvatar from '@/views/account/components/UserAvatar';
+import BasketToggle from '../basket/BasketToggle';
+import Badge from './Badge';
+import MobileNavigation from './MobileNavigation';
+import SearchBar from './SearchBar';
+import logo1 from '../../images/logo1.png';
+import logo2 from '../../images/logo2.png';
 
 const Navigation = () => {
   const navbar = useRef(null);
@@ -26,22 +23,22 @@ const Navigation = () => {
     basketLength: state.basket.length,
     user: state.auth,
     isAuthenticating: state.app.isAuthenticating,
-    isLoading: state.app.loading,
+    isLoading: state.app.loading
   }));
 
   const scrollHandler = () => {
     if (navbar.current && window.screen.width > 480) {
       if (window.pageYOffset >= 70) {
-        navbar.current.classList.add("is-nav-scrolled");
+        navbar.current.classList.add('is-nav-scrolled');
       } else {
-        navbar.current.classList.remove("is-nav-scrolled");
+        navbar.current.classList.remove('is-nav-scrolled');
       }
     }
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", scrollHandler);
-    return () => window.removeEventListener("scroll", scrollHandler);
+    window.addEventListener('scroll', scrollHandler);
+    return () => window.removeEventListener('scroll', scrollHandler);
   }, []);
 
   const onClickLink = (e) => {
@@ -55,10 +52,10 @@ const Navigation = () => {
     ROUTE.CHECKOUT_STEP_3,
     ROUTE.SIGNIN,
     ROUTE.SIGNUP,
-    ROUTE.FORGOT_PASSWORD,
+    ROUTE.FORGOT_PASSWORD
   ];
 
-  if (store.user && store.user.role === "ADMIN") {
+  if (store.user && store.user.role === 'ADMIN') {
     return null;
   }
   if (window.screen.width <= 800) {
@@ -83,14 +80,14 @@ const Navigation = () => {
       </div>
       <ul className="navigation-menu-main">
         <li>
-          <Button style={{ border: "none", backgroundColor: "#f9f9f9" }}>
+          <Button style={{ border: 'none', backgroundColor: '#f9f9f9' }}>
             <FontAwesomeIcon
               icon={faBars}
               style={{
-                color: "#000000",
-                width: "2rem",
-                height: "2rem",
-                marginTop: "0.5rem",
+                color: '#000000',
+                width: '2rem',
+                height: '2rem',
+                marginTop: '0.5rem'
               }}
             />
           </Button>
@@ -111,7 +108,7 @@ const Navigation = () => {
         </li>
         <li>
           <NavLink activeClassName="navigation-menu-active" to={ROUTE.SHOP}>
-          Маркетплейс
+            Маркетплейс
           </NavLink>
         </li>
         <li>
@@ -133,39 +130,39 @@ const Navigation = () => {
         <SearchBar />
         <li className="navigation-menu-item">
           <NavLink
-            style={{ border: "none", backgroundColor: "#f9f9f9" }}
+            style={{ border: 'none', backgroundColor: '#f9f9f9' }}
             to={ROUTE.ADD_PRODUCT_CLIENT}
           >
             <FontAwesomeIcon
               icon={faPlus}
               style={{
-                color: "#000000",
-                width: "2rem",
-                height: "2rem",
-                marginTop: "0.5rem",
+                color: '#000000',
+                width: '2rem',
+                height: '2rem',
+                marginTop: '0.5rem'
               }}
-              
+
             />
           </NavLink>
         </li>
         <li className="navigation-menu-item">
           <Button
             style={{
-              border: "none",
-              backgroundColor: "#f9f9f9",
-              marginLeft: "1rem",
+              border: 'none',
+              backgroundColor: '#f9f9f9',
+              marginLeft: '1rem'
             }}
           >
             <FontAwesomeIcon
               icon={faBell}
               style={{
-                color:"#CCCCCC",
+                color: '#CCCCCC',
                 // backgroundColor:"white",
-                width: "2rem",
-                height: "2rem",
-                marginTop: "0.5rem",
+                width: '2rem',
+                height: '2rem',
+                marginTop: '0.5rem'
               }}
-              
+
             />
           </Button>
         </li>
@@ -179,7 +176,7 @@ const Navigation = () => {
                 type="button"
               >
                 <Badge count={store.basketLength}>
-                  <ShoppingOutlined style={{ fontSize: "2.4rem" }} />
+                  <ShoppingOutlined style={{ fontSize: '2.4rem' }} />
                 </Badge>
               </button>
             )}

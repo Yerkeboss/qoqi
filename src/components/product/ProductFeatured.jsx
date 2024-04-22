@@ -1,14 +1,20 @@
-import { ImageLoader } from "@/components/common";
-import PropType from "prop-types";
-import React, { useState } from "react";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import PropType from 'prop-types';
+import React, { useState } from 'react';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import { useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
+import { ImageLoader } from '@/components/common';
 
 const ProductFeatured = ({ product }) => {
   const history = useHistory();
   const [isHovered, setIsHovered] = useState(false);
+
+  const { profile, isAuthenticating } = useSelector((state) => ({
+    profile: state.profile,
+    isAuthenticating: state.app.isAuthenticating
+  }));
 
   const onClickItem = () => {
     if (!product) return;
@@ -27,9 +33,13 @@ const ProductFeatured = ({ product }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="product-display-img">
+        <div
+          className="product-display-img"
+        >
           {product.image ? (
-            <ImageLoader className="product-card-img" src={product.image} />
+            <ImageLoader
+              src={product.image}
+            />
           ) : (
             <Skeleton width="100%" height="100%" />
           )}
@@ -37,7 +47,7 @@ const ProductFeatured = ({ product }) => {
         {isHovered ? (
           <div className="product-display-details">
             <h2>{product.name || <Skeleton width={80} />}</h2>
-            <svg width="100%" height="1" style={{ top: "0" }}>
+            <svg width="100%" height="1" style={{ marginTop: '0.5rem' }}>
               <line
                 x1="0"
                 y1="0"
@@ -47,16 +57,26 @@ const ProductFeatured = ({ product }) => {
                 strokeWidth="4"
               />
             </svg>
-            <p className="text-subtle text-italic">
+            <p
+              className="text-subtle text-italic"
+              style={{
+                display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '0.5rem'
+              }}
+            >
               {product.brand || <Skeleton width={40} />}
             </p>
-            <div style={{ display: "flex", marginLeft: "22rem" }}>
-              <FontAwesomeIcon icon={faThumbsUp} className="white-icon" />
-              <FontAwesomeIcon icon={faEye} className="white-icon" />
+            <div style={{ display: 'flex' }}>
+              <h4>
+                {profile.fullname}
+              </h4>
+              <div style={{ display: 'flex', marginTop: '-0.5rem', marginLeft: '9rem' }}>
+                <FontAwesomeIcon icon={faThumbsUp} className="white-icon" />
+                <FontAwesomeIcon icon={faEye} className="white-icon" />
+              </div>
             </div>
           </div>
         ) : (
-          ""
+          ''
         )}
       </div>
     </SkeletonTheme>
@@ -68,8 +88,8 @@ ProductFeatured.propTypes = {
     image: PropType.string,
     name: PropType.string,
     id: PropType.string,
-    brand: PropType.string,
-  }).isRequired,
+    brand: PropType.string
+  }).isRequired
 };
 
 export default ProductFeatured;
