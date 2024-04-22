@@ -52,16 +52,7 @@ const ProductList = (props) => {
       {children}
       {/* Show 'Show More' button if products length is less than total products */}
       {products.items.length < products.total && (
-        <div className="d-flex-center padding-l">
-          {/* <button
-            className="button button-small"
-            disabled={isFetching}
-            onClick={fetchProducts}
-            type="button"
-          > */}
-          {/* {isFetching ? 'Fetching Items...' : 'Show More Items'} */}
-          {/* </button> */}
-        </div>
+      <></>
       )}
     </Boundary>
   );
