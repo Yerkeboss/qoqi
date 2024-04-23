@@ -7,7 +7,7 @@ import {
   SIGNOUT, SIGNUP
 } from '@/constants/constants';
 import { SIGNIN as ROUTE_SIGNIN } from '@/constants/routes';
-import defaultAvatar from '@/images/defaultAvatar.jpg';
+import defaultAvatar from '@/images/defaultAvatar2.jpg';
 import defaultBanner from '@/images/defaultBanner.jpg';
 import { call, put } from 'redux-saga/effects';
 import { signInSuccess, signOutSuccess } from '@/redux/actions/authActions';
@@ -95,7 +95,9 @@ function* authSaga({ type, payload }) {
           avatar: defaultAvatar,
           banner: defaultBanner,
           email: payload.email,
-          address: '',
+          address: payload.address,
+          position: payload.position,
+          portfolio: payload.portfolio,
           basket: [],
           mobile: { data: {} },
           role: 'USER',
@@ -161,7 +163,9 @@ function* authSaga({ type, payload }) {
           avatar: payload.photoURL ? payload.photoURL : defaultAvatar,
           banner: defaultBanner,
           email: payload.email,
-          address: '',
+          address: payload.address,
+          position: payload.position,
+          portfolio: payload.portfolio,
           basket: [],
           mobile: { data: {} },
           role: 'USER',

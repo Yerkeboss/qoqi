@@ -1,15 +1,15 @@
 import { ArrowRightOutlined, LoadingOutlined } from '@ant-design/icons';
-import { SocialLogin } from '@/components/common';
-import { CustomInput } from '@/components/formik';
-import { SIGNIN } from '@/constants/routes';
 import { Field, Form, Formik } from 'formik';
-import { useDocumentTitle, useScrollTop } from '@/hooks';
 import PropType from 'prop-types';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import * as Yup from 'yup';
+import { SocialLogin } from '@/components/common';
+import { CustomInput } from '@/components/formik';
+import { SIGNIN } from '@/constants/routes';
+import { useDocumentTitle, useScrollTop } from '@/hooks';
 import { signUp } from '@/redux/actions/authActions';
 import { setAuthenticating, setAuthStatus } from '@/redux/actions/miscActions';
-import * as Yup from 'yup';
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string()
@@ -20,8 +20,13 @@ const SignInSchema = Yup.object().shape({
     .min(8, 'Password length should be at least 8 characters.')
     .matches(/[A-Z\W]/g, 'Password should contain at least 1 uppercase letter.'),
   fullname: Yup.string()
-    .required('Full name is required.')
-    .min(4, 'Name should be at least 4 characters.')
+    .min(4, 'Full name should be at least 4 characters.')
+    .max(60, 'Full name should be only be 4 characters long.')
+    .required('Full name is required'),
+  position: Yup.string()
+    .required('Full name is required.'),
+  address: Yup.string(),
+  portfolio: Yup.string()
 });
 
 const SignUp = ({ history }) => {
@@ -43,9 +48,12 @@ const SignUp = ({ history }) => {
 
   const onFormSubmit = (form) => {
     dispatch(signUp({
-      fullname: form.fullname.trim(),
-      email: form.email.trim().toLowerCase(),
-      password: form.password.trim()
+      fullname: form.fullname,
+      email: form.email,
+      password: form.password,
+      position: form.position,
+      address: form.address,
+      portfolio: form.portfolio
     }));
   };
 
@@ -73,7 +81,10 @@ const SignUp = ({ history }) => {
                 initialValues={{
                   fullname: '',
                   email: '',
-                  password: ''
+                  password: '',
+                  position: '',
+                  address: '',
+                  portfolio: ''
                 }}
                 validateOnChange
                 validationSchema={SignInSchema}
@@ -109,6 +120,41 @@ const SignUp = ({ history }) => {
                         type="password"
                         label="* Пароль"
                         placeholder="Ваш пароль"
+                        component={CustomInput}
+                      />
+                    </div>
+                    <br />
+                    <div className="auth-field">
+                      <Field
+                        disabled={isAuthenticating}
+                        name="position"
+                        type="text"
+                        label="* Позиция"
+                        placeholder="Графический дизайнер "
+                        style={{ textTransform: 'capitalize' }}
+                        component={CustomInput}
+                      />
+                    </div>
+                    <br />
+                    <div className="auth-field">
+                      <Field
+                        disabled={isAuthenticating}
+                        name="address"
+                        type="text"
+                        label="* Адрес"
+                        placeholder="Казахстан, Алматы "
+                        style={{ textTransform: 'capitalize' }}
+                        component={CustomInput}
+                      />
+                    </div>
+                    <br />
+                    <div className="auth-field">
+                      <Field
+                        disabled={isAuthenticating}
+                        name="portfolio"
+                        type="text"
+                        label="Портфолио"
+                        placeholder="portfolio.com"
                         component={CustomInput}
                       />
                     </div>

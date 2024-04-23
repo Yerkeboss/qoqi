@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 
 const UserTab = (props) => {
   const { children } = props;
-  const [activeTab, setActiveTab] = useState(children[0].props.index || 0);
+  const defaultIndex = children.findIndex((child) => child.props.index === 0);
+  const [activeTab, setActiveTab] = useState(defaultIndex !== -1 ? 0 : -1);
   const onClickTabItem = (index) => setActiveTab(index);
 
   return (
@@ -23,11 +24,7 @@ const UserTab = (props) => {
         </ul>
       </div>
       <div className="user-tab-content">
-        {children.map((child) => {
-          if (child.props.index !== activeTab) return null;
-
-          return child.props.children;
-        })}
+        {activeTab !== -1 && children[activeTab].props.children}
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ const Education = () => {
     <main
       className="content"
       style={{
-        width: '100%',
+        width: '98.5%',
         height: '100%',
         display: 'flex',
         flexDirection: 'column'

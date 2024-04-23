@@ -1,33 +1,33 @@
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Boundary, ImageLoader } from '@/components/common';
 import { Formik } from 'formik';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import * as Yup from 'yup';
+import { Boundary, ImageLoader } from '@/components/common';
 import {
   useDocumentTitle, useFileHandler, useModal, useScrollTop
 } from '@/hooks';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from '@/redux/actions/miscActions';
 import { updateProfile } from '@/redux/actions/profileActions';
-import * as Yup from 'yup';
 import ConfirmModal from './ConfirmModal';
 import EditForm from './EditForm';
 
 const FormSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Email is not valid.')
+    .required('Email is required.'),
+  password: Yup.string()
+    .required('Password is required.')
+    .min(8, 'Password length should be at least 8 characters.')
+    .matches(/[A-Z\W]/g, 'Password should contain at least 1 uppercase letter.'),
   fullname: Yup.string()
     .min(4, 'Full name should be at least 4 characters.')
     .max(60, 'Full name should be only be 4 characters long.')
     .required('Full name is required'),
-  email: Yup.string()
-    .email('Email is not valid.')
-    .required('Email is required.'),
+  position: Yup.string()
+    .required('Full name is required.'),
   address: Yup.string(),
-  mobile: Yup.object()
-    .shape({
-      country: Yup.string(),
-      countryCode: Yup.string(),
-      dialCode: Yup.string(),
-      value: Yup.string()
-    })
+  portfolio: Yup.string()
 });
 
 const EditProfile = () => {
@@ -50,8 +50,10 @@ const EditProfile = () => {
   const initFormikValues = {
     fullname: profile.fullname || '',
     email: profile.email || '',
+    password: profile.password || '',
+    position: profile.position || '',
     address: profile.address || '',
-    mobile: profile.mobile || {}
+    portfolio: profile.portfolio || ''
   };
 
   const {
@@ -65,8 +67,10 @@ const EditProfile = () => {
       updates: {
         fullname: form.fullname,
         email: form.email,
+        password: form.password,
+        position: form.position,
         address: form.address,
-        mobile: form.mobile,
+        portfolio: form.portfolio,
         avatar: profile.avatar,
         banner: profile.banner
       },
@@ -100,7 +104,7 @@ const EditProfile = () => {
   return (
     <Boundary>
       <div className="edit-user">
-        <h3 className="text-center">Edit Account Details</h3>
+        <h3 className="text-center">Обновить Профиль</h3>
         <Formik
           initialValues={initFormikValues}
           validateOnChange
@@ -109,11 +113,11 @@ const EditProfile = () => {
         >
           {() => (
             <>
-              <div className="user-profile-banner">
-                <div className="user-profile-banner-wrapper">
+              <div className="user-edit-profile-banner">
+                <div className="user-edit-profile-banner-wrapper">
                   <ImageLoader
                     alt="Banner"
-                    className="user-profile-banner-img"
+                    className="user-edit-profile-banner-img"
                     src={imageFile.banner.url || profile.banner}
                   />
                   {isFileLoading ? (
@@ -137,10 +141,10 @@ const EditProfile = () => {
                     </label>
                   )}
                 </div>
-                <div className="user-profile-avatar-wrapper">
+                <div className="user-edit-profile-avatar-wrapper">
                   <ImageLoader
                     alt="Avatar"
-                    className="user-profile-img"
+                    className="user-edit-profile-img"
                     src={imageFile.avatar.url || profile.avatar}
                   />
                   {isFileLoading ? (

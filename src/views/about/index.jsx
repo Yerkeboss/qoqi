@@ -53,7 +53,7 @@ const About = () => {
     <main
       className="content"
       style={{
-        width: '100%',
+        width: '97.5%',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -908,17 +908,17 @@ const About = () => {
                       fontFamily: 'Inter',
                       fontWeight: '500',
                       color: '#F28290',
-                      marginLeft: '2rem',
+                      marginLeft: '2rem'
                     }}
                     >
-                    Йога пространство
+                      Йога пространство
                     </h3>
                     <p style={{
                       fontFamily: 'Inter',
                       fontWeight: '500',
                       color: '#F28290',
                       marginLeft: '2rem',
-                      width:'95%'
+                      width: '95%'
                     }}
                     >
                       Йога - древнее учение, которое включает в себя различные духовные, психические и физические практики. С каждым годом она становится все более популярной в современном обществе. Сегодня для многих людей занятия йогой - это возможность отвлечься от хаотичной и занятой жизни.

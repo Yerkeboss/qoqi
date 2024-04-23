@@ -1,28 +1,24 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { AppliedFilters, ProductGrid, ProductList } from "@/components/product";
+import React, { useState, useEffect } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
+import { ProductGrid } from '@/components/product';
 import {
   useDocumentTitle,
   useFeaturedProducts,
-  useRecommendedProducts,
-  useScrollTop,
-} from "@/hooks";
-import React, { useState, useEffect } from "react";
-import { shallowEqual, useSelector } from "react-redux";
-import { selectFilter } from "@/selectors/selector";
-import Button from "react-bootstrap/Button";
-import Creators from "../../components/creator/Creators";
-import Vacancies from "../../components/jobs/Vacancies";
-import Tender from "../../components/tender/Tender";
-import Croud from "../../components/croud/Croud";
-import Charity from "../../components/charity/Charity";
-import MasterForm from "../../components/order/MasterForm";
-import { ProductShowcaseGrid } from "../../components/product";
-import { MessageDisplay } from "@/components/common";
-import { FEATURED_PRODUCTS } from "@/constants/routes";
-import { Link } from "react-router-dom";
+  useScrollTop
+} from '@/hooks';
+import { selectFilter } from '@/selectors/selector';
+import Creators from '../../components/creator/Creators';
+import Vacancies from '../../components/jobs/Vacancies';
+import Tender from '../../components/tender/Tender';
+import Croud from '../../components/croud/Croud';
+import Charity from '../../components/charity/Charity';
+import MasterForm from '../../components/order/MasterForm';
 
 const Shop = () => {
-  useDocumentTitle("Shop | Qoqiqaz");
+  useDocumentTitle('Shop | Qoqiqaz');
   useScrollTop();
 
   const [art, setArt] = useState(false);
@@ -37,7 +33,7 @@ const Shop = () => {
     featuredProducts,
     fetchFeaturedProducts,
     isLoading: isLoadingFeatured,
-    error: errorFeatured,
+    error: errorFeatured
   } = useFeaturedProducts(100);
 
   const toggleArt = () => {
@@ -114,58 +110,60 @@ const Shop = () => {
       filteredProducts: selectFilter(state.products.items, state.filter),
       products: state.products,
       requestStatus: state.app.requestStatus,
-      isLoading: state.app.loading,
+      isLoading: state.app.loading
     }),
     shallowEqual
   );
 
   return (
-    <main className="content" style={{ marginTop: "3rem" }}>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        {art && (
-          <h2 style={{ marginLeft: "2rem", height: "20%" }}>Маркетплейс</h2>
-        )}
-        {creator && (
-          <h2 style={{ marginLeft: "2rem", height: "20%" }}>Найти креатора</h2>
-        )}
-        {vac && <h2 style={{ marginLeft: "2rem", height: "20%" }}>Вакансии</h2>}
-        {order && (
-          <h2 style={{ marginLeft: "2rem", height: "20%" }}>
+    <main className="content" style={{ marginTop: '2rem' }}>
+      <div style={{ width: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {art && (
+          <h2 style={{ marginLeft: '2rem', height: '20%' }}>Маркетплейс</h2>
+          )}
+          {creator && (
+          <h2 style={{ marginLeft: '2rem', height: '20%' }}>Найти креатора</h2>
+          )}
+          {vac && <h2 style={{ marginLeft: '2rem', height: '20%' }}>Вакансии</h2>}
+          {order && (
+          <h2 style={{ marginLeft: '2rem', height: '20%' }}>
             Разместить заказ
           </h2>
-        )}
-        {tender && (
-          <h2 style={{ marginLeft: "2rem", height: "20%" }}>
+          )}
+          {tender && (
+          <h2 style={{ marginLeft: '2rem', height: '20%' }}>
             Конкурсы/тендеры
           </h2>
-        )}
-        {croud && (
-          <h2 style={{ marginLeft: "2rem", height: "20%" }}>Краудсорсинг</h2>
-        )}
-        {charity && (
-          <h2 style={{ marginLeft: "2rem", height: "20%" }}>
+          )}
+          {croud && (
+          <h2 style={{ marginLeft: '2rem', height: '20%' }}>Краудсорсинг</h2>
+          )}
+          {charity && (
+          <h2 style={{ marginLeft: '2rem', height: '20%' }}>
             Благотворительность
           </h2>
-        )}
+          )}
 
-        <section className="product-list-wrapper">
+          {/* <section className="product-list-wrapper"> */}
           <div
             style={{
-              display: "flex",
-              marginBottom: "4rem",
-              marginLeft: "1.5rem",
+              display: 'flex',
+              marginBottom: '4rem',
+              marginLeft: '1.5rem',
+              width: '97.5%'
             }}
           >
             <Button
               onClick={toggleArt}
               style={{
-                backgroundColor: art ? "#F28290" : "white",
-                color: art ? "white" : "black",
-                border: art ? "none" : "1px solid black",
-                borderRadius: "12px",
-                marginLeft: "0.5rem",
-                width: "15rem",
-                height: "4rem",
+                backgroundColor: art ? '#F28290' : 'white',
+                color: art ? 'white' : 'black',
+                border: art ? 'none' : '1px solid black',
+                borderRadius: '12px',
+                marginLeft: '0.5rem',
+                width: '100%',
+                height: '4rem'
               }}
             >
               Купить работу
@@ -173,13 +171,13 @@ const Shop = () => {
             <Button
               onClick={toggleCreator}
               style={{
-                backgroundColor: creator ? "#F28290" : "white",
-                color: creator ? "white" : "black",
-                border: creator ? "none" : "1px solid black",
-                borderRadius: "12px",
-                marginLeft: "0.5rem",
-                width: "15rem",
-                height: "4rem",
+                backgroundColor: creator ? '#F28290' : 'white',
+                color: creator ? 'white' : 'black',
+                border: creator ? 'none' : '1px solid black',
+                borderRadius: '12px',
+                marginLeft: '0.5rem',
+                width: '100%',
+                height: '4rem'
               }}
             >
               Найти креатора
@@ -187,13 +185,13 @@ const Shop = () => {
             <Button
               onClick={toggleVac}
               style={{
-                backgroundColor: vac ? "#F28290" : "white",
-                color: vac ? "white" : "black",
-                border: vac ? "none" : "1px solid black",
-                borderRadius: "12px",
-                marginLeft: "0.5rem",
-                width: "12rem",
-                height: "4rem",
+                backgroundColor: vac ? '#F28290' : 'white',
+                color: vac ? 'white' : 'black',
+                border: vac ? 'none' : '1px solid black',
+                borderRadius: '12px',
+                marginLeft: '0.5rem',
+                width: '100%',
+                height: '4rem'
               }}
             >
               Вакансии
@@ -201,13 +199,13 @@ const Shop = () => {
             <Button
               onClick={toggleOrder}
               style={{
-                backgroundColor: order ? "#F28290" : "white",
-                color: order ? "white" : "black",
-                border: order ? "none" : "1px solid black",
-                borderRadius: "12px",
-                marginLeft: "0.5rem",
-                width: "18rem",
-                height: "4rem",
+                backgroundColor: order ? '#F28290' : 'white',
+                color: order ? 'white' : 'black',
+                border: order ? 'none' : '1px solid black',
+                borderRadius: '12px',
+                marginLeft: '0.5rem',
+                width: '100%',
+                height: '4rem'
               }}
             >
               Разместить заказ
@@ -215,13 +213,13 @@ const Shop = () => {
             <Button
               onClick={toggleTender}
               style={{
-                backgroundColor: tender ? "#F28290" : "white",
-                color: tender ? "white" : "black",
-                border: tender ? "none" : "1px solid black",
-                borderRadius: "12px",
-                width: "18rem",
-                height: "4rem",
-                marginLeft: "0.5rem",
+                backgroundColor: tender ? '#F28290' : 'white',
+                color: tender ? 'white' : 'black',
+                border: tender ? 'none' : '1px solid black',
+                borderRadius: '12px',
+                width: '100%',
+                height: '4rem',
+                marginLeft: '0.5rem'
               }}
             >
               Конкурсы/тендеры
@@ -229,13 +227,13 @@ const Shop = () => {
             <Button
               onClick={toggleCroud}
               style={{
-                backgroundColor: croud ? "#F28290" : "white",
-                color: croud ? "white" : "black",
-                border: croud ? "none" : "1px solid black",
-                borderRadius: "12px",
-                marginLeft: "0.5rem",
-                width: "12rem",
-                height: "4rem",
+                backgroundColor: croud ? '#F28290' : 'white',
+                color: croud ? 'white' : 'black',
+                border: croud ? 'none' : '1px solid black',
+                borderRadius: '12px',
+                marginLeft: '0.5rem',
+                width: '100%',
+                height: '4rem'
               }}
             >
               Краудсорсинг
@@ -243,34 +241,32 @@ const Shop = () => {
             <Button
               onClick={toggleCharity}
               style={{
-                backgroundColor: charity ? "#F28290" : "white",
-                color: charity ? "white" : "black",
-                border: charity ? "none" : "1px solid black",
-                borderRadius: "12px",
-                marginLeft: "0.5rem",
-                width: "20rem",
-                height: "4rem",
+                backgroundColor: charity ? '#F28290' : 'white',
+                color: charity ? 'white' : 'black',
+                border: charity ? 'none' : '1px solid black',
+                borderRadius: '12px',
+                marginLeft: '0.5rem',
+                width: '100%',
+                height: '4rem'
               }}
             >
               Благотворительность
             </Button>
           </div>
-          {/* <AppliedFilters
-            filteredProductsCount={store.filteredProducts.length}
-          /> */}
-          {art && (
-            // <ProductList {...store}>
+          <div style={{ width: '97.5%', marginLeft: '2rem' }}>
+            {art && (
             <ProductGrid products={featuredProducts} />
-            // </ProductList>
-          )}
-
-          {creator && <Creators />}
-          {vac && <Vacancies />}
-          {order && <MasterForm />}
-          {tender && <Tender />}
-          {croud && <Croud />}
-          {charity && <Charity />}
-        </section>
+            )}
+          </div>
+          <div style={{ width: '98%' }}>
+            {creator && <Creators />}
+            {vac && <Vacancies />}
+            {order && <MasterForm />}
+            {tender && <Tender />}
+            {croud && <Croud />}
+            {charity && <Charity />}
+          </div>
+        </div>
       </div>
     </main>
   );

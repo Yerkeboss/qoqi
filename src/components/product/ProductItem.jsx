@@ -1,10 +1,10 @@
-import { CheckOutlined } from "@ant-design/icons";
-import { ImageLoader } from "@/components/common";
-import { displayMoney } from "@/helpers/utils";
-import PropType from "prop-types";
-import React from "react";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { useHistory } from "react-router-dom";
+import { CheckOutlined } from '@ant-design/icons';
+import PropType from 'prop-types';
+import React from 'react';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import { useHistory } from 'react-router-dom';
+import { displayMoney } from '@/helpers/utils';
+import { ImageLoader } from '@/components/common';
 
 const ProductItem = ({ product, isItemOnBasket, addToBasket }) => {
   const history = useHistory();
@@ -20,18 +20,17 @@ const ProductItem = ({ product, isItemOnBasket, addToBasket }) => {
   const itemOnBasket = isItemOnBasket ? isItemOnBasket(product.id) : false;
 
   const handleAddToBasket = () => {
-    if (addToBasket)
-      addToBasket({ ...product, selectedSize: product.sizes[0] });
+    if (addToBasket) addToBasket({ ...product, selectedSize: product.sizes[0] });
   };
 
   return (
     <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2">
       <div
-        className={`product-card ${!product.id ? "product-loading" : ""}`}
+        className={`product-card ${!product.id ? 'product-loading' : ''}`}
         style={{
-          border: product && itemOnBasket ? "1px solid #a6a5a5" : "",
+          border: product && itemOnBasket ? '1px solid #a6a5a5' : '',
           boxShadow:
-            product && itemOnBasket ? "0 10px 15px rgba(0, 0, 0, .07)" : "none",
+            product && itemOnBasket ? '0 10px 15px rgba(0, 0, 0, .07)' : 'none'
         }}
       >
         {itemOnBasket && (
@@ -46,7 +45,7 @@ const ProductItem = ({ product, isItemOnBasket, addToBasket }) => {
             {product.image ? (
               <ImageLoader
                 alt={product.name}
-                // className="product-card-img"
+                className="product-card-img"
                 src={product.image}
               />
             ) : (
@@ -73,14 +72,14 @@ const ProductItem = ({ product, isItemOnBasket, addToBasket }) => {
 
 ProductItem.defaultProps = {
   isItemOnBasket: undefined,
-  addToBasket: undefined,
+  addToBasket: undefined
 };
 
 ProductItem.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   product: PropType.object.isRequired,
   isItemOnBasket: PropType.func,
-  addToBasket: PropType.func,
+  addToBasket: PropType.func
 };
 
 export default ProductItem;

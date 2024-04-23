@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Suisse+Intl&display=swap");
+
 label {
   font-size: 1.2rem;
-  font-weight: bold;
+  font-family: 'Suisse Intl', sans-serif;
+  font-weight: 500;
   background: #e1e1e1;
   border: none;
   padding: 1.2rem 1.6rem;
@@ -50,6 +53,8 @@ label {
   padding: 1rem 1.2rem;
   color: #696868;
   border: none;
+  font-family: 'Suisse Intl', sans-serif;
+  font-weight: 500;
 
   &:hover {
     background: none;
