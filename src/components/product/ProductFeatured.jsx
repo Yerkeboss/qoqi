@@ -69,7 +69,7 @@ const ProductFeatured = ({ product }) => {
               <h4>
                 {profile.fullname}
               </h4>
-              <div style={{ display: 'flex', marginTop: '-0.5rem', marginLeft: '9rem' }}>
+              <div style={{ display: 'flex', marginTop: '-0.5rem', marginLeft: '15rem' }}>
                 <FontAwesomeIcon icon={faThumbsUp} className="white-icon" />
                 <FontAwesomeIcon icon={faEye} className="white-icon" />
               </div>

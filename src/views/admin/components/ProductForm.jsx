@@ -102,9 +102,6 @@ const FormSchema = Yup.object().shape({
     .max(60, 'Product name must only be less than 60 characters.'),
   brand: Yup.string().required('Brand name is required.'),
   price: Yup.number(),
-  // .positive("Price is invalid.")
-  // .integer("Price should be an integer.")
-  // .required("Price is required."),
   description: Yup.string().required('Description is required.'),
   isFeatured: Yup.boolean(),
   isRecommended: Yup.boolean()
@@ -113,11 +110,7 @@ const FormSchema = Yup.object().shape({
 const ProductForm = ({ product, onSubmit, isLoading }) => {
   const [param, setParam] = useState(false);
   const [description, setDescription] = useState(false);
-  // const [isFeatured, setIsFeatured] = useState(false);
 
-  // const handleFeaturedChange = (e) => {
-  //   setIsFeatured(e.target.checked);
-  // };
 
   const toggleParam = () => {
     setParam(true);
