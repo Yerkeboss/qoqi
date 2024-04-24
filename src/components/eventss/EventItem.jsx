@@ -16,12 +16,6 @@ const EventItem = ({ event }) => {
     }
   };
 
-  // const itemOnBasket = isItemOnBasket ? isItemOnBasket(product.id) : false;
-
-  // const handleAddToBasket = () => {
-  //   if (addToBasket) addToBasket({ ...product, selectedSize: product.sizes[0] });
-  // };
-
   return (
   // <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2">
     <div className={`event-card ${!event.id ? 'event-loading' : ''}`}>

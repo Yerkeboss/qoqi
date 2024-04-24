@@ -1,12 +1,16 @@
 /* eslint-disable react/no-multi-comp */
 import { LoadingOutlined } from '@ant-design/icons';
-import React, { lazy, Suspense } from 'react';
+import React, {
+  lazy, Suspense, useEffect, useRef, useState
+} from 'react';
 import { useSelector } from 'react-redux';
-import { useDocumentTitle, useScrollTop } from '@/hooks';
+import { Link, useParams } from 'react-router-dom';
+import { useDocumentTitle, useScrollTop, useUser } from '@/hooks';
 import { ImageLoader } from '@/components/common';
+import Orders from './Orders';
 
-const UserAccountTab = lazy(() => import('../components/UserAccountTab'));
-const UserOrdersTab = lazy(() => import('../components/UserOrdersTab'));
+const Account = lazy(() => import('./Account'));
+
 
 const Loader = () => (
   <div className="loader" style={{ minHeight: '80vh', background: 'red' }}>
@@ -16,17 +20,29 @@ const Loader = () => (
 );
 
 const ViewUser = () => {
-  useScrollTop();
-  useDocumentTitle('Мой аккаунт | Qoqiqaz');
+  const { id } = useParams();
+  const { user, isLoading, error } = useUser(id);
 
-  const profile = useSelector((state) => state.profile);
+  useScrollTop();
+  useDocumentTitle(`Обзор ${user?.fullname || 'Item'}`);
+
 
   return (
+
     <div
+      className="content"
       style={{
         width: '100%', display: 'flex', position: 'relative', marginLeft: '2rem', marginTop: '3rem', height: '80rem'
       }}
     >
+      {isLoading && (
+      <div className="loader">
+        <h4>Загружается</h4>
+        <br />
+        <LoadingOutlined style={{ fontSize: '3rem' }} />
+      </div>
+      )}
+      {user && !isLoading && (
       <div style={{
         flex: '1', width: '70%', height: '80rem'
       }}
@@ -35,24 +51,26 @@ const ViewUser = () => {
           <ImageLoader
             alt="Banner"
             className="user-profile-banner-img"
-            src={profile.banner}
+            src={user?.banner}
           />
         </div>
         <div>
           <Suspense fallback={<Loader />}>
-            <UserOrdersTab />
+            <Orders />
           </Suspense>
         </div>
       </div>
+      )}
       <div style={{
         display: 'flex', marginLeft: '2rem', width: '30%', height: '50rem'
       }}
       >
         <Suspense fallback={<Loader />}>
-          <UserAccountTab />
+          <Account />
         </Suspense>
       </div>
     </div>
+
   );
 };
 

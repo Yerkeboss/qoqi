@@ -38,12 +38,11 @@ const ViewProduct = () => {
   useDocumentTitle(`Обзор ${product?.name || 'Item'}`);
 
   const [selectedImage, setSelectedImage] = useState(product?.image || '');
-  const [selectedSize, setSelectedSize] = useState('');
-  const [selectedColor, setSelectedColor] = useState('');
   const [rating, setRating] = useState(0); // State to store the rating
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    setSelectedImage(product?.image);
     if (product && product.userId) {
       Firebase.getUser(product.userId)
         .then((doc) => {
@@ -64,30 +63,15 @@ const ViewProduct = () => {
     setRating(value);
   };
 
-  const store = useSelector((state) => ({
-    basketLength: state.basket.length,
-    user: state.auth,
-    isAuthenticating: state.app.isAuthenticating,
-    isLoading: state.app.loading
-  }));
-
-  const { profile, isAuthenticating } = useSelector((state) => ({
-    profile: state.profile,
-    isAuthenticating: state.app.isAuthenticating
+  const { profile } = useSelector((state) => ({
+    profile: state.profile
   }));
 
   const {
     featuredProducts,
-    fetchFeaturedProducts,
     isLoading: isLoadingFeatured,
     error: errorFeatured
   } = useFeaturedProducts(100);
-
-  const colorOverlay = useRef(null);
-
-  useEffect(() => {
-    setSelectedImage(product?.image);
-  }, [product]);
 
   const handleAddToBasket = () => {
     addToBasket({

@@ -22,8 +22,9 @@ export { default as Search } from './search';
 export { default as SearchEvent } from './searchEvent';
 export { default as Shop } from './shop';
 export { default as About } from './about';
-export {default as Education} from './education';
+export { default as Education } from './education';
 export { default as ViewProduct } from './view_product';
 export { default as ViewEvent } from './view_event';
-
+export { default as ViewUser } from './view_user';
+export { default as Account } from './view_user/Account';
 

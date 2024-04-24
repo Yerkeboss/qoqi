@@ -13,11 +13,6 @@ const ProductFeatured = ({ product }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [user, setUser] = useState(null);
 
-  const { profile, isAuthenticating } = useSelector((state) => ({
-    profile: state.profile,
-    isAuthenticating: state.app.isAuthenticating
-  }));
-
   const onClickItem = () => {
     if (!product) return;
 
