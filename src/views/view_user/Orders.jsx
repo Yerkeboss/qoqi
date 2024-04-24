@@ -49,7 +49,7 @@ const Orders = () => {
   return (
     <div className="loader" style={{ height: '80vh' }}>
       <h3>Портфолио</h3>
-      <div style={{ overflowY: 'scroll', overflowX: 'hidden', height: '100%' }}>
+      <div style={{ overflowY: 'scroll', overflowX: 'hidden', height: '110%' }}>
         {/* <ProductGrid products={userProducts} style={{ height: '100%' }} /> */}
         <ProductShowcaseGrid products={userProducts} />
       </div>

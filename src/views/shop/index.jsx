@@ -253,7 +253,10 @@ const Shop = () => {
               Благотворительность
             </Button>
           </div>
-          <div style={{ width: '97.5%', marginLeft: '2rem' }}>
+          <div style={{
+            width: '97.5%', marginLeft: '2rem'
+          }}
+          >
             {art && (
             <ProductGrid products={featuredProducts} />
             )}
