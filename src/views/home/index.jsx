@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import Carousel from 'react-grid-carousel';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import firebase from 'firebase/app';
 import {
   EventGrid
 } from '@/components/eventss';
@@ -17,9 +18,9 @@ import {
   useScrollTop
 } from '@/hooks';
 import { applyFilter } from '../../redux/actions/filterActions';
-import Firebase from '../../services/firebase';
 import Sort from './Sort';
 import Categories from './Categories';
+import 'firebase/firestore';
 
 const Home = () => {
   const navbar = useRef(null);
@@ -97,14 +98,17 @@ const Home = () => {
     }
   };
 
+
   useEffect(() => {
     toggleRect();
     window.addEventListener('scroll', handleScroll);
+    // Fetch products data from Firestore
     const fetchEvents = async () => {
       try {
         setLoading(true);
-        const { events } = await Firebase.getEvents();
-        setEvents(events);
+        const eventsCollection = await firebase.firestore().collection('events').get();
+        const eventsData = eventsCollection.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        setEvents(eventsData);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching events:', error);
@@ -116,7 +120,7 @@ const Home = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [Firebase]);
+  }, []);
 
   return (
     <main className="content">

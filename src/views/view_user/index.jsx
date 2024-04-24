@@ -15,7 +15,7 @@ const Loader = () => (
   </div>
 );
 
-const UserAccount = () => {
+const ViewUser = () => {
   useScrollTop();
   useDocumentTitle('Мой аккаунт | Qoqiqaz');
 
@@ -56,4 +56,4 @@ const UserAccount = () => {
   );
 };
 
-export default UserAccount;
+export default ViewUser;
