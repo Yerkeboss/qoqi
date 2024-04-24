@@ -41,14 +41,14 @@ const Creators = () => {
     <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2" height={300}>
       <div className="creators-grid">
         {users?.map((user) => (
-          <div className="creators-card" key={user?.id} onClick={() => onClickUser(user.id)}>
+          <div className="creators-card" key={user?.id}>
             <div className="creators-card-content">
-              <div className="creators-card-img-wrapper">
+              <div className="creators-card-img-wrapper" onClick={() => onClickUser(user.id)}>
                 <Image src={user?.avatar} />
               </div>
               <div className="creators-details">
-                <h2 className="creators-card-name">{user.fullname}</h2>
-                <h5 className="creators-card-position">{user.position}</h5>
+                <h2 className="creators-card-name" onClick={() => onClickUser(user.id)}>{user.fullname}</h2>
+                <h5 className="creators-card-position" onClick={() => onClickUser(user.id)}>{user.position}</h5>
                 <Button className="creators-button" onClick={() => handleSendMessage(user)}>
                   <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '1rem' }} />
                   Сообщение
