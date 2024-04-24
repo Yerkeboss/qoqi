@@ -1,9 +1,9 @@
-import { CheckOutlined } from "@ant-design/icons";
-import { ImageLoader } from "@/components/common";
-import PropType from "prop-types";
-import React from "react";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { useHistory } from "react-router-dom";
+import { CheckOutlined } from '@ant-design/icons';
+import PropType from 'prop-types';
+import React from 'react';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import { useHistory } from 'react-router-dom';
+import { ImageLoader } from '@/components/common';
 
 const EventItem = ({ event }) => {
   const history = useHistory();
@@ -24,10 +24,10 @@ const EventItem = ({ event }) => {
 
   return (
     <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2">
-      <div className={`event-card ${!event.id ? "event-loading" : ""}`}>
+      <div className={`event-card ${!event.id ? 'event-loading' : ''}`}>
         <div
           className="event-card-content"
-          onClick={onClickItem}
+          onClick={onClickItem}x
           role="presentation"
         >
           <div className="event-card-img-wrapper">
@@ -52,9 +52,8 @@ const EventItem = ({ event }) => {
 
 EventItem.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  event: PropType.object.isRequired,
+  event: PropType.object.isRequired
 };
 
 export default EventItem;
-
 

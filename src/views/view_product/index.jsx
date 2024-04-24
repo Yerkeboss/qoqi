@@ -1,45 +1,63 @@
-import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
-import { ColorChooser, ImageLoader, MessageDisplay } from "@/components/common";
-import { ProductShowcaseGrid } from "@/components/product";
-import { RECOMMENDED_PRODUCTS, SHOP } from "@/constants/routes";
-import { displayMoney } from "@/helpers/utils";
+import { ArrowLeftOutlined, LoadingOutlined } from '@ant-design/icons';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import Select from 'react-select';
+import Card from 'react-bootstrap/Card';
+import { CardBody, CardTitle } from 'react-bootstrap';
+import Image from 'react-bootstrap/Image';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import { useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faThumbsUp,
+  faBookmark,
+  faShare,
+  faCartShopping
+} from '@fortawesome/free-solid-svg-icons';
+import Firebase from '../../services/firebase';
+import UserAvatar from '../account/components/UserAvatar';
 import {
   useBasket,
   useDocumentTitle,
   useProduct,
   useRecommendedProducts,
   useFeaturedProducts,
-  useScrollTop,
-} from "@/hooks";
-import React, { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import Select from "react-select";
-import Card from "react-bootstrap/Card";
-import { CardBody, CardTitle } from "react-bootstrap";
-import Image from "react-bootstrap/Image";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { useSelector } from "react-redux";
-import UserAvatar from "../account/components/UserAvatar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faThumbsUp,
-  faBookmark,
-  faShare,
-  faCartShopping,
-} from "@fortawesome/free-solid-svg-icons";
+  useScrollTop
+} from '@/hooks';
+import { displayMoney } from '@/helpers/utils';
+import { RECOMMENDED_PRODUCTS, SHOP } from '@/constants/routes';
+import { ProductShowcaseGrid } from '@/components/product';
+import { ColorChooser, ImageLoader, MessageDisplay } from '@/components/common';
 
 const ViewProduct = () => {
   const { id } = useParams();
   const { product, isLoading, error } = useProduct(id);
   const { addToBasket, isItemOnBasket } = useBasket(id);
   useScrollTop();
-  useDocumentTitle(`Обзор ${product?.name || "Item"}`);
+  useDocumentTitle(`Обзор ${product?.name || 'Item'}`);
 
-  const [selectedImage, setSelectedImage] = useState(product?.image || "");
-  const [selectedSize, setSelectedSize] = useState("");
-  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedImage, setSelectedImage] = useState(product?.image || '');
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedColor, setSelectedColor] = useState('');
   const [rating, setRating] = useState(0); // State to store the rating
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (product && product.userId) {
+      Firebase.getUser(product.userId)
+        .then((doc) => {
+          if (doc.exists) {
+            setUser(doc.data());
+          } else {
+            console.log('No such user!');
+          }
+        })
+        .catch((error) => {
+          console.error('Error getting user:', error);
+        });
+    }
+  }, [product]);
 
   // Function to handle click on a star
   const handleStarClick = (value) => {
@@ -50,19 +68,19 @@ const ViewProduct = () => {
     basketLength: state.basket.length,
     user: state.auth,
     isAuthenticating: state.app.isAuthenticating,
-    isLoading: state.app.loading,
+    isLoading: state.app.loading
   }));
 
   const { profile, isAuthenticating } = useSelector((state) => ({
     profile: state.profile,
-    isAuthenticating: state.app.isAuthenticating,
+    isAuthenticating: state.app.isAuthenticating
   }));
 
   const {
     featuredProducts,
     fetchFeaturedProducts,
     isLoading: isLoadingFeatured,
-    error: errorFeatured,
+    error: errorFeatured
   } = useFeaturedProducts(100);
 
   const colorOverlay = useRef(null);
@@ -73,7 +91,7 @@ const ViewProduct = () => {
 
   const handleAddToBasket = () => {
     addToBasket({
-      ...product,
+      ...product
     });
   };
 
@@ -83,7 +101,7 @@ const ViewProduct = () => {
         <div className="loader">
           <h4>Загружается</h4>
           <br />
-          <LoadingOutlined style={{ fontSize: "3rem" }} />
+          <LoadingOutlined style={{ fontSize: '3rem' }} />
         </div>
       )}
       {error && <MessageDisplay message={error} />}
@@ -95,7 +113,7 @@ const ViewProduct = () => {
               &nbsp; Вернуться в Маркетплэйс
             </h3>
           </Link>
-          <div className="product-modal" style={{ background: "white" }}>
+          <div className="product-modal" style={{ background: 'white' }}>
             <div className="product-modal-image-wrapper">
               <ImageLoader
                 alt={product.name}
@@ -106,17 +124,17 @@ const ViewProduct = () => {
             <div className="product-modal-details">
               <br />
               <h1 className="margin">{product.name}</h1>
-              <div style={{ height: "2px", backgroundColor: "black" }} />
+              <div style={{ height: '2px', backgroundColor: 'black' }} />
               <div
                 style={{
-                  border: "2px solid black",
-                  height: "4rem",
-                  borderRadius: "3rem",
-                  width: "40%",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  display: "flex",
-                  marginTop: "2rem",
+                  border: '2px solid black',
+                  height: '4rem',
+                  borderRadius: '3rem',
+                  width: '40%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  display: 'flex',
+                  marginTop: '2rem'
                 }}
               >
                 <p>{product.brand}</p>
@@ -125,50 +143,50 @@ const ViewProduct = () => {
               <br />
               <div
                 style={{
-                  display: "inline-flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "1rem",
+                  display: 'inline-flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '1rem'
                 }}
               >
                 <div
                   className="user-nav-img-wrapper"
-                  style={{ marginLeft: "0" }}
+                  style={{ marginLeft: '0' }}
                 >
-                  <img alt="" className="user-nav-img" src={profile.avatar} />
+                  <img alt="" className="user-nav-img" src={user?.avatar} />
                 </div>
                 <h5
                   style={{
-                    fontWeight: "bold",
-                    fontSize: "2rem",
-                    marginLeft: "2rem",
+                    fontWeight: 'bold',
+                    fontSize: '2rem',
+                    marginLeft: '2rem'
                   }}
                 >
-                  {profile.fullname}
+                  {user?.fullname}
                 </h5>
                 <Button
                   style={{
-                    borderRadius: "5rem",
-                    background: "#F28290",
-                    color: "white",
-                    fontWeight: "500",
-                    height: "4rem",
-                    width: "14rem",
-                    border: "none",
-                    marginLeft: "2rem",
+                    borderRadius: '5rem',
+                    background: '#F28290',
+                    color: 'white',
+                    fontWeight: '500',
+                    height: '4rem',
+                    width: '14rem',
+                    border: 'none',
+                    marginLeft: '2rem'
                   }}
                 >
                   Подписаться
                 </Button>
               </div>
-              <div style={{ marginTop: "2rem" }}>
+              <div style={{ marginTop: '2rem' }}>
                 {[...Array(5)].map((_, index) => (
                   <span
                     key={index}
                     style={{
-                      cursor: "pointer",
-                      color: index < rating ? "#F28290" : "gray",
-                      fontSize: "3rem",
+                      cursor: 'pointer',
+                      color: index < rating ? '#F28290' : 'gray',
+                      fontSize: '3rem'
                     }}
                     onClick={() => handleStarClick(index + 1)}
                   >
@@ -176,128 +194,128 @@ const ViewProduct = () => {
                   </span>
                 ))}
               </div>
-              <div style={{ display: "flex" }}>
+              <div style={{ display: 'flex' }}>
                 <Button
                   style={{
-                    width: "4rem",
-                    height: "4rem",
-                    marginTop: "1rem",
-                    borderRadius: "5rem",
-                    background: "#F28290",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    border: "none",
+                    width: '4rem',
+                    height: '4rem',
+                    marginTop: '1rem',
+                    borderRadius: '5rem',
+                    background: '#F28290',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    border: 'none'
                   }}
                 >
                   <FontAwesomeIcon
                     style={{
-                      color: "white",
-                      width: "2rem",
-                      height: "2rem",
+                      color: 'white',
+                      width: '2rem',
+                      height: '2rem'
                     }}
                     icon={faThumbsUp}
                   />
                 </Button>
                 <Button
                   style={{
-                    width: "4rem",
-                    height: "4rem",
-                    marginTop: "1rem",
-                    borderRadius: "5rem",
-                    background: "#F28290",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    border: "none",
-                    marginLeft: "1rem",
+                    width: '4rem',
+                    height: '4rem',
+                    marginTop: '1rem',
+                    borderRadius: '5rem',
+                    background: '#F28290',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    border: 'none',
+                    marginLeft: '1rem'
                   }}
                 >
                   <FontAwesomeIcon
                     style={{
-                      color: "white",
-                      width: "2rem",
-                      height: "2rem",
+                      color: 'white',
+                      width: '2rem',
+                      height: '2rem'
                     }}
                     icon={faBookmark}
                   />
                 </Button>
                 <Button
                   style={{
-                    width: "4rem",
-                    height: "4rem",
-                    marginTop: "1rem",
-                    borderRadius: "5rem",
-                    background: "#F28290",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    border: "none",
-                    marginLeft: "1rem",
+                    width: '4rem',
+                    height: '4rem',
+                    marginTop: '1rem',
+                    borderRadius: '5rem',
+                    background: '#F28290',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    border: 'none',
+                    marginLeft: '1rem'
                   }}
                 >
                   <FontAwesomeIcon
                     style={{
-                      color: "white",
-                      width: "2rem",
-                      height: "2rem",
+                      color: 'white',
+                      width: '2rem',
+                      height: '2rem'
                     }}
                     icon={faShare}
                   />
                 </Button>
                 <Button
                   style={{
-                    width: "4rem",
-                    height: "4rem",
-                    marginTop: "1rem",
-                    borderRadius: "5rem",
-                    background: "#F28290",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    border: "none",
-                    marginLeft: "1rem",
+                    width: '4rem',
+                    height: '4rem',
+                    marginTop: '1rem',
+                    borderRadius: '5rem',
+                    background: '#F28290',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    border: 'none',
+                    marginLeft: '1rem'
                   }}
                   type="button"
                   className={`button button-small ${
                     isItemOnBasket(product.id)
-                      ? "button-border button-border-gray"
-                      : ""
+                      ? 'button-border button-border-gray'
+                      : ''
                   }`}
                   onClick={handleAddToBasket}
                 >
                   <FontAwesomeIcon
                     style={{
-                      color: "white",
-                      width: "2rem",
-                      height: "2rem",
+                      color: 'white',
+                      width: '2rem',
+                      height: '2rem'
                     }}
                     icon={faCartShopping}
                   />
-                  {isItemOnBasket(product.id) ? "+" : ""}
+                  {isItemOnBasket(product.id) ? '+' : ''}
                 </Button>
               </div>
-              <div style={{ display: "flex", marginTop: "3rem" }}>
+              <div style={{ display: 'flex', marginTop: '3rem' }}>
                 <div
                   className="user-nav-img-wrapper"
-                  style={{ marginLeft: "0" }}
+                  style={{ marginLeft: '0' }}
                 >
                   <img alt="" className="user-nav-img" src={profile.avatar} />
                 </div>
-                <Form.Group style={{ marginLeft: "2rem" }}>
+                <Form.Group style={{ marginLeft: '2rem' }}>
                   <Form.Control
                     style={{
-                      height: "25rem",
-                      width: "50rem",
-                      borderRadius: "2rem",
-                      textAlign: "left",
-                      paddingLeft: "2rem",
-                      paddingBottom: "20rem",
+                      height: '25rem',
+                      width: '50rem',
+                      borderRadius: '2rem',
+                      textAlign: 'left',
+                      paddingLeft: '2rem',
+                      paddingBottom: '20rem'
                     }}
                     type="text"
                     placeholder="Поделитесь ваши личными
                     впечатлениями"
-                  ></Form.Control>
+                  />
                 </Form.Group>
               </div>
               {featuredProducts.some((fp) => fp.id === product.id) && (

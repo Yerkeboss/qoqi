@@ -34,14 +34,14 @@ const ProductList = (props) => {
   if (filteredProducts.length === 0 && !isLoading) {
     return (
       <MessageDisplay
-        message={requestStatus?.message || 'No products found.'}
+        message={requestStatus?.message || 'Работы не найдены'}
       />
     );
   }
   if (filteredProducts.length === 0 && requestStatus) {
     return (
       <MessageDisplay
-        message={requestStatus?.message || 'Something went wrong :('}
+        message={requestStatus?.message || 'Что-то пошло не так :('}
         action={fetchProducts}
         buttonLabel="Try Again"
       />

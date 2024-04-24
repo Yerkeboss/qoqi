@@ -9,5 +9,6 @@ export { default as useProduct } from './useProduct';
 export { default as useEvent } from './useEvent';
 export { default as useRecommendedProducts } from './useRecommendedProducts';
 export { default as useScrollTop } from './useScrollTop';
+export { default as useUserId } from './useUserId';
 
 

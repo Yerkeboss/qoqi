@@ -1,9 +1,9 @@
-import { Basket } from '@/components/basket';
-import { Footer, Navigation } from '@/components/common';
-import * as ROUTES from '@/constants/routes';
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
+import { Basket } from '@/components/basket';
+import { Footer, Navigation } from '@/components/common';
+import * as ROUTES from '@/constants/routes';
 import * as view from '@/views';
 import AdminRoute from './AdminRoute';
 import ClientRoute from './ClientRoute';
@@ -39,7 +39,7 @@ const AppRouter = () => (
           exact
           path={ROUTES.SHOP}
         />
-         <Route
+        <Route
           component={view.About}
           exact
           path={ROUTES.ABOUT}
@@ -49,7 +49,7 @@ const AppRouter = () => (
           exact
           path={ROUTES.EDUCATION}
         />
-         <Route
+        <Route
           component={view.Event}
           exact
           path={ROUTES.EVENTS}
@@ -128,7 +128,7 @@ const AppRouter = () => (
           component={view.EditProduct}
           path={`${ROUTES.EDIT_PRODUCT}/:id`}
         />
-         <AdminRoute
+        <AdminRoute
           component={view.Events}
           path={ROUTES.ADMIN_EVENTS}
         />

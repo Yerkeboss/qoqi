@@ -50,13 +50,15 @@ const CustomCreatableSelect = (props) => {
           menu: (provided) => ({
             ...provided,
             zIndex: 10
+
           }),
           container: (provided) => ({
             ...provided, marginBottom: '1.2rem'
           }),
           control: (provided) => ({
             ...provided,
-            border: touched && error ? '1px solid red' : '1px solid #cacaca'
+            border: touched && error ? '1px solid red' : '1px solid #cacaca',
+            borderRadius: '2rem'
           })
         }}
       />

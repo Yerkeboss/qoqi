@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { LoadingOutlined } from '@ant-design/icons';
 import {
-  Field, FieldArray, Form, Formik
+  Field, Form, Formik
 } from 'formik';
 import PropType from 'prop-types';
 import React, { useState, useEffect } from 'react';
@@ -10,13 +10,14 @@ import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Select } from 'antd';
-import { useFileHandler } from '@/hooks';
+import { useFileHandler, useUserId } from '@/hooks';
 import {
   CustomCreatableSelect,
   CustomInput,
   CustomTextarea
 } from '@/components/formik';
 import { ImageLoader } from '@/components/common';
+
 
 const { Option } = Select;
 // Default brand names that I used. You can use what you want
@@ -111,6 +112,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
   const [param, setParam] = useState(false);
   const [description, setDescription] = useState(false);
 
+  const userId = useUserId();
 
   const toggleParam = () => {
     setParam(true);
@@ -146,6 +148,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
     if (imageFile.image.file || product.imageUrl) {
       onSubmit({
         ...form,
+        userId,
         quantity: 1,
         // due to firebase function billing policy, let's add lowercase version
         // of name here instead in firebase functions
@@ -260,7 +263,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                         placeholder="Мона Лиза"
                         style={{
                           textTransform: 'capitalize',
-                          borderRadius: '5rem'
+                          borderRadius: '2rem'
                         }}
                         component={CustomInput}
                       />
@@ -278,7 +281,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                         disabled={isLoading}
                         placeholder="Выберите категорию"
                         label="* Категория"
-                        style={{ borderRadius: '5rem' }}
+                        style={{ borderRadius: '2rem' }}
                       />
                     </div>
                   </div>
@@ -291,7 +294,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                       id="description"
                       rows={3}
                       label="* Описание работы"
-                      style={{ borderRadius: '5rem' }}
+                      style={{ borderRadius: '2rem' }}
                       component={CustomTextarea}
                     />
                     <div className="d-flex">
@@ -321,7 +324,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                             name="price"
                             id="price"
                             type="number"
-                            style={{ borderRadius: '5rem' }}
+                            style={{ borderRadius: '2rem' }}
                             label="Цена"
                             component={CustomInput}
                           />

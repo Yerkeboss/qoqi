@@ -28,7 +28,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const [selectedBrand, setSelectedBrand] = useState('');
   const [activeButton, setActiveButton] = useState('');
-
   const [rect, setRect] = useState(false);
   const [pop, setPop] = useState(false);
   const [res, setRes] = useState(false);

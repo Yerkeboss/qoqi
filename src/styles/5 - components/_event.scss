@@ -74,7 +74,8 @@
   max-width: 100%;
   width: 90%;
   height: 100%;
-    border:none;
+  border: none;
+  /* Apply gradient to create shadow effect */
   // margin: auto;
   // animation: slide-up .3s ease;
 
@@ -88,7 +89,7 @@
 }
 
 .event-card:hover .event-card-content {
-  transform: translateY(-10px);
+  // transform: translateY(-10px);
 }
 
 .event-card:hover .event-card-button {
@@ -140,6 +141,20 @@
   background: #f6f6f6;
   // transition: all .4s ease-in-out;
 
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50%; /* Adjust height to cover 20% of the bottom side */
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 1),
+      transparent
+    ); /* Apply gradient to create shadow effect */
+  }
+
   @include mobile {
     height: 8rem;
   }
@@ -158,6 +173,7 @@
   bottom: 3rem;
   left: 2rem;
   max-width: 204px;
+  z-index: 9999;
   padding: 10px; /* Adjust padding as needed */
   color: white;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
