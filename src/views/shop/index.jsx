@@ -158,15 +158,23 @@ const Shop = () => {
               onClick={toggleArt}
               style={{
                 backgroundColor: art ? '#F28290' : 'white',
-                color: art ? 'white' : 'black',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
                 border: art ? 'none' : '1px solid black',
-                borderRadius: '12px',
+                borderRadius: '1vw',
                 marginLeft: '0.5rem',
                 width: '100%',
                 height: '4rem'
               }}
             >
-              Купить работу
+              <p style={{
+                color: art ? 'white' : 'black'
+
+              }}
+              >
+                Купить работу
+              </p>
             </Button>
             <Button
               onClick={toggleCreator}
@@ -174,13 +182,16 @@ const Shop = () => {
                 backgroundColor: creator ? '#F28290' : 'white',
                 color: creator ? 'white' : 'black',
                 border: creator ? 'none' : '1px solid black',
-                borderRadius: '12px',
+                borderRadius: '1vw',
                 marginLeft: '0.5rem',
                 width: '100%',
-                height: '4rem'
+                height: '4rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
               }}
             >
-              Найти креатора
+              <p style={{ color: creator ? 'white' : 'black' }}> Найти креатора</p>
             </Button>
             <Button
               onClick={toggleVac}
@@ -188,13 +199,17 @@ const Shop = () => {
                 backgroundColor: vac ? '#F28290' : 'white',
                 color: vac ? 'white' : 'black',
                 border: vac ? 'none' : '1px solid black',
-                borderRadius: '12px',
+                borderRadius: '1vw',
                 marginLeft: '0.5rem',
                 width: '100%',
-                height: '4rem'
+                height: '4rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
               }}
             >
-              Вакансии
+              <p style={{ color: vac ? 'white' : 'black' }}> Вакансии</p>
+
             </Button>
             <Button
               onClick={toggleOrder}
@@ -202,13 +217,17 @@ const Shop = () => {
                 backgroundColor: order ? '#F28290' : 'white',
                 color: order ? 'white' : 'black',
                 border: order ? 'none' : '1px solid black',
-                borderRadius: '12px',
+                borderRadius: '1vw',
                 marginLeft: '0.5rem',
                 width: '100%',
-                height: '4rem'
+                height: '4rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
               }}
             >
-              Разместить заказ
+              <p style={{ color: order ? 'white' : 'black' }}>            Разместить заказ</p>
+
             </Button>
             <Button
               onClick={toggleTender}
@@ -216,13 +235,16 @@ const Shop = () => {
                 backgroundColor: tender ? '#F28290' : 'white',
                 color: tender ? 'white' : 'black',
                 border: tender ? 'none' : '1px solid black',
-                borderRadius: '12px',
+                borderRadius: '1vw',
                 width: '100%',
                 height: '4rem',
-                marginLeft: '0.5rem'
+                marginLeft: '0.5rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
               }}
             >
-              Конкурсы/тендеры
+              <p style={{ color: tender ? 'white' : 'black' }}>Конкурсы/тендеры</p>
             </Button>
             <Button
               onClick={toggleCroud}
@@ -230,13 +252,16 @@ const Shop = () => {
                 backgroundColor: croud ? '#F28290' : 'white',
                 color: croud ? 'white' : 'black',
                 border: croud ? 'none' : '1px solid black',
-                borderRadius: '12px',
+                borderRadius: '1vw',
                 marginLeft: '0.5rem',
                 width: '100%',
-                height: '4rem'
+                height: '4rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
               }}
             >
-              Краудсорсинг
+              <p style={{ color: croud ? 'white' : 'black' }}>Краудсорсинг</p>
             </Button>
             <Button
               onClick={toggleCharity}
@@ -244,13 +269,16 @@ const Shop = () => {
                 backgroundColor: charity ? '#F28290' : 'white',
                 color: charity ? 'white' : 'black',
                 border: charity ? 'none' : '1px solid black',
-                borderRadius: '12px',
+                borderRadius: '1vw',
                 marginLeft: '0.5rem',
                 width: '100%',
-                height: '4rem'
+                height: '4rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
               }}
             >
-              Благотворительность
+              <p style={{ color: charity ? 'white' : 'black' }}>Благотворительность</p>
             </Button>
           </div>
           <div style={{

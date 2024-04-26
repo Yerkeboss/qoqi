@@ -441,6 +441,68 @@ class Firebase {
   editProduct = (id, updates) => this.db.collection('products').doc(id).update(updates);
 
   removeProduct = (id) => this.db.collection('products').doc(id).delete();
+
+  // Order
+
+  getSingleOrder = (id) => this.db.collection('orders').doc(id).get();
+
+  getOrders = (lastRefKey) => {
+    let didTimeout = false;
+
+    return new Promise((resolve, reject) => {
+      (async () => {
+        if (lastRefKey) {
+          try {
+            const query = this.db
+              .collection('orders')
+              .orderBy(app.firestore.FieldPath.documentId())
+              .startAfter(lastRefKey)
+              .limit(12);
+
+            const snapshot = await query.get();
+            const orders = [];
+            snapshot.forEach((doc) => orders.push({ id: doc.id, ...doc.data() }));
+            const lastKey = snapshot.docs[snapshot.docs.length - 1];
+
+            resolve({ orders, lastKey });
+          } catch (e) {
+            reject(e?.message || ':( Failed to fetch orders.');
+          }
+        } else {
+          const timeout = setTimeout(() => {
+            didTimeout = true;
+            reject(new Error('Request timeout, please try again'));
+          }, 15000);
+
+          try {
+            const totalQuery = await this.db.collection('orders').get();
+            const total = totalQuery.docs.length;
+            const query = this.db
+              .collection('orders')
+              .orderBy(app.firestore.FieldPath.documentId())
+              .limit(12);
+            const snapshot = await query.get();
+
+            clearTimeout(timeout);
+            if (!didTimeout) {
+              const orders = [];
+              snapshot.forEach((doc) => orders.push({ id: doc.id, ...doc.data() }));
+              const lastKey = snapshot.docs[snapshot.docs.length - 1];
+
+              resolve({ orders, lastKey, total });
+            }
+          } catch (e) {
+            if (didTimeout) return;
+            reject(e?.message || ':( Failed to fetch orders.');
+          }
+        }
+      })();
+    });
+  };
+
+  addOrder = (id, order) => this.db.collection('orders').doc(id).set(order);
+  generateKeyOrder = () => this.db.collection('orders').doc().id;
+
 }
 
 const firebaseInstance = new Firebase();

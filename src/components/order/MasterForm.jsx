@@ -1,187 +1,191 @@
-import React, { Component } from "react";
+import React, { Component, useState } from 'react';
 import {
   Form,
-  Button,
   Card,
-  CardHeader,
   CardBody,
   CardTitle,
-  CardText,
-  CardFooter,
-} from "reactstrap";
+  CardFooter, Button
+} from 'reactstrap';
+import Step1 from './Step1';
+import Step2 from './Step2';
+import Step3 from './Step3';
+import 'firebase/firestore';
+import MultiStepProgressBar from './MultiStepProgressBar';
+import firebase from '../../services/firebase';
+import { useUserId } from '@/hooks';
+import Modal from '../common/Modal';
 
-import Step1 from "./Step1";
-import Step2 from "./Step2";
-import Step3 from "./Step3";
-// import Step4 from "./Step4";
-// import Step5 from "./Step5";
 
-import MultiStepProgressBar from "./MultiStepProgressBar";
+const MasterForm = () => {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [selectedSpecialist, setSelectedSpecialist] = useState('');
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [inputText, setInputText] = useState(''); // State to track input text
+  const [enteredTexts, setEnteredTexts] = useState([]); // State to store entered texts
+  const [duration, setDuration] = useState('');
+  const [budgetType, setBudgetType] = useState('');
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
+  const userId = useUserId();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [anotherOption, setAnotherOption] = useState(false);
 
-class MasterForm extends Component {
-  constructor(props) {
-    super(props);
 
-    // Set the initial input values
-    this.state = {
-      currentStep: 1,
-      email: "",
-      username: "",
-      password: "",
-    };
-
-    // Bind the submission to handleChange()
-    this.handleChange = this.handleChange.bind(this);
-
-    // Bind new functions for next and previous
-    this._next = this._next.bind(this);
-    this._prev = this._prev.bind(this);
-  }
-
-  // Use the submitted data to set the state
-  handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  // Trigger an alert on form submission
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const { email, username, password } = this.state;
-    // alert(`Успешно`);
+  // Function to go to the next step
+  const _next = () => {
+    setCurrentStep(currentStep + 1);
   };
 
-  // Move to the next step
-  _next() {
-    let currentStep = this.state.currentStep;
-    this.setState({
-      currentStep: currentStep + 1,
-    });
-  }
+  // Function to go to the previous step
+  const _prev = () => {
+    setCurrentStep(currentStep - 1);
+  };
 
-  // Move to the previous step
-  _prev() {
-    let currentStep = this.state.currentStep;
-    this.setState({
-      currentStep: currentStep - 1,
-    });
-  }
+  // Function to handle specialist change
+  const handleSpecialist = (value) => {
+    setSelectedSpecialist(value);
+  };
 
-  // Render the previous button
-  previousButton() {
-    if (this.state.currentStep !== 1) {
-      return (
-        <Button
-          style={{
-            color: "#F28290",
-            background: "white",
-            border: "1px solid #F28290",
-            height: "5rem",
-            borderRadius: "5rem",
-            marginLeft: "7rem",
-            position: "absolute",
-            top: "14rem",
-            left: "60rem",
-            width:"10rem"
-          }}
-          onClick={this._prev}
-        >
-          Назад
-        </Button>
-      );
+  const handleDuration = (value) => {
+    setDuration(value);
+  };
+
+  const handleBudgetType = (value) => {
+    setBudgetType(value);
+  };
+
+  const handleMoney = (e) => {
+    const { name, value } = e.target;
+    if (name === 'from') {
+      setFrom(value);
+    } else if (name === 'to') {
+      setTo(value);
     }
-    return null;
-  }
+  };
 
-  // Render the next button
-  nextButton() {
-    if (this.state.currentStep < 3) {
-      return (
-        <Button
-          onClick={this._next}
-          style={{
-            color: "white",
-            background: "#F28290",
-            border: "none",
-            height: "5rem",
-            borderRadius: "5rem",
-            marginLeft: "7rem",
-            position: "absolute",
-            top: "14rem",
-            left: "72rem",
-            width:"17rem"
-          }}
-        >
-          Следующий шаг
-        </Button>
-      );
+  // Function to handle input change for step 2
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'name') {
+      setName(value);
+    } else if (name === 'address') {
+      setAddress(value);
     }
-    return null;
-  }
+  };
 
-  // Render the submit button
-  submitButton() {
-    if (this.state.currentStep === 3) {
-      return (
-        <Button
-          style={{
-            color: "white",
-            background: "#F28290",
-            border: "none",
-            height: "5rem",
-            borderRadius: "5rem",
-            marginLeft: "7rem",
-            position: "absolute",
-            top: "14rem",
-            left: "72rem",
-            width:"23rem"
-          }}
-          type="submit"
-        >
-          Опубликовать вакансию
-        </Button>
-      );
+  const handleChange = (e) => {
+    setInputText(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      // Add the entered text to the list
+      setEnteredTexts([...enteredTexts, inputText]);
+      setInputText(''); // Clear the input field
     }
-    return null;
-  }
+  };
 
-  render() {
-    return (
-      <Form onSubmit={this.handleSubmit}>
-        <Card>
-          {/* <CardHeader>Create an Account</CardHeader> */}
-          <CardBody>
-            <CardTitle>
-              <MultiStepProgressBar currentStep={this.state.currentStep} />
-            </CardTitle>
-            {/* <CardText /> */}
-            <Step1
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-              email={this.state.email}
-            ></Step1>
-            <Step2
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-              username={this.state.username}
-            ></Step2>
-            <Step3
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-              password={this.state.password}
-            />
+  const toggleModal = () => {
+    setModalIsOpen(!modalIsOpen);
+  };
 
-            {this.previousButton()}
-            {this.nextButton()}
-            {this.submitButton()}
-          </CardBody>
-          <CardFooter></CardFooter>
-        </Card>
-      </Form>
-    );
-  }
-}
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      // Formulate the order object
+      const order = {
+        selectedSpecialist, name, address, enteredTexts, duration, budgetType, from, to, userId
+      };
+
+      // Add order to Firestore
+      await firebase.db.collection('orders').add(order);
+      toggleModal();
+      setCurrentStep(1);
+      setAnotherOption(false);
+    } catch (error) {
+      console.error('Error adding document: ', error);
+    }
+  };
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Card>
+        <CardBody style={{
+          display: 'flex', justifyContent: 'center', alignItems: 'center'
+        }}
+        >
+          <CardTitle>
+            <MultiStepProgressBar currentStep={currentStep} />
+          </CardTitle>
+
+          <Step1
+            currentStep={currentStep}
+            _next={_next}
+            handleSpecialist={handleSpecialist}
+            selectedSpecialist={selectedSpecialist}
+            anotherOption={anotherOption}
+            setAnotherOption={setAnotherOption}
+          />
+          <Step2
+            currentStep={currentStep}
+            handleInputChange={handleInputChange}
+            _prev={_prev}
+            _next={_next}
+            name={name}
+            address={address}
+            inputText={inputText}
+            enteredTexts={enteredTexts}
+            handleChange={handleChange}
+            handleKeyPress={handleKeyPress}
+            setAddress={setAddress}
+          />
+          <Step3
+            currentStep={currentStep}
+            _prev={_prev}
+            duration={duration}
+            budgetType={budgetType}
+            setBudgetType={setBudgetType}
+            from={from}
+            to={to}
+            handleDuration={handleDuration}
+            handleBudgetType={handleBudgetType}
+            handleMoney={handleMoney}
+          />
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            afterOpenModal={() => {}}
+          >
+            <p>Заказ успешно добавлен</p>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <Button
+                onClick={closeModal}
+                style={{
+                  background: '#F28290',
+                  border: 'none',
+                  height: '4vw',
+                  borderRadius: '1vw',
+                  width: '10vw'
+
+                }}
+              >
+                <p style={{ color: 'white', fontSize: '1vw', textTransform: 'none' }}>OK</p>
+              </Button>
+            </div>
+          </Modal>
+        </CardBody>
+        <CardFooter />
+      </Card>
+    </Form>
+  );
+};
 
 export default MasterForm;
+
