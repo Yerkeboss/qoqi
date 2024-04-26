@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import firebase from '@/services/firebase';
 
-const useUser = (id) => {
+const useOrder = (id) => {
   // get and check if product exists in store
-  const storeUser = useSelector((state) => state.users.items ? state.users.items.find((item) => item.id === id) : null);
-  const [user, setUser] = useState(storeUser);
+  const storeJobs = useSelector((state) => state.jobs); // Get the entire jobs state
+  const storeJob = storeJobs ? storeJobs.items.find((item) => item.id === id) : null;
+  const [job, setJob] = useState(storeJob);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const didMount = useDidMount(true);
@@ -14,19 +15,19 @@ const useUser = (id) => {
   useEffect(() => {
     (async () => {
       try {
-        if (!user || user.id !== id) {
+        if (!job || job.id !== id) {
           setLoading(true);
-          const doc = await firebase.getUser(id);
+          const doc = await firebase.getSingleOrder(id);
 
           if (doc.exists) {
             const data = { ...doc.data(), id: doc.ref.id };
 
             if (didMount) {
-              setUser(data);
+              setJob(data);
               setLoading(false);
             }
           } else {
-            setError('User not found.');
+            setError('Order not found.');
           }
         }
       } catch (err) {
@@ -38,7 +39,7 @@ const useUser = (id) => {
     })();
   }, [id]);
 
-  return { user, isLoading, error };
+  return { job, isLoading, error };
 };
 
-export default useUser;
+export default useOrder;

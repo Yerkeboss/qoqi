@@ -29,3 +29,4 @@ export const CHECKOUT_STEP_3 = '/checkout/step3';
 export const VIEW_PRODUCT = '/product/:id';
 export const VIEW_EVENT = '/event/:id';
 export const VIEW_USER = '/user/:id';
+export const VIEW_ORDER = '/job/:id';

@@ -111,6 +111,119 @@ const About = () => {
         </div>
         {showInfo && (
           <div>
+            <div style={{ display: 'flex', marginTop: '1vw' }}>
+              <div
+                style={{
+                  flex: 1,
+                  border: '1px solid #F28290',
+                  backgroundColor: '#F28290',
+                  borderRadius: '20px'
+
+                  // height: "30rem",
+                }}
+              >
+                <div
+                  style={{
+                    backgroundColor: '#FFFBFB',
+                    width: '10rem',
+                    borderRadius: '15px',
+                    marginLeft: '2rem',
+                    height: '3rem',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}
+                >
+                  <p
+                    style={{
+                      color: '#F28290',
+                      marginLeft: '1rem',
+                      fontFamily: 'Inter',
+                      fontWeight: '500'
+                    }}
+                  >
+                    Описание
+                  </p>
+                  <p
+                    style={{
+                      color: 'white',
+                      width: '60rem',
+                      marginTop: '13rem',
+                      fontFamily: 'Inter',
+                      fontWeight: '500'
+                    }}
+                  >
+                    ACDSSS (Ассоциация креативного развития социальных и
+                    спортивных пространств) – это некоммерческая
+                    организация, Целью которой является создание новых точек
+                    притяжения в виде креативных арт-пространств и устойчивого
+                    образования
+                  </p>
+                </div>
+              </div>
+              <div
+                style={{
+                  flex: 1,
+                  // border: "1px solid #F28290",
+                  // borderRadius: "20px",
+                  marginLeft: '2rem'
+
+                }}
+              >
+                <Image
+                  src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/images%2Fpexels-fauxels-3184418.jpg?alt=media&token=8077d9e9-821e-4edc-a20c-f532dc50e807"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '2rem'
+                  }}
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                border: '1px solid #F28290',
+                backgroundColor: '#F282904D',
+                height: '18rem',
+                borderRadius: '20px',
+                marginTop: '1rem'
+              }}
+            >
+              <div
+                style={{
+                  backgroundColor: '#F28290',
+                  width: '10rem',
+                  borderRadius: '15px',
+                  marginLeft: '2rem',
+                  height: '3rem',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <p
+                  style={{
+                    color: 'white',
+                    marginLeft: '3rem',
+                    fontFamily: 'Inter',
+                    fontWeight: '500'
+                  }}
+                >
+                  QOQI
+                </p>
+                <p
+                  style={{
+                    color: '#F28290',
+                    width: '70rem',
+                    marginTop: '3rem',
+                    fontFamily: 'Inter',
+                    fontWeight: '500'
+                  }}
+                >
+                  QOQI Project – это креативный проект в рамках которого
+                  работает Арт-пространство на базе Музея энергии будущего NUR
+                  ALEM со следующими активностями:
+                </p>
+              </div>
+            </div>
             <div
               style={{ display: 'flex', marginTop: '1rem', height: '100%' }}
             >
@@ -307,119 +420,6 @@ const About = () => {
                   }}
                 >
                   Проведение соревнований по киберспорту
-                </p>
-              </div>
-            </div>
-            <div style={{ display: 'flex', marginTop: '2rem' }}>
-              <div
-                style={{
-                  flex: 1,
-                  border: '1px solid #F28290',
-                  backgroundColor: '#F28290',
-                  borderRadius: '20px'
-
-                  // height: "30rem",
-                }}
-              >
-                <div
-                  style={{
-                    backgroundColor: '#FFFBFB',
-                    width: '10rem',
-                    borderRadius: '15px',
-                    marginLeft: '2rem',
-                    height: '3rem',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }}
-                >
-                  <p
-                    style={{
-                      color: '#F28290',
-                      marginLeft: '1rem',
-                      fontFamily: 'Inter',
-                      fontWeight: '500'
-                    }}
-                  >
-                    Описание
-                  </p>
-                  <p
-                    style={{
-                      color: 'white',
-                      width: '60rem',
-                      marginTop: '13rem',
-                      fontFamily: 'Inter',
-                      fontWeight: '500'
-                    }}
-                  >
-                    ACDSSS (Ассоциация креативного развития социальных и
-                    спортивных пространств) – это некоммерческая
-                    организация, Целью которой является создание новых точек
-                    притяжения в виде креативных арт-пространств и устойчивого
-                    образования
-                  </p>
-                </div>
-              </div>
-              <div
-                style={{
-                  flex: 1,
-                  // border: "1px solid #F28290",
-                  // borderRadius: "20px",
-                  marginLeft: '2rem'
-
-                }}
-              >
-                <Image
-                  src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/images%2Fpexels-fauxels-3184418.jpg?alt=media&token=8077d9e9-821e-4edc-a20c-f532dc50e807"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '2rem'
-                  }}
-                />
-              </div>
-            </div>
-            <div
-              style={{
-                border: '1px solid #F28290',
-                backgroundColor: '#F282904D',
-                height: '18rem',
-                borderRadius: '20px',
-                marginTop: '1rem'
-              }}
-            >
-              <div
-                style={{
-                  backgroundColor: '#F28290',
-                  width: '10rem',
-                  borderRadius: '15px',
-                  marginLeft: '2rem',
-                  height: '3rem',
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}
-              >
-                <p
-                  style={{
-                    color: 'white',
-                    marginLeft: '3rem',
-                    fontFamily: 'Inter',
-                    fontWeight: '500'
-                  }}
-                >
-                  QOQI
-                </p>
-                <p
-                  style={{
-                    color: '#F28290',
-                    width: '70rem',
-                    marginTop: '3rem',
-                    fontFamily: 'Inter',
-                    fontWeight: '500'
-                  }}
-                >
-                  QOQI Project – это креативный проект в рамках которого
-                  работает Арт-пространство на базе Музея энергии будущего NUR
-                  ALEM со следующими активностями:
                 </p>
               </div>
             </div>

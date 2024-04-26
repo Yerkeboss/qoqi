@@ -1,357 +1,179 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { useHistory } from 'react-router-dom';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
-const Vacancies = () => (
-  <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2" height={300}>
-    <div>
-      <Card
-        style={{
-          border: '1px solid black',
-          backgroundColor: 'white',
-          height: '100%',
-          borderRadius: '20px',
-          padding: '1rem',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          marginLeft: '2rem',
-          marginTop: '2rem'
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <p
-            style={{
-              color: 'black',
-              fontFamily: 'Inter',
-              fontWeight: '500',
-              marginLeft: '4rem'
-            }}
-          >
-            Название
-          </p>
-          <p
-            style={{
-              color: 'black',
-              fontFamily: 'Inter',
-              fontWeight: '500',
-              marginRight: '2rem'
-            }}
-          >
-            Кандидаты
-          </p>
-          <p
-            style={{
-              color: 'white',
-              fontFamily: 'Inter',
-              fontWeight: '500',
-              marginRight: '20rem'
-            }}
-          >
-            Описание
-          </p>
-        </div>
-        <div
+const Vacancies = () => {
+  const history = useHistory();
+  const [jobs, setJobs] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchVacancies = async () => {
+      const vacanciesCollection = await firebase.firestore().collection('orders').get();
+      const vacanciesData = vacanciesCollection.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setJobs(vacanciesData);
+    };
+
+    fetchVacancies();
+  }, []);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const usersCollection = await firebase.firestore().collection('users').get();
+      const usersData = usersCollection.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setUsers(usersData);
+    };
+
+    fetchUsers();
+  }, []);
+
+  const getUserAvatar = (userId) => {
+    const user = users.find((user) => user.id === userId);
+    return user ? user.avatar : ''; // Return the avatar if user is found, otherwise return an empty string
+  };
+
+  const getUserId = (userId) => {
+    const user = users.find((user) => user.id === userId);
+    return user ? user.id : '';
+  }
+
+
+  const onClickJob = (jobId) => {
+    history.push(`/job/${jobId}`);
+  };
+
+  const onClickUser = (userId) => {
+    history.push(`/user/${userId}`);
+  };
+
+  return (
+    <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2" height={300} style = {{overflowY:'scroll', overflowX:'hidden'}}>
+      <div>
+        <Card
           style={{
+            border: '1px solid black',
+            backgroundColor: 'white',
+            height: '100%',
+            borderRadius: '2vw',
+            padding: '1rem',
             display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'space-between',
-            flexDirection: 'column'
+            marginLeft: '2rem',
+            marginTop: '2rem'
           }}
         >
-          <Card
+          <div style={{ display: 'flex', justifyContent: 'space-between', width: '47vw' }}>
+            <p
+              style={{
+                color: 'black',
+                fontFamily: 'Inter',
+                fontWeight: '500',
+                marginLeft: '4rem'
+              }}
+            >
+              Название
+            </p>
+            <p
+              style={{
+                color: 'black',
+                fontFamily: 'Inter',
+                fontWeight: '500',
+                marginRight: '2rem'
+              }}
+            >
+              Заказчики
+            </p>
+          </div>
+          <div
             style={{
-              flex: 1,
-              marginRight: '1rem',
-              border: '1px solid black',
-              borderRadius: '20px',
-              height: '100%'
+              display: 'flex',
+              justifyContent: 'space-between',
+              flexDirection: 'column'
             }}
           >
-            {' '}
-            {/* First card */}
-            <Card.Body>
-              <div
+            {jobs?.map((job) => (
+              <Card
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  marginTop: '3rem'
+                  flex: 1,
+                  marginRight: '1rem',
+                  border: '1px solid black',
+                  borderRadius: '2vw',
+                  height: '100%', 
+                  marginTop:'1vw'
                 }}
+                key={job?.id}
               >
-                <Card.Title
-                  style={{
-                    color: 'black',
-                    fontFamily: 'Inter',
-                    fontWeight: '500',
-                    marginLeft: '4rem',
-                    width: '20rem'
-                  }}
-                >
-                  Видеооператор
-                  <Card.Text style={{ fontSize: '2rem' }}>
-                    250 000 - 350 000
-                  </Card.Text>
-                  <Card.Text style={{ fontSize: '1.2rem' }}>
-                    Опыт от 1 года до 3 лет | Алматы
-                  </Card.Text>
-                </Card.Title>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <Image
-                    src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/images%2FFrame%2032.png?alt=media&token=cadf5462-02f0-4210-806c-516428424d70"
+                {' '}
+                {/* First card */}
+                <Card.Body>
+                  <div
                     style={{
-                      marginLeft: '10rem',
-                      width: '10%',
-                      height: '30%'
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      marginTop:'1vw',
+                      width:'49vw'
                     }}
-                  />
-                  <Image
-                    src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/images%2FFrame%2033.png?alt=media&token=5b21cbe4-2548-4ae2-982b-81e0113e4760"
-                    style={{
-                      marginLeft: '1rem',
-                      width: '10%',
-                      height: '30%'
-                    }}
-                  />
-                  <Image
-                    src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/images%2FFrame%2034.png?alt=media&token=4eb0dbe1-c38d-4f8e-a6b9-b0fabee35675"
-                    style={{
-                      marginLeft: '1rem',
-                      width: '10%',
-                      height: '30%'
-                    }}
-                  />
-                  <h1 style={{ marginTop: '3rem', marginLeft: '1rem' }}>+3</h1>
-
-                </div>
-
-                <Card.Title
-                  style={{
-                    width: '20rem',
-                    color: 'white',
-                    fontFamily: 'Inter',
-                    fontWeight: '500',
-                    marginRight: '7rem'
-                  }}
-                >
-                  Погружение в мир креативного мышления и инноваций.
-                  Практические инструменты для стимулирования творческого
-                  потенциала.
-                </Card.Title>
-              </div>
-              <div style={{ display: 'flex', marginBottom: '4rem' }}>
-                <Button
-                  style={{
-                    backgroundColor: '#F28290',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '12px',
-                    marginLeft: '4rem',
-                    width: '12rem',
-                    height: '4rem'
-                  }}
-                >
-                  Откликнуться
-                </Button>
-              </div>
-            </Card.Body>
-          </Card>
-          <Card
-            style={{
-              flex: 1,
-              marginRight: '1rem',
-              border: '1px solid black',
-              borderRadius: '20px',
-              height: '100%',
-              marginTop: '2rem'
-            }}
-          >
-            {' '}
-            {/* First card */}
-            <Card.Body>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  marginTop: '3rem'
-                }}
-              >
-                <Card.Title
-                  style={{
-                    color: 'black',
-                    fontFamily: 'Inter',
-                    fontWeight: '500',
-                    marginLeft: '4rem',
-                    width: '20rem'
-                  }}
-                >
-                  Видеооператор
-                  <Card.Text style={{ fontSize: '2rem' }}>
-                    250 000 - 350 000
-                  </Card.Text>
-                  <Card.Text style={{ fontSize: '1.2rem' }}>
-                    Опыт от 1 года до 3 лет | Алматы
-                  </Card.Text>
-                </Card.Title>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <Image
-                    src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/images%2FFrame%2032.png?alt=media&token=cadf5462-02f0-4210-806c-516428424d70"
-                    style={{
-                      marginLeft: '10rem',
-                      width: '10%',
-                      height: '30%'
-                    }}
-                  />
-                  <Image
-                    src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/images%2FFrame%2033.png?alt=media&token=5b21cbe4-2548-4ae2-982b-81e0113e4760"
-                    style={{
-                      marginLeft: '1rem',
-                      width: '10%',
-                      height: '30%'
-                    }}
-                  />
-                  <Image
-                    src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/images%2FFrame%2034.png?alt=media&token=4eb0dbe1-c38d-4f8e-a6b9-b0fabee35675"
-                    style={{
-                      marginLeft: '1rem',
-                      width: '10%',
-                      height: '30%'
-                    }}
-                  />
-                  <h1 style={{ marginTop: '3rem', marginLeft: '1rem' }}>+3</h1>
-
-                </div>
-                <Card.Title
-                  style={{
-                    width: '20rem',
-                    color: 'white',
-                    fontFamily: 'Inter',
-                    fontWeight: '500',
-                    marginRight: '7rem'
-                  }}
-                >
-                  Погружение в мир креативного мышления и инноваций.
-                  Практические инструменты для стимулирования творческого
-                  потенциала.
-                </Card.Title>
-              </div>
-              <div style={{ display: 'flex', marginBottom: '4rem' }}>
-                <Button
-                  style={{
-                    backgroundColor: '#F28290',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '12px',
-                    marginLeft: '4rem',
-                    width: '12rem',
-                    height: '4rem'
-                  }}
-                >
-                  Откликнуться
-                </Button>
-              </div>
-            </Card.Body>
-          </Card>
-          <Card
-            style={{
-              flex: 1,
-              marginRight: '1rem',
-              border: '1px solid black',
-              borderRadius: '20px',
-              height: '100%',
-              marginTop: '2rem'
-            }}
-          >
-            {' '}
-            {/* First card */}
-            <Card.Body>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  marginTop: '3rem'
-                }}
-              >
-                <Card.Title
-                  style={{
-                    color: 'black',
-                    fontFamily: 'Inter',
-                    fontWeight: '500',
-                    marginLeft: '4rem',
-                    width: '20rem'
-                  }}
-                >
-                  Видеооператор
-                  <Card.Text style={{ fontSize: '2rem' }}>
-                    250 000 - 350 000
-                  </Card.Text>
-                  <Card.Text style={{ fontSize: '1.2rem' }}>
-                    Опыт от 1 года до 3 лет | Алматы
-                  </Card.Text>
-                </Card.Title>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <Image
-                    src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/images%2FFrame%2032.png?alt=media&token=cadf5462-02f0-4210-806c-516428424d70"
-                    style={{
-                      marginLeft: '10rem',
-                      width: '10%',
-                      height: '30%'
-                    }}
-                  />
-                  <Image
-                    src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/images%2FFrame%2033.png?alt=media&token=5b21cbe4-2548-4ae2-982b-81e0113e4760"
-                    style={{
-                      marginLeft: '1rem',
-                      width: '10%',
-                      height: '30%'
-                    }}
-                  />
-                  <Image
-                    src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/images%2FFrame%2034.png?alt=media&token=4eb0dbe1-c38d-4f8e-a6b9-b0fabee35675"
-                    style={{
-                      marginLeft: '1rem',
-                      width: '10%',
-                      height: '30%'
-                    }}
-                  />
-                  <h1 style={{ marginTop: '3rem', marginLeft: '1rem' }}>+3</h1>
-
-                </div>
-                <Card.Title
-                  style={{
-                    width: '20rem',
-                    color: 'white',
-                    fontFamily: 'Inter',
-                    fontWeight: '500',
-                    marginRight: '7rem'
-                  }}
-                >
-                  Погружение в мир креативного мышления и инноваций.
-                  Практические инструменты для стимулирования творческого
-                  потенциала.
-                </Card.Title>
-              </div>
-              <div style={{ display: 'flex', marginBottom: '4rem' }}>
-                <Button
-                  style={{
-                    backgroundColor: '#F28290',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '12px',
-                    marginLeft: '4rem',
-                    width: '12rem',
-                    height: '4rem'
-                  }}
-                >
-                  Откликнуться
-                </Button>
-              </div>
-            </Card.Body>
-          </Card>
-        </div>
-      </Card>
-    </div>
-  </SkeletonTheme>
-);
+                  >
+                    <Card.Title
+                      style={{
+                        color: 'black',
+                        fontFamily: 'Inter',
+                        fontWeight: '500',
+                        marginLeft: '2.6vw',
+                        width: '18vw'
+                      }}
+                    >
+                      <Card.Text style={{ fontSize: '1.2vw' }} onClick ={()=>onClickJob(job.id)} >{job?.selectedSpecialist}</Card.Text>
+                      <Card.Text style={{ fontSize: '1.8vw', marginTop:'0vw' }}>
+                       {`${job?.from} - ${job?.to}`} 
+                      </Card.Text>
+                      <Card.Text style={{ fontSize: '1.2rem', width:'100%', marginTop:'-1vw' }}>
+                        {`${job?.duration} | ${job?.address}`} 
+                      </Card.Text>
+                    </Card.Title>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent:'center', marginTop:'0.8vw', marginBottom:'0.8vw' }} onClick={() => onClickUser(getUserId(job.userId))}>
+                      <Image
+                      src={getUserAvatar(job.userId)}
+                        style={{
+                          width: '12vw',
+                          height: '12vw'
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', marginBottom: '2vw', marginTop:'-4vw' }}>
+                    <Button
+                      style={{
+                        backgroundColor: '#F28290',
+                        border: 'none',
+                        borderRadius: '1vw',
+                        marginLeft: '2.6vw',
+                        width: 'fit-content',
+                        height: '4rem',
+                        display:'flex',
+                        justifyContent:'center',
+                        alignItems:'center', 
+                        paddingLeft:'1vw',
+                        paddingRight:'1vw'
+                      }}
+                    >
+                      <p style = {{color: 'white',}}>Откликнуться</p>
+                    </Button>
+                  </div>
+                </Card.Body>
+              </Card>
+            ))}
+          </div>
+        </Card>
+      </div>
+    </SkeletonTheme>
+  );
+};
 
 export default Vacancies;
