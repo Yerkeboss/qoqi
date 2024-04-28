@@ -28,4 +28,5 @@ export { default as ViewEvent } from './view_event';
 export { default as ViewUser } from './view_user';
 export { default as Account } from './view_user/Account';
 export { default as ViewOrder } from './view_order';
+export { default as ViewTender } from './view_tender';
 

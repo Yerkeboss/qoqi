@@ -6,6 +6,8 @@ import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTengeSign } from '@fortawesome/free-solid-svg-icons';
 
 const Vacancies = () => {
   const history = useHistory();
@@ -131,7 +133,12 @@ const Vacancies = () => {
                     >
                       <Card.Text style={{ fontSize: '1.2vw' }} onClick ={()=>onClickJob(job.id)} >{job?.selectedSpecialist}</Card.Text>
                       <Card.Text style={{ fontSize: '1.8vw', marginTop:'0vw' }}>
-                       {`${job?.from} - ${job?.to}`} 
+                      {`${job?.from}`}
+                        {' '}
+                        <FontAwesomeIcon icon={faTengeSign} />
+                        { `  -  ${job?.to}`}
+                        {' '}
+                        <FontAwesomeIcon icon={faTengeSign} />
                       </Card.Text>
                       <Card.Text style={{ fontSize: '1.2rem', width:'100%', marginTop:'-1vw' }}>
                         {`${job?.duration} | ${job?.address}`} 

@@ -503,6 +503,9 @@ class Firebase {
   addOrder = (id, order) => this.db.collection('orders').doc(id).set(order);
   generateKeyOrder = () => this.db.collection('orders').doc().id;
 
+  // Tender
+
+  getSingleTender = (id) => this.db.collection('tenders').doc(id).get();
 }
 
 const firebaseInstance = new Firebase();

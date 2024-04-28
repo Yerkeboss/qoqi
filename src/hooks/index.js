@@ -12,3 +12,4 @@ export { default as useScrollTop } from './useScrollTop';
 export { default as useUserId } from './useUserId';
 export { default as useUser } from './useUser';
 export { default as useOrder } from './useOrder';
+export { default as useTender } from './useTender';

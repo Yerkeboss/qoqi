@@ -30,3 +30,4 @@ export const VIEW_PRODUCT = '/product/:id';
 export const VIEW_EVENT = '/event/:id';
 export const VIEW_USER = '/user/:id';
 export const VIEW_ORDER = '/job/:id';
+export const VIEW_TENDER = '/tender/:id';

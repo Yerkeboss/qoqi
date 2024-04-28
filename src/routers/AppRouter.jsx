@@ -93,6 +93,10 @@ const AppRouter = () => (
           component={view.ViewOrder}
           path={ROUTES.VIEW_ORDER}
         />
+        <Route
+          component={view.ViewTender}
+          path={ROUTES.VIEW_TENDER}
+        />
         <ClientRoute
           component={view.UserAccount}
           exact
