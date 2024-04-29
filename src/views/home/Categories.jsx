@@ -301,7 +301,7 @@ const Categories = ({
             marginLeft: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'
           }}
         >
-          <FormControl fullWidth>
+          <FormControl fullWidth sx={{ borderRadius: '10px !important' }}>
             <Select
               displayEmpty
               value=""
@@ -309,12 +309,25 @@ const Categories = ({
               onChange={(event) => handleBrandSelect(event.target.value)}
               MenuProps={MenuProps}
               inputProps={{ 'aria-label': 'Without label' }}
-              style={{ border: 'none' }}
+              style={{ border: 'none', borderRadius: '2vw' }}
             >
-              <MenuItem value="" className="select-text">
+              <MenuItem
+                value=""
+                className="select-text"
+                sx={{
+                  '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                  '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                }}
+              >
                 <p className="select-text">Киберспорт</p>
               </MenuItem>
-              <MenuItem value="стримы">
+              <MenuItem
+                value="стримы"
+                sx={{
+                  '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                  '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                }}
+              >
                 <p
                   className={
           activeButton === 'стримы' ? 'select-text-active' : 'select-text'
@@ -323,7 +336,13 @@ const Categories = ({
                   Стримы
                 </p>
               </MenuItem>
-              <MenuItem value="полезные лайфхаки в игре">
+              <MenuItem
+                value="полезные лайфхаки в игре"
+                sx={{
+                  '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                  '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                }}
+              >
                 {' '}
                 <p
                   className={
@@ -333,7 +352,13 @@ const Categories = ({
                   Полезные лайфхаки в игре
                 </p>
               </MenuItem>
-              <MenuItem value="новости из игр">
+              <MenuItem
+                value="новости из игр"
+                sx={{
+                  '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                  '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                }}
+              >
                 {' '}
                 <p
                   className={
@@ -343,7 +368,13 @@ const Categories = ({
                   Новости из игр
                 </p>
               </MenuItem>
-              <MenuItem value="блоги">
+              <MenuItem
+                value="блоги"
+                sx={{
+                  '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                  '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                }}
+              >
                 <p
                   className={
           activeButton === 'блоги' ? 'select-text-active' : 'select-text'
@@ -364,7 +395,7 @@ const Categories = ({
               marginLeft: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'
             }}
           >
-            <FormControl fullWidth>
+            <FormControl fullWidth sx={{ borderRadius: '10px !important' }}>
               <Select
                 displayEmpty
                 value={selectedBrand}
@@ -372,12 +403,25 @@ const Categories = ({
                 onChange={(event) => handleBrandSelect(event.target.value)}
                 MenuProps={MenuProps}
                 inputProps={{ 'aria-label': 'Without label' }}
-                style={{ border: 'none' }}
+                style={{ border: 'none', borderRadius: '2vw'  }}
               >
-                <MenuItem value="" className="select-text">
+                <MenuItem
+                  value=""
+                  className="select-text"
+                  sx={{
+                    '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                    '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                  }}
+                >
                   <p className="select-text">Киберспорт</p>
                 </MenuItem>
-                <MenuItem value="стримы">
+                <MenuItem
+                  value="стримы"
+                  sx={{
+                    '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                    '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                  }}
+                >
                   <p
                     className={
           activeButton === 'стримы' ? 'select-text-active' : 'select-text'
@@ -386,7 +430,13 @@ const Categories = ({
                     Стримы
                   </p>
                 </MenuItem>
-                <MenuItem value="полезные лайфхаки в игре">
+                <MenuItem
+                  value="полезные лайфхаки в игре"
+                  sx={{
+                    '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                    '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                  }}
+                >
                   {' '}
                   <p
                     className={
@@ -396,7 +446,13 @@ const Categories = ({
                     Полезные лайфхаки в игре
                   </p>
                 </MenuItem>
-                <MenuItem value="новости из игр">
+                <MenuItem
+                  value="новости из игр"
+                  sx={{
+                    '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                    '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                  }}
+                >
                   {' '}
                   <p
                     className={
@@ -406,7 +462,13 @@ const Categories = ({
                     Новости из игр
                   </p>
                 </MenuItem>
-                <MenuItem value="блоги">
+                <MenuItem
+                  value="блоги"
+                  sx={{
+                    '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                    '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                  }}
+                >
                   <p
                     className={
           activeButton === 'блоги' ? 'select-text-active' : 'select-text'
@@ -439,10 +501,23 @@ const Categories = ({
               inputProps={{ 'aria-label': 'Without label' }}
               style={{ border: 'none' }}
             >
-              <MenuItem value="" className="select-text">
+              <MenuItem
+                value=""
+                className="select-text"
+                sx={{
+                  '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                  '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                }}
+              >
                 <p className="select-text">Блоги/статьи</p>
               </MenuItem>
-              <MenuItem value="исследования">
+              <MenuItem
+                value="исследования"
+                sx={{
+                  '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                  '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                }}
+              >
                 <p
                   className={
           activeButton === 'исследования' ? 'select-text-active' : 'select-text'
@@ -451,7 +526,13 @@ const Categories = ({
                   Исследования
                 </p>
               </MenuItem>
-              <MenuItem value="обзоры">
+              <MenuItem
+                value="обзоры"
+                sx={{
+                  '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                  '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                }}
+              >
                 {' '}
                 <p
                   className={
@@ -483,10 +564,23 @@ const Categories = ({
                 inputProps={{ 'aria-label': 'Without label' }}
                 style={{ border: 'none' }}
               >
-                <MenuItem value="" className="select-text">
+                <MenuItem
+                  value=""
+                  className="select-text"
+                  sx={{
+                    '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                    '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                  }}
+                >
                   <p className="select-text">Блоги/статьи</p>
                 </MenuItem>
-                <MenuItem value="исследования">
+                <MenuItem
+                  value="исследования"
+                  sx={{
+                    '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                    '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                  }}
+                >
                   <p
                     className={
           activeButton === 'исследования' ? 'select-text-active' : 'select-text'
@@ -495,7 +589,13 @@ const Categories = ({
                     Исследования
                   </p>
                 </MenuItem>
-                <MenuItem value="обзоры">
+                <MenuItem
+                  value="обзоры"
+                  sx={{
+                    '&:hover': { backgroundColor: 'transparent' }, // Override hover style
+                    '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
+                  }}
+                >
                   {' '}
                   <p
                     className={

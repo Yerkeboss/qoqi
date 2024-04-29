@@ -18,36 +18,43 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="product-form-container">
-      <Suspense
-        fallback={(
-          <div className="loader" style={{ minHeight: '80vh' }}>
-            <h6>Загружается ... </h6>
-            <br />
-            <LoadingOutlined />
-          </div>
+    <main
+      className="content"
+      style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '-5vw'
+      }}
+    >
+      <div className="product-form-container">
+        <Suspense
+          fallback={(
+            <div className="loader" style={{ minHeight: '80vh' }}>
+              <h6>Загружается ... </h6>
+              <br />
+              <LoadingOutlined />
+            </div>
         )}
-      >
-        <ProductForm
-          isLoading={isLoading}
-          onSubmit={onSubmit}
-          product={{
-            name: '',
-            brand: '',
-            price: 0,
-            maxQuantity: 0,
-            description: '',
-            keywords: [],
-            sizes: [],
-            image: '',
-            isFeatured: false,
-            isRecommended: false,
-            availableColors: [],
-            imageCollection: []
-          }}
-        />
-      </Suspense>
-    </div>
+        >
+          <ProductForm
+            isLoading={isLoading}
+            onSubmit={onSubmit}
+            product={{
+              name: '',
+              brand: '',
+              price: 0,
+              maxQuantity: 0,
+              description: '',
+              keywords: [],
+              sizes: [],
+              image: '',
+              isFeatured: false,
+              isRecommended: false,
+              availableColors: [],
+              imageCollection: []
+            }}
+          />
+        </Suspense>
+      </div>
+    </main>
   );
 };
 
