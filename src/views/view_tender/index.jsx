@@ -19,7 +19,7 @@ const ViewTender = () => {
 
 
   const backToOrder = () => {
-    history.push('/shop');
+    history.push('/tenderList');
   };
 
   return (

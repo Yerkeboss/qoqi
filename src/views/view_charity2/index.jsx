@@ -17,7 +17,7 @@ const ViewCharity2 = () => {
 
 
   const backToOrder = () => {
-    history.push('/shop');
+    history.push('/charityList');
   };
 
 

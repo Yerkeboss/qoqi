@@ -8,6 +8,13 @@ import * as view from '@/views';
 import AdminRoute from './AdminRoute';
 import ClientRoute from './ClientRoute';
 import PublicRoute from './PublicRoute';
+import { Vacancies } from '@/components/jobs';
+import { Creators } from '@/components/creator';
+import { MasterForm } from '@/components/order';
+import { Tender } from '@/components/tender';
+import { Croud } from '@/components/croud';
+import { Charity } from '@/components/charity';
+
 
 // Revert back to history v4.10.0 because
 // v5.0 breaks navigation
@@ -92,6 +99,30 @@ const AppRouter = () => (
         <Route
           component={view.ViewOrder}
           path={ROUTES.VIEW_ORDER}
+        />
+        <Route
+          component={Vacancies}
+          path={ROUTES.VACANCIES}
+        />
+        <Route
+          component={Creators}
+          path={ROUTES.CREATORS}
+        />
+        <Route
+          component={MasterForm}
+          path={ROUTES.MASTERFORM}
+        />
+        <Route
+          component={Tender}
+          path={ROUTES.TENDER}
+        />
+        <Route
+          component={Croud}
+          path={ROUTES.CROUD}
+        />
+        <Route
+          component={Charity}
+          path={ROUTES.CHARITY}
         />
         <Route
           component={view.ViewTender}

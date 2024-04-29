@@ -34,3 +34,10 @@ export const VIEW_TENDER = '/tender/:id';
 export const VIEW_CROUD = '/croud/:id';
 export const VIEW_CHARITY = '/charity/:id';
 export const VIEW_CHARITY2 = '/charity2/:id';
+export const VACANCIES = '/vacancies';
+export const CREATORS = '/creators';
+export const MASTERFORM = '/order';
+export const TENDER = '/tenderList';
+export const CROUD = '/croudList';
+export const CHARITY = '/charityList';
+

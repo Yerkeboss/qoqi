@@ -8,8 +8,15 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTengeSign } from '@fortawesome/free-solid-svg-icons';
+import {
+  useDocumentTitle,
+  useFeaturedProducts,
+  useScrollTop
+} from '@/hooks';
 
 const Vacancies = () => {
+  useDocumentTitle('Vacancies | Qoqiqaz');
+  useScrollTop();
   const history = useHistory();
   const [jobs, setJobs] = useState([]);
   const [users, setUsers] = useState([]);
@@ -22,6 +29,7 @@ const Vacancies = () => {
     };
 
     fetchVacancies();
+
   }, []);
 
   useEffect(() => {
@@ -44,6 +52,33 @@ const Vacancies = () => {
     return user ? user.id : '';
   }
 
+  const onClickArt = () => {
+    history.push('/shop');
+  };
+
+  const onClickCreators = () => {
+    history.push('/creators');
+  };
+
+  const onClickVacancies = () => {
+    history.push('/vacancies');
+  };
+
+  const onClickOrder = () => {
+    history.push('/order');
+  };
+
+  const onClickTender = () => {
+    history.push('/tenderList');
+  };
+
+  const onClickCroud = () => {
+    history.push('/croudList');
+  };
+
+  const onClickCharity = () => {
+    history.push('/charityList');
+  };
 
   const onClickJob = (jobId) => {
     history.push(`/job/${jobId}`);
@@ -54,7 +89,148 @@ const Vacancies = () => {
   };
 
   return (
-    <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2" height={300} style = {{overflowY:'scroll', overflowX:'hidden'}}>
+    <main className="content" style={{ marginTop: '2rem' }}>
+    <div style={{ width: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+<h2 style={{ marginLeft: '2rem', height: '20%' }}>Вакансии</h2>
+
+        <div
+          style={{
+            display: 'flex',
+            marginBottom: '4rem',
+            marginLeft: '1.5rem',
+            width: '97.5%'
+          }}
+        >
+          <Button
+            onClick={onClickArt}
+            style={{
+              backgroundColor: 'white',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              border: '1px solid black',
+              borderRadius: '1vw',
+              marginLeft: '0.5rem',
+              width: '100%',
+              height: '4rem'
+            }}
+          >
+            <p style={{
+              color:  'black'
+
+            }}
+            >
+              Купить работу
+            </p>
+          </Button>
+          <Button
+            onClick={onClickCreators}
+            style={{
+              backgroundColor:'white',
+              color: 'black',
+              border: '1px solid black',
+              borderRadius: '1vw',
+              marginLeft: '0.5rem',
+              width: '100%',
+              height: '4rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <p style={{ color:  'black' }}> Найти креатора</p>
+          </Button>
+          <Button
+            onClick={onClickVacancies}
+            style={{
+              backgroundColor:  '#F28290' ,
+              color:  'white' ,
+              border: 'none' ,
+              borderRadius: '1vw',
+              marginLeft: '0.5rem',
+              width: '100%',
+              height: '4rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <p style={{ color: 'white'  }}> Вакансии</p>
+
+          </Button>
+          <Button
+            onClick={onClickOrder}
+            style={{
+              backgroundColor: 'white',
+              color: 'black',
+              border:  '1px solid black',
+              borderRadius: '1vw',
+              marginLeft: '0.5rem',
+              width: '100%',
+              height: '4rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <p style={{ color: 'black' }}>Разместить заказ</p>
+
+          </Button>
+          <Button
+            onClick={onClickTender}
+            style={{
+              backgroundColor: 'white',
+              color:  'black',
+              border: '1px solid black',
+              borderRadius: '1vw',
+              width: '100%',
+              height: '4rem',
+              marginLeft: '0.5rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <p style={{ color:  'black' }}>Конкурсы/тендеры</p>
+          </Button>
+          <Button
+            onClick={onClickCroud}
+            style={{
+              backgroundColor: 'white',
+              color: 'black',
+              border:  '1px solid black',
+              borderRadius: '1vw',
+              marginLeft: '0.5rem',
+              width: '100%',
+              height: '4rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <p style={{ color:  'black' }}>Краудсорсинг</p>
+          </Button>
+          <Button
+            onClick={onClickCharity}
+            style={{
+              backgroundColor: 'white',
+              color:  'black',
+              border:  '1px solid black',
+              borderRadius: '1vw',
+              marginLeft: '0.5rem',
+              width: '100%',
+              height: '4rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <p style={{ color: 'black' }}>Благотворительность</p>
+          </Button>
+        </div>
+        <div style={{ width: '98%' }}>
+          <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2" height={300} style = {{overflowY:'scroll', overflowX:'hidden'}}>
       <div>
         <Card
           style={{
@@ -67,7 +243,6 @@ const Vacancies = () => {
             flexDirection: 'column',
             justifyContent: 'space-between',
             marginLeft: '2rem',
-            marginTop: '2rem'
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '47vw' }}>
@@ -180,6 +355,11 @@ const Vacancies = () => {
         </Card>
       </div>
     </SkeletonTheme>
+        </div>
+      </div>
+    </div>
+  </main>
+   
   );
 };
 

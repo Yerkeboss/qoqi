@@ -50,7 +50,7 @@ const ViewOrder = () => {
   };
 
   const backToOrder = () => {
-    history.push('/shop');
+    history.push('/vacancies');
   };
 
 
