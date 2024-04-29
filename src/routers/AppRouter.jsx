@@ -97,6 +97,18 @@ const AppRouter = () => (
           component={view.ViewTender}
           path={ROUTES.VIEW_TENDER}
         />
+        <Route
+          component={view.ViewCroud}
+          path={ROUTES.VIEW_CROUD}
+        />
+        <Route
+          component={view.ViewCharity}
+          path={ROUTES.VIEW_CHARITY}
+        />
+        <Route
+          component={view.ViewCharity2}
+          path={ROUTES.VIEW_CHARITY2}
+        />
         <ClientRoute
           component={view.UserAccount}
           exact

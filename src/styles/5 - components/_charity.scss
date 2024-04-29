@@ -1,0 +1,132 @@
+.charity-grid {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(20% - 0.5vw), 1fr));
+  padding: 0;
+  grid-gap:0.5vw;
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+.charity-card {
+  width: 100%;
+  height: 100%;
+  border: 1px solid $border-color;
+  position: relative;
+  border: none;
+  overflow: hidden;
+  margin-left:1.5vw;
+
+
+  @include mobile {
+    height: 200px;
+  }
+}
+
+.charity-card-check {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: $green;
+  z-index: 1;
+}
+
+.charity-card-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  transition: all 0.4s ease-in-out;
+}
+
+.charity-card-img-wrapper {
+  width: 100%;
+  height: 100%;
+  // padding: 0 $m-size;
+  margin: auto;
+  position: relative;
+  transition: all 0.4s ease-in-out;
+  object-fit: fill;
+
+  @include mobile {
+    height: 8rem;
+  }
+}
+
+.image {
+  width:95%;
+  height:90%;
+}
+
+.charity-details {
+  padding: 0;
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.charity-card-name {
+  margin-top:0.5vw;
+  margin-bottom:0;
+  width: 100%;
+  color: black;
+  font-weight: 500;
+  font-size: larger;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.charity-card-position {
+  margin-bottom:2vw;
+  margin-top:0.5vw;
+  color:#61788A;
+  font-weight: 1.2vw;
+}
+
+.charity-button {
+  background-color: #f28290;
+  border-radius: 5rem;
+  border: none;
+  color: white;
+  height: 5rem;
+  width: 20rem;
+}
+
+.charity2-card {
+  margin-left:1.5vw;
+  display:flex;
+  margin-top:2vw;
+  justify-content: space-between;
+  align-items:center;
+}
+
+.charity2-card-content {
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  width:100%;
+}
+
+.image2 {
+  width:6vw;
+  height:6vw;
+  border-radius:1vw;
+}
+
+.charity2-name {
+  font-weight: 500;
+  font-size: larger;
+}
+
+.charity2-position {
+  margin-top:0.5vw;
+  color:#61788A;
+  font-weight: 1.2vw;
+}
+
+.heart-icon {
+  font-size: 1.5vw;
+  color:#CCCCCC;
+}

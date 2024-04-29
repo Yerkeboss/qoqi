@@ -506,6 +506,16 @@ class Firebase {
   // Tender
 
   getSingleTender = (id) => this.db.collection('tenders').doc(id).get();
+
+  //Croud
+
+  getSingleCroud = (id) => this.db.collection('croud').doc(id).get();
+
+  //Charity 
+  getSingleCharity = (id) => this.db.collection('charity').doc(id).get();
+
+  //Charity2 
+  getSingleCharity2 = (id) => this.db.collection('charityAdditional').doc(id).get();
 }
 
 const firebaseInstance = new Firebase();

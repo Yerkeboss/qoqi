@@ -31,3 +31,6 @@ export const VIEW_EVENT = '/event/:id';
 export const VIEW_USER = '/user/:id';
 export const VIEW_ORDER = '/job/:id';
 export const VIEW_TENDER = '/tender/:id';
+export const VIEW_CROUD = '/croud/:id';
+export const VIEW_CHARITY = '/charity/:id';
+export const VIEW_CHARITY2 = '/charity2/:id';

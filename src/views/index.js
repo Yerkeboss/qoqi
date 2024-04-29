@@ -29,4 +29,7 @@ export { default as ViewUser } from './view_user';
 export { default as Account } from './view_user/Account';
 export { default as ViewOrder } from './view_order';
 export { default as ViewTender } from './view_tender';
+export { default as ViewCroud } from './view_croud';
+export { default as ViewCharity } from './view_charity';
+export { default as ViewCharity2 } from './view_charity2';
 
