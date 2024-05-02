@@ -75,7 +75,7 @@ const Creators = () => {
 
   const onSignInClick = () => {
     onCloseModal();
-    history.push('/signup');
+    history.push('/signin');
   };
 
 
