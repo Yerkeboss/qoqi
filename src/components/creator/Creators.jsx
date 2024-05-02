@@ -7,12 +7,19 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { useHistory } from 'react-router-dom';
-import { useUserId } from '@/hooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { useUserId, useDidMount, useModal } from '@/hooks';
 import Firebase from '@/services/firebase';
+import { Boundary, Modal } from '@/components/common';
 
 const Creators = () => {
   const history = useHistory();
   const [users, setUsers] = useState([]);
+  const { isOpenModal, onOpenModal, onCloseModal } = useModal();
+
+  const { user } = useSelector((state) => ({
+    user: state.auth
+  }));
 
   useEffect(() => {
     // Fetch users data from Firestore
@@ -59,12 +66,47 @@ const Creators = () => {
   };
 
   const handleSendMessage = (userId) => {
-    history.push(`/chat/${userId}`);
+    if (!user) {
+      onOpenModal();
+    } else {
+      history.push(`/chat/${userId}`);
+    }
+  };
+
+  const onSignInClick = () => {
+    onCloseModal();
+    history.push('/signup');
   };
 
 
   return (
     <main className="content" style={{ marginTop: '2rem' }}>
+      { user === null && (
+      <Modal
+        isOpen={isOpenModal}
+        onRequestClose={onCloseModal}
+      >
+        <p className="text-center">Вы должны войти в систему чтобы написать сообщение</p>
+        <br />
+        <div className="d-flex-center">
+          <button
+            className="button button-border button-border-gray button-small"
+            onClick={onCloseModal}
+            type="button"
+          >
+            Продолжить смотреть сайт
+          </button>
+          &nbsp;
+          <button
+            className="button button-small"
+            onClick={onSignInClick}
+            type="button"
+          >
+            Войти в систему чтобы написать сообщение
+          </button>
+        </div>
+      </Modal>
+      )}
       <div style={{ width: '100%' }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <h2 style={{ marginLeft: '2rem', height: '20%' }}>Найти креатора</h2>

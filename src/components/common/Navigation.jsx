@@ -156,7 +156,7 @@ const Navigation = () => {
             <FontAwesomeIcon
               icon={faBell}
               style={{
-                color: '#CCCCCC',
+                color: 'black',
                 // backgroundColor:"white",
                 width: '2rem',
                 height: '2rem',
