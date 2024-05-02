@@ -40,4 +40,5 @@ export const MASTERFORM = '/order';
 export const TENDER = '/tenderList';
 export const CROUD = '/croudList';
 export const CHARITY = '/charityList';
+export const CHAT = '/chat/:id';
 

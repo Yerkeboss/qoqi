@@ -32,3 +32,4 @@ export { default as ViewTender } from './view_tender';
 export { default as ViewCroud } from './view_croud';
 export { default as ViewCharity } from './view_charity';
 export { default as ViewCharity2 } from './view_charity2';
+export { default as Chat } from './view_chat';

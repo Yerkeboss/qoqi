@@ -7,6 +7,8 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { useHistory } from 'react-router-dom';
+import { useUserId } from '@/hooks';
+import Firebase from '@/services/firebase';
 
 const Creators = () => {
   const history = useHistory();
@@ -56,12 +58,8 @@ const Creators = () => {
     history.push('/charityList');
   };
 
-  // Function to handle sending a message
-  const handleSendMessage = (user) => {
-    // Implement your logic here to handle sending a message to the user
-    console.log('Sending message to:', user.name);
-    // Redirect to a messaging page or implement your messaging functionality
-    // history.push(`/message/${user.id}`);
+  const handleSendMessage = (userId) => {
+    history.push(`/chat/${userId}`);
   };
 
 
@@ -217,7 +215,10 @@ const Creators = () => {
                       <div className="creators-details">
                         <h2 className="creators-card-name" onClick={() => onClickUser(user.id)}>{user.fullname}</h2>
                         <h5 className="creators-card-position" onClick={() => onClickUser(user.id)}>{user.position}</h5>
-                        <Button className="creators-button" onClick={() => handleSendMessage(user)}>
+                        <Button
+                          className="creators-button"
+                          onMouseDown={() => handleSendMessage(user.id)}
+                        >
                           <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '1rem' }} />
                           Сообщение
                         </Button>

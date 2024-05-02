@@ -140,6 +140,10 @@ const AppRouter = () => (
           component={view.ViewCharity2}
           path={ROUTES.VIEW_CHARITY2}
         />
+        <Route
+          component={view.Chat}
+          path={ROUTES.CHAT}
+        />
         <ClientRoute
           component={view.UserAccount}
           exact

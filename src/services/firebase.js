@@ -501,21 +501,55 @@ class Firebase {
   };
 
   addOrder = (id, order) => this.db.collection('orders').doc(id).set(order);
+
   generateKeyOrder = () => this.db.collection('orders').doc().id;
 
   // Tender
 
   getSingleTender = (id) => this.db.collection('tenders').doc(id).get();
 
-  //Croud
+  // Croud
 
   getSingleCroud = (id) => this.db.collection('croud').doc(id).get();
 
-  //Charity 
+  // Charity
   getSingleCharity = (id) => this.db.collection('charity').doc(id).get();
 
-  //Charity2 
+  // Charity2
   getSingleCharity2 = (id) => this.db.collection('charityAdditional').doc(id).get();
+
+  // Messaging
+
+  getSingleChat = (id) => this.db.collection('chats').doc(id).get();
+
+  sendMessage = async (senderId, receiverId, message) => {
+    const conversationId = this.getConversationId(senderId, receiverId);
+    const messageData = {
+      senderId,
+      receiverId,
+      message,
+      timestamp: new Date()
+    };
+    try {
+      await this.db.collection('chats').add(messageData);
+      return true;
+    } catch (error) {
+      console.error('Error sending message:', error);
+      return false;
+    }
+  };
+
+  listenToMessages = (userId, callback) => this.db.collection('chats').where('users', 'array-contains', userId).onSnapshot((snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+      if (change.type === 'added') {
+        const conversationId = change.doc.id;
+        const { messages } = change.doc.data();
+        callback({ conversationId, messages });
+      }
+    });
+  });
+
+  getConversationId = (senderId, receiverId) => (senderId < receiverId ? `${senderId}_${receiverId}` : `${receiverId}_${senderId}`);
 }
 
 const firebaseInstance = new Firebase();
