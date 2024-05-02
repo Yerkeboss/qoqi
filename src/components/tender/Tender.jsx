@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 const Tender = () => {
   const history = useHistory();
   const [tenders, setTenders] = useState([]);
+  const [author, setAuthor] = useState([]);
 
   useEffect(() => {
     const fetchTenders = async () => {
@@ -18,8 +19,19 @@ const Tender = () => {
       const tendersData = tendersCollection.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setTenders(tendersData);
     };
+
+    const fetchAuthor = async () => {
+      const usersCollection = await firebase.firestore().collection('users').get();
+      const usersData = usersCollection.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const filteredUser = usersData.filter((user) => user.fullname === 'Author');
+      setAuthor(filteredUser);
+    };
+    fetchAuthor();
     fetchTenders();
   }, []);
+
+  const authorId = author.map((item) => item.id);
+
 
   const onClickTender = (tenderId) => {
     history.push(`/tender/${tenderId}`);
@@ -53,12 +65,8 @@ const Tender = () => {
     history.push('/charityList');
   };
 
-  const onClickJob = (jobId) => {
-    history.push(`/job/${jobId}`);
-  };
-
-  const onClickUser = (userId) => {
-    history.push(`/user/${userId}`);
+  const handleSendMessage = (userId) => {
+    history.push(`/chat/${userId}`);
   };
 
   return (
@@ -282,9 +290,11 @@ const Tender = () => {
                         </p>
                         <p style={{ fontWeight: 'bold', fontSize: '1vw', marginTop: '0.5vw' }}>{tender?.location}</p>
                       </div>
-                      <Button style={{
-                        background: '#f28290', borderRadius: '1.5vw', border: 'none', width: 'fit-content', paddingLeft: '1.5vw', paddingRight: '1.5vw', display: 'flex', justifyContent: 'space-between', alignItems: 'center', heigth: '1.9vw'
-                      }}
+                      <Button
+                        style={{
+                          background: '#f28290', borderRadius: '1.5vw', border: 'none', width: 'fit-content', paddingLeft: '1.5vw', paddingRight: '1.5vw', display: 'flex', justifyContent: 'space-between', alignItems: 'center', heigth: '1.9vw'
+                        }}
+                        onClick={() => handleSendMessage(authorId)}
                       >
                         <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '0.5vw', color: 'white' }} />
                         <p style={{ color: 'white' }}>Сообщение</p>

@@ -143,15 +143,13 @@ const Chat = () => {
               // Determine if the user has been clicked
 
               return (
-                <div className="chats" key={receiver?.id}>
-                  <div className="userChat" onClick={() => handleChoose(receiver?.id)}>
-                    <Image src={receiver?.avatar} />
-                    <div className="userChatInfo">
-                      <p>{receiver?.fullname}</p>
-                      <p className="lastMessage">{lastMessage}</p>
-                    </div>
-                    {/* You can add the notification circle logic here */}
+                <div className="userChat" onClick={() => handleChoose(receiver?.id)} key={receiver?.id}>
+                  <Image src={receiver?.avatar} />
+                  <div className="userChatInfo">
+                    <p>{receiver?.fullname}</p>
+                    <p className="lastMessage">{lastMessage}</p>
                   </div>
+                  {/* You can add the notification circle logic here */}
                 </div>
               );
             })}

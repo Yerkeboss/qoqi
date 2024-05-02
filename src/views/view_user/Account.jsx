@@ -2,7 +2,7 @@
 import PropType from 'prop-types';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { withRouter, Link, useParams } from 'react-router-dom';
+import { withRouter, useHistory, useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,6 +15,11 @@ import { useDocumentTitle, useScrollTop, useUser } from '@/hooks';
 const Account = () => {
   const { id } = useParams();
   const { user, isLoading, error } = useUser(id);
+  const history = useHistory();
+
+  const handleSendMessage = (userId) => {
+    history.push(`/chat/${userId}`);
+  };
 
   return (
     <Card className="user-profile">
@@ -86,6 +91,7 @@ const Account = () => {
               style={{
  border: '2px solid #F28290', borderRadius: '2rem', marginLeft: '2rem', width: '50%'
 }}
+              onClick={() => handleSendMessage(user.id)}
             >
               <p style={{ color: '#F28290', width: '100%' }}>Сообщение</p>
             </Button>

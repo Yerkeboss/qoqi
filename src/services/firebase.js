@@ -523,7 +523,6 @@ class Firebase {
   getSingleChat = (id) => this.db.collection('chats').doc(id).get();
 
   sendMessage = async (senderId, receiverId, message) => {
-    const conversationId = this.getConversationId(senderId, receiverId);
     const messageData = {
       senderId,
       receiverId,
@@ -538,18 +537,6 @@ class Firebase {
       return false;
     }
   };
-
-  listenToMessages = (userId, callback) => this.db.collection('chats').where('users', 'array-contains', userId).onSnapshot((snapshot) => {
-    snapshot.docChanges().forEach((change) => {
-      if (change.type === 'added') {
-        const conversationId = change.doc.id;
-        const { messages } = change.doc.data();
-        callback({ conversationId, messages });
-      }
-    });
-  });
-
-  getConversationId = (senderId, receiverId) => (senderId < receiverId ? `${senderId}_${receiverId}` : `${receiverId}_${senderId}`);
 }
 
 const firebaseInstance = new Firebase();
