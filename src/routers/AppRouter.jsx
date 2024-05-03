@@ -14,6 +14,7 @@ import { MasterForm } from '@/components/order';
 import { Tender } from '@/components/tender';
 import { Croud } from '@/components/croud';
 import { Charity } from '@/components/charity';
+import { Education } from '@/components/education';
 
 
 // Revert back to history v4.10.0 because
@@ -52,9 +53,22 @@ const AppRouter = () => (
           path={ROUTES.ABOUT}
         />
         <Route
-          component={view.Education}
+          component={Education}
           exact
           path={ROUTES.EDUCATION}
+        />
+        <Route
+          component={view.ViewEducation}
+          path={ROUTES.VIEW_EDUCATION}
+        />
+        <Route
+          component={view.Educate}
+          exact
+          path={ROUTES.EDUCATE}
+        />
+        <Route
+          component={view.ViewEduInfo}
+          path={ROUTES.EDUINFO}
         />
         <Route
           component={view.Event}

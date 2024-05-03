@@ -537,6 +537,11 @@ class Firebase {
       return false;
     }
   };
+
+  // Education
+  getSingleEducation = (id) => this.db.collection('education').doc(id).get();
+  
+  getSingleEduInfo = (id) => this.db.collection('educate').doc(id).get();
 }
 
 const firebaseInstance = new Firebase();

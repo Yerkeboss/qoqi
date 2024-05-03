@@ -17,3 +17,4 @@ export { default as useCroud } from './useCroud';
 export { default as useCharity } from './useCharity';
 export { default as useCharity2 } from './useCharity2';
 export { default as useChat } from './useChat';
+export { default as useEducation } from './useEducation';
