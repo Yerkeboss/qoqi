@@ -1,0 +1,13 @@
+.buttons-grid {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(5% - 2vw), 1fr));
+  padding: 0;
+  grid-gap:0.6vw;
+  margin-top:1vw;
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

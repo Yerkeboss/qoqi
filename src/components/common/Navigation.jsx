@@ -6,6 +6,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faPlus, faBars } from '@fortawesome/free-solid-svg-icons';
 import Button from 'react-bootstrap/Button';
+
 import * as ROUTE from '@/constants/routes';
 import UserAvatar from '@/views/account/components/UserAvatar';
 import BasketToggle from '../basket/BasketToggle';
@@ -25,6 +26,8 @@ const Navigation = () => {
     isAuthenticating: state.app.isAuthenticating,
     isLoading: state.app.loading
   }));
+
+
 
   const scrollHandler = () => {
     if (navbar.current && window.screen.width > 480) {
@@ -78,20 +81,23 @@ const Navigation = () => {
           <img alt="Logo" src={logo2} />
         </Link>
       </div>
-      <ul className="navigation-menu-main">
-        <li>
-          <Button style={{ border: 'none', backgroundColor: '#f9f9f9' }}>
-            <FontAwesomeIcon
-              icon={faBars}
-              style={{
+      <li className="navigation-big-menu">
+        <Button style={{
+ border: 'none', backgroundColor: '#f9f9f9'
+}}
+        >
+          <FontAwesomeIcon
+            icon={faBars}
+            style={{
                 color: '#000000',
-                width: '2rem',
-                height: '2rem',
-                marginTop: '0.5rem'
+                width: '2vw',
+                height: '3vw'
               }}
-            />
-          </Button>
-        </li>
+          />
+        </Button>
+      </li>
+      <ul className="navigation-menu-main">
+
         <li>
           <NavLink
             activeClassName="navigation-menu-active"

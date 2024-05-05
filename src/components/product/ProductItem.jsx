@@ -55,9 +55,9 @@ const ProductItem = ({ product, isItemOnBasket, addToBasket }) => {
         </div>
       </div>
       <div className="product-details">
-        <h5 className="product-card-name">
+        <p className="product-card-name">
           {product.name || <Skeleton width={80} />}
-        </h5>
+        </p>
         <h4 className="product-card-price">
           {product.price ? (
             displayMoney(product.price)
