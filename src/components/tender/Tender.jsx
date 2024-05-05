@@ -74,32 +74,38 @@ const Tender = () => {
       <div style={{ width: '100%' }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <h2 style={{ marginLeft: '2rem', height: '20%' }}>Вакансии</h2>
-
           <div
             style={{
               display: 'flex',
-              marginBottom: '4rem',
-              marginLeft: '1.5rem',
-              width: '97.5%'
+              marginBottom: '2vw',
+              paddingLeft: '1.5vw',
+              paddingRight: '1.5vw',
+              width: '100%',
+              alignItems: 'center',
+              gap: '0.95vw'
             }}
           >
             <Button
               onClick={onClickArt}
               style={{
                 backgroundColor: 'white',
+                color: 'black',
+                border: '1px solid black',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                border: '1px solid black',
                 borderRadius: '1vw',
-                marginLeft: '0.5rem',
-                width: '100%',
-                height: '4rem'
+                height: '4rem',
+                padding: '1.5vw'
               }}
             >
               <p style={{
-                color: 'black'
-
+                color: 'black',
+                margin: '0',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
               }}
               >
                 Купить работу
@@ -112,15 +118,24 @@ const Tender = () => {
                 color: 'black',
                 border: '1px solid black',
                 borderRadius: '1vw',
-                marginLeft: '0.5rem',
-                width: '100%',
                 height: '4rem',
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
+                padding: '1.5vw'
               }}
             >
-              <p style={{ color: 'black' }}> Найти креатора</p>
+              <p style={{
+                color: 'black',
+                margin: '0', // Remove default margin for <p> tag
+                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
+                overflow: 'hidden', // Hide any overflow text
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
+              }}
+              >
+                Найти креатора
+              </p>
             </Button>
             <Button
               onClick={onClickVacancies}
@@ -129,15 +144,25 @@ const Tender = () => {
                 color: 'black',
                 border: '1px solid black',
                 borderRadius: '1vw',
-                marginLeft: '0.5rem',
-                width: '100%',
                 height: '4rem',
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
+                padding: '1.5vw'
               }}
             >
-              <p style={{ color: 'black' }}> Вакансии</p>
+              <p style={{
+                color: 'black',
+                margin: '0', // Remove default margin for <p> tag
+                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
+                overflow: 'hidden', // Hide any overflow text
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
+              }}
+              >
+                {' '}
+                Вакансии
+              </p>
 
             </Button>
             <Button
@@ -147,33 +172,52 @@ const Tender = () => {
                 color: 'black',
                 border: '1px solid black',
                 borderRadius: '1vw',
-                marginLeft: '0.5rem',
-                width: '100%',
                 height: '4rem',
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
+                padding: '1.5vw'
               }}
             >
-              <p style={{ color: 'black' }}>Разместить заказ</p>
+              <p style={{
+                color: 'black',
+                margin: '0', // Remove default margin for <p> tag
+                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
+                overflow: 'hidden', // Hide any overflow text
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
+              }}
+              >
+                Разместить заказ
+              </p>
 
             </Button>
             <Button
-              onClick={onClickTenderList}
+              onClick={onClickTender}
               style={{
+          
+                color: 'black',
                 backgroundColor: '#F28290',
-                color: 'white',
                 border: 'none',
                 borderRadius: '1vw',
-                marginLeft: '0.5rem',
-                width: '100%',
+                padding: '1.5vw',
                 height: '4rem',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center'
               }}
             >
-              <p style={{ color: 'white' }}>Конкурсы/тендеры</p>
+              <p style={{
+                color: 'white',
+                margin: '0', // Remove default margin for <p> tag
+                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
+                overflow: 'hidden', // Hide any overflow text
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
+              }}
+              >
+                Конкурсы/тендеры
+              </p>
             </Button>
             <Button
               onClick={onClickCroud}
@@ -182,15 +226,24 @@ const Tender = () => {
                 color: 'black',
                 border: '1px solid black',
                 borderRadius: '1vw',
-                marginLeft: '0.5rem',
-                width: '100%',
+                padding: '1.5vw',
                 height: '4rem',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center'
               }}
             >
-              <p style={{ color: 'black' }}>Краудсорсинг</p>
+              <p style={{
+                color: 'black',
+                margin: '0', // Remove default margin for <p> tag
+                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
+                overflow: 'hidden', // Hide any overflow text
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
+              }}
+              >
+                Краудсорсинг
+              </p>
             </Button>
             <Button
               onClick={onClickCharity}
@@ -199,15 +252,24 @@ const Tender = () => {
                 color: 'black',
                 border: '1px solid black',
                 borderRadius: '1vw',
-                marginLeft: '0.5rem',
-                width: '100%',
+                padding: '1.5vw',
                 height: '4rem',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center'
               }}
             >
-              <p style={{ color: 'black' }}>Благотворительность</p>
+              <p style={{
+                color: 'black',
+                margin: '0', // Remove default margin for <p> tag
+                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
+                overflow: 'hidden', // Hide any overflow text
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
+              }}
+              >
+                Благотворительность
+              </p>
             </Button>
           </div>
           <div style={{ width: '98%' }}>

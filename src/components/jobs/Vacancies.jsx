@@ -94,142 +94,205 @@ const Vacancies = () => {
       <div style={{ display: 'flex', flexDirection: 'column' }}>
 <h2 style={{ marginLeft: '2rem', height: '20%' }}>Вакансии</h2>
 
-        <div
-          style={{
-            display: 'flex',
-            marginBottom: '4rem',
-            marginLeft: '1.5rem',
-            width: '97.5%'
-          }}
-        >
-          <Button
-            onClick={onClickArt}
+<div
             style={{
-              backgroundColor: 'white',
               display: 'flex',
-              justifyContent: 'center',
+              marginBottom: '2vw',
+              paddingLeft: '1.5vw',
+              paddingRight: '1.5vw',
+              width: '100%',
               alignItems: 'center',
-              border: '1px solid black',
-              borderRadius: '1vw',
-              marginLeft: '0.5rem',
-              width: '100%',
-              height: '4rem'
+              gap: '0.95vw'
             }}
           >
-            <p style={{
-              color:  'black'
-
-            }}
+            <Button
+              onClick={onClickArt}
+              style={{
+                backgroundColor: 'white',
+                color: 'black',
+                border: '1px solid black',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: '1vw',
+                height: '4rem',
+                padding: '1.5vw'
+              }}
             >
-              Купить работу
-            </p>
-          </Button>
-          <Button
-            onClick={onClickCreators}
-            style={{
-              backgroundColor:'white',
-              color: 'black',
-              border: '1px solid black',
-              borderRadius: '1vw',
-              marginLeft: '0.5rem',
-              width: '100%',
-              height: '4rem',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <p style={{ color:  'black' }}> Найти креатора</p>
-          </Button>
-          <Button
-            onClick={onClickVacancies}
-            style={{
-              backgroundColor:  '#F28290' ,
-              color:  'white' ,
-              border: 'none' ,
-              borderRadius: '1vw',
-              marginLeft: '0.5rem',
-              width: '100%',
-              height: '4rem',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <p style={{ color: 'white'  }}> Вакансии</p>
+              <p style={{
+                color: 'black',
+                margin: '0',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
+              }}
+              >
+                Купить работу
+              </p>
+            </Button>
+            <Button
+              onClick={onClickCreators}
+              style={{
+                color: 'black',
+                backgroundColor: 'white',
+                border: '1px solid black',
+                borderRadius: '1vw',
+                padding: '1.5vw',
+                height: '4rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <p style={{
+                color: 'black',
+                margin: '0', // Remove default margin for <p> tag
+                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
+                overflow: 'hidden', // Hide any overflow text
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
+              }}
+              >
+                Найти креатора
+              </p>
+            </Button>
+            <Button
+              onClick={onClickVacancies}
+              style={{
+                backgroundColor: '#F28290',
+                border: 'none',
+                color: 'black',
+         
+                borderRadius: '1vw',
+                height: '4rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding: '1.5vw'
+              }}
+            >
+              <p style={{
+                color: 'white',
+                margin: '0', // Remove default margin for <p> tag
+                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
+                overflow: 'hidden', // Hide any overflow text
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
+              }}
+              >
+                {' '}
+                Вакансии
+              </p>
 
-          </Button>
-          <Button
-            onClick={onClickOrder}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              border:  '1px solid black',
-              borderRadius: '1vw',
-              marginLeft: '0.5rem',
-              width: '100%',
-              height: '4rem',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <p style={{ color: 'black' }}>Разместить заказ</p>
+            </Button>
+            <Button
+              onClick={onClickOrder}
+              style={{
+                backgroundColor: 'white',
+                color: 'black',
+                border: '1px solid black',
+                borderRadius: '1vw',
+                padding: '1.5vw',
+                height: '4rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <p style={{
+                color: 'black',
+                margin: '0', // Remove default margin for <p> tag
+                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
+                overflow: 'hidden', // Hide any overflow text
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
+              }}
+              >
+                Разместить заказ
+              </p>
 
-          </Button>
-          <Button
-            onClick={onClickTender}
-            style={{
-              backgroundColor: 'white',
-              color:  'black',
-              border: '1px solid black',
-              borderRadius: '1vw',
-              width: '100%',
-              height: '4rem',
-              marginLeft: '0.5rem',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <p style={{ color:  'black' }}>Конкурсы/тендеры</p>
-          </Button>
-          <Button
-            onClick={onClickCroud}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              border:  '1px solid black',
-              borderRadius: '1vw',
-              marginLeft: '0.5rem',
-              width: '100%',
-              height: '4rem',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <p style={{ color:  'black' }}>Краудсорсинг</p>
-          </Button>
-          <Button
-            onClick={onClickCharity}
-            style={{
-              backgroundColor: 'white',
-              color:  'black',
-              border:  '1px solid black',
-              borderRadius: '1vw',
-              marginLeft: '0.5rem',
-              width: '100%',
-              height: '4rem',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <p style={{ color: 'black' }}>Благотворительность</p>
-          </Button>
-        </div>
-        <div style={{ width: '98%' }}>
+            </Button>
+            <Button
+              onClick={onClickTender}
+              style={{
+                backgroundColor: 'white',
+                color: 'black',
+                border: '1px solid black',
+                borderRadius: '1vw',
+                padding: '1.5vw',
+                height: '4rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <p style={{
+                color: 'black',
+                margin: '0', // Remove default margin for <p> tag
+                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
+                overflow: 'hidden', // Hide any overflow text
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
+              }}
+              >
+                Конкурсы/тендеры
+              </p>
+            </Button>
+            <Button
+              onClick={onClickCroud}
+              style={{
+                backgroundColor: 'white',
+                color: 'black',
+                border: '1px solid black',
+                borderRadius: '1vw',
+                padding: '1.5vw',
+                height: '4rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <p style={{
+                color: 'black',
+                margin: '0', // Remove default margin for <p> tag
+                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
+                overflow: 'hidden', // Hide any overflow text
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
+              }}
+              >
+                Краудсорсинг
+              </p>
+            </Button>
+            <Button
+              onClick={onClickCharity}
+              style={{
+                backgroundColor: 'white',
+                color: 'black',
+                border: '1px solid black',
+                borderRadius: '1vw',
+                padding: '1.5vw',
+                height: '4rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <p style={{
+                color: 'black',
+                margin: '0', // Remove default margin for <p> tag
+                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
+                overflow: 'hidden', // Hide any overflow text
+                textOverflow: 'ellipsis',
+                fontSize: '1.2vw'
+              }}
+              >
+                Благотворительность
+              </p>
+            </Button>
+          </div>
+        <div style={{ width: '99%' }}>
           <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2" height={300} style = {{overflowY:'scroll', overflowX:'hidden'}}>
       <div>
         <Card
