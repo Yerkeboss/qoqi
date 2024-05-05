@@ -18,4 +18,5 @@ export { default as PriceRange } from './PriceRange';
 export { default as SearchBar } from './SearchBar';
 export { default as SearchBarEvents } from './SearchBarEvents';
 export { default as SocialLogin } from './SocialLogin';
+export { default as BigMenu } from './BigMenu';
 

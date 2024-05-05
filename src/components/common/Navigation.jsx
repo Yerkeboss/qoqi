@@ -1,12 +1,14 @@
 /* eslint-disable indent */
 import { ShoppingOutlined } from '@ant-design/icons';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import {
+ Link, NavLink, useLocation, useHistory
+} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faPlus, faBars } from '@fortawesome/free-solid-svg-icons';
 import Button from 'react-bootstrap/Button';
-
+import BigMenu from './BigMenu';
 import * as ROUTE from '@/constants/routes';
 import UserAvatar from '@/views/account/components/UserAvatar';
 import BasketToggle from '../basket/BasketToggle';
@@ -16,9 +18,12 @@ import SearchBar from './SearchBar';
 import logo1 from '../../images/logo1.png';
 import logo2 from '../../images/logo2.png';
 
+
 const Navigation = () => {
   const navbar = useRef(null);
   const { pathname } = useLocation();
+  const history = useHistory();
+  const [showMenu, setShowMenu] = useState(false);
 
   const store = useSelector((state) => ({
     basketLength: state.basket.length,
@@ -26,8 +31,6 @@ const Navigation = () => {
     isAuthenticating: state.app.isAuthenticating,
     isLoading: state.app.loading
   }));
-
-
 
   const scrollHandler = () => {
     if (navbar.current && window.screen.width > 480) {
@@ -48,6 +51,17 @@ const Navigation = () => {
     if (store.isAuthenticating) e.preventDefault();
   };
 
+  const onOpenMenu = () => {
+    setShowMenu(!showMenu);
+  };
+// State to track if handleClick has been called
+
+  const handleClick = (route) => {
+    history.push(route);
+    setShowMenu(false);
+  };
+
+  console.log('showMenu', showMenu);
   // disable the basket toggle to these pathnames
   const basketDisabledpathnames = [
     ROUTE.CHECKOUT_STEP_1,
@@ -82,8 +96,10 @@ const Navigation = () => {
         </Link>
       </div>
       <li className="navigation-big-menu">
-        <Button style={{
- border: 'none', backgroundColor: '#f9f9f9'
+        <Button
+          onClick={onOpenMenu}
+          style={{
+ width: '5vw', height: '5vw', border: 'none', backgroundColor: 'transparent'
 }}
         >
           <FontAwesomeIcon
@@ -91,10 +107,13 @@ const Navigation = () => {
             style={{
                 color: '#000000',
                 width: '2vw',
-                height: '3vw'
+                height: '3vw',
+pointerEvents: 'none'
               }}
+
           />
         </Button>
+
       </li>
       <ul className="navigation-menu-main">
 
@@ -216,6 +235,9 @@ const Navigation = () => {
           </li>
         )}
       </ul>
+      {showMenu && (
+      <BigMenu handleClick={handleClick} />
+        )}
     </nav>
   );
 };

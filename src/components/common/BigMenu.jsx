@@ -1,112 +1,166 @@
-import React, { useEffect, useRef } from 'react';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import React, { useEffect, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import { withStyles } from '@mui/styles';
+import Button from 'react-bootstrap/Button';
 
-const BigMenu = () => {
-  const CustomOutlinedInput = withStyles({
-    root: {
-      '& .MuiOutlinedInput-notchedOutline': {
-        border: 'none'
-      }
-    }
-  })(OutlinedInput);
-  return (
-    <Box
-      className="filter-buttons"
-      style={{
-        marginLeft: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'
-      }}
-    >
-      <FormControl fullWidth sx={{ borderRadius: '10px !important' }}>
-        <Select
-          displayEmpty
-          value=""
-          input={<CustomOutlinedInput />}
-          onChange={(event) => handleBrandSelect(event.target.value)}
-          MenuProps={MenuProps}
-          inputProps={{ 'aria-label': 'Without label' }}
-          style={{ border: 'none', borderRadius: '2vw' }}
+const BigMenu = ({ handleClick }) => (
+  <Box
+    className="big-menu-container"
+  >
+    <div className="big-menu-grid">
+      <div>
+        <p
+          className="menu-item-header"
+          onClick={() => handleClick('/')}
         >
-          <MenuItem
-            value=""
-            className="select-text"
-            sx={{
-              '&:hover': { backgroundColor: 'transparent' }, // Override hover style
-              '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
-            }}
-          >
-            <p className="select-text">Киберспорт</p>
-          </MenuItem>
-          <MenuItem
-            value="стримы"
-            sx={{
-              '&:hover': { backgroundColor: 'transparent' }, // Override hover style
-              '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
-            }}
-          >
-            <p
-              className={
-activeButton === 'стримы' ? 'select-text-active' : 'select-text'
-}
-            >
-              Стримы
-            </p>
-          </MenuItem>
-          <MenuItem
-            value="полезные лайфхаки в игре"
-            sx={{
-              '&:hover': { backgroundColor: 'transparent' }, // Override hover style
-              '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
-            }}
-          >
-            {' '}
-            <p
-              className={
-activeButton === 'полезные лайфхаки в игре' ? 'select-text-active' : 'select-text'
-}
-            >
-              Полезные лайфхаки в игре
-            </p>
-          </MenuItem>
-          <MenuItem
-            value="новости из игр"
-            sx={{
-              '&:hover': { backgroundColor: 'transparent' }, // Override hover style
-              '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
-            }}
-          >
-            {' '}
-            <p
-              className={
-activeButton === 'новости из игр' ? 'select-text-active' : 'select-text'
-}
-            >
-              Новости из игр
-            </p>
-          </MenuItem>
-          <MenuItem
-            value="блоги"
-            sx={{
-              '&:hover': { backgroundColor: 'transparent' }, // Override hover style
-              '&.Mui-selected': { backgroundColor: '#f28290' } // Background color for selected item
-            }}
-          >
-            <p
-              className={
-activeButton === 'блоги' ? 'select-text-active' : 'select-text'
-}
-            >
-              Блоги
-            </p>
-          </MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-  );
-};
+          Главное
+        </p>
+        <p
+          className="menu-item"
+          onClick={() => handleClick('/')}
+        >
+          Лучшее за неделю
+        </p>
+        <p
+          className="menu-item"
+          onClick={() => handleClick('/')}
+        >
+          Галерея лучших работ
+        </p>
+        <p
+          className="menu-item"
+          onClick={() => handleClick('/')}
+        >
+          Анонсы
+        </p>
+      </div>
+      <div>
+        {' '}
+        <p className="menu-item-header" onClick={() => handleClick('/about')}>
+          О нас
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/about')}>
+          Информация
+          о компании
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/about')}>
+          Контакты
+        </p>
+      </div>
+      <div>
+        {' '}
+        <p className="menu-item-header" onClick={() => handleClick('/shop')}>
+          Работа
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/shop')}>
+          Купить работу
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/order')}>
+          Разместить заказ
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/creators')}>
+          Найти креатора
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/tenderList')}>
+          Конкурсы / Тендеры
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/croud')}>
+          Краудсорсинг
+        </p>
+      </div>
+      <div>
+        <p className="menu-item-header" onClick={() => handleClick('/events')}>
+          Мероприятия
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/events')}>
+          Виртуальные
+          выставки
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/events')}>
+          Онлайн форумы
+        </p>
+      </div>
+      <div>
+        <p className="menu-item-header" onClick={() => handleClick('/account')}>
+          Профиль
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/account')}>
+          Портфолио
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/account')}>
+          Корзина
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/account')}>
+          Подписка
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/account')}>
+          Сообщения
+        </p>
+      </div>
+      <div>
+        <p className="menu-item-header" onClick={() => handleClick('/educationList')}>
+          Обучение
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/educationList')}>
+          Онлайн курсы
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/educationList')}>
+          Мастер-классы
+        </p>
+        <p className="menu-item" onClick={() => handleClick('/educationList')}>
+          Информационные
+          ресурсы
+        </p>
+      </div>
+      <div style={{ marginTop: '2vw' }}>
+        <Button className="menu-button">
+          <p>Фотографии</p>
+        </Button>
+        <Button className="menu-button">
+          <p>Иллюстрации</p>
+        </Button>
+        <Button className="menu-button">
+          <p>Анимации</p>
+        </Button>
+        <Button className="menu-button">
+          <p>Дизайн одежды</p>
+        </Button>
+        <Button className="menu-button">
+          <p>Арт</p>
+        </Button>
+      </div>
+      <div style={{ marginTop: '2vw' }}>
+        <Button className="menu-button">
+          <p>Музыка</p>
+        </Button>
+        <Button className="menu-button">
+          <p>Аудио подкасты</p>
+        </Button>
+        <Button className="menu-button">
+          <p>Скульптуры</p>
+        </Button>
+        <Button className="menu-button">
+          <p>Дизайн интерьера</p>
+        </Button>
+        <Button className="menu-button">
+          <p>Краудсорсинг</p>
+        </Button>
+      </div>
+      <div style={{ marginTop: '2vw' }}>
+        <Button className="menu-button">
+          <p>Дизайн</p>
+        </Button>
+        <Button className="menu-button">
+          <p>3D ART</p>
+        </Button>
+        <Button className="menu-button">
+          <p>Инсталляции</p>
+        </Button>
+        <Button className="menu-button">
+          <p>Граффити</p>
+        </Button>
+      </div>
+    </div>
+  </Box>
+);
 
 export default BigMenu;
