@@ -60,8 +60,7 @@ const Navigation = () => {
     history.push(route);
     setShowMenu(false);
   };
-
-  console.log('showMenu', showMenu);
+  
   // disable the basket toggle to these pathnames
   const basketDisabledpathnames = [
     ROUTE.CHECKOUT_STEP_1,

@@ -6,7 +6,7 @@ import FeaturedProduct from './ProductFeatured';
 const ProductShowcase = ({ products }) => (
   <div className="product-display-grid">
     {products.length === 0
-      ? new Array(12).fill({}).map((product, index) => (
+      ? new Array(200).fill({}).map((product, index) => (
         <FeaturedProduct
               // eslint-disable-next-line react/no-array-index-key
           key={`product-skeleton ${index}`}

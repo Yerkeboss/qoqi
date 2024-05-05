@@ -34,13 +34,18 @@ const Home = () => {
   const [res, setRes] = useState(false);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [products, setProducts] = useState([]);
+  const [sortedProducts, setSortedProducts] = useState([]);
 
   const {
     featuredProducts,
     isLoading: isLoadingFeatured,
     error: errorFeatured
-  } = useFeaturedProducts(100);
+  } = useFeaturedProducts(200);
+
+  const otherProducts = products.filter(
+    (product) => !featuredProducts.some((fp) => fp.id === product.id)
+  );
 
   const toggleRect = () => {
     setRect(true);
@@ -58,6 +63,8 @@ const Home = () => {
     setRect(false);
     setPop(false);
     setRes(true);
+    // Sort products by dateAdded when "Недавние" button is clicked
+    setSortedProducts(sortProductsByDateAdded(otherProducts));
   };
 
   const handleBrandSelect = (brand) => {
@@ -65,7 +72,6 @@ const Home = () => {
     dispatch(applyFilter({ brand }));
     setActiveButton(brand);
   };
-
 
   const store = useSelector(
     (state) => ({
@@ -76,15 +82,15 @@ const Home = () => {
     }),
     shallowEqual
   );
-  const ITEM_HEIGHT = 48;
-  const ITEM_PADDING_TOP = 8;
-  const MenuProps = {
-    PaperProps: {
-      style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250
-      }
-    }
+
+
+  const sortProductsByDateAdded = (otherProducts) => {
+    const sorted = [...otherProducts].sort((a, b) => {
+      const dateA = new Date(parseInt(a.dateAdded));
+      const dateB = new Date(parseInt(b.dateAdded));
+      return dateB - dateA;
+    });
+    return sorted;
   };
 
 
@@ -98,6 +104,16 @@ const Home = () => {
     }
   };
 
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250
+      }
+    }
+  };
 
   useEffect(() => {
     toggleRect();
@@ -116,11 +132,28 @@ const Home = () => {
       }
     };
 
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const productsCollection = await firebase.firestore().collection('products').get();
+        const productsData = productsCollection.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        setProducts(productsData);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        setLoading(false);
+      }
+    };
+
     fetchEvents();
+    fetchProducts();
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  console.log('otherProducts', otherProducts);
+  console.log('products', products);
 
   return (
     <main className="content">
@@ -145,21 +178,20 @@ const Home = () => {
         </div>
         <br />
 
-        <ProductList {...store}>
-          <div className="scrollable-carousel">
-            <Carousel scrollSnap cols={3} rows={2} gap={2} loop>
-              {store.filteredProducts
-                .filter(
-                  (product) => !featuredProducts.some((fp) => fp.id === product.id)
-                )
-                .map((product, index) => (
-                  <Carousel.Item key={index}>
-                    <ProductShowcaseGrid products={[product]} />
-                  </Carousel.Item>
-                ))}
-            </Carousel>
-          </div>
-        </ProductList>
+        <div className="scrollable-carousel">
+          <Carousel scrollSnap cols={3} rows={2} gap={2} loop>
+            {res ? sortedProducts.map((product, index) => (
+              <Carousel.Item key={index}>
+                <ProductShowcaseGrid products={[product]} />
+              </Carousel.Item>
+            )) : otherProducts
+              .map((product, index) => (
+                <Carousel.Item key={index}>
+                  <ProductShowcaseGrid products={[product]} />
+                </Carousel.Item>
+              ))}
+          </Carousel>
+        </div>
         <Sort
           toggleRect={toggleRect}
           togglePop={togglePop}
@@ -169,21 +201,20 @@ const Home = () => {
           res={res}
         />
         <h2 style={{ marginLeft: '2rem' }}>Лучшее за неделю</h2>
-        <ProductList {...store}>
-          <div className="scrollable-carousel">
-            <Carousel scrollSnap cols={3} rows={1} gap={2} loop>
-              {store.filteredProducts
-                .filter(
-                  (product) => !featuredProducts.some((fp) => fp.id === product.id)
-                )
-                .map((product, index) => (
-                  <Carousel.Item key={index}>
-                    <ProductShowcaseGrid products={[product]} />
-                  </Carousel.Item>
-                ))}
-            </Carousel>
-          </div>
-        </ProductList>
+        <div className="scrollable-carousel">
+          <Carousel scrollSnap cols={3} rows={1} gap={2} loop>
+            {res ? sortedProducts.map((product, index) => (
+              <Carousel.Item key={index}>
+                <ProductShowcaseGrid products={[product]} />
+              </Carousel.Item>
+            )) : otherProducts
+              .map((product, index) => (
+                <Carousel.Item key={index}>
+                  <ProductShowcaseGrid products={[product]} />
+                </Carousel.Item>
+              ))}
+          </Carousel>
+        </div>
       </div>
     </main>
   );
