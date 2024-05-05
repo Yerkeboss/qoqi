@@ -71,7 +71,27 @@ const Home = () => {
     setSelectedBrand(brand);
     dispatch(applyFilter({ brand }));
     setActiveButton(brand);
+
+    // Filter products by brand from the products state
+    const filteredProductsByBrand = products.filter((product) => product.brand === brand);
+
+    // Sort filtered products by dateAdded
+    const sortedProductsByDate = sortProductsByDateAdded(filteredProductsByBrand);
+
+    // Update sortedProducts state
+    if (res) {
+      setSortedProducts(sortedProductsByDate);
+    } else {
+      const filteredProducts = store.filteredProducts.filter(
+        (product) => !featuredProducts.some((fp) => fp.id === product.id)
+      );
+
+      const sortedProductsByBrand = filteredProducts.filter((product) => product.brand === brand);
+      const sortedProducts = sortProductsByDateAdded(sortedProductsByBrand);
+      setSortedProducts(sortedProducts);
+    }
   };
+
 
   const store = useSelector(
     (state) => ({
@@ -83,9 +103,11 @@ const Home = () => {
     shallowEqual
   );
 
+  console.log('store.Filter', store.filteredProducts);
 
-  const sortProductsByDateAdded = (otherProducts) => {
-    const sorted = [...otherProducts].sort((a, b) => {
+
+  const sortProductsByDateAdded = (products) => {
+    const sorted = [...products].sort((a, b) => {
       const dateA = new Date(parseInt(a.dateAdded));
       const dateB = new Date(parseInt(b.dateAdded));
       return dateB - dateA;
@@ -178,20 +200,26 @@ const Home = () => {
         </div>
         <br />
 
-        <div className="scrollable-carousel">
-          <Carousel scrollSnap cols={3} rows={2} gap={2} loop>
-            {res ? sortedProducts.map((product, index) => (
-              <Carousel.Item key={index}>
-                <ProductShowcaseGrid products={[product]} />
-              </Carousel.Item>
-            )) : otherProducts
-              .map((product, index) => (
+        <ProductList {...store}>
+          <div className="scrollable-carousel">
+            <Carousel scrollSnap cols={3} rows={2} gap={2} loop>
+              {res ? sortedProducts.map((product, index) => (
                 <Carousel.Item key={index}>
                   <ProductShowcaseGrid products={[product]} />
                 </Carousel.Item>
-              ))}
-          </Carousel>
-        </div>
+              )) : store.filteredProducts
+                .filter(
+                  (product) => !featuredProducts.some((fp) => fp.id === product.id)
+                )
+                .map((product, index) => (
+                  <Carousel.Item key={index}>
+                    <ProductShowcaseGrid products={[product]} />
+                  </Carousel.Item>
+                ))}
+            </Carousel>
+          </div>
+        </ProductList>
+
         <Sort
           toggleRect={toggleRect}
           togglePop={togglePop}
@@ -201,20 +229,25 @@ const Home = () => {
           res={res}
         />
         <h2 style={{ marginLeft: '2rem' }}>Лучшее за неделю</h2>
-        <div className="scrollable-carousel">
-          <Carousel scrollSnap cols={3} rows={1} gap={2} loop>
-            {res ? sortedProducts.map((product, index) => (
-              <Carousel.Item key={index}>
-                <ProductShowcaseGrid products={[product]} />
-              </Carousel.Item>
-            )) : otherProducts
-              .map((product, index) => (
+        <ProductList {...store}>
+          <div className="scrollable-carousel">
+            <Carousel scrollSnap cols={3} rows={1} gap={2} loop>
+              {res ? sortedProducts.map((product, index) => (
                 <Carousel.Item key={index}>
                   <ProductShowcaseGrid products={[product]} />
                 </Carousel.Item>
-              ))}
-          </Carousel>
-        </div>
+              )) : store.filteredProducts
+                .filter(
+                  (product) => !featuredProducts.some((fp) => fp.id === product.id)
+                )
+                .map((product, index) => (
+                  <Carousel.Item key={index}>
+                    <ProductShowcaseGrid products={[product]} />
+                  </Carousel.Item>
+                ))}
+            </Carousel>
+          </div>
+        </ProductList>
       </div>
     </main>
   );

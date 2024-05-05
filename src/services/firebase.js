@@ -44,7 +44,7 @@ class Firebase {
               .collection('users')
               .orderBy(app.firestore.FieldPath.documentId())
               .startAfter(lastRefKey)
-              .limit(12);
+            
 
             const snapshot = await query.get();
             const users = [];
@@ -67,7 +67,7 @@ class Firebase {
             const query = this.db
               .collection('users')
               .orderBy(app.firestore.FieldPath.documentId())
-              .limit(12);
+      
             const snapshot = await query.get();
 
             clearTimeout(timeout);
@@ -158,7 +158,7 @@ class Firebase {
               .collection('events')
               .orderBy(app.firestore.FieldPath.documentId())
               .startAfter(lastRefKeyEvents)
-              .limit(12);
+              ;
 
             const snapshotEvents = await query.get();
             const events = [];
@@ -181,7 +181,7 @@ class Firebase {
             const queryEvents = this.db
               .collection('events')
               .orderBy(app.firestore.FieldPath.documentId())
-              .limit(12);
+        
             const snapshotEvents = await queryEvents.get();
 
             clearTimeout(timeoutEvents);
@@ -218,11 +218,11 @@ class Firebase {
             .orderBy('name_lower')
             .where('name_lower', '>=', searchKey)
             .where('name_lower', '<=', `${searchKey}\uf8ff`)
-            .limit(12);
+
           const searchedKeywordsRef = eventsRef
             .orderBy('dateAdded', 'desc')
             .where('keywords', 'array-contains-any', searchKey.split(' '))
-            .limit(12);
+
 
           // const totalResult = await totalQueryRef.get();
           const nameSnaps = await searchedNameRef.get();
@@ -302,7 +302,7 @@ class Firebase {
               .collection('products')
               .orderBy(app.firestore.FieldPath.documentId())
               .startAfter(lastRefKey)
-              .limit(12);
+            
 
             const snapshot = await query.get();
             const products = [];
@@ -325,7 +325,7 @@ class Firebase {
             const query = this.db
               .collection('products')
               .orderBy(app.firestore.FieldPath.documentId())
-              .limit(12);
+            
             const snapshot = await query.get();
 
             clearTimeout(timeout);
@@ -362,11 +362,11 @@ class Firebase {
             .orderBy('name_lower')
             .where('name_lower', '>=', searchKey)
             .where('name_lower', '<=', `${searchKey}\uf8ff`)
-            .limit(12);
+    
           const searchedKeywordsRef = productsRef
             .orderBy('dateAdded', 'desc')
             .where('keywords', 'array-contains-any', searchKey.split(' '))
-            .limit(12);
+     
 
           // const totalResult = await totalQueryRef.get();
           const nameSnaps = await searchedNameRef.get();
@@ -413,13 +413,13 @@ class Firebase {
     });
   };
 
-  getFeaturedProducts = (itemsCount = 12) => this.db
+  getFeaturedProducts = (itemsCount = 1000) => this.db
     .collection('products')
     .where('isFeatured', '==', true)
     .limit(itemsCount)
     .get();
 
-  getRecommendedProducts = (itemsCount = 12) => this.db
+  getRecommendedProducts = (itemsCount = 1000) => this.db
     .collection('products')
     .where('isRecommended', '==', true)
     .limit(itemsCount)
@@ -457,7 +457,7 @@ class Firebase {
               .collection('orders')
               .orderBy(app.firestore.FieldPath.documentId())
               .startAfter(lastRefKey)
-              .limit(12);
+         
 
             const snapshot = await query.get();
             const orders = [];
@@ -480,7 +480,7 @@ class Firebase {
             const query = this.db
               .collection('orders')
               .orderBy(app.firestore.FieldPath.documentId())
-              .limit(12);
+         
             const snapshot = await query.get();
 
             clearTimeout(timeout);
@@ -540,7 +540,7 @@ class Firebase {
 
   // Education
   getSingleEducation = (id) => this.db.collection('education').doc(id).get();
-  
+
   getSingleEduInfo = (id) => this.db.collection('educate').doc(id).get();
 }
 

@@ -56,6 +56,6 @@ export const displayActionMessage = (msg, status = 'info') => {
     } catch (e) {
       console.log(e);
     }
-  }, 3000);
+  }, 1000);
 };
 
