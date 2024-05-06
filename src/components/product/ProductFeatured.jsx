@@ -129,7 +129,7 @@ const ProductFeatured = ({ product }) => {
             </div>
             <div
               style={{
-                width: '25vw',
+                width: '26vw',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'space-between',

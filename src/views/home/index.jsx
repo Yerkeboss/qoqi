@@ -57,10 +57,19 @@ const Home = () => {
     setRect(false);
     setPop(true);
     setRes(false);
-    // Sort products by the length of the 'liked' array in descending order
-    const sortedByLikes = otherProducts.sort((a, b) => b.liked.length - a.liked.length);
+
+    // Sort products by the sum of likes and views in descending order
+    const sortedByLikes = otherProducts.sort((a, b) => {
+      const likesA = a.liked.length;
+      const likesB = b.liked.length;
+      const viewsA = a.viewed.length;
+      const viewsB = b.viewed.length;
+      return (likesB + viewsB) - (likesA + viewsA);
+    });
+
     setSortedProducts(sortedByLikes);
   };
+
 
   const toggleRes = () => {
     setRect(false);
