@@ -59,7 +59,6 @@ const Home = () => {
     setRes(false);
     // Sort products by the length of the 'liked' array in descending order
     const sortedByLikes = otherProducts.sort((a, b) => b.liked.length - a.liked.length);
-    console.log('sortedByLikes', sortedByLikes);
     setSortedProducts(sortedByLikes);
   };
 

@@ -426,8 +426,8 @@ class Firebase {
     .get();
 
   addProduct = (id, product) => {
-    const { liked, ...rest } = product;
-    const productData = liked ? { ...rest } : { ...rest, liked: [] }; // Ensure liked array exists
+    const { liked, viewed, ...rest } = product;
+    const productData = liked && viewed ? { ...rest } : { ...rest, liked: [], viewed: [] }; // Ensure liked array exists
     return this.db.collection('products').doc(id).set(productData);
   };
 

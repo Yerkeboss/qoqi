@@ -13,8 +13,10 @@ const ProductFeatured = ({ product }) => {
   const history = useHistory();
   const [isHovered, setIsHovered] = useState(false);
   const [user, setUser] = useState(null);
-  const [likesCount, setLikesCount] = useState(0); // State to hold likes count
-  const [isLiked, setIsLiked] = useState(false); // State to hold whether the user liked the product
+  const [likesCount, setLikesCount] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+  const [viewsCount, setViewsCount] = useState(0);
+  const [isViewed, setIsViewed] = useState(false);
   const userId = useUserId();
 
   useEffect(() => {
@@ -34,13 +36,19 @@ const ProductFeatured = ({ product }) => {
   }, [product]);
 
   const liked = product.liked || [];
+  const viewed = product.viewed || [];
 
   useEffect(() => {
     if (product && product.liked) {
       setLikesCount(product.liked.length);
       setIsLiked(product.liked.includes(userId)); // Check if the user liked the product
     }
-  }, [product, liked, userId]); // Include userId as a dependency
+
+    if (product && product.viewed) {
+      setViewsCount(product.viewed.length);
+      setIsViewed(product.viewed.includes(userId)); // Check if the user liked the product
+    }
+  }, [product, liked, userId, viewed]); // Include userId as a dependency
 
   const onLikeClick = async () => {
     if (!product || !userId) return;
@@ -70,11 +78,29 @@ const ProductFeatured = ({ product }) => {
   };
 
 
-  const onClickItem = () => {
-    if (!product) return;
+  const onClickItem = async () => {
+    if (!product || !userId) return;
 
     if (product.id) {
       history.push(`/product/${product.id}`);
+    }
+
+    try {
+      let updatedViewed = viewed;
+
+      if (isViewed) {
+        updatedViewed = viewed.filter((id) => id !== userId);
+      } else if (!viewed.includes(userId)) {
+        updatedViewed.push(userId);
+      }
+
+      await Firebase.editProduct(product.id, { viewed: updatedViewed });
+
+
+      setViewsCount(updatedViewed.length);
+      setIsViewed(!isViewed);
+    } catch (error) {
+      console.error('Error updating product:', error);
     }
   };
 
@@ -86,7 +112,7 @@ const ProductFeatured = ({ product }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="product-display-img">
+        <div className="product-display-img" onClick={onClickItem}>
           {product.image ? (
             <ImageLoader src={product.image} />
           ) : (
@@ -95,10 +121,10 @@ const ProductFeatured = ({ product }) => {
         </div>
         {isHovered ? (
           <div className="product-display-details">
-            <div style={{ display: 'inline-block', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ display: 'inline-block', justifyContent: 'center', alignItems: 'center' }} onClick={onClickItem}>
               <h2>{product.name || <Skeleton width={80} />}</h2>
             </div>
-            <div className="product-brand">
+            <div className="product-brand" onClick={onClickItem}>
               <p>{product.brand || <Skeleton width={40} />}</p>
             </div>
             <div
@@ -122,6 +148,12 @@ const ProductFeatured = ({ product }) => {
                 {' '}
                 {/* Display likes count */}
                 <FontAwesomeIcon icon={faEye} className="white-icon" />
+                <span style={{
+                  marginLeft: '1vw', fontSize: '1.2vw', fontWeight: 'bolder', color: 'white'
+                }}
+                >
+                  {viewsCount}
+                </span>
               </div>
             </div>
           </div>
