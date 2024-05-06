@@ -44,7 +44,7 @@ class Firebase {
               .collection('users')
               .orderBy(app.firestore.FieldPath.documentId())
               .startAfter(lastRefKey)
-            
+
 
             const snapshot = await query.get();
             const users = [];
@@ -67,7 +67,7 @@ class Firebase {
             const query = this.db
               .collection('users')
               .orderBy(app.firestore.FieldPath.documentId())
-      
+
             const snapshot = await query.get();
 
             clearTimeout(timeout);
@@ -181,7 +181,7 @@ class Firebase {
             const queryEvents = this.db
               .collection('events')
               .orderBy(app.firestore.FieldPath.documentId())
-        
+
             const snapshotEvents = await queryEvents.get();
 
             clearTimeout(timeoutEvents);
@@ -302,7 +302,7 @@ class Firebase {
               .collection('products')
               .orderBy(app.firestore.FieldPath.documentId())
               .startAfter(lastRefKey)
-            
+
 
             const snapshot = await query.get();
             const products = [];
@@ -325,7 +325,7 @@ class Firebase {
             const query = this.db
               .collection('products')
               .orderBy(app.firestore.FieldPath.documentId())
-            
+
             const snapshot = await query.get();
 
             clearTimeout(timeout);
@@ -362,11 +362,11 @@ class Firebase {
             .orderBy('name_lower')
             .where('name_lower', '>=', searchKey)
             .where('name_lower', '<=', `${searchKey}\uf8ff`)
-    
+
           const searchedKeywordsRef = productsRef
             .orderBy('dateAdded', 'desc')
             .where('keywords', 'array-contains-any', searchKey.split(' '))
-     
+
 
           // const totalResult = await totalQueryRef.get();
           const nameSnaps = await searchedNameRef.get();
@@ -425,7 +425,11 @@ class Firebase {
     .limit(itemsCount)
     .get();
 
-  addProduct = (id, product) => this.db.collection('products').doc(id).set(product);
+  addProduct = (id, product) => {
+    const { liked, ...rest } = product;
+    const productData = liked ? { ...rest } : { ...rest, liked: [] }; // Ensure liked array exists
+    return this.db.collection('products').doc(id).set(productData);
+  };
 
   generateKey = () => this.db.collection('products').doc().id;
 
@@ -438,7 +442,10 @@ class Firebase {
 
   deleteImage = (id) => this.storage.ref('products').child(id).delete();
 
-  editProduct = (id, updates) => this.db.collection('products').doc(id).update(updates);
+  editProduct = (id, updates) => {
+    return this.db.collection('products').doc(id).update(updates);
+  };
+
 
   removeProduct = (id) => this.db.collection('products').doc(id).delete();
 
@@ -457,7 +464,7 @@ class Firebase {
               .collection('orders')
               .orderBy(app.firestore.FieldPath.documentId())
               .startAfter(lastRefKey)
-         
+
 
             const snapshot = await query.get();
             const orders = [];
@@ -480,7 +487,7 @@ class Firebase {
             const query = this.db
               .collection('orders')
               .orderBy(app.firestore.FieldPath.documentId())
-         
+
             const snapshot = await query.get();
 
             clearTimeout(timeout);

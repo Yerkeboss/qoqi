@@ -57,6 +57,10 @@ const Home = () => {
     setRect(false);
     setPop(true);
     setRes(false);
+    // Sort products by the length of the 'liked' array in descending order
+    const sortedByLikes = otherProducts.sort((a, b) => b.liked.length - a.liked.length);
+    console.log('sortedByLikes', sortedByLikes);
+    setSortedProducts(sortedByLikes);
   };
 
   const toggleRes = () => {
@@ -102,9 +106,6 @@ const Home = () => {
     }),
     shallowEqual
   );
-
-  console.log('store.Filter', store.filteredProducts);
-
 
   const sortProductsByDateAdded = (products) => {
     const sorted = [...products].sort((a, b) => {
@@ -174,9 +175,6 @@ const Home = () => {
     };
   }, []);
 
-  console.log('otherProducts', otherProducts);
-  console.log('products', products);
-
   return (
     <main className="content">
       <div className="home" style={{ marginTop: '2rem' }}>
@@ -203,7 +201,7 @@ const Home = () => {
         <ProductList {...store}>
           <div className="scrollable-carousel">
             <Carousel scrollSnap cols={3} rows={2} gap={2} loop>
-              {res ? sortedProducts.map((product, index) => (
+              {res || pop ? sortedProducts.map((product, index) => (
                 <Carousel.Item key={index}>
                   <ProductShowcaseGrid products={[product]} />
                 </Carousel.Item>
@@ -232,7 +230,7 @@ const Home = () => {
         <ProductList {...store}>
           <div className="scrollable-carousel">
             <Carousel scrollSnap cols={3} rows={1} gap={2} loop>
-              {res ? sortedProducts.map((product, index) => (
+              {res || pop ? sortedProducts.map((product, index) => (
                 <Carousel.Item key={index}>
                   <ProductShowcaseGrid products={[product]} />
                 </Carousel.Item>

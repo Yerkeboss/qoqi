@@ -7,19 +7,15 @@ import { faEye, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import { ImageLoader } from '@/components/common';
 import Firebase from '../../services/firebase';
+import { useUserId } from '@/hooks';
 
 const ProductFeatured = ({ product }) => {
   const history = useHistory();
   const [isHovered, setIsHovered] = useState(false);
   const [user, setUser] = useState(null);
-
-  const onClickItem = () => {
-    if (!product) return;
-
-    if (product.id) {
-      history.push(`/product/${product.id}`);
-    }
-  };
+  const [likesCount, setLikesCount] = useState(0); // State to hold likes count
+  const [isLiked, setIsLiked] = useState(false); // State to hold whether the user liked the product
+  const userId = useUserId();
 
   useEffect(() => {
     if (product && product.userId) {
@@ -37,55 +33,94 @@ const ProductFeatured = ({ product }) => {
     }
   }, [product]);
 
+  const liked = product.liked || [];
+
+  useEffect(() => {
+    if (product && product.liked) {
+      setLikesCount(product.liked.length);
+      setIsLiked(product.liked.includes(userId)); // Check if the user liked the product
+    }
+  }, [product, liked, userId]); // Include userId as a dependency
+
+  const onLikeClick = async () => {
+    if (!product || !userId) return;
+
+    try {
+      let updatedLiked = liked; // Create a copy of liked array
+
+      if (isLiked) {
+        // If user has already liked the product, remove the like
+        updatedLiked = liked.filter((id) => id !== userId);
+      } else {
+        // If user hasn't liked the product yet, add the like if it doesn't already exist
+        if (!liked.includes(userId)) {
+          updatedLiked.push(userId);
+        }
+      }
+
+      // Update the liked array in Firebase
+      await Firebase.editProduct(product.id, { liked: updatedLiked });
+
+      // Update likes count directly from the updated liked array
+      setLikesCount(updatedLiked.length); // Update likes count directly from liked array length
+      setIsLiked(!isLiked); // Toggle isLiked state
+    } catch (error) {
+      console.error('Error updating product:', error);
+    }
+  };
+
+
+  const onClickItem = () => {
+    if (!product) return;
+
+    if (product.id) {
+      history.push(`/product/${product.id}`);
+    }
+  };
+
   return (
     <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2">
       <div
         className="product-display"
-        onClick={onClickItem}
         role="presentation"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div
-          className="product-display-img"
-        >
+        <div className="product-display-img">
           {product.image ? (
-            <ImageLoader
-              src={product.image}
-            />
+            <ImageLoader src={product.image} />
           ) : (
             <Skeleton width="100%" height="100%" />
           )}
         </div>
         {isHovered ? (
           <div className="product-display-details">
-            <div style={{
-              display: 'inline-block', justifyContent: 'center', alignItems: 'center'
-            }}
-            >
+            <div style={{ display: 'inline-block', justifyContent: 'center', alignItems: 'center' }}>
               <h2>{product.name || <Skeleton width={80} />}</h2>
             </div>
             <div className="product-brand">
-              <p>
-                {product.brand || <Skeleton width={40} />}
-              </p>
+              <p>{product.brand || <Skeleton width={40} />}</p>
             </div>
-            <div style={{
-              width: '26vw',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'space-between',
-              marginTop: '1vw'
-            }}
-            >
-              <h4 style={{ flex: '5' }}>
-                {user?.fullname}
-              </h4>
-              <div style={{
-                justifySelf: 'flex-end'
+            <div
+              style={{
+                width: '25vw',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'space-between',
+                marginTop: '1vw'
               }}
-              >
-                <FontAwesomeIcon icon={faThumbsUp} className="white-icon" />
+            >
+              <h4 style={{ flex: '5' }}>{user?.fullname}</h4>
+              <div style={{ justifySelf: 'flex-end' }}>
+                <FontAwesomeIcon icon={faThumbsUp} className="white-icon" onClick={onLikeClick} />
+                <span style={{
+                  marginLeft: '1vw', fontSize: '1.2vw', fontWeight: 'bolder', color: 'white'
+                }}
+                >
+                  {likesCount}
+                </span>
+                {' '}
+                {/* Display likes count */}
                 <FontAwesomeIcon icon={faEye} className="white-icon" />
               </div>
             </div>
@@ -103,7 +138,8 @@ ProductFeatured.propTypes = {
     image: PropType.string,
     name: PropType.string,
     id: PropType.string,
-    brand: PropType.string
+    brand: PropType.string,
+    liked: PropType.array // Add liked propType
   }).isRequired
 };
 
