@@ -9,10 +9,9 @@ const Sort = ({
   <Box
     sx={{
       background: 'white',
-      wifth: '15rem',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '5rem'
+      width: 'fit-content',
+      height: '5rem',
+      padding: '0.5vw'
     }}
     style={{
       borderRadius: '10rem',
@@ -24,42 +23,57 @@ const Sort = ({
       zIndex: '9999'
     }}
   >
-    <div style={{ borderRadius: '10rem', backgroundColor: 'white', height: '4rem' }}>
+    <div style={{
+      borderRadius: '10rem',
+      backgroundColor: 'white',
+      height: '4rem',
+      justifyContent: 'center',
+      alignItems: 'center',
+      display: 'flex',
+      flexDirection: 'row'
+    }}
+    >
       <Button
         onClick={toggleRect}
         style={{
           backgroundColor: rect ? 'black' : 'white',
           borderRadius: '10rem',
-          color: rect ? 'white' : 'black',
           border: 'none',
-          height: '4rem'
+          height: '4rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
-        Рекомендации
+        <p style={{ color: rect ? 'white' : 'black' }}>Рекомендации</p>
       </Button>
       <Button
         onClick={togglePop}
         style={{
           backgroundColor: pop ? 'black' : 'white',
           borderRadius: '10rem',
-          color: pop ? 'white' : 'black',
           border: 'none',
-          height: '4rem'
+          height: '4rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
-        Популярное
+        <p style={{ color: pop ? 'white' : 'black' }}>Популярное</p>
       </Button>
       <Button
         onClick={toggleRes}
         style={{
           backgroundColor: res ? 'black' : 'white',
           borderRadius: '10rem',
-          color: res ? 'white' : 'black',
           border: 'none',
-          height: '4rem'
+          height: '4rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
-        Недавние
+        <p style={{ color: res ? 'white' : 'black' }}>Недавние</p>
       </Button>
     </div>
   </Box>
