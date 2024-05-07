@@ -556,14 +556,14 @@
   height: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-  grid-gap: 2rem;
+  grid-gap: 2vw;
 }
 
 .product-display {
   border-radius: 1rem;
   width: 100%;
   height: 100%;
-  max-height: 35rem;
+  max-height: 24vw;
   border: 1px solid $border-color;
   display: inline-flex; /* Change to inline-flex */
   align-items: stretch; /* Stretch child elements vertically */
@@ -603,7 +603,7 @@
   img {
     border-radius: 1rem;
     width: 100%;
-    height: 100%;
+    height: 30vw;
     object-fit: fill;
     transition: transform 0.3s ease-in-out;
     @include bezier-transition;

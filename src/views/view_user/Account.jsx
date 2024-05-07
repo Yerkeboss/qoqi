@@ -77,7 +77,7 @@ const Account = () => {
             </div>
 
           </div>
-          <p style={{ marginLeft: '6rem' }}>Графический дизайнер с 6+ годами опыта в игровой индустрии</p>
+          <p style={{ marginLeft: '3vw' }}>Графический дизайнер с 6+ годами опыта в игровой индустрии</p>
           <div style={{
  display: 'flex', width: '100%', marginTop: '1rem', justifyContent: 'center', alignItems: 'center'
 }}

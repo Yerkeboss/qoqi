@@ -32,22 +32,21 @@ const ViewUser = () => {
     <div
       className="content"
       style={{
-        width: '100%', display: 'flex', position: 'relative', marginLeft: '2rem', marginTop: '3rem', height: '80rem'
+        width: '100%', display: 'flex', position: 'relative', marginLeft: '2rem', marginTop: '3rem', height: '80vw'
       }}
     >
       {isLoading && (
       <div className="loader">
-        <h4>Загружается</h4>
         <br />
         <LoadingOutlined style={{ fontSize: '3rem' }} />
       </div>
       )}
       {user && !isLoading && (
       <div style={{
-        flex: '1', width: '70%', height: '80rem'
+        flex: '1', width: '70%'
       }}
       >
-        <div className="user-profile-banner-wrapper">
+        <div className="user-profile-banner-wrapper" style={{ height: '18vw' }}>
           <ImageLoader
             alt="Banner"
             className="user-profile-banner-img"

@@ -74,9 +74,6 @@ const Home = () => {
     return sorted;
   };
 
-  console.log('selectedBrand', selectedBrand);
-  console.log('activeButton', activeButton);
-
   const toggleRect = () => {
     setRect(true);
     setPop(false);
@@ -210,14 +207,13 @@ const Home = () => {
     <main className="content">
       <div className="home" style={{ marginTop: '2rem' }}>
         <h2 style={{ marginLeft: '2rem' }}>Мероприятия</h2>
-        <Carousel cols={3} rows={1} gap={10} loop scrollSnap>
+        <Carousel cols={3} rows={1} gap={2} loop scrollSnap>
           {events.map((event, index) => (
             <Carousel.Item key={index}>
               <EventGrid events={[event]} />
             </Carousel.Item>
           ))}
         </Carousel>
-
         <div style={{ marginLeft: '2rem' }}>
           <h2>Галерея лучших работ</h2>
           <Categories
@@ -228,27 +224,15 @@ const Home = () => {
           />
         </div>
         <br />
-
-        <ProductList {...store}>
-          <div className="scrollable-carousel">
-            <Carousel scrollSnap cols={3} rows={2} gap={2} loop>
-              {rect || res || pop ? sortedProducts.map((product, index) => (
-                <Carousel.Item key={index}>
-                  <ProductShowcaseGrid products={[product]} />
-                </Carousel.Item>
-              )) : store.filteredProducts
-                .filter(
-                  (product) => !featuredProducts.some((fp) => fp.id === product.id)
-                )
-                .map((product, index) => (
-                  <Carousel.Item key={index}>
-                    <ProductShowcaseGrid products={[product]} />
-                  </Carousel.Item>
-                ))}
-            </Carousel>
-          </div>
-        </ProductList>
-
+        <div className="scrollable-carousel">
+          <Carousel scrollSnap cols={3} rows={2} gap={2} loop>
+            {((rect || res || pop) && sortedProducts.map((product, index) => (
+              <Carousel.Item key={index}>
+                <ProductShowcaseGrid products={[product]} />
+              </Carousel.Item>
+            )))}
+          </Carousel>
+        </div>
         <Sort
           toggleRect={toggleRect}
           togglePop={togglePop}
@@ -258,25 +242,13 @@ const Home = () => {
           res={res}
         />
         <h2 style={{ marginLeft: '2rem' }}>Лучшее за неделю</h2>
-        <ProductList {...store}>
-          <div className="scrollable-carousel">
-            <Carousel scrollSnap cols={3} rows={1} gap={2} loop>
-              {rect || res || pop ? sortedProducts.map((product, index) => (
-                <Carousel.Item key={index}>
-                  <ProductShowcaseGrid products={[product]} />
-                </Carousel.Item>
-              )) : store.filteredProducts
-                .filter(
-                  (product) => !featuredProducts.some((fp) => fp.id === product.id)
-                )
-                .map((product, index) => (
-                  <Carousel.Item key={index}>
-                    <ProductShowcaseGrid products={[product]} />
-                  </Carousel.Item>
-                ))}
-            </Carousel>
-          </div>
-        </ProductList>
+        <Carousel scrollSnap cols={3} rows={1} gap={2} loop>
+          {((rect || res || pop) && sortedProducts.map((product, index) => (
+            <Carousel.Item key={index}>
+              <ProductShowcaseGrid products={[product]} />
+            </Carousel.Item>
+          )))}
+        </Carousel>
       </div>
     </main>
   );
