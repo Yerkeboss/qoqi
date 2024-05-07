@@ -20,20 +20,29 @@ const ProductFeatured = ({ product }) => {
   const userId = useUserId();
 
   useEffect(() => {
+    let isMounted = true; // Add a variable to track component mount status
+
     if (product && product.userId) {
       Firebase.getUser(product.userId)
         .then((doc) => {
-          if (doc.exists) {
-            setUser(doc.data());
-          } else {
-            console.log('No such user!');
+          if (isMounted) { // Check if the component is still mounted before updating state
+            if (doc.exists) {
+              setUser(doc.data());
+            } else {
+              console.log('No such user!');
+            }
           }
         })
         .catch((error) => {
           console.error('Error getting user:', error);
         });
     }
+
+    return () => {
+      isMounted = false; // Cleanup function to update component mount status
+    };
   }, [product]);
+
 
   const liked = product.liked || [];
   const viewed = product.viewed || [];

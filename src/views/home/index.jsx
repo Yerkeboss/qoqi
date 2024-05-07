@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+  useState, useEffect, useRef, useMemo
+} from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import Carousel from 'react-grid-carousel';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
@@ -32,11 +34,10 @@ const Home = () => {
   const [rect, setRect] = useState(false);
   const [pop, setPop] = useState(false);
   const [res, setRes] = useState(false);
+  const [brandOption, setBrandOption] = useState(false);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
-  const [sortedProducts, setSortedProducts] = useState([]);
-
   const {
     featuredProducts,
     isLoading: isLoadingFeatured,
@@ -47,27 +48,46 @@ const Home = () => {
     (product) => !featuredProducts.some((fp) => fp.id === product.id)
   );
 
+
+  const sortProductsByUserPreference = (products) => {
+    // Map to track the count of brands visited by users
+    const brandVisitsMap = new Map();
+
+    // Iterate through the products to track brand visits
+    products.forEach((product) => {
+      if (product.viewed) {
+        product.viewed.forEach((userId) => {
+          const { brand } = product;
+          // Increment the count of the brand visited by this user
+          brandVisitsMap.set(brand, (brandVisitsMap.get(brand) || 0) + 1);
+        });
+      }
+    });
+
+    // Sort products based on the brands visited by users
+    const sorted = [...products].sort((a, b) => {
+      const brandAVisits = brandVisitsMap.get(a.brand) || 0;
+      const brandBVisits = brandVisitsMap.get(b.brand) || 0;
+      return brandBVisits - brandAVisits;
+    });
+
+    return sorted;
+  };
+
+  console.log('selectedBrand', selectedBrand);
+  console.log('activeButton', activeButton);
+
   const toggleRect = () => {
     setRect(true);
     setPop(false);
     setRes(false);
   };
 
+
   const togglePop = () => {
     setRect(false);
     setPop(true);
     setRes(false);
-
-    // Sort products by the sum of likes and views in descending order
-    const sortedByLikes = otherProducts.sort((a, b) => {
-      const likesA = a.liked.length;
-      const likesB = b.liked.length;
-      const viewsA = a.viewed.length;
-      const viewsB = b.viewed.length;
-      return (likesB + viewsB) - (likesA + viewsA);
-    });
-
-    setSortedProducts(sortedByLikes);
   };
 
 
@@ -75,45 +95,15 @@ const Home = () => {
     setRect(false);
     setPop(false);
     setRes(true);
-    // Sort products by dateAdded when "Недавние" button is clicked
-    setSortedProducts(sortProductsByDateAdded(otherProducts));
   };
 
   const handleBrandSelect = (brand) => {
     setSelectedBrand(brand);
     dispatch(applyFilter({ brand }));
     setActiveButton(brand);
-
-    // Filter products by brand from the products state
-    const filteredProductsByBrand = products.filter((product) => product.brand === brand);
-
-    // Sort filtered products by dateAdded
-    const sortedProductsByDate = sortProductsByDateAdded(filteredProductsByBrand);
-
-    // Update sortedProducts state
-    if (res) {
-      setSortedProducts(sortedProductsByDate);
-    } else {
-      const filteredProducts = store.filteredProducts.filter(
-        (product) => !featuredProducts.some((fp) => fp.id === product.id)
-      );
-
-      const sortedProductsByBrand = filteredProducts.filter((product) => product.brand === brand);
-      const sortedProducts = sortProductsByDateAdded(sortedProductsByBrand);
-      setSortedProducts(sortedProducts);
-    }
+    setBrandOption(true);
   };
 
-
-  const store = useSelector(
-    (state) => ({
-      filteredProducts: selectFilter(state.products.items, state.filter),
-      products: state.products,
-      requestStatus: state.app.requestStatus,
-      isLoading: state.app.loading
-    }),
-    shallowEqual
-  );
 
   const sortProductsByDateAdded = (products) => {
     const sorted = [...products].sort((a, b) => {
@@ -145,9 +135,41 @@ const Home = () => {
       }
     }
   };
+  const store = useSelector(
+    (state) => ({
+      filteredProducts: selectFilter(state.products.items, state.filter),
+      products: state.products,
+      requestStatus: state.app.requestStatus,
+      isLoading: state.app.loading
+    }),
+    shallowEqual
+  );
+
+  const sortedProducts = useMemo(() => {
+    let filteredProducts = otherProducts; // Start with all otherProducts
+
+    // Apply sorting based on user preferences, likes/views, or date added
+    if (rect) {
+      filteredProducts = sortProductsByUserPreference(filteredProducts);
+    } else if (pop) {
+      filteredProducts = filteredProducts.sort((a, b) => {
+        const likesA = a.liked.length;
+        const likesB = b.liked.length;
+        const viewsA = a.viewed.length;
+        const viewsB = b.viewed.length;
+        return (likesB + viewsB) - (likesA + viewsA);
+      });
+    } else if (res) {
+      filteredProducts = sortProductsByDateAdded(filteredProducts);
+    }
+    if (selectedBrand) {
+      filteredProducts = filteredProducts.filter((product) => product.brand.toLowerCase() === selectedBrand);
+    }
+
+    return filteredProducts;
+  }, [rect, pop, res, otherProducts, selectedBrand]);
 
   useEffect(() => {
-    toggleRect();
     window.addEventListener('scroll', handleScroll);
     // Fetch products data from Firestore
     const fetchEvents = async () => {
@@ -178,6 +200,7 @@ const Home = () => {
 
     fetchEvents();
     fetchProducts();
+    toggleRect();
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -209,7 +232,7 @@ const Home = () => {
         <ProductList {...store}>
           <div className="scrollable-carousel">
             <Carousel scrollSnap cols={3} rows={2} gap={2} loop>
-              {res || pop ? sortedProducts.map((product, index) => (
+              {rect || res || pop ? sortedProducts.map((product, index) => (
                 <Carousel.Item key={index}>
                   <ProductShowcaseGrid products={[product]} />
                 </Carousel.Item>
@@ -238,7 +261,7 @@ const Home = () => {
         <ProductList {...store}>
           <div className="scrollable-carousel">
             <Carousel scrollSnap cols={3} rows={1} gap={2} loop>
-              {res || pop ? sortedProducts.map((product, index) => (
+              {rect || res || pop ? sortedProducts.map((product, index) => (
                 <Carousel.Item key={index}>
                   <ProductShowcaseGrid products={[product]} />
                 </Carousel.Item>

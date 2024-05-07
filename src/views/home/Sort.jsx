@@ -42,7 +42,8 @@ const Sort = ({
           height: '4rem',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          padding: '1.5vw'
         }}
       >
         <p style={{ color: rect ? 'white' : 'black' }}>Рекомендации</p>
@@ -56,7 +57,8 @@ const Sort = ({
           height: '4rem',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          padding: '1.5vw'
         }}
       >
         <p style={{ color: pop ? 'white' : 'black' }}>Популярное</p>
@@ -70,7 +72,8 @@ const Sort = ({
           height: '4rem',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          padding: '1.5vw'
         }}
       >
         <p style={{ color: res ? 'white' : 'black' }}>Недавние</p>

@@ -160,7 +160,7 @@ const Chat = () => {
               display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#F28290', height: '6vw'
             }}
             >
-              <Image src={user?.avatar} style={{ width: '4vw', height: '4vw' }} onClick={() => onClickUser(user.id)} />
+              <Image src={user?.avatar} style={{ width: '4vw', height: '4vw', borderRadius: '50%' }} onClick={() => onClickUser(user.id)} />
               <p style={{ color: 'white', marginLeft: '1vw' }} onClick={() => onClickUser(user.id)}>{user?.fullname}</p>
             </div>
             <div className="messages">
