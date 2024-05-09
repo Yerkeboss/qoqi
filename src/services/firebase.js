@@ -556,6 +556,16 @@ class Firebase {
   // Education
   getSingleEducation = (id) => this.db.collection('education').doc(id).get();
 
+  addCourse = (id, course) => {
+    const { saved, ...rest } = course;
+    const courseData = saved ? { ...rest } : { ...rest, saved: [] }; // Ensure liked array exists
+    return this.db.collection('education').doc(id).set(courseData);
+  };
+
+  editCourse = (id, updates) => {
+    return this.db.collection('education').doc(id).update(updates);
+  };
+
   getSingleEduInfo = (id) => this.db.collection('educate').doc(id).get();
 }
 

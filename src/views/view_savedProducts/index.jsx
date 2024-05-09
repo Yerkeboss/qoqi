@@ -69,7 +69,7 @@ const SavedProducts = () => {
             >
               <p style={{ color: '#F28290' }}>Назад</p>
             </Button>
-            <h2 style={{ marginLeft: '1.5vw', height: '20%' }}> Сохраненные Работы</h2>
+            <h2 style={{ marginLeft: '1.5vw', height: '20%' }}> Сохраненные работы</h2>
           </div>
           <div style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
             {/* <ProductGrid products={userProducts} /> */}

@@ -156,6 +156,10 @@ const AppRouter = () => (
           path={ROUTES.SAVED_VACANCIES}
         />
         <Route
+          component={view.SavedCourses}
+          path={ROUTES.SAVED_COURSES}
+        />
+        <Route
           component={view.ViewCroud}
           path={ROUTES.VIEW_CROUD}
         />

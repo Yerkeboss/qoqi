@@ -16,6 +16,7 @@ const Educate = () => {
   const history = useHistory();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const userId = useUserId();
+  const [saved, setSaved] = useState([]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -43,7 +44,7 @@ const Educate = () => {
     try {
       // Formulate the course object
       const course = {
-        name, duration, description, userId
+        name, duration, description, userId, saved
       };
 
       // Add course to Firestore

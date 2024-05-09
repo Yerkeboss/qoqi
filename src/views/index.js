@@ -37,3 +37,4 @@ export { default as ViewEduInfo } from './view_eduInfo';
 export { default as Educate } from './educate';
 export { default as SavedProducts } from './view_savedProducts';
 export { default as SavedVacancies } from './view_savedVacancies';
+export { default as SavedCourses } from './view_savedCourses';

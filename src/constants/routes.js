@@ -47,3 +47,4 @@ export const CHAT = '/chat/:id';
 export const SAVED = '/saved';
 export const SAVED_PRODUCTS = '/savedProducts';
 export const SAVED_VACANCIES = '/savedVacancies';
+export const SAVED_COURSES = '/savedCourses';

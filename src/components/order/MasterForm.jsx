@@ -31,6 +31,7 @@ const MasterForm = () => {
   const userId = useUserId();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [anotherOption, setAnotherOption] = useState(false);
+  const [saved, setSaved] = useState([]);
 
 
   // Function to go to the next step
@@ -103,7 +104,7 @@ const MasterForm = () => {
     try {
       // Formulate the order object
       const order = {
-        selectedSpecialist, name, address, enteredTexts, duration, budgetType, from, to, userId
+        selectedSpecialist, name, address, enteredTexts, duration, budgetType, from, to, userId, saved
       };
 
       // Add order to Firestore
@@ -249,7 +250,7 @@ const MasterForm = () => {
                 backgroundColor: '#F28290',
                 border: 'none',
                 color: 'black',
-               
+
                 borderRadius: '1vw',
                 padding: '1.5vw',
                 height: '4rem',

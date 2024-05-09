@@ -115,7 +115,7 @@ const Vacancies = () => {
             >
               <p style={{ color: '#F28290' }}>Назад</p>
             </Button>
-            <h2 style={{ marginLeft: '1.5vw', height: '20%' }}> Сохраненные Вакансии</h2>
+            <h2 style={{ marginLeft: '1.5vw', height: '20%' }}> Сохраненные вакансии</h2>
 
           </div>
           <div style={{ width: '99%' }}>

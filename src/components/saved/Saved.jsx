@@ -21,6 +21,10 @@ const Saved = () => {
     history.push('/savedVacancies');
   };
 
+  const onOpenCourses = () => {
+    history.push('/savedCourses');
+  };
+
 
   return (
     <main className="content" style={{ marginTop: '2rem' }}>
@@ -151,6 +155,7 @@ const Saved = () => {
             style={{
               width: '30vw', height: '28vw', border: '1px solid black', borderRadius: '1vw', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '1.5vw', flexDirection: 'column'
             }}
+            onClick={onOpenCourses}
           >
             <div
               style={{
