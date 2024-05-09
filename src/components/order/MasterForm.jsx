@@ -21,6 +21,7 @@ const MasterForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedSpecialist, setSelectedSpecialist] = useState('');
   const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [address, setAddress] = useState('');
   const [inputText, setInputText] = useState(''); // State to track input text
   const [enteredTexts, setEnteredTexts] = useState([]); // State to store entered texts
@@ -74,6 +75,8 @@ const MasterForm = () => {
       setName(value);
     } else if (name === 'address') {
       setAddress(value);
+    } else if (name === 'description') {
+      setDescription(value);
     }
   };
 
@@ -104,7 +107,7 @@ const MasterForm = () => {
     try {
       // Formulate the order object
       const order = {
-        selectedSpecialist, name, address, enteredTexts, duration, budgetType, from, to, userId, saved
+        selectedSpecialist, name, address, description, enteredTexts, duration, budgetType, from, to, userId, saved
       };
 
       // Add order to Firestore
@@ -377,6 +380,7 @@ const MasterForm = () => {
                     _next={_next}
                     name={name}
                     address={address}
+                    description={description}
                     inputText={inputText}
                     enteredTexts={enteredTexts}
                     handleChange={handleChange}

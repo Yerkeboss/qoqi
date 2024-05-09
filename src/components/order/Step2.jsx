@@ -9,6 +9,7 @@ const Step2 = (props) => {
     currentStep,
     handleInputChange,
     name,
+    description,
     _next,
     _prev,
     address,
@@ -80,6 +81,25 @@ const Step2 = (props) => {
             id="name"
             placeholder="Пример: Редизайн сайта"
             value={name} // Prop: The username input data
+            onChange={handleInputChange} // Prop: Puts data into the state
+          />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <p style={{
+            marginTop: '1.5vw', marginBottom: '0.5vw', fontSize: '1.1vw', color: '#121417', fontWeight: '400'
+          }}
+          >
+            Описание задачи
+          </p>
+          <Input
+            style={{
+              borderRadius: '1vw', width: '98%', fontSize: '1vw', height: '7vw'
+            }}
+            type="textarea"
+            name="description"
+            id="description"
+            placeholder="Фокус на Дизайн"
+            value={description} // Prop: The username input data
             onChange={handleInputChange} // Prop: Puts data into the state
           />
         </div>

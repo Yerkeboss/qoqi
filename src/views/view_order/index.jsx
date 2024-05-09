@@ -265,6 +265,24 @@ const ViewOrder = () => {
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Card.Text style={{ fontSize: '1.4vw', width: '100%', marginTop: '-0.5vw' }}>
+                      Описание задачи:
+                    </Card.Text>
+                    <div style={{
+                      display: 'flex',
+                      justifyContent: 'flex-end'
+                    }}
+                    >
+                      <Card.Text style={{
+                        fontSize: '1.4vw', width: '15vw', marginTop: '-0.5vw'
+                      }}
+                      >
+                        {`${job?.description}`}
+                      </Card.Text>
+                    </div>
+
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Card.Text style={{ fontSize: '1.4vw', width: '100%', marginTop: '-0.5vw' }}>
                       Местоположение офиса:
                     </Card.Text>
                     <div style={{
