@@ -35,3 +35,5 @@ export { default as Chat } from './view_chat';
 export { default as ViewEducation } from './view_education';
 export { default as ViewEduInfo } from './view_eduInfo';
 export { default as Educate } from './educate';
+export { default as SavedProducts } from './view_savedProducts';
+export { default as SavedVacancies } from './view_savedVacancies';

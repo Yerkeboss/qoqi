@@ -44,4 +44,6 @@ export const TENDER = '/tenderList';
 export const CROUD = '/croudList';
 export const CHARITY = '/charityList';
 export const CHAT = '/chat/:id';
-
+export const SAVED = '/saved';
+export const SAVED_PRODUCTS = '/savedProducts';
+export const SAVED_VACANCIES = '/savedVacancies';

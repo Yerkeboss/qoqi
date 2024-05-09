@@ -1,10 +1,6 @@
 import { ArrowLeftOutlined, LoadingOutlined } from '@ant-design/icons';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Select from 'react-select';
-import Card from 'react-bootstrap/Card';
-import { CardBody, CardTitle } from 'react-bootstrap';
-import Image from 'react-bootstrap/Image';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useSelector } from 'react-redux';
@@ -16,24 +12,28 @@ import {
   faCartShopping
 } from '@fortawesome/free-solid-svg-icons';
 import Firebase from '../../services/firebase';
-import UserAvatar from '../account/components/UserAvatar';
 import {
   useBasket,
   useDocumentTitle,
   useProduct,
-  useRecommendedProducts,
   useFeaturedProducts,
-  useScrollTop
+  useScrollTop,
+  useUserId
 } from '@/hooks';
 import { displayMoney } from '@/helpers/utils';
-import { RECOMMENDED_PRODUCTS, SHOP } from '@/constants/routes';
-import { ProductShowcaseGrid } from '@/components/product';
-import { ColorChooser, ImageLoader, MessageDisplay } from '@/components/common';
+import { SHOP } from '@/constants/routes';
+import { ImageLoader, MessageDisplay } from '@/components/common';
 
 const ViewProduct = () => {
   const { id } = useParams();
   const { product, isLoading, error } = useProduct(id);
   const { addToBasket, isItemOnBasket } = useBasket(id);
+  const [isLiked, setIsLiked] = useState(false);
+  const liked = product?.liked || [];
+  const [isSaved, setIsSaved] = useState(false);
+  const saved = product?.saved || [];
+  const userId = useUserId();
+
   useScrollTop();
   useDocumentTitle(`Обзор ${product?.name || 'Item'}`);
 
@@ -42,26 +42,91 @@ const ViewProduct = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    let isMounted = true; // Add a variable to track component mount status
+    if (product && product.liked) {
+      setIsLiked(product.liked.includes(userId)); // Check if the user liked the product
+    }
+    if (product && product.saved) {
+      setIsSaved(product.saved.includes(userId)); // Check if the user liked the product
+    }
     setSelectedImage(product?.image);
     if (product && product.userId) {
       Firebase.getUser(product.userId)
         .then((doc) => {
-          if (doc.exists) {
-            setUser(doc.data());
-          } else {
-            console.log('No such user!');
+          if (isMounted) { // Check if the component is still mounted before updating state
+            if (doc.exists) {
+              setUser(doc.data());
+            } else {
+              console.log('No such user!');
+            }
           }
         })
         .catch((error) => {
           console.error('Error getting user:', error);
         });
     }
-  }, [product]);
+    return () => {
+      isMounted = false; // Cleanup function to update component mount status
+    };
+  }, [product, liked, userId, saved]);
 
   // Function to handle click on a star
   const handleStarClick = (value) => {
     setRating(value);
   };
+
+  const onLikeClick = async () => {
+    if (!product || !userId) return;
+
+    try {
+      let updatedLiked = liked; // Create a copy of liked array
+
+      if (isLiked) {
+        // If user has already liked the product, remove the like
+        updatedLiked = liked.filter((id) => id !== userId);
+      } else {
+        // If user hasn't liked the product yet, add the like if it doesn't already exist
+        if (!liked.includes(userId)) {
+          updatedLiked.push(userId);
+        }
+      }
+
+      // Update the liked array in Firebase
+      await Firebase.editProduct(product.id, { liked: updatedLiked });
+
+      // Update likes count directly from the updated liked array
+      setIsLiked(!isLiked); // Toggle isLiked state
+    } catch (error) {
+      console.error('Error updating product:', error);
+    }
+  };
+
+  const onSaveClick = async () => {
+    if (!product || !userId) return;
+
+    try {
+      let updatedSaved = saved; // Create a copy of liked array
+
+      if (isSaved) {
+        // If user has already liked the product, remove the like
+        updatedSaved = saved.filter((id) => id !== userId);
+      } else {
+        // If user hasn't liked the product yet, add the like if it doesn't already exist
+        if (!saved.includes(userId)) {
+          updatedSaved.push(userId);
+        }
+      }
+
+      // Update the liked array in Firebase
+      await Firebase.editProduct(product.id, { saved: updatedSaved });
+
+      // Update likes count directly from the updated liked array
+      setIsSaved(!isSaved); // Toggle isLiked state
+    } catch (error) {
+      console.error('Error updating product:', error);
+    }
+  };
+
 
   const { profile } = useSelector((state) => ({
     profile: state.profile
@@ -83,7 +148,6 @@ const ViewProduct = () => {
     <main className="content">
       {isLoading && (
         <div className="loader">
-          <h4>Загружается</h4>
           <br />
           <LoadingOutlined style={{ fontSize: '3rem' }} />
         </div>
@@ -114,7 +178,9 @@ const ViewProduct = () => {
                   border: '2px solid black',
                   height: '4rem',
                   borderRadius: '3rem',
-                  width: '40%',
+                  width: 'fit-content',
+                  paddingLeft: '1vw',
+                  paddingRight: '1vw',
                   justifyContent: 'center',
                   alignItems: 'center',
                   display: 'flex',
@@ -152,15 +218,21 @@ const ViewProduct = () => {
                   style={{
                     borderRadius: '5rem',
                     background: '#F28290',
-                    color: 'white',
                     fontWeight: '500',
                     height: '4rem',
-                    width: '14rem',
+                    width: 'fit-content',
+                    paddingLeft: '1vw',
+                    paddingRight: '1vw',
                     border: 'none',
-                    marginLeft: '2rem'
+                    marginLeft: '2rem',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
                   }}
                 >
-                  Подписаться
+                  <p style={{ color: 'white' }}>
+                    Подписаться
+                  </p>
                 </Button>
               </div>
               <div style={{ marginTop: '2rem' }}>
@@ -185,16 +257,17 @@ const ViewProduct = () => {
                     height: '4rem',
                     marginTop: '1rem',
                     borderRadius: '5rem',
-                    background: '#F28290',
+                    background: isLiked ? 'black' : '#F28290',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     border: 'none'
                   }}
+                  onClick={onLikeClick}
                 >
                   <FontAwesomeIcon
                     style={{
-                      color: 'white',
+                      color: isLiked ? '#F28290' : 'white',
                       width: '2rem',
                       height: '2rem'
                     }}
@@ -207,17 +280,18 @@ const ViewProduct = () => {
                     height: '4rem',
                     marginTop: '1rem',
                     borderRadius: '5rem',
-                    background: '#F28290',
+                    background: isSaved ? 'black' : '#F28290',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     border: 'none',
                     marginLeft: '1rem'
                   }}
+                  onClick={onSaveClick}
                 >
                   <FontAwesomeIcon
                     style={{
-                      color: 'white',
+                      color: isSaved ? '#F28290' : 'white',
                       width: '2rem',
                       height: '2rem'
                     }}

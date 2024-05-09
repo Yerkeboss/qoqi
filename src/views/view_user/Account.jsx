@@ -6,7 +6,9 @@ import { withRouter, useHistory, useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBriefcase, faLocationDot, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import {
+ faBriefcase, faLocationDot, faGlobe, faUserPlus, faEnvelope
+} from '@fortawesome/free-solid-svg-icons';
 import { displayDate } from '@/helpers/utils';
 import { ACCOUNT_EDIT } from '@/constants/routes';
 import { ImageLoader } from '@/components/common';
@@ -77,25 +79,25 @@ const Account = () => {
             </div>
 
           </div>
-          <p style={{ marginLeft: '3vw' }}>Графический дизайнер с 6+ годами опыта в игровой индустрии</p>
           <div style={{
- display: 'flex', width: '100%', marginTop: '1rem', justifyContent: 'center', alignItems: 'center'
+ display: 'flex', width: '90%', marginTop: '1rem', justifyContent: 'space-between', alignItems: 'center'
 }}
           >
             <Button
-              style={{ border: '2px solid #F28290', borderRadius: '2rem', width: '100%' }}
+              className="user-subscribe-button"
             >
-              <p style={{ color: '#F28290', width: '100%' }}>Подписаться</p>
+                            <FontAwesomeIcon icon={faUserPlus} style={{ marginRight: '1rem', color: 'white', fontSize: '1.3vw' }} />
+              <p style={{ color: 'white', width: '100%' }}>Подписаться</p>
             </Button>
             <Button
-              style={{
- border: '2px solid #F28290', borderRadius: '2rem', marginLeft: '2rem', width: '50%'
-}}
+              className="user-message-button"
               onClick={() => handleSendMessage(user.id)}
             >
+              <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '1rem', color: '#F28290', fontSize: '1.3vw' }} />
               <p style={{ color: '#F28290', width: '100%' }}>Сообщение</p>
             </Button>
           </div>
+          <p style={{ marginLeft: '3vw' }}>Графический дизайнер с 6+ годами опыта в игровой индустрии</p>
         </div>
 
       </div>

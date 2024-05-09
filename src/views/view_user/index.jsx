@@ -61,7 +61,7 @@ const ViewUser = () => {
       </div>
       )}
       <div style={{
-        display: 'flex', marginLeft: '2rem', width: '30%', height: '50rem'
+        display: 'flex', marginLeft: '2rem', width: '30%', height: '45vw'
       }}
       >
         <Suspense fallback={<Loader />}>

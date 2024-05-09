@@ -426,8 +426,8 @@ class Firebase {
     .get();
 
   addProduct = (id, product) => {
-    const { liked, viewed, ...rest } = product;
-    const productData = liked && viewed ? { ...rest } : { ...rest, liked: [], viewed: [] }; // Ensure liked array exists
+    const { liked, viewed, saved, ...rest } = product;
+    const productData = (liked && viewed && saved) ? { ...rest } : { ...rest, liked: [], viewed: [], saved: [] }; // Ensure liked array exists
     return this.db.collection('products').doc(id).set(productData);
   };
 
@@ -507,7 +507,15 @@ class Firebase {
     });
   };
 
-  addOrder = (id, order) => this.db.collection('orders').doc(id).set(order);
+  addOrder = (id, order) => {
+    const { saved, ...rest } = order;
+    const orderData = saved ? { ...rest } : { ...rest, saved: [] }; // Ensure liked array exists
+    return this.db.collection('orders').doc(id).set(orderData);
+  };
+
+  editOrder = (id, updates) => {
+    return this.db.collection('orders').doc(id).update(updates);
+  };
 
   generateKeyOrder = () => this.db.collection('orders').doc().id;
 

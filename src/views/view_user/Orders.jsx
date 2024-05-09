@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import firebase from 'firebase/app'; // Import Firebase
-import { withRouter, Link, useParams } from 'react-router-dom';
-import { useFeaturedProducts, useUserId, useUser } from '@/hooks'; // Import the useUserId hook
-import { ProductGrid, ProductList, ProductShowcaseGrid } from '../../components/product';
+import { useParams } from 'react-router-dom';
+import { useFeaturedProducts, useUser } from '@/hooks'; // Import the useUserId hook
+import { ProductShowcaseGrid } from '../../components/product';
 import { MessageDisplay } from '@/components/common';
-import { selectFilter } from '@/selectors/selector';
 import 'firebase/firestore';
 
 

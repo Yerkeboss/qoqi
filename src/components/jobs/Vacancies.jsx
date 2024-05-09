@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { SkeletonTheme } from 'react-loading-skeleton';
-import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTengeSign } from '@fortawesome/free-solid-svg-icons';
 import {
   useDocumentTitle,
-  useFeaturedProducts,
-  useScrollTop
+  useScrollTop, useUserId
 } from '@/hooks';
+import Firebase from '../../services/firebase';
+import CardComponent from './CardComponent';
 
 const Vacancies = () => {
   useDocumentTitle('Vacancies | Qoqiqaz');
@@ -20,6 +17,9 @@ const Vacancies = () => {
   const history = useHistory();
   const [jobs, setJobs] = useState([]);
   const [users, setUsers] = useState([]);
+  const [isSaved, setIsSaved] = useState(false);
+  const userId = useUserId();
+
 
   useEffect(() => {
     const fetchVacancies = async () => {
@@ -29,8 +29,8 @@ const Vacancies = () => {
     };
 
     fetchVacancies();
+  }, [userId]);
 
-  }, []);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -42,6 +42,33 @@ const Vacancies = () => {
     fetchUsers();
   }, []);
 
+  console.log('isSaved', isSaved);
+
+
+  const onSaveClick = async (jobId) => {
+    if (!userId) return;
+
+    try {
+      const jobIndex = jobs.findIndex((job) => job.id === jobId);
+      if (jobIndex === -1) return;
+
+      const updatedJobs = [...jobs];
+      const job = updatedJobs[jobIndex];
+
+      if (job.saved && job.saved.includes(userId)) {
+        job.saved = job.saved.filter((savedUserId) => savedUserId !== userId);
+      } else {
+        job.saved = [...(job.saved || []), userId];
+      }
+
+      setJobs(updatedJobs);
+
+      await Firebase.editOrder(jobId, { saved: job.saved });
+    } catch (error) {
+      console.error('Error updating order:', error);
+    }
+  };
+
   const getUserAvatar = (userId) => {
     const user = users.find((user) => user.id === userId);
     return user ? user.avatar : ''; // Return the avatar if user is found, otherwise return an empty string
@@ -50,7 +77,7 @@ const Vacancies = () => {
   const getUserId = (userId) => {
     const user = users.find((user) => user.id === userId);
     return user ? user.id : '';
-  }
+  };
 
   const onClickArt = () => {
     history.push('/shop');
@@ -90,11 +117,11 @@ const Vacancies = () => {
 
   return (
     <main className="content" style={{ marginTop: '2rem' }}>
-    <div style={{ width: '100%' }}>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-<h2 style={{ marginLeft: '2rem', height: '20%' }}>Вакансии</h2>
+      <div style={{ width: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <h2 style={{ marginLeft: '2rem', height: '20%' }}>Вакансии</h2>
 
-<div
+          <div
             style={{
               display: 'flex',
               marginBottom: '2vw',
@@ -163,7 +190,7 @@ const Vacancies = () => {
                 backgroundColor: '#F28290',
                 border: 'none',
                 color: 'black',
-         
+
                 borderRadius: '1vw',
                 height: '4rem',
                 display: 'flex',
@@ -292,138 +319,72 @@ const Vacancies = () => {
               </p>
             </Button>
           </div>
-        <div style={{ width: '99%' }}>
-          <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2" height={300} style = {{overflowY:'scroll', overflowX:'hidden'}}>
-      <div>
-        <Card
-          style={{
-            border: '1px solid black',
-            backgroundColor: 'white',
-            height: '100%',
-            borderRadius: '2vw',
-            padding: '1rem',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            marginLeft: '2rem',
-          }}
-        >
-          <div style={{ display: 'flex', justifyContent: 'space-between', width: '47vw' }}>
-            <p
+          <div style={{ width: '99%' }}>
+
+            <Card
               style={{
-                color: 'black',
-                fontFamily: 'Inter',
-                fontWeight: '500',
-                marginLeft: '4rem'
+                border: '1px solid black',
+                backgroundColor: 'white',
+                height: '100%',
+                borderRadius: '2vw',
+                padding: '1rem',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                marginLeft: '2rem'
               }}
             >
-              Название
-            </p>
-            <p
-              style={{
-                color: 'black',
-                fontFamily: 'Inter',
-                fontWeight: '500',
-                marginRight: '2rem'
-              }}
-            >
-              Заказчики
-            </p>
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              flexDirection: 'column'
-            }}
-          >
-            {jobs?.map((job) => (
-              <Card
+              <div style={{ display: 'flex', justifyContent: 'space-between', width: '47vw' }}>
+                <p
+                  style={{
+                    color: 'black',
+                    fontFamily: 'Inter',
+                    fontWeight: '500',
+                    marginLeft: '4rem'
+                  }}
+                >
+                  Название
+                </p>
+                <p
+                  style={{
+                    color: 'black',
+                    fontFamily: 'Inter',
+                    fontWeight: '500',
+                    marginRight: '2rem'
+                  }}
+                >
+                  Заказчики
+                </p>
+              </div>
+              <div
                 style={{
-                  flex: 1,
-                  marginRight: '1rem',
-                  border: '1px solid black',
-                  borderRadius: '2vw',
-                  height: '100%', 
-                  marginTop:'1vw'
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  flexDirection: 'column'
                 }}
-                key={job?.id}
               >
-                {' '}
-                {/* First card */}
-                <Card.Body>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      marginTop:'1vw',
-                      width:'49vw'
-                    }}
-                  >
-                    <Card.Title
-                      style={{
-                        color: 'black',
-                        fontFamily: 'Inter',
-                        fontWeight: '500',
-                        marginLeft: '2.6vw',
-                        width: '18vw'
-                      }}
-                    >
-                      <Card.Text style={{ fontSize: '1.2vw' }} onClick ={()=>onClickJob(job.id)} >{job?.selectedSpecialist}</Card.Text>
-                      <Card.Text style={{ fontSize: '1.8vw', marginTop:'0vw' }}>
-                      {`${job?.from}`}
-                        {' '}
-                        <FontAwesomeIcon icon={faTengeSign} />
-                        { `  -  ${job?.to}`}
-                        {' '}
-                        <FontAwesomeIcon icon={faTengeSign} />
-                      </Card.Text>
-                      <Card.Text style={{ fontSize: '1.2rem', width:'100%', marginTop:'-1vw' }}>
-                        {`${job?.duration} | ${job?.address}`} 
-                      </Card.Text>
-                    </Card.Title>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent:'center', marginTop:'0.8vw', marginBottom:'0.8vw' }} onClick={() => onClickUser(getUserId(job.userId))}>
-                      <Image
-                      src={getUserAvatar(job.userId)}
-                        style={{
-                          width: '12vw',
-                          height: '12vw'
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div style={{ display: 'flex', marginBottom: '2vw', marginTop:'-4vw' }}>
-                    <Button
-                      style={{
-                        backgroundColor: '#F28290',
-                        border: 'none',
-                        borderRadius: '1vw',
-                        marginLeft: '2.6vw',
-                        width: 'fit-content',
-                        height: '4rem',
-                        display:'flex',
-                        justifyContent:'center',
-                        alignItems:'center', 
-                        paddingLeft:'1vw',
-                        paddingRight:'1vw'
-                      }}
-                    >
-                      <p style = {{color: 'white',}}>Откликнуться</p>
-                    </Button>
-                  </div>
-                </Card.Body>
-              </Card>
-            ))}
+                {jobs.map((job) => (
+                  <CardComponent
+                    key={job.id}
+                    job={job}
+                    onSaveClick={onSaveClick}
+                    getUserAvatar={getUserAvatar}
+                    onClickJob={onClickJob}
+                    onClickUser={onClickUser}
+                    userId={userId}
+                    getUserId={getUserId}
+                  />
+                ))}
+              </div>
+            </Card>
+
           </div>
-        </Card>
-      </div>
-    </SkeletonTheme>
         </div>
       </div>
-    </div>
-  </main>
-   
+    </main>
+
   );
 };
+
 
 export default Vacancies;

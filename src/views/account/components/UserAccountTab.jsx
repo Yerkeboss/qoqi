@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBriefcase, faLocationDot, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { displayDate } from '@/helpers/utils';
-import { ACCOUNT_EDIT } from '@/constants/routes';
+import { ACCOUNT_EDIT, SAVED } from '@/constants/routes';
 import { ImageLoader } from '@/components/common';
 
 const UserProfile = (props) => {
@@ -77,21 +77,27 @@ const UserProfile = (props) => {
           >
             <Button
               onClick={() => props.history.push(ACCOUNT_EDIT)}
-              style={{ border: '2px solid #F28290', borderRadius: '2rem', width: '100%' }}
-            >
-              <p style={{ color: '#F28290', width: '100%' }}>Редактировать профиль</p>
-            </Button>
-            <Button
-              onClick={() => props.history.push(ACCOUNT_EDIT)}
               style={{
- border: '2px solid #F28290', borderRadius: '2rem', marginLeft: '2rem', width: '50%'
+ border: '2px solid #F28290', borderRadius: '2rem', width: 'fit-content', paddingLeft: '1vw', paddingRight: '1vw'
 }}
             >
-              <p style={{ color: '#F28290', width: '100%' }}>Настройки</p>
+              <p style={{ color: '#F28290', whiteSpace: 'nowrap' }}>Редактировать профиль</p>
+            </Button>
+            <Button
+              onClick={() => props.history.push(SAVED)}
+              style={{
+ border: '2px solid #F28290', borderRadius: '2rem', marginLeft: '2rem', width: 'fit-content'
+}}
+            >
+              <p style={{
+ color: '#F28290', whiteSpace: 'nowrap', paddingLeft: '1vw', paddingRight: '1vw'
+}}
+              >
+                Сохраненные
+              </p>
             </Button>
           </div>
         </div>
-
       </div>
     </Card>
   );

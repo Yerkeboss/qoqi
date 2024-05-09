@@ -95,3 +95,28 @@
   color: #121417;
   font-weight: 500;
 }
+
+.user-message-button {
+  background-color: white;
+  border-radius: 1vw;
+  border: 0.3vw solid #F28290;
+  height: 3.5vw;
+  width: fit-content;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+}
+.user-subscribe-button {
+  background-color: #F28290;
+  border-radius: 1vw;
+  border: 0.3vw solid #F28290;
+  height: 3.5vw;
+  width: fit-content;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+}

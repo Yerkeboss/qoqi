@@ -15,6 +15,7 @@ import { Tender } from '@/components/tender';
 import { Croud } from '@/components/croud';
 import { Charity } from '@/components/charity';
 import { Education } from '@/components/education';
+import { Saved } from '@/components/saved';
 
 
 // Revert back to history v4.10.0 because
@@ -123,6 +124,10 @@ const AppRouter = () => (
           path={ROUTES.CREATORS}
         />
         <Route
+          component={Saved}
+          path={ROUTES.SAVED}
+        />
+        <Route
           component={MasterForm}
           path={ROUTES.MASTERFORM}
         />
@@ -141,6 +146,14 @@ const AppRouter = () => (
         <Route
           component={view.ViewTender}
           path={ROUTES.VIEW_TENDER}
+        />
+        <Route
+          component={view.SavedProducts}
+          path={ROUTES.SAVED_PRODUCTS}
+        />
+        <Route
+          component={view.SavedVacancies}
+          path={ROUTES.SAVED_VACANCIES}
         />
         <Route
           component={view.ViewCroud}

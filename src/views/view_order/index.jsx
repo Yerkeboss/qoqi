@@ -8,14 +8,21 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { LoadingOutlined } from '@ant-design/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTengeSign } from '@fortawesome/free-solid-svg-icons';
-import { useDocumentTitle, useScrollTop, useOrder } from '@/hooks';
+import { faTengeSign, faCheck } from '@fortawesome/free-solid-svg-icons';
+import {
+  useDocumentTitle, useScrollTop, useOrder, useUserId
+} from '@/hooks';
+import Firebase from '../../services/firebase';
 
 const ViewOrder = () => {
   const history = useHistory();
   const { id } = useParams();
   const { job, isLoading, error } = useOrder(id);
   const [users, setUsers] = useState([]);
+  const [isSaved, setIsSaved] = useState(false);
+  const saved = job?.saved || [];
+  const userId = useUserId();
+
 
   useScrollTop();
   useDocumentTitle(`Обзор ${job?.selectedSpecialist || 'Item'}`);
@@ -26,9 +33,12 @@ const ViewOrder = () => {
       const usersData = usersCollection.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setUsers(usersData);
     };
+    if (job && job.saved) {
+      setIsSaved(job.saved.includes(userId)); // Check if the user liked the product
+    }
 
     fetchUsers();
-  }, []);
+  }, [saved]);
 
   const getUserAvatar = (userId) => {
     const user = users.find((user) => user.id === userId);
@@ -51,6 +61,32 @@ const ViewOrder = () => {
 
   const backToOrder = () => {
     history.push('/vacancies');
+  };
+
+  const onSaveClick = async () => {
+    if (!job || !userId) return;
+
+    try {
+      let updatedSaved = saved; // Create a copy of liked array
+
+      if (isSaved) {
+        // If user has already liked the product, remove the like
+        updatedSaved = saved.filter((id) => id !== userId);
+      } else {
+        // If user hasn't liked the product yet, add the like if it doesn't already exist
+        if (!saved.includes(userId)) {
+          updatedSaved.push(userId);
+        }
+      }
+
+      // Update the liked array in Firebase
+      await Firebase.editOrder(job.id, { saved: updatedSaved });
+
+      // Update likes count directly from the updated liked array
+      setIsSaved(!isSaved); // Toggle isLiked state
+    } catch (error) {
+      console.error('Error updating product:', error);
+    }
   };
 
 
@@ -176,8 +212,9 @@ const ViewOrder = () => {
                           paddingLeft: '1vw',
                           paddingRight: '1vw'
                         }}
+                        onClick={() => onSaveClick(job.id)}
                       >
-                        <p style={{ color: 'white' }}>Откликнуться</p>
+                        {isSaved ? (<FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />) : (<p style={{ color: 'white' }}>Откликнуться</p>)}
                       </Button>
                     </div>
                   </div>

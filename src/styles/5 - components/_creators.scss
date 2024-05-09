@@ -60,8 +60,11 @@
 
 .creators-details {
   padding: 0;
-  margin-top: 1rem;
-  margin-left: 1rem;
+  margin-top:1vw;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
 }
 .creators-card-name {
   width: 100%;
@@ -82,10 +85,12 @@
 }
 
 .creators-button {
-  background-color: #f28290;
-  border-radius: 5rem;
-  border: none;
-  color: white;
+  background-color: #F28290;
+  border-radius: 1vw;
+  border: 0.3vw solid #F28290;
   height: 3.5vw;
-  width: 15vw;
+  width: 80%;
+  display:flex;
+  justify-content: center;
+  align-items:center;
 }

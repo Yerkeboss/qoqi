@@ -322,8 +322,8 @@ const Creators = () => {
                           className="creators-button"
                           onMouseDown={() => handleSendMessage(user.id)}
                         >
-                          <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '1rem' }} />
-                          Сообщение
+                          <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '1rem', color: 'white', fontSize: '1.3vw' }} />
+                          <p style={{ color: 'white' }}>Сообщение</p>
                         </Button>
                       </div>
                     </div>
