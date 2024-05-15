@@ -28,6 +28,10 @@
   height: 5rem;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .filter-buttons-text {
   color: black;
   text-align: center;

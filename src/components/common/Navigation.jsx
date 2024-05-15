@@ -74,16 +74,16 @@ const Navigation = () => {
   if (store.user && store.user.role === 'ADMIN') {
     return null;
   }
-  if (window.screen.width <= 800) {
-    return (
-      <MobileNavigation
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...store}
-        disabledPaths={basketDisabledpathnames}
-        pathname={pathname}
-      />
-    );
-  }
+  // if (window.screen.width <= 800) {
+  //   return (
+  //     <MobileNavigation
+  //       // eslint-disable-next-line react/jsx-props-no-spreading
+  //       {...store}
+  //       disabledPaths={basketDisabledpathnames}
+  //       pathname={pathname}
+  //     />
+  //   );
+  // }
   return (
     <nav className="navigation" ref={navbar}>
       <div className="logo">
@@ -208,7 +208,7 @@ pointerEvents: 'none'
         </li>
 
         {store.user ? (
-          <li className="navigation-menu-item">
+          <li className="navigation-menu-item-avatar">
             <UserAvatar />
           </li>
         ) : (
@@ -218,6 +218,7 @@ pointerEvents: 'none'
                 className="button button-small"
                 onClick={onClickLink}
                 to={ROUTE.SIGNUP}
+                style={{ borderRadius: '1vw' }}
               >
                 Зарегистрироваться
               </Link>
@@ -227,6 +228,7 @@ pointerEvents: 'none'
                 className="button button-small button-muted margin-left-s"
                 onClick={onClickLink}
                 to={ROUTE.SIGNIN}
+                style={{ borderRadius: '1vw' }}
               >
                 Вход
               </Link>
