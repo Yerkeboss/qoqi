@@ -156,7 +156,14 @@
 
 @media (max-width: 500px) {
   .scrollable-carousel {
-    margin-top: -4vw;
+    margin-top: -5vw;
   }
 }
+
+@media (max-width: 480px) {
+  .scrollable-carousel {
+    margin-top: 0.5vw;
+  }
+}
+
 
