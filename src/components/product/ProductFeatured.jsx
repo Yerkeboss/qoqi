@@ -75,6 +75,8 @@ const ProductFeatured = ({ product }) => {
         }
       }
 
+      console.log('like');
+
       // Update the liked array in Firebase
       await Firebase.editProduct(product.id, { liked: updatedLiked });
 
@@ -131,38 +133,41 @@ const ProductFeatured = ({ product }) => {
         {isHovered ? (
           <div className="product-display-details">
             <div style={{ display: 'inline-block', justifyContent: 'center', alignItems: 'center' }} onClick={onClickItem}>
-              <h2>{product.name || <Skeleton width={80} />}</h2>
+              <h2 className="product-name">{product.name || <Skeleton width={80} />}</h2>
             </div>
             <div className="product-brand" onClick={onClickItem}>
-              <p>{product.brand || <Skeleton width={40} />}</p>
+              <p className="product-brand-name">{product.brand || <Skeleton width={40} />}</p>
             </div>
             <div
-              style={{
-                width: '26vw',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'space-between',
-                marginTop: '1vw'
-              }}
+              className="product-wrap"
             >
-              <h4 style={{ flex: '5' }}>{user?.fullname}</h4>
-              <div style={{ justifySelf: 'flex-end' }}>
-                <FontAwesomeIcon icon={faThumbsUp} className="white-icon" onClick={onLikeClick} />
-                <span style={{
-                  marginLeft: '1vw', fontSize: '1.2vw', fontWeight: 'bolder', color: 'white'
+              <div style={{
+                display: 'flex', justifySelf: 'flex-start', alignItems: 'center'
+              }}
+              >
+                <p className="user-name">{user?.fullname}</p>
+              </div>
+              <div style={{
+                justifySelf: 'flex-end', flexDirection: 'row', display: 'flex', alignItems: 'center'
+              }}
+              >
+                <div style={{
+                  display: 'flex', justifyContent: 'center', alignItems: 'center'
                 }}
                 >
-                  {likesCount}
-                </span>
+                  <FontAwesomeIcon icon={faThumbsUp} className="white-icon" onClick={onLikeClick} />
+                  <p className="like-count">
+                    {likesCount}
+                  </p>
+                </div>
                 {' '}
                 {/* Display likes count */}
-                <FontAwesomeIcon icon={faEye} className="white-icon" />
-                <span style={{
-                  marginLeft: '1vw', fontSize: '1.2vw', fontWeight: 'bolder', color: 'white'
-                }}
-                >
-                  {viewsCount}
-                </span>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <FontAwesomeIcon icon={faEye} className="white-icon" />
+                  <p className="like-count">
+                    {viewsCount}
+                  </p>
+                </div>
               </div>
             </div>
           </div>

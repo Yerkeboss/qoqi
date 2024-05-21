@@ -28,6 +28,7 @@ import 'firebase/firestore';
 const Home = () => {
   const navbar = useRef(null);
   const [numColumns, setNumColumns] = useState(3);
+  const [numColumns2, setNumColumns2] = useState(3);
   useDocumentTitle('Qoqiqaz | Home');
   useScrollTop();
   const dispatch = useDispatch();
@@ -201,12 +202,19 @@ const Home = () => {
       const windowWidth = window.innerWidth;
       if (windowWidth >= 1200) {
         setNumColumns(3); // Adjust for larger screens
+        setNumColumns2(3);
       } else if (windowWidth >= 800) {
         setNumColumns(2); // Adjust for medium screens
+        setNumColumns2(2);
+      } else if (windowWidth >= 767) {
+        setNumColumns(2); // Adjust for medium screens
+        setNumColumns2(2);
       } else if (windowWidth >= 600) {
         setNumColumns(2); // Adjust for medium screens
+        setNumColumns2(2);
       } else {
         setNumColumns(2); // Adjust for smaller screens
+        setNumColumns2(2);
       }
     };
 
@@ -248,7 +256,7 @@ const Home = () => {
         </div>
         <br />
         <div className="scrollable-carousel">
-          <Carousel scrollSnap cols={3} rows={2} gap={2} loop>
+          <Carousel scrollSnap cols={numColumns2} rows={2} gap={2} loop>
             {((rect || res || pop) && sortedProducts.map((product, index) => (
               <Carousel.Item key={index}>
                 <ProductShowcaseGrid products={[product]} />
@@ -266,7 +274,7 @@ const Home = () => {
         />
         <div className="scrollable-carousel">
           <h2 className="home-title3">Лучшее за неделю</h2>
-          <Carousel scrollSnap cols={3} rows={1} gap={2} loop>
+          <Carousel scrollSnap cols={numColumns2} rows={1} gap={2} loop>
             {((rect || res || pop) && sortedProducts.map((product, index) => (
               <Carousel.Item key={index}>
                 <ProductShowcaseGrid products={[product]} />
