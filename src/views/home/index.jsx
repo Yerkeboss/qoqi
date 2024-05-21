@@ -227,7 +227,7 @@ const Home = () => {
   return (
     <main className="content">
       <div className="home">
-        <div className="scrollable-carousel">
+        <div className="scrollable-events">
           <h2 className="home-title">Мероприятия</h2>
           <Carousel cols={numColumns} rows={1} gap={2} loop scrollSnap>
             {events.map((event, index) => (
@@ -238,7 +238,7 @@ const Home = () => {
           </Carousel>
         </div>
         <div className="scrollable-carousel">
-          <h2 className="home-title">Галерея лучших работ</h2>
+          <h2 className="home-title2">Галерея лучших работ</h2>
           <Categories
             activeButton={activeButton}
             handleBrandSelect={handleBrandSelect}
@@ -265,7 +265,7 @@ const Home = () => {
           res={res}
         />
         <div className="scrollable-carousel">
-          <h2 className="home-title">Лучшее за неделю</h2>
+          <h2 className="home-title3">Лучшее за неделю</h2>
           <Carousel scrollSnap cols={3} rows={1} gap={2} loop>
             {((rect || res || pop) && sortedProducts.map((product, index) => (
               <Carousel.Item key={index}>

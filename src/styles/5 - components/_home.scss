@@ -71,8 +71,17 @@
   padding: 0;
 }
 
+.scrollable-events {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: transparent transparent; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer, Edge */
+  scrollbar-width: none; /* For Chrome, Safari */
+}
+
 .scrollable-carousel {
-  margin-top:1vw;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
@@ -85,6 +94,8 @@
 .scrollable-carousel::-webkit-scrollbar {
   display: none; /* For Chrome, Safari */
 }
+
+
 
 .additional-buttons {
   width: 10%;
@@ -106,9 +117,19 @@
   margin-left:2rem;
 }
 
+.home-title2 {
+  margin-left:2rem;
+}
+.home-title3 {
+  margin-left:2rem;
+}
+
 @media (max-width: 1200px) {
   .categories-container {
     width:96%;
+  }
+  .scrollable-events {
+    margin-top: -1vw;
   }
 }
 
@@ -116,20 +137,20 @@
   .categories-container {
     width:95.5%;
   }
-
-  .scrollable-carousel {
-    margin-top: -0.5vw;
+  .scrollable-events {
+    margin-top: -2vw;
   }
+
 }
 
 @media (max-width: 900px) {
   .categories-container {
     width:95%;
   }
-
-  .scrollable-carousel {
-    margin-top: -2vw;
+  .scrollable-events {
+    margin-top: -3vw;
   }
+
 }
 
 @media (max-width: 800px) {
@@ -142,6 +163,12 @@
   .home-title {
     margin-left:0.1rem;
   }
+  .home-title2 {
+    margin-left:0.1rem;
+  }
+  .home-title3 {
+    margin-left:0.1rem;
+  }
   .categories-container {
     width:100%;
     margin-left:0.1rem;
@@ -149,21 +176,64 @@
 }
 
 @media (max-width: 600px) {
-  .scrollable-carousel {
-    margin-top: -3vw;
+  .home-title {
+    margin-top:1vw;
   }
-}
-
-@media (max-width: 500px) {
-  .scrollable-carousel {
-    margin-top: -5vw;
+  .home-title2 {
+    margin-top:3vw;
+  }
+  .home-title3 {
+    margin-top:3vw;
   }
 }
 
 @media (max-width: 480px) {
-  .scrollable-carousel {
-    margin-top: 0.5vw;
+  .home-title {
+    margin-top:7vw;
+  }
+  .home-title2 {
+    margin-top:3vw;
+  }
+  .home-title3 {
+    margin-top:3vw;
   }
 }
+
+@media (max-width: 450px) {
+  .home-title {
+    margin-top:9vw;
+  }
+  .home-title2 {
+    margin-top:2vw;
+  }
+  .home-title3 {
+    margin-top:2vw;
+  }
+}
+
+@media (max-width: 430px) {
+  .home-title {
+    margin-top:9vw;
+  }
+  .home-title2 {
+    margin-top:1vw;
+  }
+  .home-title3 {
+    margin-top:4vw;
+  }
+}
+
+@media (max-width: 400px) {
+  .home-title {
+    margin-top:9vw;
+  }
+  .home-title2 {
+    margin-top:0vw;
+  }
+  .home-title3 {
+    margin-top:4vw;
+  }
+}
+
 
 
