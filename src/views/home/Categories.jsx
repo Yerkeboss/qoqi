@@ -21,14 +21,7 @@ const Categories = ({
   activeButton, handleBrandSelect, selectedBrand, MenuProps
 }) => (
   <div
-    style={{
-      display: 'flex',
-      flexDirection: 'row',
-      width: '98.3%',
-      overflowX: 'auto',
-      whiteSpace: 'nowrap',
-      overflowY: 'hidden'
-    }}
+    className="categories-container"
   >
     <Button
       className={
@@ -403,7 +396,7 @@ const Categories = ({
                 onChange={(event) => handleBrandSelect(event.target.value)}
                 MenuProps={MenuProps}
                 inputProps={{ 'aria-label': 'Without label' }}
-                style={{ border: 'none', borderRadius: '2vw'  }}
+                style={{ border: 'none', borderRadius: '2vw' }}
               >
                 <MenuItem
                   value=""

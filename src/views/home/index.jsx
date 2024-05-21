@@ -26,6 +26,7 @@ import 'firebase/firestore';
 
 const Home = () => {
   const navbar = useRef(null);
+  const [numColumns, setNumColumns] = useState(3);
   useDocumentTitle('Qoqiqaz | Home');
   useScrollTop();
   const dispatch = useDispatch();
@@ -195,27 +196,48 @@ const Home = () => {
       }
     };
 
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+      if (windowWidth >= 1200) {
+        setNumColumns(3); // Adjust for larger screens
+      } else if (windowWidth >= 800) {
+        setNumColumns(2); // Adjust for medium screens
+      } else if (windowWidth >= 600) {
+        setNumColumns(2); // Adjust for medium screens
+      } else {
+        setNumColumns(2); // Adjust for smaller screens
+      }
+    };
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Call handleResize once to set initial number of columns
+    handleResize();
+
     fetchEvents();
     fetchProducts();
     toggleRect();
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll) && window.removeEventListener('resize', handleResize);
     };
   }, []);
 
   return (
     <main className="content">
-      <div className="home" style={{ marginTop: '2rem' }}>
-        <h2 style={{ marginLeft: '2rem' }}>Мероприятия</h2>
-        <Carousel cols={3} rows={1} gap={2} loop scrollSnap>
-          {events.map((event, index) => (
-            <Carousel.Item key={index}>
-              <EventGrid events={[event]} />
-            </Carousel.Item>
-          ))}
-        </Carousel>
-        <div style={{ marginLeft: '2rem' }}>
-          <h2>Галерея лучших работ</h2>
+      <div className="home">
+        <div className="scrollable-carousel">
+          <h2 className="home-title">Мероприятия</h2>
+          <Carousel cols={numColumns} rows={1} gap={2} loop scrollSnap>
+            {events.map((event, index) => (
+              <Carousel.Item key={index}>
+                <EventGrid events={[event]} />
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </div>
+        <div className="scrollable-carousel">
+          <h2 className="home-title">Галерея лучших работ</h2>
           <Categories
             activeButton={activeButton}
             handleBrandSelect={handleBrandSelect}
@@ -241,14 +263,16 @@ const Home = () => {
           pop={pop}
           res={res}
         />
-        <h2 style={{ marginLeft: '2rem' }}>Лучшее за неделю</h2>
-        <Carousel scrollSnap cols={3} rows={1} gap={2} loop>
-          {((rect || res || pop) && sortedProducts.map((product, index) => (
-            <Carousel.Item key={index}>
-              <ProductShowcaseGrid products={[product]} />
-            </Carousel.Item>
-          )))}
-        </Carousel>
+        <div className="scrollable-carousel">
+          <h2 className="home-title">Лучшее за неделю</h2>
+          <Carousel scrollSnap cols={3} rows={1} gap={2} loop>
+            {((rect || res || pop) && sortedProducts.map((product, index) => (
+              <Carousel.Item key={index}>
+                <ProductShowcaseGrid products={[product]} />
+              </Carousel.Item>
+            )))}
+          </Carousel>
+        </div>
       </div>
     </main>
   );

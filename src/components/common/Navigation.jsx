@@ -33,7 +33,7 @@ const Navigation = () => {
   }));
 
   const scrollHandler = () => {
-    if (navbar.current && window.screen.width > 480) {
+    if (navbar.current && window.screen.width > 300) {
       if (window.pageYOffset >= 70) {
         navbar.current.classList.add('is-nav-scrolled');
       } else {
@@ -74,16 +74,7 @@ const Navigation = () => {
   if (store.user && store.user.role === 'ADMIN') {
     return null;
   }
-  // if (window.screen.width <= 800) {
-  //   return (
-  //     <MobileNavigation
-  //       // eslint-disable-next-line react/jsx-props-no-spreading
-  //       {...store}
-  //       disabledPaths={basketDisabledpathnames}
-  //       pathname={pathname}
-  //     />
-  //   );
-  // }
+
   return (
     <nav className="navigation" ref={navbar}>
       <div className="logo">
@@ -97,25 +88,15 @@ const Navigation = () => {
       <li className="navigation-big-menu">
         <Button
           onClick={onOpenMenu}
-          style={{
- width: '5vw', height: '5vw', border: 'none', backgroundColor: 'transparent'
-}}
+          className="navigation-big-menu-button"
         >
           <FontAwesomeIcon
             icon={faBars}
-            style={{
-                color: '#000000',
-                width: '2vw',
-                height: '3vw',
-pointerEvents: 'none'
-              }}
-
+            className="navigation-bars"
           />
         </Button>
-
       </li>
       <ul className="navigation-menu-main">
-
         <li>
           <NavLink
             activeClassName="navigation-menu-active"
@@ -154,39 +135,23 @@ pointerEvents: 'none'
         <SearchBar />
         <li className="navigation-menu-item">
           <NavLink
-            style={{ border: 'none', backgroundColor: '#f9f9f9' }}
+            style={{ border: 'none', backgroundColor: 'transparent' }}
             to={ROUTE.ADD_PRODUCT_CLIENT}
           >
             <FontAwesomeIcon
               icon={faPlus}
-              style={{
-                color: '#000000',
-                width: '2rem',
-                height: '2rem',
-                marginTop: '0.5rem'
-              }}
+              className="bell"
 
             />
           </NavLink>
         </li>
         <li className="navigation-menu-item">
           <Button
-            style={{
-              border: 'none',
-              backgroundColor: '#f9f9f9',
-              marginLeft: '1rem'
-            }}
+            style={{ border: 'none', backgroundColor: 'transparent', marginLeft: '1rem' }}
           >
             <FontAwesomeIcon
               icon={faBell}
-              style={{
-                color: 'black',
-                // backgroundColor:"white",
-                width: '2rem',
-                height: '2rem',
-                marginTop: '0.5rem'
-              }}
-
+              className="bell"
             />
           </Button>
         </li>
@@ -200,7 +165,7 @@ pointerEvents: 'none'
                 type="button"
               >
                 <Badge count={store.basketLength}>
-                  <ShoppingOutlined style={{ fontSize: '2.4rem' }} />
+                  <ShoppingOutlined className="basket-icon" />
                 </Badge>
               </button>
             )}

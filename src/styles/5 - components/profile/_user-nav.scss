@@ -85,3 +85,43 @@
 .user-sub-open > .user-nav-sub {
   display: block;
 }
+
+@media (max-width: 1000px) {
+  .user-nav {
+    margin-top:0.5vw;
+  }
+  .user-nav-img-wrapper {
+    width: 3vw;
+    height: 3vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .user-nav-img-wrapper {
+    width: 4vw;
+    height: 4vw;
+  }
+}
+
+@media (max-width: 550px) {
+  .user-nav {
+    margin-top:0.5vw;
+  }
+  .user-nav-img-wrapper {
+    width: 4.5vw;
+    height: 4.5vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .user-nav {
+    margin-top:1vw;
+  }
+}
+
+@media (max-width: 450px) {
+  .user-nav-img-wrapper {
+    width: 5vw;
+    height: 5vw;
+  }
+}

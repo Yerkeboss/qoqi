@@ -1,0 +1,66 @@
+.sort-container {
+  border-radius:2vw;
+  position: fixed;
+  top:50vw;
+  margin-left:1.5vw;
+  z-index: 9999;
+  padding:0.5rem;
+  width: fit-content;
+  height:5rem;
+  background:white;
+}
+.sort-body {
+  border-radius:2vw;
+  background:white;
+  height:4rem;
+  justify-content: center;
+  align-items:center;
+  display: flex;
+  flex-direction: row;
+}
+
+.sort-button {
+  background-color: white;
+  border-radius:2vw;
+  border:none;
+  height:4rem;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  padding:1.5vw;
+}
+
+.sort-button-active {
+  background-color: black;
+  border-radius:2vw;
+  border:none;
+  height:4rem;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  padding:1.5vw;
+}
+
+@media (max-width: 1400px) {
+  .sort-container {
+    top:60vw;
+  }
+}
+
+@media (max-width: 1200px) {
+  .sort-container {
+    top:80vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .sort-container {
+    top:120vw;
+  }
+}
+
+
+
+
+
+

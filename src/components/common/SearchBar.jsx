@@ -79,7 +79,7 @@ const SearchBar = () => {
     <>
       <div className="searchbar" ref={searchbarRef}>
         <div className="search-wrap">
-          <div className="search-icon" onClick={toggleInput}>
+          <div onClick={toggleInput}>
             <SearchOutlined className="searchbar-icon" />
           </div>
           {isInputOpen && (
