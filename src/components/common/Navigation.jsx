@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { ShoppingOutlined } from '@ant-design/icons';
+import { ShoppingOutlined, DownOutlined } from '@ant-design/icons';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
@@ -13,7 +13,6 @@ import * as ROUTE from '@/constants/routes';
 import UserAvatar from '@/views/account/components/UserAvatar';
 import BasketToggle from '../basket/BasketToggle';
 import Badge from './Badge';
-import MobileNavigation from './MobileNavigation';
 import SearchBar from './SearchBar';
 import logo1 from '../../images/logo1.png';
 import logo2 from '../../images/logo2.png';
@@ -24,6 +23,7 @@ const Navigation = () => {
   const { pathname } = useLocation();
   const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const store = useSelector((state) => ({
     basketLength: state.basket.length,
@@ -41,11 +41,36 @@ const Navigation = () => {
       }
     }
   };
+  const handleWindowResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  const userNav = useRef(null);
+  const toggleDropdown = (e) => {
+    const closest = e.target.closest('div.user-nav');
+
+    try {
+      if (!closest && userNav.current.classList.contains('user-sub-open')) {
+        userNav.current.classList.remove('user-sub-open');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const onClickNav = () => {
+    userNav.current.classList.toggle('user-sub-open');
+  };
 
   useEffect(() => {
     window.addEventListener('scroll', scrollHandler);
-    return () => window.removeEventListener('scroll', scrollHandler);
-  }, []);
+    window.addEventListener('resize', handleWindowResize);
+    document.addEventListener('click', toggleDropdown);
+    return () => {
+      window.removeEventListener('scroll', scrollHandler);
+      window.removeEventListener('resize', handleWindowResize);
+      document.removeEventListener('click', toggleDropdown);
+    };
+  }, [windowWidth]);
 
   const onClickLink = (e) => {
     if (store.isAuthenticating) e.preventDefault();
@@ -74,6 +99,7 @@ const Navigation = () => {
   if (store.user && store.user.role === 'ADMIN') {
     return null;
   }
+
 
   return (
     <nav className="navigation" ref={navbar}>
@@ -141,7 +167,6 @@ const Navigation = () => {
             <FontAwesomeIcon
               icon={faPlus}
               className="bell"
-
             />
           </NavLink>
         </li>
@@ -177,28 +202,72 @@ const Navigation = () => {
             <UserAvatar />
           </li>
         ) : (
-          <li className="navigation-action">
-            {pathname !== ROUTE.SIGNUP && (
-              <Link
-                className="button button-small"
-                onClick={onClickLink}
-                to={ROUTE.SIGNUP}
-                style={{ borderRadius: '1vw' }}
-              >
-                Зарегистрироваться
-              </Link>
+          <>
+            {windowWidth <= 800 ? (
+              <li className="navigation-menu-item-avatar">
+                <div
+                  className="user-nav"
+                  onClick={onClickNav}
+                  onKeyDown={() => { }}
+                  ref={userNav}
+                  role="button"
+                  tabIndex={0}
+                >
+                  <Link
+                    className="button register-button"
+                    onClick={onClickLink}
+                    to={ROUTE.SIGNIN}
+                    style={{ borderRadius: '1vw' }}
+                  >
+                    Вход
+                  </Link>
+                  <DownOutlined style={{ fontSize: '1.2rem', marginLeft: '1rem' }} />
+
+                  <div className="user-nav-sub">
+
+                    <Link
+                      to={ROUTE.SIGNUP}
+                      className="user-nav-sub-link"
+                    >
+                      Зарегистрироваться
+
+                    </Link>
+
+                    <Link
+                      to={ROUTE.SIGNIN}
+                      className="user-nav-sub-link"
+                    >
+                      Вход
+
+                    </Link>
+                  </div>
+                </div>
+              </li>
+) : (
+  <li className="navigation-action">
+    {pathname !== ROUTE.SIGNUP && (
+    <Link
+      className="button register-button"
+      onClick={onClickLink}
+      to={ROUTE.SIGNUP}
+      style={{ borderRadius: '1vw' }}
+    >
+      Зарегистрироваться
+    </Link>
             )}
-            {pathname !== ROUTE.SIGNIN && (
-              <Link
-                className="button button-small button-muted margin-left-s"
-                onClick={onClickLink}
-                to={ROUTE.SIGNIN}
-                style={{ borderRadius: '1vw' }}
-              >
-                Вход
-              </Link>
+    {pathname !== ROUTE.SIGNIN && (
+    <Link
+      className="button register-button register-button-muted margin-left-s"
+      onClick={onClickLink}
+      to={ROUTE.SIGNIN}
+      style={{ borderRadius: '1vw' }}
+    >
+      Вход
+    </Link>
             )}
-          </li>
+  </li>
+        )}
+          </>
         )}
       </ul>
       {showMenu && (

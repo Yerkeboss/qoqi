@@ -24,6 +24,7 @@ import Sort from './Sort';
 import Categories from './Categories';
 import 'firebase/firestore';
 
+
 const Home = () => {
   const navbar = useRef(null);
   const [numColumns, setNumColumns] = useState(3);
