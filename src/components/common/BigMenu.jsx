@@ -17,8 +17,6 @@ const BigMenu = ({ handleClick }) => {
       bigMenuRef.current.style.top = `${topOffset}px`;
       bigMenuRef.current.style.maxHeight = `${maxHeight}px`;
       bigMenuRef.current.style.maxWidth = `${maxWidth}px`;
-      console.log('topOffset', topOffset);
-      console.log('maxHeight', maxHeight);
     }
   }, []);
 

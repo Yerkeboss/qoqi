@@ -199,14 +199,10 @@
 
 // PRODUCT MODAL -------------------------------------------------
 .product-view {
-  margin: 0 5rem;
-  border-radius: "5rem";
+ width:100%;
 
-  @include tablet {
-    width: 100%;
-    margin: 0;
-    margin-top: 5rem;
-  }
+ margin-left: 2.5rem;
+ margin-right: 2.5rem;
 }
 
 .product-modal {
@@ -214,7 +210,7 @@
   display: flex;
   background: #fff;
   border: 1px solid #e1e1e1;
-  border-radius: "5rem";
+  border-radius: 2vw;
 
   @include tablet {
     flex-direction: column;
@@ -226,7 +222,6 @@
   border-radius: "5rem";
   width: 100%;
   // height: 40rem;
-  height: inherit;
   flex-grow: 1;
   position: relative;
   background: #f8f8f8;
@@ -247,8 +242,23 @@
   }
 }
 
+.brand-name {
+font-size: 1.5vw;
+color:#f28290;
+font-weight: bolder;
+}
+
+.description {
+  font-size: 1.3vw;
+color:black;
+}
+
+.p-name {
+margin-top:-2vw
+}
+
 .product-modal-image-collection {
-  width: 150px;
+  width: 15vw;
   height: inherit;
   background: #fff;
   display: flex;
@@ -256,6 +266,7 @@
   padding: 10px;
   overflow-y: scroll;
   position: relative;
+  border-radius:2vw;
 
   @include tablet {
     width: 100%;
@@ -284,7 +295,7 @@
 .product-modal-image-collection-wrapper {
   width: 100%;
   height: 100px;
-  border: 1px solid #e1e1e1;
+  // border: 1px solid #e1e1e1;
   margin-bottom: 5px;
   position: relative;
 
@@ -305,14 +316,14 @@
 }
 
 .product-modal-image {
-  border-radius: "5rem";
+  border-radius: 2vw;
   width: 100%;
   height: 100%;
   object-fit: fill;
 }
 
 .product-modal-details {
-  width: 100rem;
+  width: 50%;
   padding: $l-size;
   border-radius: "5rem";
   @include tablet {
@@ -321,6 +332,101 @@
     padding-bottom: $l-size;
     order: 3;
   }
+}
+
+.product-brand-wrap {
+  border:2px solid black;
+  height: 4rem;
+  border-radius:3rem;
+  width:fit-content;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  justify-content: center;
+  align-items:center;
+  display: flex;
+  margin-top: 2rem;
+}
+
+.user-descr {
+  display: inline-flex;
+  justify-content: center;
+  align-items:center;
+  height: 1rem;
+}
+
+.user-fname {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-left: 2rem;
+}
+
+.btn-subscribe {
+  border-radius:5rem;
+  background:#F28290;
+  height: 4rem;
+  width: fit-content;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  border:none;
+  margin-left: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+.btn-liked {
+  width: 4rem;
+  height: 4rem;
+  margin-top: 1rem;
+  border-radius: 5rem;         
+  background:  #F28290;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;               
+}
+.btn-liked-active {
+  width: 4rem;
+  height: 4rem;
+  margin-top: 1rem;
+  border-radius: 5rem;         
+  background:  black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none; 
+}
+
+.liked-icon { 
+  color:white;
+  width:2rem;
+  height: 2rem;
+}
+
+.liked-icon-active { 
+  color:#F28290;
+  width:2rem;
+  height: 2rem;
+}
+
+.form-post{
+width:31rem;
+border-radius: 1vw;
+}
+
+.user-navigation-wrapper {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: 10px;
+  position: relative;
+  background: #c5c5c5;
+}
+
+.user-navigation-image {
+  width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .product-modal-action {
@@ -731,6 +837,20 @@ height:3vw;
     margin-top:14vw;
     margin-left:1.5vw;
   }
+  .product-modal {
+  height:80%;
+  max-height: 48vw;
+  }
+
+}
+
+@media (max-width: 1050px) {
+.user-navigation-wrapper {
+  display: none;
+}
+.form-post{ 
+margin-left:-2rem;
+}
 }
 
 @media (max-width: 1000px) {
@@ -747,6 +867,29 @@ height:3vw;
       width:39vw;
       margin-top: -0.8vw;
      }
+   
+  }
+  .p-name {
+    margin-top: -3.5vw;
+  }
+}
+
+@media (max-width: 850px) {
+  .product-modal {
+  flex-direction: column;
+  width: 100%;
+  }
+  .p-name {
+    margin-top: 0vw;
+  }
+  .product-modal-details {
+    width: 100%;
+    padding: 1.6rem;
+    padding-bottom: 3.2rem;
+    order: 3;
+  }
+  .form-post {
+width:85vw;
   }
 }
 
@@ -757,6 +900,15 @@ height:3vw;
 
       margin-top: -1vw;
      }
+  }
+  .product-view {
+    margin-right: 2rem;
+  }
+  .brand-name {
+font-size: 2vw;
+  }
+  .description {
+    font-size: 2vw;
   }
 }
 
@@ -811,6 +963,10 @@ height:3vw;
    .product-brand-name {
      font-size: 3vw;
     }
+
+    .product-view {
+      margin: 0vw;
+    }
 }
 
 @media (max-width: 600px) {
@@ -824,6 +980,12 @@ height:3vw;
       margin-left: 2vw;
     }
   }
+  .brand-name {
+    font-size: 2.5vw;
+      }
+      .description {
+        font-size: 2.5vw;
+      }
 }
 
 @media (max-width: 550px) {
@@ -844,6 +1006,15 @@ height:3vw;
       width:67vw;
      }
   }
+  .brand-name {
+    font-size: 3vw;
+      }
+      .description {
+        font-size: 3vw;
+      }
+      .p-name {
+        text-align: justify;
+      }
 }
 
 @media (max-width: 450px) {
@@ -866,6 +1037,11 @@ height:3vw;
       width:75vw;
      }
   }
+
+      .p-name {
+        text-align: unset;
+        margin-left: 1vw;
+      }
 }
 
 @media (max-width: 400px) {

@@ -22,7 +22,6 @@ const ViewEvent = () => {
     <main className="content">
       {isLoading && (
         <div className="loader">
-          <h4>Загружается</h4>
           <br />
           <LoadingOutlined style={{ fontSize: "3rem" }} />
         </div>
@@ -63,9 +62,9 @@ const ViewEvent = () => {
             </div>
             <div className="product-modal-details">
               <br />
-              <span className="text-subtle">{event.brand}</span>
-              <h1 className="margin-top-0">{event.name}</h1>
-              <span>{event.description}</span>
+              <p className="brand-name">{event.brand}</p>
+              <h1 className="p-name">{event.name}</h1>
+              <p className="description">{event.description}</p>
               <br />
               <br />
               <div className="divider" />

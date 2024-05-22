@@ -33,6 +33,7 @@ const ViewProduct = () => {
   const [isSaved, setIsSaved] = useState(false);
   const saved = product?.saved || [];
   const userId = useUserId();
+  const [numRows, setNumRows] = useState(5);
 
   useScrollTop();
   useDocumentTitle(`Обзор ${product?.name || 'Item'}`);
@@ -65,7 +66,31 @@ const ViewProduct = () => {
           console.error('Error getting user:', error);
         });
     }
+
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+      if (windowWidth >= 1200) {
+        setNumRows(5);
+      } else if (windowWidth >= 1100) {
+        setNumRows(3);
+      } else if (windowWidth >= 950) {
+        setNumRows(2);
+      } else if (windowWidth >= 920) {
+        setNumRows(1);
+      } else if (windowWidth <= 850) {
+        setNumRows(3);
+      } else {
+        setNumRows(1);
+      }
+    };
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Call handleResize once to set initial number of columns
+    handleResize();
     return () => {
+      window.removeEventListener('resize', handleResize);
       isMounted = false; // Cleanup function to update component mount status
     };
   }, [product, liked, userId, saved]);
@@ -171,33 +196,17 @@ const ViewProduct = () => {
             </div>
             <div className="product-modal-details">
               <br />
-              <h1 className="margin">{product.name}</h1>
+              <h1 className="p-name">{product.name}</h1>
               <div style={{ height: '2px', backgroundColor: 'black' }} />
               <div
-                style={{
-                  border: '2px solid black',
-                  height: '4rem',
-                  borderRadius: '3rem',
-                  width: 'fit-content',
-                  paddingLeft: '1vw',
-                  paddingRight: '1vw',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  display: 'flex',
-                  marginTop: '2rem'
-                }}
+                className="product-brand-wrap"
               >
-                <p>{product.brand}</p>
+                <p className="p-brand">{product.brand}</p>
               </div>
               <br />
               <br />
               <div
-                style={{
-                  display: 'inline-flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  height: '1rem'
-                }}
+                className="user-descr"
               >
                 <div
                   className="user-nav-img-wrapper"
@@ -206,29 +215,12 @@ const ViewProduct = () => {
                   <img alt="" className="user-nav-img" src={user?.avatar} />
                 </div>
                 <h5
-                  style={{
-                    fontWeight: 'bold',
-                    fontSize: '2rem',
-                    marginLeft: '2rem'
-                  }}
+                  className="user-fname"
                 >
                   {user?.fullname}
                 </h5>
                 <Button
-                  style={{
-                    borderRadius: '5rem',
-                    background: '#F28290',
-                    fontWeight: '500',
-                    height: '4rem',
-                    width: 'fit-content',
-                    paddingLeft: '1vw',
-                    paddingRight: '1vw',
-                    border: 'none',
-                    marginLeft: '2rem',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }}
+                  className="btn-subscribe"
                 >
                   <p style={{ color: 'white' }}>
                     Подписаться
@@ -252,72 +244,38 @@ const ViewProduct = () => {
               </div>
               <div style={{ display: 'flex' }}>
                 <Button
-                  style={{
-                    width: '4rem',
-                    height: '4rem',
-                    marginTop: '1rem',
-                    borderRadius: '5rem',
-                    background: isLiked ? 'black' : '#F28290',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    border: 'none'
-                  }}
+                  className={isLiked
+                    ? 'btn-liked-active' : 'btn-liked '}
                   onClick={onLikeClick}
                 >
                   <FontAwesomeIcon
-                    style={{
-                      color: isLiked ? '#F28290' : 'white',
-                      width: '2rem',
-                      height: '2rem'
-                    }}
+                    className={isLiked
+                      ? 'liked-icon-active' : 'liked-icon'}
                     icon={faThumbsUp}
                   />
                 </Button>
                 <Button
                   style={{
-                    width: '4rem',
-                    height: '4rem',
-                    marginTop: '1rem',
-                    borderRadius: '5rem',
-                    background: isSaved ? 'black' : '#F28290',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    border: 'none',
                     marginLeft: '1rem'
                   }}
+                  className={isSaved
+                    ? 'btn-liked-active' : 'btn-liked '}
                   onClick={onSaveClick}
                 >
                   <FontAwesomeIcon
-                    style={{
-                      color: isSaved ? '#F28290' : 'white',
-                      width: '2rem',
-                      height: '2rem'
-                    }}
+                    className={isSaved
+                      ? 'liked-icon-active' : 'liked-icon'}
                     icon={faBookmark}
                   />
                 </Button>
                 <Button
                   style={{
-                    width: '4rem',
-                    height: '4rem',
-                    marginTop: '1rem',
-                    borderRadius: '5rem',
-                    background: '#F28290',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    border: 'none',
                     marginLeft: '1rem'
                   }}
+                  className="btn-liked"
                 >
                   <FontAwesomeIcon
-                    style={{
-                      color: 'white',
-                      width: '2rem',
-                      height: '2rem'
-                    }}
+                    className="liked-icon"
                     icon={faShare}
                   />
                 </Button>
@@ -343,38 +301,29 @@ const ViewProduct = () => {
                   onClick={handleAddToBasket}
                 >
                   <FontAwesomeIcon
-                    style={{
-                      color: 'white',
-                      width: '2rem',
-                      height: '2rem'
-                    }}
+                    className="liked-icon"
                     icon={faCartShopping}
                   />
                   {isItemOnBasket(product.id) ? '+' : ''}
                 </Button>
               </div>
-              <div style={{ display: 'flex', marginTop: '3rem' }}>
+              <div style={{ display: 'flex', marginTop: '3rem', width: '100%' }}>
                 <div
-                  className="user-nav-img-wrapper"
+                  className="user-navigation-wrapper"
                   style={{ marginLeft: '0' }}
                 >
-                  <img alt="" className="user-nav-img" src={profile.avatar} />
+                  <img alt="" className="user-navigation-image " src={profile.avatar} />
                 </div>
-                <Form.Group style={{ marginLeft: '2rem' }}>
-                  <Form.Control
-                    style={{
-                      height: '25rem',
-                      width: '50rem',
-                      borderRadius: '2rem',
-                      textAlign: 'left',
-                      paddingLeft: '2rem',
-                      paddingBottom: '20rem'
-                    }}
-                    type="text"
-                    placeholder="Поделитесь ваши личными
-                    впечатлениями"
-                  />
-                </Form.Group>
+                <Form>
+                  <Form.Group style={{ marginLeft: '2rem' }} className="mb-3">
+                    <Form.Control
+                      className="form-post"
+                      as="textarea"
+                      rows={numRows}
+                      placeholder="Ваша оценка"
+                    />
+                  </Form.Group>
+                </Form>
               </div>
               {featuredProducts.some((fp) => fp.id === product.id) && (
                 <>

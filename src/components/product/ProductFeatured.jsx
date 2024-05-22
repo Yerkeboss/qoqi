@@ -75,8 +75,6 @@ const ProductFeatured = ({ product }) => {
         }
       }
 
-      console.log('like');
-
       // Update the liked array in Firebase
       await Firebase.editProduct(product.id, { liked: updatedLiked });
 
