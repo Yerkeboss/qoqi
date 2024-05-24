@@ -6,8 +6,169 @@
   padding: 0;
   grid-gap:0.6vw;
   margin-top:1vw;
+}
 
-  @include mobile {
-    grid-template-columns: repeat(2, 1fr) !important;
+.shop-title {
+  margin-left:2rem;
+  margin-top: 1rem;
+}
+
+.buttons-container {
+  display: flex;
+  margin-bottom: 2vw;
+  margin-left: 2rem;
+  width: 97%;
+  align-items:center;
+  gap:0.95vw;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.shop-button-active {
+  background-color: #F28290;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  border:none;
+  border-radius:1vw;
+  height:4rem;
+  width: fit-content;
+padding: 2rem;
+}
+
+.shop-button {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  border:1px solid black;
+  border-radius:1vw;
+  height:4rem;
+  width: fit-content;
+  padding: 2rem;
+}
+
+.shop-text-active {
+  color: white;
+  margin: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.35vw;
+}
+
+.shop-text {
+  color: black;
+  margin: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.2vw;
+}
+
+.shop-products {
+  width:100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media (max-width: 1300px) {
+
+  .shop-products {
+    width:100%;
+    padding-right: 2rem;
   }
+}
+
+@media (max-width: 1200px) {
+  .shop-button-active {padding:1.3rem}
+  .shop-button {padding:1.3rem}
+}
+
+@media (max-width: 1100px) {
+  .shop-button-active {padding:1.1rem}
+  .shop-button {padding:1.1rem}
+}
+
+@media (max-width: 1000px) {
+  .shop-button-active {padding:0.9rem}
+  .shop-button {padding:0.9rem}
+  .shop-title {
+    margin-top: -2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .shop-button-active {padding:0.75rem;
+  height:3rem;}
+  .shop-button {padding:0.75rem;  height:3rem;}
+}
+
+@media (max-width: 800px) {
+
+
+  .shop-products { 
+    padding-right: 1.5rem;
+  }
+  .shop-button-active {padding:0.55rem}
+  .shop-button {padding:0.55rem}
+}
+
+@media (max-width: 750px) {
+  .shop-title {
+    margin-left: 0.1rem;
+  }
+  .buttons-container {
+    margin-left: 0.1rem;
+  }
+  .shop-button-active {padding:0.75rem}
+  .shop-button {padding:0.75rem}
+
+  .shop-products {
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+  }
+  .shop-text {
+    font-size: 2vw;
+  }
+
+  .shop-text-active {
+    font-size: 2vw;
+  }
+}
+
+
+@media (max-width: 650px) {
+  .buttons-container {
+width:99%;
+  }
+  .shop-button-active {padding:0.65rem;height:3rem;}
+  .shop-button {padding:0.65rem;height:3rem;}
+  .shop-text {
+    font-size: 2vw;
+  }
+
+  .shop-text-active {
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 550px) {
+  .shop-button-active {padding:0.85rem;height:3rem;}
+  .shop-button {padding:0.85rem;height:3rem;}
+}
+
+@media (max-width: 480px) {
+  .shop-text {
+    font-size: 2vw;
+  }
+
+  .shop-text-active {
+    font-size: 2vw;
+  }
+  .shop-title {
+    margin-top: 1.5rem;
+  }
+  .shop-button-active {padding:1rem;height:3rem;}
+  .shop-button {padding:1rem;height:3rem;}
 }

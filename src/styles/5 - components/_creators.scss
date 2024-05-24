@@ -4,10 +4,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(calc(20% - 0.5vw), 1fr)); 
   padding: 0;
-
-  @include mobile {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
 }
 
 .creators-card {
@@ -24,9 +20,9 @@
   justify-content: center;
   align-items:center;
 
-  @include mobile {
-    height: 200px;
-  }
+  // @include mobile {
+  //   height: 200px;
+  // }
 }
 
 .creators-card-check {
@@ -53,9 +49,9 @@
   position: relative;
   transition: all 0.4s ease-in-out;
 
-  @include mobile {
-    height: 8rem;
-  }
+  // @include mobile {
+  //   height: 8rem;
+  // }
 }
 
 .creators-details {
@@ -93,4 +89,90 @@
   display:flex;
   justify-content: center;
   align-items:center;
+  margin-bottom: 1vw;
+}
+.message-icon {
+  margin-right: 1rem;
+  color: white;
+  font-size: 1.3vw;
+}
+.message-text {
+  color:white;
+}
+@media (max-width: 1200px) {
+  .creators-grid {
+    grid-template-columns: repeat(auto-fit, minmax(calc(25% - 0.5vw), 1fr)); 
+  }
+  .creators-card {
+    margin-left: 0vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  .creators-grid {
+    grid-template-columns: repeat(auto-fit, minmax(calc(33% - 0.5vw), 1fr)); 
+  }
+  .creators-card {
+    margin-left: 0vw;
+  }
+  .message-icon {
+    font-size: 2vw;
+  }
+  .message-text {
+  font-size: 2vw;
+  }
+  .creators-button {
+  height: 5vw;
+  }
+}
+
+@media (max-width: 750px) {
+  .creators-grid {
+    grid-template-columns: repeat(auto-fit, minmax(calc(50% - 0.5vw), 1fr)); 
+  }
+  .creators-button {
+   margin-bottom: 2vw;
+    }
+
+    .message-icon {
+      font-size: 2.5vw;
+    }
+    .message-text {
+    font-size: 2.5vw;
+    }
+}
+
+@media (max-width: 750px) {
+  .creators-grid {
+    grid-template-columns: repeat(auto-fit, minmax(calc(50% - 0.5vw), 1fr)); 
+  }
+  .creators-button {
+   margin-bottom: 3vw;
+   height: 6vw;
+    }
+
+    .message-icon {
+      font-size: 2.7vw;
+    }
+    .message-text {
+    font-size: 2.7vw;
+    }
+}
+
+@media (max-width: 550px) {
+  .creators-grid {
+    grid-template-columns: repeat(auto-fit, minmax(calc(100% - 0.5vw), 1fr)); 
+  }
+  .creators-button {
+   margin-bottom: 4vw;
+   height: 8vw;
+   width:80%;
+    }
+
+    .message-icon {
+      font-size: 2.7vw;
+    }
+    .message-text {
+    font-size: 2.7vw;
+    }
 }

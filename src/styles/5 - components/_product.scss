@@ -6,9 +6,9 @@
   grid-gap: 0.5rem;
   object-fit: fill;
 
-  @include mobile {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
+  // @include mobile {
+  //   grid-template-columns: repeat(2, 1fr) !important;
+  // }
 }
 
 .product-list-header {
@@ -125,10 +125,6 @@
   position: relative;
   background: #f6f6f6;
   transition: all 0.4s ease-in-out;
-
-  @include mobile {
-    height: 8rem;
-  }
 }
 
 .product-details {
@@ -138,6 +134,7 @@
 
 .product-card-price {
   color: $black;
+  margin-top:0.8vw;
 }
 
 .product-card-name {
@@ -226,11 +223,11 @@
   position: relative;
   background: #f8f8f8;
 
-  @include mobile {
-    width: 100%;
-    height: 20rem;
-    margin: auto;
-  }
+  // @include mobile {
+  //   width: 100%;
+  //   height: 20rem;
+  //   margin: auto;
+  // }
 
   input[type="color"] {
     position: absolute;

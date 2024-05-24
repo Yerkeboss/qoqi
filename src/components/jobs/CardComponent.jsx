@@ -14,38 +14,20 @@ const CardComponent = ({
   return (
     <div>
       <Card
-        style={{
-          flex: 1,
-          marginRight: '1rem',
-          border: '1px solid black',
-          borderRadius: '2vw',
-          height: '100%',
-          marginTop: '1vw'
-        }}
+        className="inner-card"
         key={job?.id}
       >
         {' '}
         {/* First card */}
         <Card.Body>
           <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginTop: '1vw',
-              width: '49vw'
-            }}
+            className="inner-card-body"
           >
             <Card.Title
-              style={{
-                color: 'black',
-                fontFamily: 'Inter',
-                fontWeight: '500',
-                marginLeft: '2.6vw',
-                width: '18vw'
-              }}
+              className="inner-card-title"
             >
-              <Card.Text style={{ fontSize: '1.2vw' }} onClick={() => onClickJob(job.id)}>{job?.selectedSpecialist}</Card.Text>
-              <Card.Text style={{ fontSize: '1.8vw', marginTop: '0vw' }}>
+              <Card.Text className="specialist" onClick={() => onClickJob(job.id)}>{job?.selectedSpecialist}</Card.Text>
+              <Card.Text className="job-from">
                 {`${job?.from}`}
                 {' '}
                 <FontAwesomeIcon icon={faTengeSign} />
@@ -53,40 +35,23 @@ const CardComponent = ({
                 {' '}
                 <FontAwesomeIcon icon={faTengeSign} />
               </Card.Text>
-              <Card.Text style={{ fontSize: '1.2rem', width: '100%', marginTop: '-1vw' }}>
+              <Card.Text className="job-duration">
                 {`${job?.duration} | ${job?.address}`}
               </Card.Text>
             </Card.Title>
             <div
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '0.8vw', marginBottom: '0.8vw'
-              }}
+              className="vac-spec"
               onClick={() => onClickUser(getUserId(job.userId))}
             >
               <Image
                 src={getUserAvatar(job.userId)}
-                style={{
-                  width: '12vw',
-                  height: '12vw'
-                }}
+                className="vac-spec-img"
               />
             </div>
           </div>
-          <div style={{ display: 'flex', marginBottom: '2vw', marginTop: '-4vw' }}>
+          <div className="vac-save-wrapper">
             <Button
-              style={{
-                backgroundColor: '#F28290',
-                border: 'none',
-                borderRadius: '1vw',
-                marginLeft: '2.6vw',
-                width: 'fit-content',
-                height: '4rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingLeft: '1vw',
-                paddingRight: '1vw'
-              }}
+              className="vac-save-button"
               onClick={() => onSaveClick(job.id)}
             >
               {isSaved ? (<FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />) : (<p style={{ color: 'white' }}>Откликнуться</p>)}

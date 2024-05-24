@@ -56,201 +56,65 @@ const Croud = () => {
     <main className="content" style={{ marginTop: '2rem' }}>
       <div style={{ width: '100%' }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <h2 style={{ marginLeft: '2rem', height: '20%' }}>Найти креатора</h2>
+          <h2 className="shop-title">Краудсорсинг</h2>
           <div
-            style={{
-              display: 'flex',
-              marginBottom: '2vw',
-              paddingLeft: '1.5vw',
-              paddingRight: '1.5vw',
-              width: '100%',
-              alignItems: 'center',
-              gap: '0.95vw'
-            }}
+            className="buttons-container"
           >
             <Button
               onClick={onClickArt}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                border: '1px solid black',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: '1vw',
-                height: '4rem',
-                padding: '1.5vw'
-              }}
+              className="shop-button"
             >
-              <p style={{
-                color: 'black',
-                margin: '0',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
+              <p className="shop-text">
                 Купить работу
               </p>
             </Button>
             <Button
               onClick={onClickCreators}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                border: '1px solid black',
-                borderRadius: '1vw',
-                height: '4rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '1.5vw'
-              }}
+              className="shop-button"
             >
-              <p style={{
-                color: 'black',
-                margin: '0', // Remove default margin for <p> tag
-                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
-                overflow: 'hidden', // Hide any overflow text
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
+              <p className="shop-text">
                 Найти креатора
               </p>
             </Button>
             <Button
               onClick={onClickVacancies}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                border: '1px solid black',
-                borderRadius: '1vw',
-                height: '4rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '1.5vw'
-              }}
+              className="shop-button"
             >
-              <p style={{
-                color: 'black',
-                margin: '0', // Remove default margin for <p> tag
-                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
-                overflow: 'hidden', // Hide any overflow text
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
-                {' '}
+              <p className="shop-text">
                 Вакансии
               </p>
 
             </Button>
             <Button
               onClick={onClickOrder}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                border: '1px solid black',
-                borderRadius: '1vw',
-                height: '4rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '1.5vw'
-              }}
+              className="shop-button"
             >
-              <p style={{
-                color: 'black',
-                margin: '0', // Remove default margin for <p> tag
-                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
-                overflow: 'hidden', // Hide any overflow text
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
+              <p className="shop-text">
                 Разместить заказ
               </p>
 
             </Button>
             <Button
               onClick={onClickTender}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                border: '1px solid black',
-                borderRadius: '1vw',
-                height: '4rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '1.5vw'
-              }}
+              className="shop-button"
             >
-              <p style={{
-                color: 'black',
-                margin: '0', // Remove default margin for <p> tag
-                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
-                overflow: 'hidden', // Hide any overflow text
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
+              <p className="shop-text">
                 Конкурсы/тендеры
               </p>
             </Button>
             <Button
               onClick={onClickCroud}
-              style={{
-
-                color: 'black',
-                backgroundColor: '#F28290',
-                border: 'none',
-                borderRadius: '1vw',
-                padding: '1.5vw',
-                height: '4rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
+              className="shop-button-active"
             >
-              <p style={{
-                color: 'white',
-                margin: '0', // Remove default margin for <p> tag
-                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
-                overflow: 'hidden', // Hide any overflow text
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
+              <p className="shop-text-active">
                 Краудсорсинг
               </p>
             </Button>
             <Button
               onClick={onClickCharity}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                border: '1px solid black',
-                borderRadius: '1vw',
-                padding: '1.5vw',
-                height: '4rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
+              className="shop-button"
             >
-              <p style={{
-                color: 'black',
-                margin: '0', // Remove default margin for <p> tag
-                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
-                overflow: 'hidden', // Hide any overflow text
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
+              <p className="shop-text">
                 Благотворительность
               </p>
             </Button>

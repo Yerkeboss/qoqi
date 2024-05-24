@@ -119,249 +119,87 @@ const Vacancies = () => {
     <main className="content" style={{ marginTop: '2rem' }}>
       <div style={{ width: '100%' }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <h2 style={{ marginLeft: '2rem', height: '20%' }}>Вакансии</h2>
-
+          <h2 className="shop-title">Вакансии</h2>
           <div
-            style={{
-              display: 'flex',
-              marginBottom: '2vw',
-              paddingLeft: '1.5vw',
-              paddingRight: '1.5vw',
-              width: '100%',
-              alignItems: 'center',
-              gap: '0.95vw'
-            }}
+            className="buttons-container"
           >
             <Button
               onClick={onClickArt}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                border: '1px solid black',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: '1vw',
-                height: '4rem',
-                padding: '1.5vw'
-              }}
+              className="shop-button"
             >
-              <p style={{
-                color: 'black',
-                margin: '0',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
+              <p className="shop-text">
                 Купить работу
               </p>
             </Button>
             <Button
               onClick={onClickCreators}
-              style={{
-                color: 'black',
-                backgroundColor: 'white',
-                border: '1px solid black',
-                borderRadius: '1vw',
-                padding: '1.5vw',
-                height: '4rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
+              className="shop-button"
             >
-              <p style={{
-                color: 'black',
-                margin: '0', // Remove default margin for <p> tag
-                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
-                overflow: 'hidden', // Hide any overflow text
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
+              <p className="shop-text">
                 Найти креатора
               </p>
             </Button>
             <Button
               onClick={onClickVacancies}
-              style={{
-                backgroundColor: '#F28290',
-                border: 'none',
-                color: 'black',
-
-                borderRadius: '1vw',
-                height: '4rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '1.5vw'
-              }}
+              className="shop-button-active"
             >
-              <p style={{
-                color: 'white',
-                margin: '0', // Remove default margin for <p> tag
-                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
-                overflow: 'hidden', // Hide any overflow text
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
-                {' '}
+              <p className="shop-text-active">
                 Вакансии
               </p>
 
             </Button>
             <Button
               onClick={onClickOrder}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                border: '1px solid black',
-                borderRadius: '1vw',
-                padding: '1.5vw',
-                height: '4rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
+              className="shop-button"
             >
-              <p style={{
-                color: 'black',
-                margin: '0', // Remove default margin for <p> tag
-                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
-                overflow: 'hidden', // Hide any overflow text
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
+              <p className="shop-text">
                 Разместить заказ
               </p>
 
             </Button>
             <Button
               onClick={onClickTender}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                border: '1px solid black',
-                borderRadius: '1vw',
-                padding: '1.5vw',
-                height: '4rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
+              className="shop-button"
             >
-              <p style={{
-                color: 'black',
-                margin: '0', // Remove default margin for <p> tag
-                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
-                overflow: 'hidden', // Hide any overflow text
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
+              <p className="shop-text">
                 Конкурсы/тендеры
               </p>
             </Button>
             <Button
               onClick={onClickCroud}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                border: '1px solid black',
-                borderRadius: '1vw',
-                padding: '1.5vw',
-                height: '4rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
+              className="shop-button"
             >
-              <p style={{
-                color: 'black',
-                margin: '0', // Remove default margin for <p> tag
-                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
-                overflow: 'hidden', // Hide any overflow text
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
+              <p className="shop-text">
                 Краудсорсинг
               </p>
             </Button>
             <Button
               onClick={onClickCharity}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                border: '1px solid black',
-                borderRadius: '1vw',
-                padding: '1.5vw',
-                height: '4rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
+              className="shop-button"
             >
-              <p style={{
-                color: 'black',
-                margin: '0', // Remove default margin for <p> tag
-                whiteSpace: 'nowrap', // Ensure the text does not wrap to the next line
-                overflow: 'hidden', // Hide any overflow text
-                textOverflow: 'ellipsis',
-                fontSize: '1.2vw'
-              }}
-              >
+              <p className="shop-text">
                 Благотворительность
               </p>
             </Button>
           </div>
-          <div style={{ width: '99%' }}>
-
+          <div className="vac-card-container">
             <Card
-              style={{
-                border: '1px solid black',
-                backgroundColor: 'white',
-                height: '100%',
-                borderRadius: '2vw',
-                padding: '1rem',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                marginLeft: '2rem'
-              }}
+              className="vacancies-card"
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', width: '47vw' }}>
+              <div className="vac-card-wrapper">
                 <p
-                  style={{
-                    color: 'black',
-                    fontFamily: 'Inter',
-                    fontWeight: '500',
-                    marginLeft: '4rem'
-                  }}
+                  className="vac-name"
                 >
                   Название
                 </p>
                 <p
-                  style={{
-                    color: 'black',
-                    fontFamily: 'Inter',
-                    fontWeight: '500',
-                    marginRight: '2rem'
-                  }}
+                  className="vac-user"
                 >
                   Заказчики
                 </p>
               </div>
               <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  flexDirection: 'column'
-                }}
+                className="vac-items"
               >
                 {jobs.map((job) => (
                   <CardComponent
