@@ -43,38 +43,24 @@ const Step3 = (props) => {
   };
 
   return (
-    <div style={{ position: 'relative', marginLeft: '7vw', width: '50vw' }}>
+    <div className="order-container">
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
           <h2 style={{ color: '#12141799' }}>Шаг 3</h2>
           <h2>Уточните детали </h2>
         </div>
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
           <Button
             onClick={_prev}
-            style={{
-              background: 'white',
-              border: '1px solid #F28290',
-              height: '4vw',
-              borderRadius: '1vw',
-              width: '5vw',
-              marginRight: '1vw'
-            }}
+            className="back-btn"
           >
-            <p style={{ color: '#F28290', fontSize: '1vw' }}>Назад</p>
+            <p className="back-btn-text">Назад</p>
           </Button>
           <Button
             type="submit"
-            style={{
-              background: '#F28290',
-              border: 'none',
-              height: '4vw',
-              borderRadius: '1vw',
-              width: '14vw',
-              marginRight: '1vw'
-            }}
+            className="next-btn"
           >
-            <p style={{ color: 'white', fontSize: '1vw', textTransform: 'none' }}>Опубликовать вакансию</p>
+            <p className="next-btn-text">Опубликовать вакансию</p>
           </Button>
         </div>
       </div>
@@ -85,10 +71,7 @@ const Step3 = (props) => {
           marginLeft: '1rem'
         }}
       >
-        <p style={{
-          marginTop: '0', marginBottom: '0vw', fontSize: '1.1vw', color: '#121417', fontWeight: '400', marginLeft: '-0.5vw'
-        }}
-        >
+        <p className="task-time">
           Какое количество времени нужно на ваш проект?
         </p>
         <RadioGroup
@@ -102,47 +85,23 @@ const Step3 = (props) => {
             value="Больше 6 месяцев"
             control={<Radio />}
             label="Больше 6 месяцев"
-            style={{
-              borderRadius: '1vw',
-              marginTop: '1rem',
-              background: 'white',
-              border: '1px solid black',
-              width: '28rem',
-              height: '4rem'
-            }}
+            className="form-control"
           />
           <FormControlLabel
             value="от 3 до 6 месяцев"
             control={<Radio />}
             label="от 3 до 6 месяцев"
-            style={{
-              borderRadius: '1vw',
-              marginTop: '1rem',
-              background: 'white',
-              border: '1px solid black',
-              width: '28rem',
-              height: '4rem'
-            }}
+            className="form-control"
           />
           <FormControlLabel
             value="от 1 до 3 месяцев"
             control={<Radio />}
             label="от 1 до 3 месяцев"
-            style={{
-              borderRadius: '1vw',
-              marginTop: '1rem',
-              background: 'white',
-              border: '1px solid black',
-              width: '28rem',
-              height: '4rem'
-            }}
+            className="form-control"
           />
         </RadioGroup>
 
-        <p style={{
-          marginTop: '1.5vw', fontSize: '1.1vw', color: '#121417', fontWeight: '400', marginLeft: '-0.5vw', marginBottom: '0.7vw'
-        }}
-        >
+        <p className="task-budget">
           Определите бюджет за ваш проект
         </p>
         <div style={{
@@ -150,67 +109,35 @@ const Step3 = (props) => {
         }}
         >
           <Button
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              background: '#F28290',
-              border: '1px solid #F28290',
-              height: '4vw',
-              borderRadius: '1vw',
-              width: 'fit-content',
-              paddingLeft: '1.5vw',
-              paddingRight: '1.5vw',
-              opacity: monthly ? '1' : '0.5'
-            }}
+            className={monthly ? 'budget-btn-active' : 'budget-btn'}
             onClick={monthButton}
           >
-            <p style={{ color: 'white' }}>Ежемесячно</p>
+            <p className="budget-text">Ежемесячно</p>
           </Button>
           <Button
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: 'fit-content',
-              paddingLeft: '1.5vw',
-              paddingRight: '1.5vw',
-              background: '#F28290',
-              border: '1px solid #F28290',
-              height: '4vw',
-              borderRadius: '1vw',
-              opacity: project ? '1' : '0.5'
-            }}
+            className={project ? 'budget-btn-active' : 'budget-btn'}
             onClick={projectButton}
+            style={{ marginLeft: '1vw' }}
           >
-            <p style={{ color: 'white' }}>Проектно</p>
+            <p className="budget-text">Проектно</p>
           </Button>
         </div>
-        <div style={{
-          display: 'flex', position: 'relative', marginLeft: '-0.5vw', justifyContent: 'space-between', width: '21.5vw'
-        }}
-        >
+        <div className="budget-wrap">
           <div style={{
             display: 'flex', flexDirection: 'column'
           }}
           >
             <p>От</p>
-            <div style={{
-              display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '-0.5vw'
-            }}
-            >
+            <div className="budget-container">
               <Input
-                style={{
-                  borderRadius: '1vw', width: '5vw', height: '3vw'
-                }}
+                className="input-style4"
                 type="text"
                 name="from"
                 id="from"
-                placeholder="Тнг"
                 value={from}
                 onChange={handleMoney}
               />
-              <p style={{ marginLeft: '0.5vw', fontSize: '1vw' }}>/в месяц</p>
+              <p className="money">/в месяц</p>
             </div>
 
           </div>
@@ -219,22 +146,17 @@ const Step3 = (props) => {
           }}
           >
             <p>До</p>
-            <div style={{
-              display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '-0.5vw'
-            }}
-            >
+            <div className="budget-container">
+
               <Input
-                style={{
-                  borderRadius: '1vw', width: '5vw', height: '3vw'
-                }}
+                className="input-style4"
                 type="text"
                 name="to"
                 id="to"
-                placeholder="Тнг"
                 value={to}
                 onChange={handleMoney}
               />
-              <p style={{ marginLeft: '0.5vw', fontSize: '1vw' }}>/в месяц</p>
+              <p className="money">/в месяц</p>
             </div>
 
           </div>

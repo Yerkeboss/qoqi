@@ -49,3 +49,66 @@
   top: 1vw;
   right: 1vw;
 }
+
+@media (max-width: 1200px) {
+.progressContainer {
+  height: 14vw;
+}
+}
+
+@media (max-width: 1100px) {
+  .progressContainer {
+    height: 16vw;
+  }
+  }
+
+@media (max-width: 900px) {
+    .progressContainer {
+      height: 18vw;
+    }
+    .stepLabel {
+      font-size: 2rem;
+    }
+    }
+
+    @media (max-width: 800px) {
+      .progressContainer {
+        height: 20vw;
+      }
+      }
+
+      @media (max-width: 700px) {
+        .progressContainer {
+          height: 20vw;
+          margin-bottom: 8.5vw;
+        }
+        }
+
+
+      @media (max-width: 600px) {
+        .progressContainer {
+          height: 22vw;
+          margin-bottom: 10.5vw;
+        }
+        }
+
+        @media (max-width: 500px) {
+          .progressContainer {
+            height: 24vw;
+            margin-bottom: 12.5vw;
+          }
+          }
+
+          @media (max-width: 450px) {
+            .progressContainer {
+              height: 28vw;
+              margin-bottom: 14.5vw;
+            }
+            }
+
+          @media (max-width: 400px) {
+            .progressContainer {
+              height: 30vw;
+              margin-bottom: 14.5vw;
+            }
+            }

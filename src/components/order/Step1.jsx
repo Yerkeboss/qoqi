@@ -4,8 +4,9 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-  Button, TextField
+  TextField
 } from '@mui/material';
+import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCamera, faPlayCircle, faFileVideo, faPaintBrush, faDesktop, faCube
@@ -41,7 +42,7 @@ const Step1 = (props) => {
   };
 
   return (
-    <div style={{ position: 'relative', marginLeft: '7vw', width: '50vw' }}>
+    <div className="order-container">
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
           <h2 style={{ color: '#12141799' }}>Шаг 1</h2>
@@ -49,16 +50,9 @@ const Step1 = (props) => {
         </div>
         <Button
           onClick={_next}
-          style={{
-            background: '#F28290',
-            border: 'none',
-            height: '4vw',
-            borderRadius: '1vw',
-            width: '10vw',
-            marginRight: '1vw'
-          }}
+          className="next-btn"
         >
-          <p style={{ color: 'white', fontSize: '1vw', textTransform: 'none' }}>Следующий шаг</p>
+          <p className="next-btn-text">Следующий шаг</p>
         </Button>
       </div>
 
@@ -68,7 +62,8 @@ const Step1 = (props) => {
           value={selectedSpecialist}
           onChange={handleRadioChange}
           name="radio-buttons-group"
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}
+          style={{ display: 'grid' }}
+          className="stepOneGrid"
         >
           <FormControlLabel
             value="Фотограф"
@@ -78,13 +73,11 @@ const Step1 = (props) => {
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
               }}
               >
-                <FontAwesomeIcon icon={faCamera} style={{ color: '#8c8c8c', fontSize: '3vw', marginTop: '1.5vw' }} />
-                <p style={{ marginTop: '0.5vw' }}>Фотограф</p>
+                <FontAwesomeIcon icon={faCamera} className="orderIcon" />
+                <p className="order-name">Фотограф</p>
               </div>
             )}
-            style={{
-              background: 'white', border: '1px solid black', height: '14rem', justifyContent: 'center'
-            }}
+            className="form-control-label"
             classes={{ root: 'radioRoot' }}
           />
           <FormControlLabel
@@ -95,13 +88,11 @@ const Step1 = (props) => {
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
               }}
               >
-                <FontAwesomeIcon icon={faPlayCircle} style={{ color: '#8c8c8c', fontSize: '3vw', marginTop: '1.5vw' }} />
-                <p style={{ marginTop: '0.5vw' }}>Видеооператор</p>
+                <FontAwesomeIcon icon={faPlayCircle} className="orderIcon" />
+                <p className="order-name">Видеооператор</p>
               </div>
             )}
-            style={{
-              background: 'white', border: '1px solid black', height: '14rem', justifyContent: 'center'
-            }}
+            className="form-control-label"
             classes={{ root: 'radioRoot' }}
           />
           {/* Replace one FormControlLabel with TextField */}
@@ -113,13 +104,11 @@ const Step1 = (props) => {
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
               }}
               >
-                <FontAwesomeIcon icon={faFileVideo} style={{ color: '#8c8c8c', fontSize: '3vw', marginTop: '1.5vw' }} />
-                <p style={{ marginTop: '0.5vw' }}>Аниматор</p>
+                <FontAwesomeIcon icon={faFileVideo} className="orderIcon" />
+                <p className="order-name">Аниматор</p>
               </div>
             )}
-            style={{
-              background: 'white', border: '1px solid black', height: '14rem', justifyContent: 'center'
-            }}
+            className="form-control-label"
             classes={{ root: 'radioRoot' }}
           />
           <FormControlLabel
@@ -130,13 +119,11 @@ const Step1 = (props) => {
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
               }}
               >
-                <FontAwesomeIcon icon={faPaintBrush} style={{ color: '#8c8c8c', fontSize: '3vw', marginTop: '1.5vw' }} />
-                <p style={{ marginTop: '0.5vw' }}>Иллюстратор</p>
+                <FontAwesomeIcon icon={faPaintBrush} className="orderIcon" />
+                <p className="order-name">Иллюстратор</p>
               </div>
             )}
-            style={{
-              background: 'white', border: '1px solid black', height: '14rem', justifyContent: 'center'
-            }}
+            className="form-control-label"
             classes={{ root: 'radioRoot' }}
           />
           <FormControlLabel
@@ -147,13 +134,11 @@ const Step1 = (props) => {
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
               }}
               >
-                <FontAwesomeIcon icon={faDesktop} style={{ color: '#8c8c8c', fontSize: '3vw', marginTop: '1.5vw' }} />
-                <p style={{ marginTop: '0.5vw', textAlign: 'center' }}>Графичесĸий дизайнер</p>
+                <FontAwesomeIcon icon={faDesktop} className="orderIcon" />
+                <p className="order-name">Графичесĸий дизайнер</p>
               </div>
             )}
-            style={{
-              background: 'white', border: '1px solid black', height: '14rem', justifyContent: 'center'
-            }}
+            className="form-control-label"
             classes={{ root: 'radioRoot' }}
           />
           <FormControlLabel
@@ -164,13 +149,11 @@ const Step1 = (props) => {
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
               }}
               >
-                <FontAwesomeIcon icon={faCube} style={{ color: '#8c8c8c', fontSize: '3vw', marginTop: '1.5vw' }} />
-                <p style={{ marginTop: '0.5vw' }}>3D Художник</p>
+                <FontAwesomeIcon icon={faCube} className="orderIcon" />
+                <p className="order-name">3D Художник</p>
               </div>
             )}
-            style={{
-              background: 'white', border: '1px solid black', height: '14rem', justifyContent: 'center'
-            }}
+            className="form-control-label"
             classes={{ root: 'radioRoot' }}
           />
           {!anotherOption && (
@@ -181,9 +164,7 @@ const Step1 = (props) => {
             value={selectedSpecialist !== 'Фотограф' && '3D Художник' && 'Графичесĸий дизайнер' && 'Иллюстратор' && 'Аниматор' && 'Видеооператор' ? selectedSpecialist : ''}
             onChange={handleTextChange}
             placeholder="Другое"
-            style={{
-              background: 'white', border: '1px solid black', height: '14rem', justifyContent: 'center', borderRadius: '2vw', width: '15.5vw', padding: '1vw', marginLeft: '-0.6vw'
-            }}
+            className="form-control-label2"
           />
           )}
         </RadioGroup>
