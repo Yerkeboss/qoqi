@@ -136,94 +136,61 @@ const Tender = () => {
               </p>
             </Button>
           </div>
-          <div style={{ width: '98%' }}>
+          <div className="tender-container">
             <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2" height={300}>
               <div className="tender-grid">
                 {tenders?.map((tender) => (
                   <Card
-                    style={{
-                      width: '30vw', height: '34vw', border: '1px solid black', borderRadius: '1vw', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '1.5vw', flexDirection: 'column'
-                    }}
+                    className="tender-card"
                     key={tender?.id}
                   >
                     <div
-                      style={{
-                        background: '#F28290', width: '27vw', height: '25vw', borderRadius: '1vw', padding: '1vw'
-                      }}
+                      className="tender-wrap"
                       onClick={() => onClickTender(tender.id)}
                     >
                       <div style={{
                         display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'
                       }}
                       >
-                        <div style={{
-                          borderRadius: '2vw', background: 'white', width: 'fit-content', paddingLeft: '1.5vw', paddingRight: '1.5vw', height: '3vw', display: 'flex', justifyContent: 'center', alignItems: 'center'
-                        }}
-                        >
+                        <div className="tender-date">
                           <p style={{ color: '#F28290' }}>{tender?.date}</p>
                         </div>
-                        <div style={{
-                          background: 'white', width: '3vw', height: '3vw', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '50%'
-                        }}
-                        >
-                          <FontAwesomeIcon icon={faBookmark} style={{ color: '#F28290', fontSize: '1.5vw' }} />
+                        <div className="bookmark-icon-wrapper">
+                          <FontAwesomeIcon icon={faBookmark} className="bookmark-icon" />
                         </div>
                       </div>
 
-                      <div style={{
-                        display: 'flex', flexDirection: 'column', width: 'fit-content', marginTop: '5vw', padding: '0.3vw'
-                      }}
-                      >
-                        <p style={{ color: 'white', marginBottom: '0vw' }}>{tender?.team}</p>
-                        <p style={{
-                          fontSize: '1.9vw', color: 'white', marginTop: '1vw', marginBottom: '1vw'
-                        }}
-                        >
+                      <div className="tender-details">
+                        <p className="tender-team">{tender?.team}</p>
+                        <p className="tender-position">
                           {tender?.position}
                         </p>
-                        <div style={{
-                          border: '2px solid white', borderRadius: '1vw', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '3vw', width: 'fit-content', paddingLeft: '1vw', paddingRight: '1vw'
-                        }}
-                        >
-                          <p style={{
-                            color: 'white'
-                          }}
-                          >
+                        <div className="tender-type">
+                          <p className="tender-type-txt">
                             {tender?.typeOfJob}
                           </p>
                         </div>
-                        <div style={{
-                          border: '2px solid white', borderRadius: '1vw', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '3vw', width: 'fit-content', paddingLeft: '1vw', paddingRight: '1vw', marginTop: '0.5vw'
-                        }}
-                        >
-                          <p style={{
-                            color: 'white'
-                          }}
-                          >
+                        <div className="tender-level">
+                          <p className="tender-type-txt">
                             {tender?.level}
                           </p>
                         </div>
                       </div>
                     </div>
-                    <div style={{
-                      display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginTop: '0vw', marginBottom: '-1vw'
-                    }}
-                    >
-                      <div style={{ display: 'flex', flexDirection: 'column', marginTop: '0vw' }}>
-                        <p style={{ fontWeight: 'bold', fontSize: '1.9vw', marginBottom: '0' }}>
+                    <div className="tender-bottom-wrap">
+                      <div className="tender-price-wrap">
+                        <p className="tender-price-txt">
                           {' '}
                           {tender?.price}
                         </p>
-                        <p style={{ fontWeight: 'bold', fontSize: '1vw', marginTop: '0.5vw' }}>{tender?.location}</p>
+                        <p className="tender-location">{tender?.location}</p>
                       </div>
                       <Button
-                        style={{
-                          background: '#f28290', borderRadius: '1.5vw', border: 'none', width: 'fit-content', paddingLeft: '1.5vw', paddingRight: '1.5vw', display: 'flex', justifyContent: 'space-between', alignItems: 'center', heigth: '1.9vw'
-                        }}
+                        className="message-send-btn"
                         onClick={() => handleSendMessage(authorId)}
                       >
-                        <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '0.5vw', color: 'white' }} />
-                        <p style={{ color: 'white' }}>Сообщение</p>
+                        <FontAwesomeIcon icon={faEnvelope} className="message-icon" />
+                        <p className="message-send-txt">Сообщение</p>
                       </Button>
                     </div>
                   </Card>
