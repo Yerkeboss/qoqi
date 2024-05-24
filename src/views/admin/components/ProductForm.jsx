@@ -173,17 +173,17 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
       >
         {({ values, setValues }) => (
           <Form className="product-headline">
-            <div>
-              <h1>Опубликовать работу</h1>
+            <div className="product-title">
+              <h1 className="t1">Опубликовать работу</h1>
               <div style={{ display: 'flex' }}>
-                <h2>Добавьте вложения</h2>
+                <h2 className="t2">Добавьте вложения</h2>
                 <div className="product-submit-button">
-                  <button
+                  <Button
                     className="button-submit"
                     disabled={isLoading}
                     type="submit"
                   >
-                    {isLoading ? 'Загружается' : 'Опубликовать'}
+                    {isLoading ? <p className="submit-txt">Загружается</p> : <p className="submit-txt">Опубликовать</p>}
                     &nbsp;
                     {isLoading ? (
                       <LoadingOutlined />
@@ -193,7 +193,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                         style={{ marginLeft: '1rem', width: '10%' }}
                       />
                     )}
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
