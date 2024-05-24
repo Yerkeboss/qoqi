@@ -1,0 +1,69 @@
+.croud-container {
+  width:98%;
+}
+
+.croud-card {
+  margin-left: 2rem;
+  width: 99%;
+  border-radius: 1vw;
+  margin-top: 2vw;
+}
+
+.croud-date {
+  display: flex;
+  justify-content: center;
+  background: white;
+  width: fit-content;
+  border-radius: 1vw;
+  margin-left: 1.5vw;
+  margin-top: 1.5vw;
+  position: absolute;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  flex-grow: 1;
+}
+
+.croud-date-txt {
+  color: #4a4a4a;
+  font-size: 1.5vw;
+}
+
+.croud-label {
+  display: flex;
+  justify-content: center;
+  width: 30vw;
+  margin-left: 2vw;
+  position: absolute;
+  margin-top: 24vw;
+}
+
+.croud-label-txt {
+  color: white;
+  font-weight: bold;
+  font-size: 2vw;
+  line-height: 2.5vw;
+}
+
+@media (max-width: 1000px) { 
+  .croud-container {
+    width:97%;
+  }
+  .croud-label {
+    margin-top: 22vw;
+  }
+}
+
+@media (max-width: 800px) { 
+  .croud-date-txt {
+  font-size: 1.3vw;
+  }
+}
+
+@media (max-width: 750px) { 
+  .croud-container {
+    width:100%;
+  }
+  .croud-card {
+margin-left: 0;
+  }
+}

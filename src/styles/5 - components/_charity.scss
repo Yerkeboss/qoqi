@@ -1,3 +1,6 @@
+.charity-container {
+  width:98.5%;
+}
 .charity-grid {
   width: 100%;
   height: auto;
@@ -5,10 +8,6 @@
   grid-template-columns: repeat(auto-fit, minmax(calc(20% - 0.5vw), 1fr));
   padding: 0;
   grid-gap:0.5vw;
-
-  @include mobile {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
 }
 
 .charity-card {
@@ -18,12 +17,8 @@
   position: relative;
   border: none;
   overflow: hidden;
-  margin-left:1.5vw;
+  margin-left:2rem;
 
-
-  @include mobile {
-    height: 200px;
-  }
 }
 
 .charity-card-check {
@@ -50,10 +45,6 @@
   position: relative;
   transition: all 0.4s ease-in-out;
   object-fit: fill;
-
-  @include mobile {
-    height: 8rem;
-  }
 }
 
 .image {
@@ -95,7 +86,7 @@
 }
 
 .charity2-card {
-  margin-left:1.5vw;
+  margin-left:2rem;
   display:flex;
   margin-top:2vw;
   justify-content: space-between;
@@ -129,4 +120,71 @@
 .heart-icon {
   font-size: 1.5vw;
   color:#CCCCCC;
+}
+
+@media (max-width: 1200px) { 
+  .charity-container {
+    width:97.5%;
+  }
+}
+
+@media (max-width: 1000px) { 
+  .charity-container {
+    width:97%;
+  }
+
+  .charity-grid {
+    grid-template-columns: repeat(auto-fit, minmax(calc(25% - 0.5vw), 1fr));
+   }
+
+   .heart-icon {
+    font-size: 2vw;
+
+  }
+
+}
+
+@media (max-width: 800px) { 
+
+  .charity-grid {
+    grid-template-columns: repeat(auto-fit, minmax(calc(33% - 0.5vw), 1fr));
+   }
+
+}
+
+@media (max-width: 750px) { 
+  .charity-container {
+    width: 100%;
+  }
+.charity-card {
+  margin-left: 0;
+}
+.charity2-card {
+  margin-left: 0;
+}
+  .charity-grid {
+    grid-template-columns: repeat(auto-fit, minmax(calc(33% - 0.5vw), 1fr));
+   }
+
+}
+@media (max-width: 600px) { 
+
+  .charity-grid {
+    grid-template-columns: repeat(auto-fit, minmax(calc(50% - 0.5vw), 1fr));
+   }
+   .heart-icon {
+    font-size: 2.5vw;
+
+  }
+}
+
+@media (max-width: 450px) { 
+
+  .charity-grid {
+    grid-template-columns: repeat(auto-fit, minmax(calc(100% - 0.5vw), 1fr));
+   }
+   .heart-icon {
+    font-size: 4vw;
+
+  }
 }

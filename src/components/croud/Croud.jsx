@@ -119,32 +119,21 @@ const Croud = () => {
               </p>
             </Button>
           </div>
-          <div style={{ width: '98.5%' }}>
+          <div className="croud-container">
             <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2" height={300}>
               <div style={{ marginTop: '-2vw' }}>
                 {crouds?.map((croud) => (
                   <Card
-                    style={{
-                      marginLeft: '1.5vw', width: '99%', borderRadius: '1vw', marginTop: '2vw'
-                    }}
+                    className="croud-card"
                     key={croud?.id}
                     onClick={() => onClickCroud(croud.id)}
                   >
                     <Card.Body style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                      <div style={{
-                        display: 'flex', justifyContent: 'center', background: 'white', width: '10vw', borderRadius: '1vw', marginLeft: '1.5vw', marginTop: '1.5vw', position: 'absolute', flexGrow: '1'
-                      }}
-                      >
-                        <p>{croud?.date}</p>
+                      <div className="croud-date">
+                        <p className="croud-date-txt">{croud?.date}</p>
                       </div>
-                      <div style={{
-                        display: 'flex', justifyContent: 'center', width: '30vw', marginLeft: '2vw', position: 'absolute', marginTop: '24vw'
-                      }}
-                      >
-                        <p style={{
-                          color: 'white', fontWeight: 'bold', fontSize: '2vw', lineHeight: '2.5vw'
-                        }}
-                        >
+                      <div className="croud-label">
+                        <p className="croud-label-txt">
                           {croud?.label}
                         </p>
                       </div>

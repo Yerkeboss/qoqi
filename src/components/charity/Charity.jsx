@@ -135,7 +135,7 @@ const Charity = () => {
               </p>
             </Button>
           </div>
-          <div style={{ width: '98.5%' }}>
+          <div className="charity-container">
             <SkeletonTheme color="#e1e1e1" highlightColor="#f2f2f2" height={300}>
               <div className="charity-grid">
                 {charities?.map((charity) => (
