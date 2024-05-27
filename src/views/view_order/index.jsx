@@ -106,238 +106,122 @@ const ViewOrder = () => {
       )}
       {job && !isLoading && (
         <div
-          style={{
-            display: 'flex', justifyContent: 'center', alignItems: 'flex-start', marginTop: '3vw'
-          }}
+          className="course-info-wrap"
           key={job?.id}
         >
           {' '}
           <Button
-            style={{
-              backgroundColor: 'white',
-              border: '2px solid #F28290 ',
-              borderRadius: '1vw',
-              width: 'fit-content',
-              height: '4vw',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingLeft: '1vw',
-              paddingRight: '1vw',
-              marginRight: '1vw'
-
-            }}
+            className="course-back-btn"
             onClick={backToOrder}
           >
-            <p style={{ color: '#F28290' }}>Назад</p>
+            <p className="course-back-txt">Назад</p>
           </Button>
-          <div
-            style={{
-              display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'
-            }}
+          <Card
+            className="course-info-card"
           >
-            <Card
-              style={{
-                marginRight: '1rem',
-                border: '1px solid black',
-                borderRadius: '2vw',
-                height: '100%'
-              }}
-            >
-              {' '}
-              {/* First card */}
-              <Card.Body>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginTop: '1vw',
-                    width: '50vw',
-                    marginBottom: '1vw'
-                  }}
-                >
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column'
-                  }}
+            {' '}
+            {/* First card */}
+            <Card.Body>
+              <div
+                className="order-card-body"
+              >
+                <div className="order-card-wrap">
+                  <Card.Title
+                    className="order-card-title"
                   >
-                    <Card.Title
-                      style={{
-                        color: 'black',
-                        fontFamily: 'Inter',
-                        fontWeight: '500',
-                        marginLeft: '2.6vw',
-                        width: '30vw'
-                      }}
-                    >
-                      <Card.Text style={{ fontSize: '1.8vw', fontWeight: 'bold' }}>{job?.selectedSpecialist}</Card.Text>
-                      <Card.Text style={{ fontSize: '1.8vw', marginTop: '0vw' }}>
-                        {`${job?.from}`}
-                        {' '}
-                        <FontAwesomeIcon icon={faTengeSign} />
-                        { `  -  ${job?.to}`}
-                        {' '}
-                        <FontAwesomeIcon icon={faTengeSign} />
+                    <div className="order-header">
+                      <div className="order-header-details">
+                        <Card.Text className="order-specialist">{job?.selectedSpecialist}</Card.Text>
+                        <Card.Text className="order-budget">
+                          {`${job?.from}`}
+                          {' '}
+                          <FontAwesomeIcon icon={faTengeSign} className="tenge-icon" />
+                          { `  -  ${job?.to}`}
+                          {' '}
+                          <FontAwesomeIcon icon={faTengeSign} className="tenge-icon" />
+                        </Card.Text>
+                      </div>
+                      <div
+                        className="order-user"
+                        onClick={() => onClickUser(getUserId(job.userId))}
+                      >
+                        <Image
+                          src={getUserAvatar(job.userId)}
+                          className="order-user-img"
+                        />
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex' }}>
+                      <Card.Text className="order-duration">
+                        Время выполнения проекта:
                       </Card.Text>
-                      <div style={{ display: 'flex' }}>
-                        <Card.Text style={{ fontSize: '1vw', width: '100%', marginTop: '-0.5vw' }}>
-                          Время выполнения проекта:
-                        </Card.Text>
-                        <Card.Text style={{ fontSize: '1vw', width: '100%', marginTop: '-0.5vw' }}>
-                          {`${job?.duration}`}
-                        </Card.Text>
-                      </div>
-                      <div style={{ display: 'flex' }}>
-                        <Card.Text style={{ fontSize: '1vw', width: '100%', marginTop: '-0.5vw' }}>
-                          Название задачи:
-                        </Card.Text>
-                        <Card.Text style={{ fontSize: '1vw', width: '100%', marginTop: '-0.5vw' }}>
-                          {`${job?.name}`}
-                        </Card.Text>
-                      </div>
-                    </Card.Title>
-                    <div style={{ display: 'flex', marginBottom: '2vw' }}>
+                      <Card.Text className="order-duration2">
+                        {`${job?.duration}`}
+                      </Card.Text>
+                    </div>
+                    <div style={{ display: 'flex' }}>
+                      <Card.Text className="order-duration">
+                        Название задачи:
+                      </Card.Text>
+                      <Card.Text className="order-duration2">
+                        {`${job?.name}`}
+                      </Card.Text>
+                    </div>
+                    <div style={{ display: 'flex' }}>
+                      <Card.Text className="order-duration">
+                        Описание задачи:
+                      </Card.Text>
+
+                      <Card.Text className="order-duration2">
+                        {`${job?.description}`}
+                      </Card.Text>
+
+
+                    </div>
+                    <div style={{ display: 'flex' }}>
+                      <Card.Text className="order-duration">
+                        Местоположение офиса:
+                      </Card.Text>
+
+                      <Card.Text className="order-duration2">
+                        {`${job?.address}`}
+                      </Card.Text>
+                    </div>
+                    <div style={{ display: 'flex' }}>
+                      <Card.Text className="order-duration">
+                        Основные критерии для вакансии:
+                      </Card.Text>
+
+                      <Card.Text className="order-duration2">
+                        {`${job?.enteredTexts}`}
+                      </Card.Text>
+
+                    </div>
+                    <div style={{ display: 'flex' }}>
+                      <Card.Text className="order-duration">
+                        Тип бюджета:
+                      </Card.Text>
+
+                      <Card.Text className="order-duration2">
+                        {`${job?.budgetType}`}
+                      </Card.Text>
+
+                    </div>
+                    <div className="order-save">
                       <Button
-                        style={{
-                          backgroundColor: '#F28290',
-                          border: 'none',
-                          borderRadius: '1vw',
-                          marginLeft: '2.6vw',
-                          width: 'fit-content',
-                          height: '4rem',
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          paddingLeft: '1vw',
-                          paddingRight: '1vw'
-                        }}
+                        className="vac-save-button"
                         onClick={() => onSaveClick(job.id)}
                       >
                         {isSaved ? (<FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />) : (<p style={{ color: 'white' }}>Откликнуться</p>)}
                       </Button>
                     </div>
-                  </div>
-                  <div
-                    style={{
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '2.6vw'
-                    }}
-                    onClick={() => onClickUser(getUserId(job.userId))}
-                  >
-                    <Image
-                      src={getUserAvatar(job.userId)}
-                      style={{
-                        width: '15vw',
-                        height: '15vw'
-                      }}
-                    />
-                  </div>
+                  </Card.Title>
+
                 </div>
-              </Card.Body>
-            </Card>
-            <Card
-              style={{
-                marginRight: '1rem',
-                border: '1px solid black',
-                borderRadius: '2vw',
-                height: '100%',
-                marginTop: '1vw'
 
-              }}
-            >
-              <Card.Body style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginTop: '1vw',
-                width: '50vw',
-                marginBottom: '1vw'
-              }}
-              >
-                <Card.Title style={{
-                  color: 'black',
-                  fontFamily: 'Inter',
-                  fontWeight: '500',
-                  marginLeft: '2.6vw',
-                  width: '100%',
-                  marginTop: '1vw',
-                  marginRight: '2vw'
-                }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Card.Text style={{ fontSize: '1.4vw', width: '100%', marginTop: '-0.5vw' }}>
-                      Описание задачи:
-                    </Card.Text>
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'flex-end'
-                    }}
-                    >
-                      <Card.Text style={{
-                        fontSize: '1.4vw', width: '15vw', marginTop: '-0.5vw'
-                      }}
-                      >
-                        {`${job?.description}`}
-                      </Card.Text>
-                    </div>
-
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Card.Text style={{ fontSize: '1.4vw', width: '100%', marginTop: '-0.5vw' }}>
-                      Местоположение офиса:
-                    </Card.Text>
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'flex-end'
-                    }}
-                    >
-                      <Card.Text style={{
-                        fontSize: '1.4vw', width: '15vw', marginTop: '-0.5vw'
-                      }}
-                      >
-                        {`${job?.address}`}
-                      </Card.Text>
-                    </div>
-
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Card.Text style={{ fontSize: '1.4vw', width: '100%', marginTop: '-0.5vw' }}>
-                      Основные критерии для вакансии:
-                    </Card.Text>
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'flex-end'
-                    }}
-                    >
-                      <Card.Text style={{
-                        fontSize: '1.4vw', width: '15vw', marginTop: '-0.5vw'
-                      }}
-                      >
-                        {`${job?.enteredTexts}`}
-                      </Card.Text>
-                    </div>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Card.Text style={{ fontSize: '1.4vw', width: '100%', marginTop: '-0.5vw' }}>
-                      Тип бюджета:
-                    </Card.Text>
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'flex-end'
-                    }}
-                    >
-                      <Card.Text style={{
-                        fontSize: '1.4vw', width: '15vw', marginTop: '-0.5vw'
-                      }}
-                      >
-                        {`${job?.budgetType}`}
-                      </Card.Text>
-                    </div>
-                  </div>
-
-                </Card.Title>
-              </Card.Body>
-            </Card>
-          </div>
+              </div>
+            </Card.Body>
+          </Card>
         </div>
       )}
     </div>

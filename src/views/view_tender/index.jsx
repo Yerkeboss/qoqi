@@ -7,16 +7,34 @@ import { useParams, useHistory } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { LoadingOutlined } from '@ant-design/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookmark, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { useDocumentTitle, useScrollTop, useTender } from '@/hooks';
 
 const ViewTender = () => {
   const history = useHistory();
   const { id } = useParams();
   const { tender, isLoading, error } = useTender(id);
+  const [author, setAuthor] = useState([]);
 
   useScrollTop();
   useDocumentTitle(`Обзор ${tender?.position || 'Item'}`);
 
+  const handleSendMessage = (userId) => {
+    history.push(`/chat/${userId}`);
+  };
+
+  useEffect(() => {
+    const fetchAuthor = async () => {
+      const usersCollection = await firebase.firestore().collection('users').get();
+      const usersData = usersCollection.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const filteredUser = usersData.filter((user) => user.fullname === 'Author');
+      setAuthor(filteredUser);
+    };
+    fetchAuthor();
+  }, []);
+
+  const authorId = author.map((item) => item.id);
 
   const backToOrder = () => {
     history.push('/tenderList');
@@ -33,93 +51,60 @@ const ViewTender = () => {
         </div>
       )}
       {tender && !isLoading && (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="course-info-wrap">
           {' '}
           <Button
-            style={{
-              backgroundColor: 'white',
-              border: '2px solid #F28290 ',
-              borderRadius: '1vw',
-              width: 'fit-content',
-              height: '4vw',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingLeft: '1vw',
-              paddingRight: '1vw',
-              top: '10vw',
-              left: '23vw',
-              position: 'absolute'
-            }}
+            className="course-back-btn"
             onClick={backToOrder}
           >
-            <p style={{ color: '#F28290' }}>Назад</p>
+            <p className="course-back-txt">Назад</p>
           </Button>
           <Card
-            style={{
-              marginRight: '1rem',
-              border: '1px solid black',
-              borderRadius: '2vw',
-              height: '100%',
-              marginTop: '3vw'
-            }}
+            className="course-info-card"
             key={tender?.id}
           >
             {' '}
             {/* First card */}
             <Card.Body>
               <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  marginTop: '1vw',
-                  marginBottom: '2vw',
-                  width: 'fit-content',
-                  paddingRight: '2vw',
-                  paddingLeft: '2vw'
-                }}
+                className="order-card-body"
               >
                 <Card.Title
-                  style={{
-                    color: 'black',
-                    fontFamily: 'Inter',
-                    fontWeight: '500',
-                    width: '35vw'
-                  }}
+                  className="order-card-title"
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Card.Text style={{ fontSize: '1.2vw' }}>Дата:</Card.Text>
-                    <Card.Text style={{ fontSize: '1.2vw', color: '#F28290', justifyContent: 'flex-end' }}>{tender?.date}</Card.Text>
+                    <Card.Text className="tender-name">Дата:</Card.Text>
+                    <Card.Text className="tender-detail">{tender?.date}</Card.Text>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Card.Text style={{ fontSize: '1.2vw' }}>Команда:</Card.Text>
-                    <Card.Text style={{ fontSize: '1.2vw', color: '#F28290', justifyContent: 'flex-end' }}>{tender?.team}</Card.Text>
+                    <Card.Text className="tender-name">Команда:</Card.Text>
+                    <Card.Text className="tender-detail">{tender?.team}</Card.Text>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Card.Text style={{ fontSize: '1.2vw' }}>Позиция</Card.Text>
-                    <Card.Text style={{ fontSize: '1.2vw', color: '#F28290', justifyContent: 'flex-end' }}>{tender?.position}</Card.Text>
+                    <Card.Text className="tender-name">Позиция:</Card.Text>
+                    <Card.Text className="tender-detail">{tender?.position}</Card.Text>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Card.Text style={{ fontSize: '1.2vw' }}>Тип работы:</Card.Text>
-                    <Card.Text style={{ fontSize: '1.2vw', color: '#F28290', justifyContent: 'flex-end' }}>
+                    <Card.Text className="tender-name">Тип работы:</Card.Text>
+                    <Card.Text className="tender-detail">
                       {`${tender?.typeOfJob}`}
                     </Card.Text>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Card.Text style={{ fontSize: '1.2vw' }}>Уровень</Card.Text>
-                    <Card.Text style={{ fontSize: '1.2vw', color: '#F28290', justifyContent: 'flex-end' }}>
+                    <Card.Text className="tender-name">Уровень:</Card.Text>
+                    <Card.Text className="tender-detail">
                       {`${tender?.level}`}
                     </Card.Text>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Card.Text style={{ fontSize: '1.2vw' }}>Цена:</Card.Text>
-                    <Card.Text style={{ fontSize: '1.2vw', color: '#F28290', justifyContent: 'flex-end' }}>
+                    <Card.Text className="tender-name">Цена:</Card.Text>
+                    <Card.Text className="tender-detail">
                       {`${tender?.price}`}
                     </Card.Text>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Card.Text style={{ fontSize: '1.2vw' }}>Адрес:</Card.Text>
-                    <Card.Text style={{ fontSize: '1.2vw', color: '#F28290', justifyContent: 'flex-end' }}>
+                    <Card.Text className="tender-name">Адрес:</Card.Text>
+                    <Card.Text className="tender-detail">
                       {`${tender?.location}`}
                     </Card.Text>
                   </div>
@@ -130,21 +115,11 @@ const ViewTender = () => {
                   >
                     {/* <div style={{ display: 'flex', marginBottom: '2vw', marginTop: '4vw' }}> */}
                     <Button
-                      style={{
-                        backgroundColor: '#F28290',
-                        border: 'none',
-                        borderRadius: '1vw',
-                        width: 'fit-content',
-                        height: '4vw',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        paddingLeft: '1vw',
-                        paddingRight: '1vw',
-                        marginLeft: '0.5vw'
-                      }}
+                      className="message-send-btn2"
+                      onClick={() => handleSendMessage(authorId)}
                     >
-                      <p style={{ color: 'white' }}>Сообщение</p>
+                      <FontAwesomeIcon icon={faEnvelope} className="message-icon2" />
+                      <p className="message-send-txt2">Сообщение</p>
                     </Button>
                     {/* </div> */}
                   </div>

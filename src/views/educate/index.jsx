@@ -69,23 +69,15 @@ const Educate = () => {
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <Form onSubmit={handleSubmit}>
           <FormGroup>
-            <div style={{
-              display: 'flex', alignItems: 'center', border: '0.2vw solid #F28290', borderRadius: '1vw', padding: '5vw'
-            }}
-            >
+            <div className="educate-container">
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <div style={{ display: 'flex', width: '30vw', justifyContent: 'space-between' }}>
-
-                  <p style={{
-                    fontSize: '1vw', color: '#121417', fontWeight: '400', height: '2vw', display: 'flex', alignItems: 'center'
-                  }}
-                  >
+                <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between' }}>
+                  <p className="order-duration" style={{ marginTop: '0' }}>
                     Название курса
                   </p>
                   <Input
-                    style={{
-                      borderRadius: '1vw', width: '50%', fontSize: '1vw'
-                    }}
+                    className="order-duration"
+                    style={{ marginLeft: '4rem' }}
                     type="text"
                     name="name"
                     id="name"
@@ -94,29 +86,32 @@ const Educate = () => {
                   />
                 </div>
                 <div style={{
-                  display: 'flex', width: '30vw', justifyContent: 'space-between', marginTop: '2vw'
+                  display: 'flex', width: '100%', justifyContent: 'space-between', marginTop: '2vw'
                 }}
                 >
 
-                  <p style={{
-                    fontSize: '1vw', color: '#121417', fontWeight: '400', height: '2vw', display: 'flex', alignItems: 'center'
-                  }}
-                  >
+                  <p className="order-duration" style={{ marginTop: '0' }}>
+
                     Длительность курса
                   </p>
-                  <Input style={{ borderRadius: '1vw', width: '50%', fontSize: '1vw' }} type="text" name="duration" id="duration" value={duration} onChange={handleInputChange} />
+                  <Input className="order-duration" style={{ marginLeft: '4rem' }} type="text" name="duration" id="duration" value={duration} onChange={handleInputChange} />
                 </div>
                 <div style={{
-                  display: 'flex', width: '30vw', justifyContent: 'space-between', marginTop: '2vw'
+                  display: 'flex', width: '100%', justifyContent: 'space-between', marginTop: '2vw'
                 }}
                 >
-                  <p style={{
-                    fontSize: '1vw', color: '#121417', fontWeight: '400', height: '10vw', display: 'flex', alignItems: 'center'
-                  }}
-                  >
+                  <p className="order-duration" style={{ marginTop: '0' }}>
                     Описание
                   </p>
-                  <Input style={{ borderRadius: '1vw', width: '50%', fontSize: '1vw' }} type="textarea" name="description" id="description" value={description} onChange={handleInputChange} />
+                  <Input
+                    className="order-duration"
+                    style={{ marginLeft: '4rem', height: '10rem' }}
+                    type="textarea"
+                    name="description"
+                    id="description"
+                    value={description}
+                    onChange={handleInputChange}
+                  />
                 </div>
                 <div style={{
                   display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '3vw'
@@ -124,19 +119,15 @@ const Educate = () => {
                 >
                   <Button
                     onClick={onClickBack}
-                    style={{
-                      background: 'white', border: '1px solid #F28290', height: '4vw', borderRadius: '1vw', width: 'fit-content', paddingLeft: '1vw', paddingRight: '1vw'
-                    }}
+                    className="back-btn"
                   >
-                    <p style={{ color: '#F28290', fontSize: '1vw', textTransform: 'none' }}>Назад</p>
+                    <p className="back-btn-text">Назад</p>
                   </Button>
                   <Button
                     type="submit"
-                    style={{
-                      background: '#F28290', border: 'none', height: '4vw', borderRadius: '1vw', width: 'fit-content', paddingLeft: '1vw', paddingRight: '1vw', marginLeft: '2vw'
-                    }}
+                    className="next-btn"
                   >
-                    <p style={{ color: 'white', fontSize: '1vw', textTransform: 'none' }}>Опубликовать курс</p>
+                    <p className="next-btn-text">Опубликовать курс</p>
                   </Button>
                 </div>
               </div>

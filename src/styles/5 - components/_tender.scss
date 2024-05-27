@@ -142,7 +142,24 @@ font-size: 1.5vw;
   align-items: center;
 }
 
+.message-send-btn2 {
+  background: rgb(242, 130, 144);
+  border-radius: 1.5vw;
+  border: none;
+  width: fit-content;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .message-icon {
+  margin-right: 0.5vw;
+  color:white;
+}
+
+.message-icon2 {
   margin-right: 0.5vw;
   color:white;
 }
@@ -151,9 +168,27 @@ font-size: 1.5vw;
   color:white;
 }
 
+.message-send-txt2 {
+  color:white;
+}
+
 
 .tender-type-txt {
   color:white;
+}
+
+.tender-name {
+font-size: 2vw;
+width:50%;
+line-height: 2.4vw;
+}
+.tender-detail {
+  line-height: 2.4vw;
+  width:50%;
+  font-size: 2vw;
+  color: #F28290;
+  justify-content: flex-end;
+  margin-left: 10rem;
 }
 
 @media (max-width: 1200px) {
@@ -163,6 +198,28 @@ font-size: 1.5vw;
   .message-send-btn {
     height: 4vw;
   }
+  .message-send-btn2 {
+    height: 6rem;
+  }
+
+  .message-send-txt2 {
+    font-size: 2.4vw;
+  }
+
+  .message-icon2 {
+    font-size: 2.4vw;
+  }
+  
+  .tender-name {
+    width:50%;
+    font-size: 2.8vw;
+    line-height: 4vw;
+    }
+    .tender-detail {
+      width:50%;
+      line-height: 4vw;
+      font-size: 2.8vw;
+    }
 }
 
 @media (max-width: 900px) {
@@ -206,6 +263,18 @@ font-size: 1.5vw;
   .tender-grid {
   margin-left: 0vw;
   }
+
+  .message-send-btn2 {
+    height: 4rem;
+  }
+
+  .message-send-txt2 {
+    font-size: 2.2vw;
+  }
+
+  .message-icon2 {
+    font-size: 2.2vw;
+  }
 }
 
 @media (max-width: 600px) {
@@ -221,10 +290,32 @@ font-size: 1.5vw;
 .tender-type-txt {
   font-size: 1.5vw;
 }
+
+.tender-name {
+
+  font-size: 3.5vw;
+
+  }
+  .tender-detail {
+
+    font-size: 3.5vw;
+
+  }
+
 }
 
 @media (max-width: 450px) {
   .tender-grid {
     grid-template-columns: repeat(auto-fit, minmax(calc(100% - 0.5vw), 1fr)); /* Adjusted */
   }
+  .tender-name {
+
+    font-size: 4vw;
+  
+    }
+    .tender-detail {
+  
+      font-size: 4vw;
+  
+    }
   }

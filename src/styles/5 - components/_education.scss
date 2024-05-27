@@ -273,12 +273,13 @@ margin-bottom: 3rem;
     flex-direction: column;
     align-items: flex-start;
     width: fit-content;
+    padding: 1.5rem;
 }
 
 .eduinfo-card-content {
   display: flex;
   justify-content: space-between;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   width: 100%;
 }
@@ -286,15 +287,12 @@ margin-bottom: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-right: 2vw;
-  width: 50%;
+  width: 100%;
 }
 
 .eduinfo-image {
   border-radius: 1vw;
-  margin-top: 2vw;
   width: 100%;
-  margin-left: 2vw;
 }
 
 .eduinfo-details {
@@ -302,8 +300,6 @@ margin-bottom: 3rem;
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
-    padding-left: 2vw;
-    padding-right: 2vw;
     height:100%;
 }
 
@@ -319,8 +315,14 @@ line-height: normal;
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    padding-left: 2vw;
-    padding-right: 2vw;
+}
+
+.educate-container {
+  display: flex;
+    align-items: center;
+    border: 3px solid rgb(242, 130, 144);
+    border-radius: 1vw;
+    padding: 3vw;
 }
 
 
@@ -331,6 +333,24 @@ line-height: normal;
   .contacts-title {
     font-size: 1.6vw;
   }
+  .course-back-btn {
+    margin-bottom: 2vw;
+    }
+    .course-info-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    .eduinfo-name, .eduinfo-about,.eduinfo-descr  {
+    font-size: 2.8vw;
+    }
+
+    .course-header1, .course-header2, .course-header3 {
+      font-size: 3vw;
+    }
+    
+    .course-name, .course-duration, .course-descr  {
+      font-size: 3vw;
+    }
 }
 
 @media (max-width: 900px) { 
@@ -382,12 +402,15 @@ line-height: normal;
 
 // Course Info 
 
-.course-info-wrap {
-  margin-top: -15vw;
-}
-
 .eduinfo-card-content {
 flex-direction: column;
+}
+.course-back-btn {
+margin-bottom: 2vw;
+}
+.course-info-wrap {
+  display: flex;
+  flex-direction: column;
 }
 
 }
@@ -586,7 +609,6 @@ flex-direction: column;
       .course-info-wrap {
         display: flex;
         flex-direction: column;
-        margin-top: -40vw;
       }
       .course-back-btn {
         margin-bottom: 2vw;
@@ -644,9 +666,18 @@ flex-direction: column;
       padding-left: 0.5rem;
       padding-right: 0.5rem;
     }
-    .course-info-wrap {
-      margin-top: -50vw;
-    }
+
+    .eduinfo-name, .eduinfo-about,.eduinfo-descr  {
+      font-size: 3.2vw;
+      }
+
+      .course-header1, .course-header2, .course-header3 {
+        font-size: 4vw;
+      }
+      
+      .course-name, .course-duration, .course-descr  {
+        font-size: 4vw;
+      }
 }
 
 @media (max-width: 480px) { 
@@ -656,10 +687,6 @@ flex-direction: column;
 
 .toggle-btns {
 margin-bottom: -1rem;
-}
-
-.course-info-wrap {
-  margin-top: -80vw;
 }
 }
 

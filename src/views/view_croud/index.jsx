@@ -37,30 +37,15 @@ const ViewCroud = () => {
       )}
       {croud && !isLoading && (
         <div
-          style={{
-            display: 'flex', justifyContent: 'center', alignItems: 'flex-start', marginTop: '3vw'
-          }}
+          className="course-info-wrap"
           key={croud?.id}
         >
           {' '}
           <Button
-            style={{
-              backgroundColor: 'white',
-              border: '2px solid #F28290 ',
-              borderRadius: '1vw',
-              width: 'fit-content',
-              height: '4vw',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingLeft: '1vw',
-              paddingRight: '1vw',
-              marginRight: '1vw'
-
-            }}
+            className="course-back-btn"
             onClick={backToOrder}
           >
-            <p style={{ color: '#F28290' }}>Назад</p>
+            <p className="course-back-txt">Назад</p>
           </Button>
           <div
             style={{
@@ -68,24 +53,14 @@ const ViewCroud = () => {
             }}
           >
             <Card
-              style={{
-                marginRight: '1rem',
-                border: '1px solid black',
-                borderRadius: '2vw',
-                height: '100%'
-              }}
+              className="course-info-card"
             >
               {' '}
               {/* First card */}
               <Card.Body>
                 <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginTop: '1vw',
-                    width: '50vw',
-                    marginBottom: '1vw'
-                  }}
+                  className="order-card-body"
+                  style={{ display: 'flex', flexDirection: 'column', padding: '4rem' }}
                 >
                   <div style={{
                     display: 'flex',
@@ -94,31 +69,24 @@ const ViewCroud = () => {
                   }}
                   >
                     <Card.Title
-                      style={{
-                        color: 'black',
-                        fontFamily: 'Inter',
-                        fontWeight: '500',
-                        marginLeft: '2.6vw',
-                        width: '30vw',
-                        marginTop: '2vw'
-                      }}
+                      className="order-card-title"
                     >
                       <div style={{
                         display: 'flex'
                       }}
                       >
-                        <Card.Text style={{ fontSize: '1.8vw', width: '100%', marginTop: '-0.5vw' }}>
+                        <Card.Text className="order-duration">
                           Название:
                         </Card.Text>
-                        <Card.Text style={{ fontSize: '1.8vw', width: '100%', marginTop: '-0.5vw' }}>
+                        <Card.Text className="order-duration">
                           {`${croud?.label}`}
                         </Card.Text>
                       </div>
                       <div style={{ display: 'flex' }}>
-                        <Card.Text style={{ fontSize: '1.8vw', width: '100%', marginTop: '1vw' }}>
+                        <Card.Text className="order-duration">
                           Дата:
                         </Card.Text>
-                        <Card.Text style={{ fontSize: '1.8vw', width: '100%', marginTop: '1vw' }}>
+                        <Card.Text className="order-duration">
                           {`${croud?.date}`}
                         </Card.Text>
                       </div>
@@ -126,15 +94,13 @@ const ViewCroud = () => {
                   </div>
                   <div
                     style={{
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '2.6vw'
+                      display: 'flex', alignItems: 'center', justifyContent: 'center'
                     }}
-
                   >
                     <Image
                       src={croud?.image}
                       style={{
-                        width: '15vw',
-                        height: '15vw'
+                        width: '100%'
                       }}
                     />
                   </div>

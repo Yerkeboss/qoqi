@@ -272,6 +272,99 @@ color:#F28290;
   font-size: 1vw;
 }
 
+.order-card-body {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
+}
+
+.order-card-wrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.order-card-title {
+  color: black;
+  width: 100%;
+}
+
+.order-header {
+display: flex;
+margin-bottom: 4rem;
+}
+
+.order-header-details {
+  width:75%;
+  }
+.order-specialist {
+  font-size:2.4vw;
+  font-weight: bold;
+}
+
+.order-budget {
+  font-size:2.4vw;
+  margin-top: 0vw;
+}
+
+.tenge-icon{
+  font-size:2.4vw;
+}
+
+.order-duration {
+  font-size: 1.8vw;
+  width: 60%;
+  margin-top: -0.5vw;
+}
+
+.order-duration2 {
+  font-size: 1.8vw;
+  width: 45%;
+  margin-top: -0.5vw;
+  margin-left: 4rem;
+  justify-self: end;
+}
+
+.order-save {
+  display: flex;
+  margin-left: -3rem;
+  margin-bottom: 2rem;
+}
+
+.order-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+}
+
+
+.order-user-img {
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
+
+  .tenge-icon{
+    font-size:3.2vw;
+  }
+
+  .order-specialist,.order-budget {
+    font-size:3.2vw;
+  }
+
+  .order-duration,.order-duration2 {
+    font-size: 2.8vw;
+  } 
+
+
+}
+
 @media (max-width: 1000px) {
   .order-container {
     width:100%;
@@ -300,6 +393,10 @@ text-wrap: nowrap;
   }
   .task-search-icon {
     top:2.5vw;
+  }
+
+  .order-save {
+    margin-left: -2rem;
   }
 
 }
@@ -368,6 +465,10 @@ width:100%;
 .task-search-icon {
   top:3vw;
 }
+
+.order-save {
+  margin-left: -1rem;
+}
   }
 
   @media (max-width: 600px) {
@@ -391,6 +492,17 @@ width:100%;
       padding: 1vw;
       height: auto;
     }
+    .tenge-icon{
+      font-size:4vw;
+    }
+  
+    .order-specialist,.order-budget {
+      font-size:4vw;
+    }
+  
+    .order-duration,.order-duration2 {
+      font-size: 3.4vw;
+    } 
      }
 
      @media (max-width: 550px) {
@@ -424,6 +536,18 @@ width:100%;
       .task-budget {
         font-size:2.5vw;
       }
+
+      .tenge-icon{
+        font-size:5vw;
+      }
+    
+      .order-specialist,.order-budget {
+        font-size:5vw;
+      }
+    
+      .order-duration,.order-duration2 {
+        font-size: 4.4vw;
+      } 
     }
 
      
