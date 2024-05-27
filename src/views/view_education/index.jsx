@@ -36,30 +36,14 @@ const ViewEducation = () => {
       )}
       {education && !isLoading && (
         <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: '3vw'
-          }}
+          className="course-info-wrap"
           key={education?.id}
         >
           <Button
-            style={{
-              backgroundColor: 'white',
-              border: '2px solid #F28290',
-              borderRadius: '1vw',
-              width: 'fit-content',
-              height: '4vw',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingLeft: '1vw',
-              paddingRight: '1vw',
-              marginRight: '1vw'
-            }}
+            className="course-back-btn"
             onClick={backToOrder}
           >
-            <p style={{ color: '#F28290' }}>Назад</p>
+            <p className="course-back-txt">Назад</p>
           </Button>
           <div
             style={{
@@ -70,59 +54,37 @@ const ViewEducation = () => {
             }}
           >
             <Card
-              style={{
-                border: '1px solid black',
-                borderRadius: '2vw',
-                height: '100%'
-              }}
+              className="course-info-card"
             >
               {/* Dividing the card into two sides */}
               <Card.Body
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  flexDirection: 'row',
-                  alignItems: 'flex-start', // Align items at the top
-                  width: '100%'
-                }}
+                className="course-info-card-body"
               >
                 {/* Left side */}
                 <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'flex-start',
-                    marginLeft: '2vw', // Added margin between the two sides
-                    width: '50%' // Set width to 50% for equal division
-                  }}
+                  className="course-info-details1"
                 >
-                  <Card.Text style={{ fontSize: '1.8vw', width: '100%' }}>
+                  <Card.Text className="course-header1">
                     Название:
                   </Card.Text>
-                  <Card.Text style={{ fontSize: '1.8vw', width: '100%' }}>
+                  <Card.Text className="course-header2">
                     Длительность:
                   </Card.Text>
-                  <Card.Text style={{ fontSize: '1.8vw', width: '100%' }}>
+                  <Card.Text className="course-header3">
                     Описание:
                   </Card.Text>
                 </div>
                 {/* Right side */}
                 <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'flex-start',
-                    width: '50%', // Set width to 50% for equal division
-                    marginRight: '2vw'
-                  }}
+                  className="course-info-details2"
                 >
-                  <Card.Text style={{ fontSize: '1.8vw', width: '100%' }}>
+                  <Card.Text className="course-name">
                     {`${education?.name}`}
                   </Card.Text>
-                  <Card.Text style={{ fontSize: '1.8vw', width: '100%' }}>
+                  <Card.Text className="course-duration">
                     {`${education?.duration}`}
                   </Card.Text>
-                  <Card.Text style={{ fontSize: '1.8vw', width: '100%' }}>
+                  <Card.Text className="course-descr">
                     {`${education?.description}`}
                   </Card.Text>
                 </div>
