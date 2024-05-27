@@ -93,127 +93,59 @@ const Education = () => {
         flexDirection: 'column'
       }}
     >
-      <div>
-        <div>
-          <h2 style={{ marginTop: '5rem', marginLeft: '2rem' }}>Обучение</h2>
-          <div style={{ display: 'flex' }}>
-            <Button
-              onClick={toggleInfo}
-              style={{
-              // marginTop: "2rem",
-                marginLeft: '2rem',
-                backgroundColor: showInfo ? '#F28290' : 'white',
-                border: showInfo ? 'none' : '1px solid black',
-                borderRadius: '12px',
-                width: 'fit-content',
-                height: '5rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingLeft: '1vw',
-                paddingRight: '1vw'
-              }}
-            >
-              <p style={{ color: showInfo ? 'white' : 'black' }}>Обучиться</p>
-            </Button>
-            <Button
-              onClick={toggleContacts}
-              style={{
-              // marginTop: "2rem",
-                marginLeft: '2rem',
-                backgroundColor: showContacts ? '#F28290' : 'white',
-                color: showContacts ? 'white' : 'black',
-                border: showContacts ? 'none' : ' 1px solid black',
-                borderRadius: '12px',
-                width: 'fit-content',
-                height: '5rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingLeft: '1vw',
-                paddingRight: '1vw'
-              }}
-            >
-              <p style={{ color: showContacts ? 'white' : 'black' }}>Обучать</p>
-            </Button>
-          </div>
-          <br />
-          <br />
-        </div>
-        {showInfo && (
-          <div style={{
-            overflowY: 'scroll',
-            height: '60vw'
-          }}
+      <div className="education-container">
+        <h2 className="education-title">Обучение</h2>
+        <div className="toggle-btns">
+          <Button
+            onClick={toggleInfo}
+            className={showInfo ? 'toggle-btn-active' : 'toggle-btn'}
           >
-            <Card
-              style={{
-                border: '1px solid black',
-                backgroundColor: 'white',
-                borderRadius: '20px',
-                padding: '1rem',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                marginTop: '1rem',
-                marginLeft: '2rem'
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <p
-                  style={{
-                    color: 'black',
-                    marginLeft: '4rem'
-                  }}
-                >
-                  Название
-                </p>
-                <p
-                  style={{
-                    color: 'black',
-                    marginRight: '2rem'
-                  }}
-                >
-                  Длительность
-                </p>
-                <p
-                  style={{
-                    color: 'black',
-                    marginRight: '20rem'
-                  }}
-                >
-                  Описание
-                </p>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  flexDirection: 'column'
-                }}
+            <p className={showInfo ? 'toggle-txt-active' : 'toggle-txt'}>Обучиться</p>
+          </Button>
+          <Button
+            onClick={toggleContacts}
+            className={showContacts ? 'toggle-btn-active' : 'toggle-btn'}
+          >
+            <p className={showContacts ? 'toggle-txt-active' : 'toggle-txt'}>Обучать</p>
+          </Button>
+        </div>
+        <br />
+        {showInfo && (
+        <div>
+          <Card
+            className="card-info"
+          >
+            <div className="card-info-headers">
+              <p
+                className="card-info-header1"
               >
-                {courses?.map((course) => (
-                  <Courses course={course} key={course.id} onSaveClick={onSaveClick} onClickEducation={onClickEducation} userId={userId} />
-                ))}
-              </div>
-            </Card>
-          </div>
+                Название
+              </p>
+              <p
+                className="card-info-header2"
+              >
+                Длительность
+              </p>
+              <p
+                className="card-info-header3"
+              >
+                Описание
+              </p>
+            </div>
+            <div
+              className="courses-wrap"
+            >
+              {courses?.map((course) => (
+                <Courses course={course} key={course.id} onSaveClick={onSaveClick} onClickEducation={onClickEducation} userId={userId} />
+              ))}
+            </div>
+          </Card>
+        </div>
         )}
         {showContacts && (
         <div>
           <Card
-            style={{
-              border: '1px solid black',
-              backgroundColor: 'white',
-              height: '100%',
-              borderRadius: '20px',
-              padding: '1rem',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              marginTop: '1rem',
-              marginLeft: '2rem'
-            }}
+            className="card-info"
           >
             <div
               style={{
@@ -224,77 +156,35 @@ const Education = () => {
             >
               {eduInfo?.map((edu) => (
                 <Card
-                  style={{
-                    flex: 1,
-                    marginRight: '1rem',
-                    border: '1px solid black',
-                    borderRadius: '20px',
-                    height: '100%'
-                  }}
+                  className="contacts-info"
                   key={edu?.id}
                 >
                   {' '}
                   <Card.Body>
                     <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        marginTop: '3rem'
-                      }}
+                      className="contacts-info-wrap"
                     >
                       <p
-                        style={{
-                          color: 'black',
-                          marginLeft: '4rem',
-                          width: '15rem'
-                        }}
+                        className="contacts-info-name"
                       >
                         {edu?.name}
                       </p>
-
-                      <p style={{
-                        marginLeft: '5rem', width: '70%', textAlign: 'justify', marginRight: '5rem'
-                      }}
-                      >
+                      <p className="contacts-info-descr">
                         {edu?.description}
                       </p>
                     </div>
-                    <div style={{ display: 'flex', marginBottom: '4rem' }}>
+                    <div className="course-actions-wrap">
                       <Button
-                        style={{
-                          backgroundColor: '#F28290',
-                          border: 'none',
-                          borderRadius: '12px',
-                          marginLeft: '4rem',
-                          width: 'fit-content',
-                          height: '4rem',
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          paddingLeft: '1vw',
-                          paddingRight: '1vw'
-                        }}
+                        className="course-save"
                         onClick={onClickAddCourse}
                       >
-                        <p style={{ color: 'white' }}>Создать </p>
+                        <p className="course-save-txt">Создать </p>
                       </Button>
                       <Button
-                        style={{
-                          marginLeft: '2rem',
-                          backgroundColor: 'white',
-                          border: '1px solid #F28290',
-                          borderRadius: '12px',
-                          width: 'fit-content',
-                          height: '4rem',
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          paddingLeft: '1vw',
-                          paddingRight: '1vw'
-                        }}
+                        className="course-details"
                         onClick={onClickEduInfo}
                       >
-                        <p style={{ color: '#F28290' }}>Узнать подробнее</p>
+                        <p className="course-details-txt">Узнать подробнее</p>
                       </Button>
                     </div>
                   </Card.Body>
@@ -308,75 +198,42 @@ const Education = () => {
                 flexDirection: 'column'
               }}
             >
-              <p style={{ fontSize: '1.4vw', marginLeft: '4rem', fontWeight: 'bolder' }}>Мои курсы</p>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <p className="contacts-title">Мои курсы</p>
+              </div>
               {userCourses?.map((userCourse) => (
                 <Card
-                  style={{
-                    flex: 1,
-                    marginRight: '1rem',
-                    border: '1px solid black',
-                    borderRadius: '20px',
-                    marginTop: '1vw',
-                    overflow: 'scroll',
-                    height: '60vw'
-                  }}
+                  className="courses-container"
                   key={userCourse?.id}
                 >
                   {' '}
                   {/* First card */}
                   <Card.Body>
                     <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        marginTop: '3rem'
-                      }}
+                      className="card-info-details"
                     >
                       <p
-                        style={{
-                          color: 'black',
-                          marginLeft: '4rem',
-                          width: '15rem'
-                        }}
+                        className="card-info-name"
                       >
                         {userCourse?.name}
                       </p>
                       <p
-                        style={{
-                          color: 'black',
-                          marginRight: '10rem'
-                        }}
+                        className="card-info-duration"
                       >
                         {userCourse?.duration}
                       </p>
                       <p
-                        style={{
-                          width: '20rem',
-                          color: 'black',
-                          marginRight: '7rem'
-                        }}
+                        className="card-info-descr"
                       >
                         {userCourse?.description}
                       </p>
                     </div>
-                    <div style={{ display: 'flex', marginBottom: '4rem' }}>
+                    <div className="course-actions-wrap">
                       <Button
-                        style={{
-                          backgroundColor: 'white',
-                          border: '1px solid #F28290',
-                          borderRadius: '1vw',
-                          marginLeft: '4rem',
-                          width: 'fit-content',
-                          height: '3vw',
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          paddingLeft: '1vw',
-                          paddingRight: '1vw'
-                        }}
+                        className="course-details2"
                         onClick={() => onClickEducation(userCourse.id)}
                       >
-                        <p style={{ color: '#F28290' }}> Подробнее</p>
+                        <p className="course-details-txt"> Подробнее</p>
 
                       </Button>
                     </div>

@@ -11,90 +11,43 @@ const Courses = ({
   return (
     <div>
       <Card
-        style={{
-          flex: 1,
-          marginRight: '1rem',
-          border: '1px solid black',
-          borderRadius: '20px',
-          height: '100%',
-          marginTop: '1vw'
-        }}
+        className="courses-container"
         key={course?.id}
       >
         {' '}
         {/* First card */}
         <Card.Body>
           <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginTop: '3rem'
-            }}
+            className="card-info-details"
           >
             <p
-              style={{
-                color: 'black',
-                marginLeft: '4rem',
-                width: '15rem'
-              }}
+              className="card-info-name"
             >
               {course?.name}
             </p>
             <p
-              style={{
-                color: 'black',
-                marginRight: '10rem'
-              }}
+              className="card-info-duration"
             >
               {course?.duration}
             </p>
             <p
-              style={{
-                width: '20rem',
-                color: 'black',
-                marginRight: '7rem'
-              }}
+              className="card-info-descr"
             >
               {course?.description}
             </p>
           </div>
-          <div style={{ display: 'flex', marginBottom: '4rem' }}>
+          <div className="course-actions-wrap">
             <Button
-              style={{
-                backgroundColor: '#F28290',
-                border: 'none',
-                borderRadius: '1vw',
-                marginLeft: '4rem',
-                width: 'fit-content',
-                height: '3vw',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingLeft: '1vw',
-                paddingRight: '1vw'
-              }}
+              className="course-save"
               onClick={() => onSaveClick(course?.id)}
             >
-              {isSaved ? (<FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />) : (<p style={{ color: 'white' }}>Записаться</p>)}
+              {isSaved ? (<FontAwesomeIcon icon={faCheck} className="course-save-icon" />) : (<p className="course-save-txt">Записаться</p>)}
             </Button>
             <Button
-              style={{
-                backgroundColor: 'white',
-                border: '1px solid #F28290',
-                borderRadius: '1vw',
-                marginLeft: '4rem',
-                width: 'fit-content',
-                height: '3vw',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingLeft: '1vw',
-                paddingRight: '1vw'
-              }}
+              className="course-details"
               onClick={() => onClickEducation(course.id)}
             >
-              <p style={{ color: '#F28290' }}> Подробнее</p>
-
+              <p className="course-details-txt"> Подробнее</p>
             </Button>
           </div>
         </Card.Body>
