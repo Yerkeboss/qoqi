@@ -76,7 +76,7 @@ const SignUp = ({ history }) => {
           )}
           <div className={`auth ${authStatus?.message && (!authStatus?.success && 'input-error')}`}>
             <div className="auth-main">
-              <h3>Зарегистрироваться в Qoqiqaz</h3>
+              <h3>Зарегистрироваться в qoqi platform</h3>
               <Formik
                 initialValues={{
                   fullname: '',

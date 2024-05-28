@@ -65,7 +65,7 @@ const SignIn = ({ history }) => {
           )}
           <div className={`auth ${authStatus?.message && (!authStatus?.success && 'input-error')}`}>
             <div className="auth-main">
-              <h3>Вход в Qoqiqaz</h3>
+              <h3>Вход в qoqi platform</h3>
               <br />
               <div className="auth-wrapper">
                 <Formik
