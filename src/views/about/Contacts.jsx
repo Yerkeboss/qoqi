@@ -2,25 +2,9 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 
 const Contacts = () => (
-  <div
-    style={{
-      flex: 1,
-      border: '1px solid #F28290',
-      backgroundColor: '#F28290',
-      borderRadius: '2vw'
-    }}
-  >
+  <div className="about-wrap">
     <Card
-      style={{
-        backgroundColor: '#F28290',
-        width: '10rem',
-        borderRadius: '15px',
-        marginLeft: '2rem',
-        height: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: '2rem'
-      }}
+      className="about-card1"
     >
       <p
         style={{

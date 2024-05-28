@@ -5,47 +5,17 @@ const ThirdRow = () => (
     className="about-grid"
   >
     <div
-      style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        border: '1px solid #F28290',
-        backgroundColor: '#F282904D',
-        borderRadius: '2vw',
-
-        alignItems: 'center',
-        width: 'fit-content',
-        padding: '2vw',
-        paddingBottom: '1vw'
-      }}
+      className="about-card4"
     >
-      <div style={{
-        background: '#F28290',
-        borderRadius: '1vw',
-        height: '3vw',
-        width: 'fit-content',
-        paddingLeft: '1vw',
-        paddingRight: '1vw',
-
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-      >
+      <div className="about-card1-descr">
         <p
-          style={{
-            color: 'white',
-            textAlign: 'center'
-          }}
+          className="about-card1-descr-txt"
         >
           Обучение
         </p>
       </div>
       <p
-        style={{
-          color: '#F28290',
-          textAlign: 'justify'
-        }}
+        className="about-card4-details"
       >
         Программа EMBA «Креативный подход в менеджменте» Школа
         креативных искусств (ШКИ): музыка, танцы, арт-дизайн, дизайн
@@ -53,140 +23,54 @@ const ThirdRow = () => (
       </p>
     </div>
     <div
-      style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        border: '1px solid #F28290',
-        backgroundColor: '#F282904D',
-        borderRadius: '2vw',
-
-        alignItems: 'center',
-        width: 'fit-content',
-        padding: '2vw',
-        paddingBottom: '1vw'
-      }}
+      className="about-card4"
     >
-      <div style={{
-        background: '#F28290',
-        borderRadius: '1vw',
-        height: '3vw',
-        width: 'fit-content',
-        paddingLeft: '1vw',
-        paddingRight: '1vw',
-
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-      >
+      <div className="about-card1-descr">
         <p
-          style={{
-            color: 'white',
-            textAlign: 'center'
-          }}
+          className="about-card1-descr-txt"
         >
           Events
         </p>
       </div>
       <p
-        style={{
-          color: '#F28290',
-          textAlign: 'justify'
-        }}
+        className="about-card4-details"
       >
         Лекторий, креативный аукцион, зимний каток, летний
         fashion фестиваль
       </p>
     </div>
     <div
-      style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        border: '1px solid #F28290',
-        backgroundColor: '#F282904D',
-        borderRadius: '2vw',
-
-        alignItems: 'center',
-        width: 'fit-content',
-        padding: '2vw',
-        paddingBottom: '1vw'
-      }}
+      className="about-card4"
     >
-      <div style={{
-        background: '#F28290',
-        borderRadius: '1vw',
-        height: '3vw',
-        width: 'fit-content',
-        paddingLeft: '0.9vw',
-        paddingRight: '0.9vw',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-      >
+      <div className="about-card1-descr">
         <p
+          className="about-card1-descr-txt"
           style={{
-            color: 'white',
-            textAlign: 'center'
+            textAlign: 'center', textWrap: 'balance'
           }}
         >
           Создание цифрового контента
         </p>
       </div>
       <p
-        style={{
-          color: '#F28290',
-          textAlign: 'justify'
-        }}
+        className="about-card4-details"
       >
         Подкасты, stand up,
         театр/перформанс, выставки, новая музыка
       </p>
     </div>
     <div
-      style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        border: '1px solid #F28290',
-        backgroundColor: '#F282904D',
-        borderRadius: '2vw',
-
-        alignItems: 'center',
-        width: 'fit-content',
-        padding: '2vw',
-        paddingBottom: '1vw'
-      }}
+      className="about-card4"
     >
-      <div style={{
-        background: '#F28290',
-        borderRadius: '1vw',
-        height: '3vw',
-        width: 'fit-content',
-        paddingLeft: '1vw',
-        paddingRight: '1vw',
-
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-      >
+      <div className="about-card1-descr">
         <p
-          style={{
-            color: 'white',
-            textAlign: 'center'
-          }}
+          className="about-card1-descr-txt"
         >
           Cyber Sport
         </p>
       </div>
       <p
-        style={{
-          color: '#F28290',
-          textAlign: 'justify'
-        }}
+        className="about-card4-details"
       >
         Проведение соревнований по киберспорту
       </p>

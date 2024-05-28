@@ -11,92 +11,35 @@ const FourthRow = ({
     style={{ display: 'flex', marginTop: '1vw', height: '100%' }}
   >
     <div
-      style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        border: '1px solid #F28290',
-        backgroundColor: '#F282904D',
-        borderRadius: '2vw',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
+      className="about-card5"
     >
-      <div style={{
-        marginTop: '2vw',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '22vw'
-      }}
-      >
+      <div className="about-card5-navs">
         <Button
           onClick={toggleFirstFloor}
-          style={{
-          // marginTop: "2rem",
-            backgroundColor: firstFloor ? '#F28290' : 'white',
-            color: firstFloor ? 'white' : 'black',
-            border: firstFloor ? 'none' : '1px solid black',
-            borderRadius: '1vw',
-            paddingLeft: '1vw',
-            paddingRight: '1vw',
-            width: 'fit-content'
-          }}
+          className={firstFloor ? 'toggle-btn-active2' : 'toggle-btn2'}
         >
           <p
-            style={{
-              color: firstFloor ? 'white' : 'black',
-              fontFamily: 'Inter',
-              fontWeight: '500'
-            }}
+            className={firstFloor ? 'toggle-txt-active2' : 'toggle-txt2'}
           >
             1 этаж
           </p>
         </Button>
         <Button
           onClick={toggleSecondFloor}
-          style={{
-          // marginTop: "2rem",
-
-            backgroundColor: secondFloor ? '#F28290' : 'white',
-            color: secondFloor ? 'white' : 'black',
-            border: secondFloor ? 'none' : '1px solid black',
-            borderRadius: '1vw',
-            paddingLeft: '1vw',
-            paddingRight: '1vw',
-            width: 'fit-content'
-          }}
+          className={secondFloor ? 'toggle-btn-active2' : 'toggle-btn2'}
         >
           <p
-            style={{
-              color: secondFloor ? 'white' : 'black',
-              fontFamily: 'Inter',
-              fontWeight: '500'
-            }}
+            className={secondFloor ? 'toggle-txt-active2' : 'toggle-txt2'}
           >
             2-7 этажи
           </p>
         </Button>
         <Button
           onClick={toggleThirdFloor}
-          style={{
-          // marginTop: "2rem",
-
-            backgroundColor: thirdFloor ? '#F28290' : 'white',
-            color: thirdFloor ? 'white' : 'black',
-            border: thirdFloor ? 'none' : '1px solid black',
-            borderRadius: '1vw',
-            paddingLeft: '1vw',
-            paddingRight: '1vw',
-            width: 'fit-content'
-          }}
+          className={thirdFloor ? 'toggle-btn-active2' : 'toggle-btn2'}
         >
           <p
-            style={{
-              color: thirdFloor ? 'white' : 'black',
-              fontFamily: 'Inter',
-              fontWeight: '500'
-            }}
+            className={thirdFloor ? 'toggle-txt-active2' : 'toggle-txt2'}
           >
             8 этаж
           </p>

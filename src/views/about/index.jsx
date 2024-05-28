@@ -57,66 +57,31 @@ const About = () => {
     <main
       className="content"
       style={{
-        width: '97.5%',
+        width: '98.5%',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        marginLeft: '2rem',
         marginTop: '3rem'
       }}
     >
-      <div>
-        <div>
-          <h2>О нас</h2>
+      <div className="education-container">
+        {/* <div> */}
+        <h2 className="education-title">О нас</h2>
+        <div className="toggle-btns">
           <Button
             onClick={toggleInfo}
-            style={{
-              // marginTop: "2rem",
-              backgroundColor: showInfo ? '#F28290' : 'white',
-              color: showInfo ? 'white' : 'black',
-              border: showInfo ? 'none' : '1px solid black',
-              borderRadius: '1vw',
-              paddingLeft: '1vw',
-              paddingRight: '1vw'
-            }}
+            className={showInfo ? 'toggle-btn-active' : 'toggle-btn'}
           >
-            <p
-              style={{
-                color: showInfo ? 'white' : 'black',
-                fontFamily: 'Inter',
-                fontWeight: '500'
-              }}
-            >
-              Информация о компании
-            </p>
+            <p className={showInfo ? 'toggle-txt-active' : 'toggle-txt'}>        Информация о компании</p>
           </Button>
           <Button
             onClick={toggleContacts}
-            style={{
-              // marginTop: "2rem",
-              marginLeft: '2rem',
-              backgroundColor: showContacts ? '#F28290' : 'white',
-              color: showContacts ? 'white' : 'black',
-              border: showContacts ? 'none' : '1px solid black',
-              borderRadius: '1vw',
-              paddingLeft: '1vw',
-              paddingRight: '1vw'
-            }}
+            className={showContacts ? 'toggle-btn-active' : 'toggle-btn'}
           >
-            <p
-              style={{
-                color: showContacts ? 'white' : 'black',
-                fontFamily: 'Inter',
-                fontWeight: '500'
-              }}
-            >
-              Контакты
-            </p>
+            <p className={showContacts ? 'toggle-txt-active' : 'toggle-txt'}>Контакты</p>
           </Button>
-          <br />
-          <br />
-          <br />
         </div>
+        {/* </div> */}
         {showInfo && (
           <div>
             <FirstRow />
