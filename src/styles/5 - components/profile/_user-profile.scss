@@ -171,6 +171,26 @@
   color: rgb(242, 130, 144);
 }
 
+.user-btn-txt {
+  color:white;
+}
+
+.user-btn-icon {
+  margin-right: 1rem;
+  color:white;
+  font-size: 1.3vw;
+}
+
+.user-btn-icon2 {
+  margin-right: 1rem;
+  color: #F28290;
+  font-size: 1.3vw;
+}
+
+.user-btn-txt2 {
+  color: #F28290;
+}
+
 
 
 .user-message-button {
@@ -218,6 +238,12 @@
     font-size: 1.6vw;
   }
   .profile-btn-txt {
+    font-size: 1.2vw;
+  }
+  .user-btn-txt {
+    font-size: 1.2vw;
+  }
+  .user-btn-txt2 {
     font-size: 1.2vw;
   }
 }
@@ -274,6 +300,10 @@ margin-left: 0;
     margin-top: 1rem;
   }
 
+  .user-message-button {
+    margin-top: 1rem;
+  }
+
 .user-profile-name {
   font-size: 2vw;
 }
@@ -319,5 +349,17 @@ margin-left: 0;
 .profile-btn-txt {
   font-size: 2vw;
 }
+.user-btn-txt {
+  font-size: 2vw;
+}
 
+.user-btn-icon {
+  font-size: 2vw;
+}
+.user-btn-icon2 {
+  font-size: 2vw;
+}
+.user-btn-txt2 {
+  font-size: 2vw;
+}
 }

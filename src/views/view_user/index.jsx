@@ -28,48 +28,39 @@ const ViewUser = () => {
 
 
   return (
-
-    <div
-      className="content"
-      style={{
-        width: '100%', display: 'flex', position: 'relative', marginLeft: '2rem', marginTop: '3rem', height: '80vw'
-      }}
-    >
-      {isLoading && (
-      <div className="loader">
-        <br />
-        <LoadingOutlined style={{ fontSize: '3rem' }} />
-      </div>
-      )}
-      {user && !isLoading && (
-      <div style={{
-        flex: '1', width: '70%'
-      }}
+    <main className="content">
+      <div
+        className="user-profile-container"
       >
-        <div className="user-profile-banner-wrapper" style={{ height: '18vw' }}>
-          <ImageLoader
-            alt="Banner"
-            className="user-profile-banner-img"
-            src={user?.banner}
-          />
+        {isLoading && (
+        <div className="loader">
+          <br />
+          <LoadingOutlined style={{ fontSize: '3rem' }} />
         </div>
-        <div>
+        )}
+        {user && !isLoading && (
+        <div className="user-profile-wrap">
+          <div className="user-profile-banner-wrapper" style={{ height: '18vw' }}>
+            <ImageLoader
+              alt="Banner"
+              className="user-profile-banner-img"
+              src={user?.banner}
+            />
+          </div>
+          <div className="user-orders-container">
+            <Suspense fallback={<Loader />}>
+              <Orders />
+            </Suspense>
+          </div>
+        </div>
+        )}
+        <div className="user-account-container">
           <Suspense fallback={<Loader />}>
-            <Orders />
+            <Account />
           </Suspense>
         </div>
       </div>
-      )}
-      <div style={{
-        display: 'flex', marginLeft: '2rem', width: '30%', height: '45vw'
-      }}
-      >
-        <Suspense fallback={<Loader />}>
-          <Account />
-        </Suspense>
-      </div>
-    </div>
-
+    </main>
   );
 };
 

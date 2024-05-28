@@ -38,66 +38,59 @@ const Account = () => {
         <div className="user-profile-details">
           <h2 className="user-profile-name">{user?.fullname}</h2>
           {user?.position ? (
-            <p style={{ marginTop: '0', color: '#12141799' }}>{user?.position}</p>
+            <p className="user-profile-position">{user?.position}</p>
           ) : (<p className="text-subtle text-italic">Позиция не указана</p>)}
-          <div style={{
- display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginRight: '5rem'
-}}
-          >
-            <div style={{
- display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'
-}}
-            >
-              <FontAwesomeIcon
-                icon={faBriefcase}
-                style={{ color: '#F28290', fontSize: '2.5rem', marginBottom: '1.5rem' }}
-              />
-              <FontAwesomeIcon
-                icon={faLocationDot}
-                style={{ color: '#F28290', fontSize: '2.5rem', marginBottom: '1.5rem' }}
-              />
-              <FontAwesomeIcon
-                icon={faGlobe}
-                style={{ color: '#F28290', fontSize: '2.5rem' }}
-              />
-            </div>
-            <div style={{
- display: 'inline-block', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginLeft: '2rem'
-}}
-            >
-              {user?.position ? (
-                <p style={{ color: '#12141799' }}>{user?.position}</p>
-          ) : (<p className="text-subtle text-italic">Позиция не указана</p>)}
-              {user?.address ? (
-                <p style={{ color: '#12141799' }}>{user?.address}</p>
+          <div className="profile-icons-container">
+            <div className="profile-icons-column">
+              <div className="profile-item">
+                <FontAwesomeIcon
+                  icon={faBriefcase}
+                  className="profile-icon"
+                />
+                {user?.position ? (
+                  <p className="profile-text">{user?.position}</p>
+          ) : (<p className="profile-text">Позиция не указана</p>)}
+              </div>
+              <div className="profile-item">
+                <FontAwesomeIcon
+                  icon={faLocationDot}
+                  className="profile-icon"
+                />
+                {user?.address ? (
+                  <p className="profile-text">{user?.address}</p>
           ) : (
-            <p style={{ color: '#12141799' }} className="text-subtle text-italic">Адрес не указан</p>
+            <p className="profile-text">Адрес не указан</p>
           )}
-              {user?.portfolio ? (
-                <p style={{ color: '#12141799' }}>{user?.portfolio}</p>
-          ) : (<p>Портфолио не указан</p>)}
+              </div>
+              <div className="profile-item">
+                <FontAwesomeIcon
+                  icon={faGlobe}
+                  className="profile-icon"
+                />
+                {user?.portfolio ? (
+                  <p className="profile-text">{user?.portfolio}</p>
+          ) : (<p className="profile-text">Портфолио не указан</p>)}
+              </div>
+
             </div>
 
           </div>
-          <div style={{
- display: 'flex', width: '90%', marginTop: '1rem', justifyContent: 'space-between', alignItems: 'center'
-}}
-          >
+          <p className="profile-descr">Графический дизайнер с 6+ годами опыта в игровой индустрии</p>
+          <div className="profile-actions">
             <Button
               className="user-subscribe-button"
             >
-                            <FontAwesomeIcon icon={faUserPlus} style={{ marginRight: '1rem', color: 'white', fontSize: '1.3vw' }} />
-              <p style={{ color: 'white', width: '100%' }}>Подписаться</p>
+              <FontAwesomeIcon icon={faUserPlus} className="user-btn-icon" />
+              <p className="user-btn-txt">Подписаться</p>
             </Button>
             <Button
               className="user-message-button"
               onClick={() => handleSendMessage(user.id)}
             >
-              <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '1rem', color: '#F28290', fontSize: '1.3vw' }} />
-              <p style={{ color: '#F28290', width: '100%' }}>Сообщение</p>
+              <FontAwesomeIcon icon={faEnvelope} className="user-btn-icon2" />
+              <p className="user-btn-txt2">Сообщение</p>
             </Button>
           </div>
-          <p style={{ marginLeft: '3vw' }}>Графический дизайнер с 6+ годами опыта в игровой индустрии</p>
         </div>
 
       </div>
