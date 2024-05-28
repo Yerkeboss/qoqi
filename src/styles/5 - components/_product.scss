@@ -945,7 +945,9 @@ font-size: 2vw;
 }
 
 @media (max-width: 767px) {
-
+  .product-display-grid {
+    grid-template-columns: repeat(auto-fit, minmax(calc(100% - 0.5vw), 1fr)); /* Adjusted */
+  }
   .product-display {
     &:hover {
       .product-display-img img {

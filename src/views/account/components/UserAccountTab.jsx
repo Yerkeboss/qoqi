@@ -29,70 +29,50 @@ const UserProfile = (props) => {
         <div className="user-profile-details">
           <h2 className="user-profile-name">{profile.fullname}</h2>
           {profile.position ? (
-            <p style={{ marginTop: '0', color: '#12141799' }}>{profile.position}</p>
+            <p className="user-profile-position">{profile.position}</p>
           ) : (<p className="text-subtle text-italic">Позиция не указана</p>)}
-          <div style={{
- display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginRight: '5rem'
-}}
-          >
-            <div style={{
- display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'
-}}
-            >
-              <FontAwesomeIcon
-                icon={faBriefcase}
-                style={{ color: '#F28290', fontSize: '2.5rem', marginBottom: '1.5rem' }}
-              />
-              <FontAwesomeIcon
-                icon={faLocationDot}
-                style={{ color: '#F28290', fontSize: '2.5rem', marginBottom: '1.5rem' }}
-              />
-              <FontAwesomeIcon
-                icon={faGlobe}
-                style={{ color: '#F28290', fontSize: '2.5rem' }}
-              />
-            </div>
-            <div style={{
- display: 'inline-block', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginLeft: '2rem'
-}}
-            >
-              {profile.position ? (
-                <p style={{ color: '#12141799' }}>{profile.position}</p>
-          ) : (<p className="text-subtle text-italic">Позиция не указана</p>)}
-              {profile.address ? (
-                <p style={{ color: '#12141799' }}>{profile.address}</p>
-          ) : (
-            <p style={{ color: '#12141799' }} className="text-subtle text-italic">Адрес не указан</p>
-          )}
-              {profile.portfolio ? (
-                <p style={{ color: '#12141799' }}>{profile.portfolio}</p>
-          ) : (<p>Портфолио не указан</p>)}
-            </div>
+          <div className="profile-icons-container">
+            <div className="profile-icons-column">
+              <div className="profile-item">
+                <FontAwesomeIcon icon={faBriefcase} className="profile-icon" />
+                {profile.position ? (
+                  <p className="profile-text">{profile.position}</p>
+      ) : (
+        <p className="profile-text">Позиция не указана</p>
+      )}
+              </div>
+              <div className="profile-item">
+                <FontAwesomeIcon icon={faLocationDot} className="profile-icon" />
+                {profile.address ? (
+                  <p className="profile-text">{profile.address}</p>
+      ) : (
+        <p className="profile-text">Адрес не указан</p>
+      )}
+              </div>
+              <div className="profile-item">
+                <FontAwesomeIcon icon={faGlobe} className="profile-icon" />
+                {profile.portfolio ? (
+                  <p className="profile-text">{profile.portfolio}</p>
+      ) : (
+        <p className="profile-text">Портфолио не указан</p>
+      )}
+              </div>
 
+            </div>
           </div>
-          <p style={{ marginLeft: '3vw' }}>Графический дизайнер с 6+ годами опыта в игровой индустрии</p>
-          <div style={{
- display: 'flex', width: '100%', marginTop: '1rem', justifyContent: 'center', alignItems: 'center'
-}}
-          >
+          <p className="profile-descr">Графический дизайнер с 6+ годами опыта в игровой индустрии</p>
+          <div className="profile-actions">
             <Button
               onClick={() => props.history.push(ACCOUNT_EDIT)}
-              style={{
- border: '2px solid #F28290', borderRadius: '2rem', width: 'fit-content', paddingLeft: '1vw', paddingRight: '1vw'
-}}
+              className="profile-button"
             >
-              <p style={{ color: '#F28290', whiteSpace: 'nowrap' }}>Редактировать профиль</p>
+              <p className="profile-btn-txt">Редактировать</p>
             </Button>
             <Button
               onClick={() => props.history.push(SAVED)}
-              style={{
- border: '2px solid #F28290', borderRadius: '2rem', marginLeft: '2rem', width: 'fit-content'
-}}
+              className="profile-button"
             >
-              <p style={{
- color: '#F28290', whiteSpace: 'nowrap', paddingLeft: '1vw', paddingRight: '1vw'
-}}
-              >
+              <p className="profile-btn-txt">
                 Сохраненные
               </p>
             </Button>

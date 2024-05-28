@@ -23,31 +23,23 @@ const UserAccount = () => {
 
   return (
     <div
-      style={{
-        width: '100%', display: 'flex', position: 'relative', marginLeft: '2rem', marginTop: '3rem', height: '100%', marginBottom: '-100vw'
-      }}
+      className="user-profile-container"
     >
-      <div style={{
-        flex: '1', width: '70%'
-      }}
-      >
-        <div className="user-profile-banner-wrapper" style={{ height: '18vw' }}>
+      <div className="user-profile-wrap">
+        <div className="user-profile-banner-wrapper">
           <ImageLoader
             alt="Banner"
             className="user-profile-banner-img"
             src={profile.banner}
           />
         </div>
-        <div>
+        <div className="user-orders-container">
           <Suspense fallback={<Loader />}>
             <UserOrdersTab />
           </Suspense>
         </div>
       </div>
-      <div style={{
-        display: 'flex', marginLeft: '2rem', width: '30%', height: '50rem'
-      }}
-      >
+      <div className="user-account-container">
         <Suspense fallback={<Loader />}>
           <UserAccountTab />
         </Suspense>
