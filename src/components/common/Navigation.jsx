@@ -156,7 +156,7 @@ const Navigation = () => {
           </NavLink>
         </li>
       </ul>
-
+      <div id="google_translate_element" />
       <ul className="navigation-menu">
         <SearchBar />
         <li className="navigation-menu-item">
