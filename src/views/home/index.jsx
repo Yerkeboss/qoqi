@@ -23,6 +23,7 @@ import { applyFilter } from '../../redux/actions/filterActions';
 import Sort from './Sort';
 import Categories from './Categories';
 import 'firebase/firestore';
+import translations from '../../translations.json';
 
 
 const Home = () => {
@@ -50,6 +51,7 @@ const Home = () => {
   const otherProducts = products.filter(
     (product) => !featuredProducts.some((fp) => fp.id === product.id)
   );
+  const [language, setLanguage] = useState('ru');
 
 
   const sortProductsByUserPreference = (products) => {
@@ -171,6 +173,23 @@ const Home = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
+    const languageMap = {
+      казахский: 'kk',
+      русский: 'ru',
+      английский: 'en'
+      // add more languages as needed
+    };
+
+    const observer = new MutationObserver(() => {
+      const langElement = document.querySelector('.goog-te-gadget-simple span:first-child');
+      if (langElement) {
+        const selectedLanguage = langElement.innerText.toLowerCase();
+        setLanguage(languageMap[selectedLanguage] || 'ru');
+      }
+      console.log('langElement', langElement);
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
     // Fetch products data from Firestore
     const fetchEvents = async () => {
       try {
@@ -229,14 +248,20 @@ const Home = () => {
     toggleRect();
     return () => {
       window.removeEventListener('scroll', handleScroll) && window.removeEventListener('resize', handleResize);
+      observer.disconnect();
     };
   }, []);
+
+  const getTranslatedText = (key) => (translations[language] && translations[language][key] ? translations[language][key] : key);
 
   return (
     <main className="content">
       <div className="home">
         <div className="scrollable-events">
-          <h2 className="home-title">Мероприятия</h2>
+          <h2 className="home-title" data-notranslate>
+            {' '}
+            {getTranslatedText('events')}
+          </h2>
           <Carousel cols={numColumns} rows={1} gap={2} loop scrollSnap>
             {events.map((event, index) => (
               <Carousel.Item key={index}>

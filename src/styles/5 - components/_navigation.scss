@@ -1,5 +1,46 @@
 /* For smaller screens */
 /* For smaller screens */
+.VIpgJd-ZVi9od-ORHb-OEVmcd { 
+  display: none;
+}
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc {
+    display: none;
+}
+        .goog-te-gadget img { 
+        display: none;
+        }
+        .goog-te-gadget-simple { 
+          display: flex !important;
+          padding: 1.3rem 1.4rem !important;
+          font-size: 1.4rem !important;
+          justify-content: center;
+          align-items: center;
+          border-radius: 2rem;
+          border:1px solid black !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        @media print {
+            #google_translate_element {
+                display: none;
+            }
+        }
+
+        /* Additional CSS to hide unwanted text */
+        .goog-logo-link, .goog-te-gadget span, .goog-te-banner-frame,
+        /* .goog-te-balloon-frame, .goog-te-gadget-simple {
+            display: none !important;
+        } */
+        .goog-te-gadget .goog-te-combo {
+            margin: 0;
+        }
+
+        .VIpgJd-ZVi9od-xl07Ob-lTBxed {
+          margin:0 !important;
+        }
 .navigation {
   width: 100%;
   height: auto; /* Change height to auto */
@@ -99,6 +140,10 @@
     }
   }
 
+  .capitalize-menu {
+    text-transform: capitalize;
+  }
+  
   .navigation-menu {
     display: flex;
     align-items: center;

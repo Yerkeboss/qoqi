@@ -5,36 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Qoqiqaz</title>
+    <title>Qoqi platform</title>
     <link rel="icon" type="image/png" href="/src/images/logo1.png" />
-    <style>
+<script type="text/javascript">
+    // <![CDATA[
 
-        .VIpgJd-ZVi9od-ORHb-OEVmcd { 
-  display: none;
-}
-        .goog-te-gadget img { 
-        display: none;
-        }
-
-        body {
-            top: 0px !important;
-        }
-
-        @media print {
-            #google_translate_element {
-                display: none;
+    // Exclude elements with data-notranslate attribute
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        var observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (mutation.type == 'childList') {
+              var elements = document.querySelectorAll('[data-notranslate]');
+              elements.forEach(function (element) {
+                element.classList.add('notranslate');
+              });
             }
-        }
-
-        /* Additional CSS to hide unwanted text */
-        .goog-logo-link, .goog-te-gadget span, .goog-te-banner-frame,
-        /* .goog-te-balloon-frame, .goog-te-gadget-simple {
-            display: none !important;
-        } */
-        .goog-te-gadget .goog-te-combo {
-            margin: 0;
-        }
-    </style>
+          });
+        });
+  
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      }, 1000); // Adjust the delay if necessary
+    });
+    // ]]>
+  </script>
+  
 </head>
 
 <body>

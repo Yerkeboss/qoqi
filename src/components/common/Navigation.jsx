@@ -16,7 +16,7 @@ import Badge from './Badge';
 import SearchBar from './SearchBar';
 import logo1 from '../../images/logo1.png';
 import logo2 from '../../images/logo2.png';
-
+import translations from '../../translations.json';
 
 const Navigation = () => {
   const navbar = useRef(null);
@@ -24,6 +24,7 @@ const Navigation = () => {
   const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [language, setLanguage] = useState('ru');
 
   const store = useSelector((state) => ({
     basketLength: state.basket.length,
@@ -65,10 +66,29 @@ const Navigation = () => {
     window.addEventListener('scroll', scrollHandler);
     window.addEventListener('resize', handleWindowResize);
     document.addEventListener('click', toggleDropdown);
+    const languageMap = {
+      казахский: 'kk',
+      русский: 'ru',
+      английский: 'en'
+      // add more languages as needed
+    };
+
+    // MutationObserver to detect language changes in Google Translate
+    const observer = new MutationObserver(() => {
+      const langElement = document.querySelector('.goog-te-gadget-simple span:first-child');
+      if (langElement) {
+        const selectedLanguage = langElement.innerText.toLowerCase();
+        setLanguage(languageMap[selectedLanguage] || 'ru');
+      }
+      console.log('langElement', langElement);
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
     return () => {
       window.removeEventListener('scroll', scrollHandler);
       window.removeEventListener('resize', handleWindowResize);
       document.removeEventListener('click', toggleDropdown);
+      observer.disconnect();
     };
   }, [windowWidth]);
 
@@ -100,6 +120,8 @@ const Navigation = () => {
     return null;
   }
 
+  const getTranslatedText = (key) => (translations[language] && translations[language][key] ? translations[language][key] : key);
+
 
   return (
     <nav className="navigation" ref={navbar}>
@@ -128,31 +150,35 @@ const Navigation = () => {
             activeClassName="navigation-menu-active"
             exact
             to={ROUTE.HOME}
+            className="capitalize-menu"
+            data-notranslate
           >
-            Главная
+            {getTranslatedText('home')}
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="navigation-menu-active" to={ROUTE.EVENTS}>
-            Мероприятия
+          <NavLink activeClassName="navigation-menu-active" to={ROUTE.EVENTS} data-notranslate className="capitalize-menu">
+            {getTranslatedText('events')}
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="navigation-menu-active" to={ROUTE.SHOP}>
-            Маркетплейс
+          <NavLink activeClassName="navigation-menu-active" to={ROUTE.SHOP} data-notranslate className="capitalize-menu">
+            {getTranslatedText('shop')}
           </NavLink>
         </li>
         <li>
           <NavLink
             activeClassName="navigation-menu-active"
             to={ROUTE.EDUCATION}
+            className="capitalize-menu"
+            data-notranslate
           >
-            Обучение
+            {getTranslatedText('education')}
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="navigation-menu-active" to={ROUTE.ABOUT}>
-            О нас
+          <NavLink activeClassName="navigation-menu-active" to={ROUTE.ABOUT} data-notranslate className="capitalize-menu">
+            {getTranslatedText('about')}
           </NavLink>
         </li>
       </ul>
@@ -218,8 +244,9 @@ const Navigation = () => {
                     onClick={onClickLink}
                     to={ROUTE.SIGNIN}
                     style={{ borderRadius: '1vw' }}
+                    data-notranslate
                   >
-                    Вход
+                    {getTranslatedText('signin')}
                   </Link>
                   <DownOutlined style={{ fontSize: '1.2rem', marginLeft: '1rem' }} />
 
@@ -228,16 +255,18 @@ const Navigation = () => {
                     <Link
                       to={ROUTE.SIGNUP}
                       className="user-nav-sub-link"
+                      data-notranslate
                     >
-                      Зарегистрироваться
+                      {getTranslatedText('signup')}
 
                     </Link>
 
                     <Link
                       to={ROUTE.SIGNIN}
                       className="user-nav-sub-link"
+                      data-notranslate
                     >
-                      Вход
+                      {getTranslatedText('signin')}
 
                     </Link>
                   </div>
@@ -251,8 +280,9 @@ const Navigation = () => {
       onClick={onClickLink}
       to={ROUTE.SIGNUP}
       style={{ borderRadius: '1vw' }}
+      data-notranslate
     >
-      Зарегистрироваться
+        {getTranslatedText('signup')}
     </Link>
             )}
     {pathname !== ROUTE.SIGNIN && (
@@ -261,8 +291,9 @@ const Navigation = () => {
       onClick={onClickLink}
       to={ROUTE.SIGNIN}
       style={{ borderRadius: '1vw' }}
+      data-notranslate
     >
-      Вход
+        {getTranslatedText('signin')}
     </Link>
             )}
   </li>

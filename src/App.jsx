@@ -13,7 +13,7 @@ const App = ({ store, persistor }) => {
         pageLanguage: 'ru', // Assuming the default language is Russian
         includedLanguages: 'kk,ru,en', // Kazakh, Russian, English
         autoDisplay: false,
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
       },
       'google_translate_element'
     );

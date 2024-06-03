@@ -1,0 +1,30 @@
+{
+  "kk": {
+    "home": "Басты бет",
+    "events": "Іс-шаралар",
+    "shop": "Маркетплейс",
+    "education": "Үйрену",
+    "about": "Біз туралы",
+    "signin": "Кіру",
+    "signup": "Тіркелу"
+  },
+  "en": {
+    "home": "Home",
+    "events": "Events",
+    "shop": "Shop",
+    "education": "Education",
+    "about": "About",
+    "signin": "Signin",
+    "signup": "Signup"
+  },
+  "ru": {
+    "home": "Главная",
+    "events": "Мероприятия",
+    "shop": "Маркетплейс",
+    "education": "Обучение",
+    "about": "О нас",
+    "signin": "Войти",
+    "signup": "Зарегистрироваться"
+  }
+
+}

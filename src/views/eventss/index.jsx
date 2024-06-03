@@ -14,6 +14,7 @@ import {
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Firebase from '../../services/firebase';
+import translations from '../../translations.json';
 
 const Event = () => {
   useDocumentTitle('Qoqiqaz | Events');
@@ -22,6 +23,7 @@ const Event = () => {
   const [loading, setLoading] = useState(true);
   const [numColumns, setNumColumns] = useState(3);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
+  const [language, setLanguage] = useState('ru');
 
   const store2 = useSelector(
     (state) => ({
@@ -46,6 +48,22 @@ const Event = () => {
         setLoading(false);
       }
     };
+    const languageMap = {
+      казахский: 'kk',
+      русский: 'ru',
+      английский: 'en'
+      // add more languages as needed
+    };
+    const observer = new MutationObserver(() => {
+      const langElement = document.querySelector('.goog-te-gadget-simple span:first-child');
+      if (langElement) {
+        const selectedLanguage = langElement.innerText.toLowerCase();
+        setLanguage(languageMap[selectedLanguage] || 'ru');
+      }
+      console.log('langElement', langElement);
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
     const handleResize = () => {
       const windowWidth = window.innerWidth;
       if (windowWidth >= 1200) {
@@ -70,14 +88,20 @@ const Event = () => {
     fetchEvents();
     return () => {
       window.removeEventListener('resize', handleResize);
+      observer.disconnect();
     };
   }, [Firebase]);
+
+  const getTranslatedText = (key) => (translations[language] && translations[language][key] ? translations[language][key] : key);
 
   return (
     <main className="content">
       <div className="home">
         <div className="scrollable-events">
-          <h2 className="home-title">Мероприятия</h2>
+          <h2 className="home-title" data-notranslate>
+            {' '}
+            {getTranslatedText('events')}
+          </h2>
           {isMobile ? (
             <>
               {events.map((event, index) => (
