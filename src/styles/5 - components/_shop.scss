@@ -160,15 +160,15 @@ width:99%;
 
 @media (max-width: 480px) {
   .shop-text {
-    font-size: 2vw;
+    font-size: 2rem;
   }
 
   .shop-text-active {
-    font-size: 2vw;
+    font-size: 2rem;
   }
   .shop-title {
     margin-top: 1.5rem;
   }
-  .shop-button-active {padding:1rem;height:3rem;}
-  .shop-button {padding:1rem;height:3rem;}
+  .shop-button-active {padding:1rem;height:5rem;border-radius:1rem;}
+  .shop-button {padding:1rem;height:5rem; border-radius: 1rem;}
 }

@@ -182,9 +182,11 @@ const Navigation = () => {
           </NavLink>
         </li>
       </ul>
-      <div id="google_translate_element" />
+      <div id="google_translate_element" className="translate-widget" />
       <ul className="navigation-menu">
-        <SearchBar />
+        <li className="navigation-menu-item">
+          <SearchBar />
+        </li>
         <li className="navigation-menu-item">
           <NavLink
             style={{ border: 'none', backgroundColor: 'transparent' }}
@@ -229,7 +231,7 @@ const Navigation = () => {
           </li>
         ) : (
           <>
-            {windowWidth <= 800 ? (
+            {windowWidth <= 900 ? (
               <li className="navigation-menu-item-avatar">
                 <div
                   className="user-nav"
@@ -302,7 +304,7 @@ const Navigation = () => {
         )}
       </ul>
       {showMenu && (
-      <BigMenu handleClick={handleClick} />
+      <BigMenu handleClick={handleClick} pathname={pathname} basketDisabledpathnames={basketDisabledpathnames} store={store} windowWidth={windowWidth} />
         )}
     </nav>
   );

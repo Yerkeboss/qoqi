@@ -46,7 +46,7 @@ const Step1 = (props) => {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
           <h2 style={{ color: '#12141799' }}>Шаг 1</h2>
-          <h2>Какой специалист вам нужен? </h2>
+          <h2 className="order-title">Какой специалист вам нужен? </h2>
         </div>
         <Button
           onClick={_next}

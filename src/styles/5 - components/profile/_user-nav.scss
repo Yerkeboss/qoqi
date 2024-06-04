@@ -85,6 +85,12 @@
 .user-sub-open > .user-nav-sub {
   display: block;
 }
+@media (max-width: 1100px) {
+  .user-nav {
+    margin-top:0.5vw;
+    margin-right: 0.5rem;
+  }
+}
 
 @media (max-width: 1000px) {
   .user-nav {
@@ -101,6 +107,10 @@
     width: 4vw;
     height: 4vw;
   }
+  .user-nav {
+    margin-top:0.5vw;
+    margin-right: 1rem;
+  }
 }
 
 @media (max-width: 550px) {
@@ -116,6 +126,7 @@
 @media (max-width: 500px) {
   .user-nav {
     margin-top:1vw;
+    margin-right: 1rem;
   }
 }
 

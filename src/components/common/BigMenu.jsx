@@ -1,8 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell, faPlus, faBars } from '@fortawesome/free-solid-svg-icons';
+import { ShoppingOutlined, DownOutlined } from '@ant-design/icons';
+import SearchBar from './SearchBar';
+import BasketToggle from '../basket/BasketToggle';
+import Badge from './Badge';
 
-const BigMenu = ({ handleClick }) => {
+const BigMenu = ({
+  handleClick, basketDisabledpathnames, pathname, store, windowWidth
+}) => {
   const bigMenuRef = useRef(null);
 
   useEffect(() => {
@@ -127,7 +135,10 @@ const BigMenu = ({ handleClick }) => {
             ресурсы
           </p>
         </div>
-        <div style={{ marginTop: '2vw' }}>
+        <div style={{ marginTop: '2.5vw' }}>
+          <div className="new-menu1">
+            <SearchBar />
+          </div>
           <Button className="menu-button">
             <p>Фотографии</p>
           </Button>
@@ -145,6 +156,14 @@ const BigMenu = ({ handleClick }) => {
           </Button>
         </div>
         <div style={{ marginTop: '2vw' }}>
+          <div className="new-menu2">
+            <FontAwesomeIcon
+              icon={faBell}
+              className="bell"
+              onClick={() => handleClick('/client/add/product')}
+              style={{ marginBottom: '2vw' }}
+            />
+          </div>
           <Button className="menu-button">
             <p>Музыка</p>
           </Button>
@@ -161,20 +180,94 @@ const BigMenu = ({ handleClick }) => {
             <p>Краудсорсинг</p>
           </Button>
         </div>
-        <div style={{ marginTop: '2vw' }}>
-          <Button className="menu-button">
-            <p>Дизайн</p>
-          </Button>
-          <Button className="menu-button">
-            <p>3D ART</p>
-          </Button>
-          <Button className="menu-button">
-            <p>Инсталляции</p>
-          </Button>
-          <Button className="menu-button">
-            <p>Граффити</p>
-          </Button>
-        </div>
+        <>
+          {windowWidth <= 480 ? (
+            <>
+              <div style={{ marginTop: '2vw' }}>
+                <div className="new-menu3">
+                  <BasketToggle>
+                    {({ onClickToggle }) => (
+                      <button
+                        className="button-link navigation-menu-link basket-toggle"
+                        disabled={basketDisabledpathnames.includes(pathname)}
+                        onClick={onClickToggle}
+                        type="button"
+                        style={{ marginTop: '-1vw', marginLeft: '-1.5rem' }}
+                      >
+                        <Badge count={store.basketLength}>
+                          <ShoppingOutlined className="basket-icon" />
+                        </Badge>
+                      </button>
+                    )}
+                  </BasketToggle>
+                </div>
+                <Button className="menu-button">
+                  <p>Дизайн</p>
+                </Button>
+                <Button className="menu-button">
+                  <p>3D ART</p>
+                </Button>
+              </div>
+              <div style={{ marginTop: '2vw' }}>
+                <div className="new-menu3-1">
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    className="bell"
+                    onClick={() => handleClick('/client/add/product')}
+                    style={{ marginBottom: '2vw' }}
+                  />
+                </div>
+                <Button className="menu-button">
+                  <p>Инсталляции</p>
+                </Button>
+                <Button className="menu-button">
+                  <p>Граффити</p>
+                </Button>
+              </div>
+            </>
+          ) : (
+            <div style={{ marginTop: '2vw' }}>
+              <div className="new-menu3">
+                <BasketToggle>
+                  {({ onClickToggle }) => (
+                    <button
+                      className="button-link navigation-menu-link basket-toggle"
+                      disabled={basketDisabledpathnames.includes(pathname)}
+                      onClick={onClickToggle}
+                      type="button"
+                      style={{ marginTop: '-1vw', marginLeft: '-1.5rem' }}
+                    >
+                      <Badge count={store.basketLength}>
+                        <ShoppingOutlined className="basket-icon" />
+                      </Badge>
+                    </button>
+                  )}
+                </BasketToggle>
+              </div>
+              <div className="new-menu3-1">
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className="bell"
+                  onClick={() => handleClick('/client/add/product')}
+                  style={{ marginBottom: '2vw' }}
+                />
+              </div>
+              <Button className="menu-button">
+                <p>Дизайн</p>
+              </Button>
+              <Button className="menu-button">
+                <p>3D ART</p>
+              </Button>
+
+              <Button className="menu-button">
+                <p>Инсталляции</p>
+              </Button>
+              <Button className="menu-button">
+                <p>Граффити</p>
+              </Button>
+            </div>
+          )}
+        </>
       </div>
     </Box>
   );

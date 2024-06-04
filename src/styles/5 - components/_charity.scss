@@ -181,10 +181,38 @@
 @media (max-width: 450px) { 
 
   .charity-grid {
-    grid-template-columns: repeat(auto-fit, minmax(calc(100% - 0.5vw), 1fr));
-   }
+    grid-template-columns: repeat(auto-fit, minmax(calc(33% - 0.5vw), 1fr));
+  margin-top: 1.5rem;
+  }
+  .charity-card {
+    margin-top: 1.5rem;
+    margin-left: 0.5rem;
+  }
+  .charity-card-name {
+    width: 80%;
+    font-size: 1.6rem;
+  }
+  .charity-card-position {
+    width: 70%;
+    font-size: 1.2rem;
+  }
+  .charity2-card {
+    margin-top: 1.5rem;
+    margin-left: 0.5rem;
+  }
+  .charity2-name {
+margin-left: 1rem;
+    font-size: 1.8rem;
+  }
+  .charity2-position {
+    font-size: 1.8rem;
+    margin-left: 1rem;
+  }
    .heart-icon {
     font-size: 4vw;
-
+  }
+  .image2 {
+    width: 7rem;
+    height: 7rem;
   }
 }

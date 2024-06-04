@@ -9,6 +9,8 @@ import {
   FormControlLabel,
   Radio
 } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendar, faWallet } from '@fortawesome/free-solid-svg-icons';
 
 const Step3 = (props) => {
   const {
@@ -60,7 +62,7 @@ const Step3 = (props) => {
             type="submit"
             className="next-btn"
           >
-            <p className="next-btn-text">Опубликовать вакансию</p>
+            <p className="next-btn-text">Опубликовать</p>
           </Button>
         </div>
       </div>
@@ -100,7 +102,7 @@ const Step3 = (props) => {
             className="form-control"
           />
         </RadioGroup>
-
+        <br />
         <p className="task-budget">
           Определите бюджет за ваш проект
         </p>
@@ -112,6 +114,10 @@ const Step3 = (props) => {
             className={monthly ? 'budget-btn-active' : 'budget-btn'}
             onClick={monthButton}
           >
+            <FontAwesomeIcon
+              icon={faCalendar}
+              className="budget-icon"
+            />
             <p className="budget-text">Ежемесячно</p>
           </Button>
           <Button
@@ -119,6 +125,10 @@ const Step3 = (props) => {
             onClick={projectButton}
             style={{ marginLeft: '1vw' }}
           >
+            <FontAwesomeIcon
+              icon={faWallet}
+              className="budget-icon"
+            />
             <p className="budget-text">Проектно</p>
           </Button>
         </div>

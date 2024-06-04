@@ -49,7 +49,7 @@
 
 .user-profile-banner-img {
   width: 100%;
-  height: 50%;
+  height: 100%;
   object-fit: fill;
   // position: absolute;
   // left: 0;
@@ -265,22 +265,39 @@
 }
 
 @media (max-width: 767px) { 
-  .user-profile-banner-wrapper {
-display: none;
-  }
+//   .user-profile-banner-wrapper {
+// display: none;
+//   }
+.user-profile-banner {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  margin-bottom: 3rem;
+}
+
+.profile-icons-container {
+  margin-left: -3rem;
+}
+
+.profile-descr {
+  margin-left: -3rem;
+  font-size: 1.4rem;
+  width: 80%;
+}
   .user-profile {
     width: 100%;
-  }
-
-  .profile-actions {
-  width:100%;
   }
 
   .user-orders-container {
     height: 35rem;
   }
   .user-profile-container {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
   .user-profile-block {
     display: flex;
@@ -291,24 +308,71 @@ display: none;
 width:100%;
 margin-left: 0;
   }
-.user-profile-avatar-wrapper {
-  width: 60%;
-  height:60%;
-  margin-top: 0;
+  .user-profile-avatar-wrapper {
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
   .user-profile-img {
-    width:100%;
-    height:100%;
+    width:22rem;
+    height:22rem;
   }
   .profile-button {
     margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .profile-btn-txt {
+    font-size: 2rem;
+  }
+  .user-subscribe-button {
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 4rem;
+  }
+
+  .user-message-button{
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 4rem;
+  }
+
+  .user-btn-txt {
+    font-size: 2rem;
+  }
+
+  .user-btn-icon {
+    font-size: 2rem;
+  }
+
+  .user-btn-txt2 {
+    font-size: 2rem;
+  }
+
+  .user-btn-icon2 {
+    font-size: 2rem;
   }
 
 .user-profile-name {
-  font-size: 2vw;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 .user-profile-position {
-  font-size: 2vw;
+  font-size: 1.8rem;
+  margin-top: 1rem;
+}
+.user-profile-details {
+  margin-right: 4rem;
+}
+.user-profile-banner-img {
+  width: 100%;
+  height: 20rem;
+  object-fit: fill;
 }
 }
 
@@ -362,4 +426,65 @@ margin-left: 0;
 .user-btn-txt2 {
   font-size: 2vw;
 }
+}
+
+@media (max-width: 450px) { 
+  .user-profile-banner-img {
+  height: 12rem;
+  }
+  .profile-actions {
+    margin-bottom: 0rem;
+    margin-top: 2rem;
+  }
+  .user-profile-details {
+    margin-right: 1rem;
+  }
+  .profile-icons-container {
+    margin-left: 0rem;
+  }
+  .user-profile-position {
+    margin-bottom: 0rem;
+  }
+  .profile-button {
+    border-radius:1rem;
+  }
+  .profile-btn-txt {
+    font-size: 1.5rem;
+  }
+
+  .user-subscribe-button {
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 4rem;
+    border-radius:1rem;
+  }
+
+  .user-message-button{
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 4rem;
+    border-radius:1rem;
+  }
+
+  .user-btn-txt {
+    font-size: 1.5rem;
+  }
+
+  .user-btn-icon {
+    font-size: 1.5rem;
+  }
+
+  .user-btn-txt2 {
+    font-size: 1.5rem;
+  }
+
+  .user-btn-icon2 {
+    font-size: 1.5rem;
+  }
+  .profile-item {
+    margin-bottom: 0rem;
+  }
+
 }

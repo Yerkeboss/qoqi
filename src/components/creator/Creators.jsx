@@ -180,7 +180,7 @@ const Creators = () => {
                   <div className="creators-card" key={user?.id}>
                     <div className="creators-card-content">
                       <div className="creators-card-img-wrapper" onClick={() => onClickUser(user.id)}>
-                        <Image src={user?.avatar} />
+                        <Image src={user?.avatar} className="img-avatar" />
                       </div>
                       <div className="creators-details">
                         <h2 className="creators-card-name" onClick={() => onClickUser(user.id)}>{user.fullname}</h2>

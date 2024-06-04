@@ -137,7 +137,7 @@ const Croud = () => {
                           {croud?.label}
                         </p>
                       </div>
-                      <Image style={{ width: '100%' }} src={croud?.image} />
+                      <Image style={{ width: '100%' }} src={croud?.image} className="croud-img" />
                     </Card.Body>
                   </Card>
                 ))}

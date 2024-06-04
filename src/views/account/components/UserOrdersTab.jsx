@@ -5,14 +5,12 @@ import { useFeaturedProducts, useUserId } from '@/hooks'; // Import the useUserI
 import { ProductGrid, ProductList, ProductShowcaseGrid } from '../../../components/product';
 import { MessageDisplay } from '@/components/common';
 import { selectFilter } from '@/selectors/selector';
-import 'firebase/firestore'; // Import Firestore
+import 'firebase/firestore';
+import { ImageLoader } from '@/components/common';
 
-const UserOrdersTab = (props) => {
+const UserOrdersTab = ({ props, windowWidth, profile }) => {
   const [products, setProducts] = useState([]);
   const userId = useUserId(); // Get the user's ID using the custom hook
-  const {
-    isLoading, requestStatus, children
-  } = props;
   const {
     featuredProducts,
     fetchFeaturedProducts,
@@ -36,21 +34,40 @@ const UserOrdersTab = (props) => {
   }, []);
 
   const userProducts = products.filter((product) => product.userId === userId);
-  if (userProducts.length === 0 && !isLoading) {
+  if (userProducts.length === 0 && !isLoadingFeatured) {
     return (
       <MessageDisplay
-        message={requestStatus?.message || 'Работы не найдены'}
+        message={props?.requestStatus?.message || 'Работы не найдены'}
       />
     );
   }
   return (
-    <div>
-      <h3>Портфолио</h3>
-      <div style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
-        {/* <ProductGrid products={userProducts} /> */}
-        <ProductShowcaseGrid products={userProducts} />
-      </div>
-    </div>
+    <>
+      {windowWidth <= 767 ? (
+        <div>
+          <h3>Портфолио</h3>
+          <div className="user-profile-banner-wrapper">
+            <ImageLoader
+              alt="Banner"
+              className="user-profile-banner-img"
+              src={profile?.banner}
+            />
+          </div>
+          <div style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
+            {/* <ProductGrid products={userProducts} /> */}
+            <ProductShowcaseGrid products={userProducts} />
+          </div>
+        </div>
+      ) : (
+        <div>
+          <h3>Портфолио</h3>
+          <div style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
+            {/* <ProductGrid products={userProducts} /> */}
+            <ProductShowcaseGrid products={userProducts} />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

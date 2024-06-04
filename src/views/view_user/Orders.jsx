@@ -3,11 +3,11 @@ import firebase from 'firebase/app'; // Import Firebase
 import { useParams } from 'react-router-dom';
 import { useFeaturedProducts, useUser } from '@/hooks'; // Import the useUserId hook
 import { ProductShowcaseGrid } from '../../components/product';
-import { MessageDisplay } from '@/components/common';
+import { MessageDisplay, ImageLoader } from '@/components/common';
 import 'firebase/firestore';
 
 
-const Orders = () => {
+const Orders = ({ windowWidth }) => {
   const [products, setProducts] = useState([]);
   const { id } = useParams();
   const {
@@ -45,13 +45,32 @@ const Orders = () => {
     );
   }
   return (
-    <div>
-      <h3>Портфолио</h3>
-      <div style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
-        {/* <ProductGrid products={userProducts} /> */}
-        <ProductShowcaseGrid products={userProducts} />
-      </div>
-    </div>
+    <>
+      {windowWidth <= 767 ? (
+        <div>
+          <h3>Портфолио</h3>
+          <div className="user-profile-banner-wrapper" style={{ marginBottom: '1rem' }}>
+            <ImageLoader
+              alt="Banner"
+              className="user-profile-banner-img"
+              src={user?.banner}
+            />
+          </div>
+          <div style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
+            {/* <ProductGrid products={userProducts} /> */}
+            <ProductShowcaseGrid products={userProducts} />
+          </div>
+        </div>
+      ) : (
+        <div>
+          <h3>Портфолио</h3>
+          <div style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
+            {/* <ProductGrid products={userProducts} /> */}
+            <ProductShowcaseGrid products={userProducts} />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

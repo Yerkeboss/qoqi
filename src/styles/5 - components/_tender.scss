@@ -306,7 +306,53 @@ line-height: 2.4vw;
 
 @media (max-width: 450px) {
   .tender-grid {
-    grid-template-columns: repeat(auto-fit, minmax(calc(100% - 0.5vw), 1fr)); /* Adjusted */
+    margin-top: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(calc(50% - 0.5vw), 1fr)); /* Adjusted */
+  }
+  .tender-date {
+    font-size: 1.6rem;
+    height: 3rem;
+  }
+  .bookmark-icon-wrapper {
+    height: 3rem;
+    width: 3rem;
+  }
+  .bookmark-icon {
+    font-size: 1.6rem;
+  }
+  .tender-team {
+    font-size: 1.6rem;
+  }
+  .tender-position {
+    font-size: 1.2rem;
+  }
+  .tender-type-txt {
+    font-size: 1.2rem;
+  }
+  .tender-type {
+    height:2.5rem;
+  }
+  .tender-level {
+    height:2.5rem;
+  }
+  .tender-price-txt {
+    font-size: 1.4rem;
+    width: 100%;
+  }
+  .tender-location {
+    font-size: 1rem;
+    width: 100%;
+    text-wrap: nowrap;
+  }
+  .message-send-btn {
+    height: 3rem;
+  }
+  .message-icon {
+    font-size: 0.8rem;
+  }
+  .message-send-txt {
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
   }
   .tender-name {
 

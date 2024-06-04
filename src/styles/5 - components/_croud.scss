@@ -12,6 +12,7 @@
 .croud-date {
   display: flex;
   justify-content: center;
+  align-items:center;
   background: white;
   width: fit-content;
   border-radius: 1vw;
@@ -31,6 +32,7 @@
 .croud-label {
   display: flex;
   justify-content: center;
+  align-items:center;
   width: 30vw;
   margin-left: 2vw;
   position: absolute;
@@ -66,4 +68,28 @@
   .croud-card {
 margin-left: 0;
   }
+}
+
+@media (max-width: 450px) { 
+  .croud-container {
+    margin-top: 1rem;
+  }
+  .croud-date {
+    height: 3rem;
+  }
+.croud-date-txt {
+  font-size: 1.2rem;
+}
+.croud-label {
+  height: 3rem;
+  width: 70%;
+  margin-top: 20rem;
+}
+.croud-label-txt {
+font-size: 1.4rem;
+text-wrap: nowrap;
+}
+.croud-img {
+  height: 25rem;
+}
 }

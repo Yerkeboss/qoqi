@@ -176,3 +176,16 @@
     font-size: 2.7vw;
     }
 }
+
+@media (max-width: 550px) {
+  .creators-grid {
+    margin-top: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(calc(33% - 0.5vw), 1fr)); 
+  }
+  .img-avatar {
+    width: 85%;
+  }
+  .creators-card-name {
+    width:80%;
+  }
+}
