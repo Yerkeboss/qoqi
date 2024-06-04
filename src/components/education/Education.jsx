@@ -17,6 +17,7 @@ const Education = () => {
   const [courses, setCourses] = useState([]);
   const [eduInfo, setEduInfo] = useState([]);
   const history = useHistory();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const userId = useUserId();
 
   const toggleInfo = () => {
@@ -25,6 +26,9 @@ const Education = () => {
   };
 
   const userCourses = courses.filter((course) => course.userId === userId);
+  const handleWindowResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -37,10 +41,14 @@ const Education = () => {
       const eduData = eduCollection.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setEduInfo(eduData);
     };
+    window.addEventListener('resize', handleWindowResize);
     fetchCourses();
     fetchEduInfo();
     toggleInfo();
-  }, []);
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, [windowWidth]);
 
   const toggleContacts = () => {
     setShowInfo(false);

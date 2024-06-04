@@ -258,13 +258,18 @@ margin-top: 1vw;
      }
      .about-card1-descr-details {
       font-size: 3vw;
+      margin-left: 1rem;
     }
+
     .about-card1-container {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       padding-top: 1.5rem;
+    }
+    .about-card1-descr {
+      margin-left: 1rem;
     }
     .about-card1-descr-txt { 
       font-size: 3vw;
@@ -272,8 +277,16 @@ margin-top: 1vw;
 
       .about-card3-descr {
         font-size: 3vw;
+        margin-left: 1rem;
       }
 
+      .about-card4 {
+        align-items:flex-start;
+      }
+
+      .about-card4-details {
+        margin-left: 1rem;
+      }
       .toggle-txt2 {
         font-size: 3vw;
       }
