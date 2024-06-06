@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import firebase from 'firebase/app';
 import { ContactlessOutlined, HistoryRounded } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLongArrowLeft, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import { ArrowLeftOutlined, LoadingOutlined } from '@ant-design/icons';
 import Firebase from '../../services/firebase';
@@ -26,6 +26,8 @@ const Chat = () => {
   const [chats, setChats] = useState([]);
   const [receivers, setReceivers] = useState([]);
   const history = useHistory();
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // Function to handle click on user
 
@@ -33,9 +35,13 @@ const Chat = () => {
   const { profile } = useSelector((state) => ({
     profile: state.profile
   }));
+  const handleWindowResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
   // await this.db.collection('chats').doc(conversationId).collection('messages').add(messageData);
 
   useEffect(() => {
+    window.addEventListener('resize', handleWindowResize);
     const fetchChatsAndUsers = async () => {
       try {
         // Query chats where the current user is the sender
@@ -71,10 +77,13 @@ const Chat = () => {
       } catch (error) {
         console.error('Error fetching chats:', error);
       }
+      return () => {
+        window.removeEventListener('resize', handleWindowResize);
+      };
     };
 
     fetchChatsAndUsers();
-  }, [userId, chats]);
+  }, [userId, chats, windowWidth]);
 
 
   const uniqueReceivers = receivers.filter((receiver, index) => receivers.findIndex((r) => r.id === receiver.id) === index);
@@ -94,6 +103,7 @@ const Chat = () => {
   };
 
   const handleChoose = (userId) => {
+    setSelectedUser(userId);
     history.push(`/chat/${userId}`);
   };
 
@@ -101,110 +111,198 @@ const Chat = () => {
     history.push('/creators');
   };
 
+  const handleBackToSidebar = () => {
+    setSelectedUser(false);
+  };
+
   const onClickUser = (userId) => {
     history.push(`/user/${userId}`);
   };
 
 
+  const formatTimeDifference = (timestamp) => {
+    const now = Date.now();
+    const diffInMilliseconds = now - timestamp;
+    const diffInSeconds = Math.floor(diffInMilliseconds / 1000);
+
+    if (diffInSeconds < 60) {
+      return 'сейчас';
+    } if (diffInSeconds < 3600) {
+      return `${Math.floor(diffInSeconds / 60)} минут`;
+    } if (diffInSeconds < 86400) {
+      return `${Math.floor(diffInSeconds / 3600)} часов`;
+    }
+    return `${Math.floor(diffInSeconds / 86400)} дней`;
+  };
+
+  const convertFirestoreTimestampToMilliseconds = (timestamp) => timestamp.seconds * 1000 + Math.floor(timestamp.nanoseconds / 1000000);
+
+
   return (
-    <div>
-      {user && (
-      <div className="main-page">
-        <div className="container-page">
-          {/* {isLoading && (
-          <div className="loader">
-            <br />
-            <LoadingOutlined style={{ fontSize: '3rem' }} />
+    <>
+      {windowWidth <= 650 ? (
+        <div>
+          {user && (
+          <div className="main-page">
+            <div className={`container-page ${selectedUser ? 'show-chat' : 'show-sidebar'}`}>
+              {!selectedUser && (
+              <div className="sidebar">
+                <div className="navbar">
+                  <p className="navbar-title">Сообщения </p>
+                </div>
+                {uniqueReceivers?.map((receiver) => {
+                  const messagesWithReceiver = chats.filter(
+                    (chat) => (chat.senderId === userId && chat.receiverId === receiver.id)
+                              || (chat.senderId === receiver.id && chat.receiverId === userId)
+                  );
+                  const sortedMessages = messagesWithReceiver.sort((a, b) => b.timestamp - a.timestamp);
+                  const lastMessage = sortedMessages.length > 0 ? sortedMessages[0].message : '';
+                  const lastMessageTimestamp = sortedMessages.length > 0 ? convertFirestoreTimestampToMilliseconds(sortedMessages[0].timestamp) : null;
+                  const lastMessageTime = lastMessageTimestamp ? formatTimeDifference(lastMessageTimestamp) : '';
+
+                  console.log('Timestamp:', sortedMessages[0]?.timestamp);
+                  console.log('Formatted Time:', lastMessageTime);
+
+                  return (
+                    <div className="userChat" onClick={() => handleChoose(receiver?.id)} key={receiver?.id}>
+                      <Image src={receiver?.avatar} />
+                      <div className="userChatInfo">
+                        <div>
+                          <p>{receiver?.fullname}</p>
+                          <p className="lastMessage">{lastMessage}</p>
+                        </div>
+                        <p className="lastMessageTime">{lastMessageTime}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              )}
+
+              {selectedUser && (
+              <div className="chat">
+                <div className="chat-container">
+                  <FontAwesomeIcon
+                    icon={faLongArrowLeft}
+                    className="back-sidebar"
+                    onClick={handleBackToSidebar}
+                  />
+                  <p className="chat-user-txt" onClick={() => onClickUser(user.id)}>{user?.fullname}</p>
+                  <FontAwesomeIcon
+                    icon={faExclamationCircle}
+                    className="back-sidebar"
+                    onClick={() => onClickUser(user.id)}
+                  />
+                </div>
+                <div className="messages">
+                  {chats
+                    .filter((chat) => (chat.senderId === userId && chat.receiverId === user.id)
+                                      || (chat.senderId === user.id && chat.receiverId === userId))
+                    .sort((a, b) => a.timestamp - b.timestamp)
+                    .map((chat, index) => (
+                      <div key={index} className={`message ${chat.senderId === userId && 'owner'}`}>
+                        <div className="messageContent">
+                          <p>{chat.message}</p>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+                <div className="input">
+                  <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="chat-textarea"
+                    placeholder="Сообщение"
+                  />
+                  <Button
+                    className="send-msg-btn"
+                    onClick={handleSendMessage}
+                  >
+                    <p style={{ color: 'white' }}>Отправить</p>
+                  </Button>
+                </div>
+              </div>
+              )}
+            </div>
           </div>
-          )} */}
-          <div className="sidebar">
-            <div className="navbar">
-              <div className="user">
-                <Image src={profile?.avatar} alt="" style={{ width: '3vw', height: '3vw' }} />
-                <p style={{ color: 'white', fontSize: '1vw' }}>{profile?.fullname}</p>
-                <Button
-                  style={{
-                    width: '4vw', height: '4vw', background: 'white', borderRadius: '1vw'
-                  }}
-                  onClick={handleBack}
-                >
-                  <p style={{ color: '#F28290', fontSize: '1vw' }}>Назад</p>
-                </Button>
+          )}
+        </div>
+      ) : (
+        <div>
+          {user && (
+          <div className="main-page">
+            <div className="container-page">
+              <div className="sidebar">
+                <div className="navbar">
+                  <div className="user">
+                    <Image src={profile?.avatar} alt="" className="user img" />
+                    <p className="profile-txt">{profile.fullname && profile.fullname.split(' ')[0]}</p>
+                    <Button className="back-btn" onClick={handleBack}>
+                      <p className="back-btn-txt">Назад</p>
+                    </Button>
+                  </div>
+                </div>
+                {uniqueReceivers?.map((receiver) => {
+                  const messagesWithReceiver = chats.filter(
+                    (chat) => (chat.senderId === userId && chat.receiverId === receiver.id)
+                             || (chat.senderId === receiver.id && chat.receiverId === userId)
+                  );
+                  const sortedMessages = messagesWithReceiver.sort((a, b) => b.timestamp - a.timestamp);
+                  const lastMessage = sortedMessages.length > 0 ? sortedMessages[0].message : '';
+
+                  return (
+                    <div className="userChat" onClick={() => handleChoose(receiver?.id)} key={receiver?.id}>
+                      <Image src={receiver?.avatar} />
+                      <div className="userChatInfo">
+                        <p>{receiver?.fullname}</p>
+                        <p className="lastMessage">{lastMessage}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="chat">
+                <div className="chat-container">
+                  <Image src={user?.avatar} className="chat-user-img" onClick={() => onClickUser(user.id)} />
+                  <p className="chat-user-txt" onClick={() => onClickUser(user.id)}>{user?.fullname}</p>
+                </div>
+                <div className="messages">
+                  {chats
+                    .filter((chat) => (chat.senderId === userId && chat.receiverId === user.id)
+                                     || (chat.senderId === user.id && chat.receiverId === userId))
+                    .sort((a, b) => a.timestamp - b.timestamp)
+                    .map((chat, index) => (
+                      <div key={index} className={`message ${chat.senderId === userId && 'owner'}`}>
+                        <div className="messageInfo">
+                          <Image src={chat.senderId === userId ? profile.avatar : user.avatar} alt="" />
+                        </div>
+                        <div className="messageContent">
+                          <p>{chat.message}</p>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+                <div className="input">
+                  <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="chat-textarea"
+                  />
+                  <Button
+                    className="send-msg-btn"
+                    onClick={handleSendMessage}
+                  >
+                    <p style={{ color: 'white' }}>Отправить</p>
+                  </Button>
+                </div>
               </div>
             </div>
-            {uniqueReceivers?.map((receiver) => {
-            // Find all messages between the current user and this receiver
-              const messagesWithReceiver = chats.filter((chat) => (chat.senderId === userId && chat.receiverId === receiver.id) || (chat.senderId === receiver.id && chat.receiverId === userId));
-              // Sort messages by timestamp to get the latest one
-              const sortedMessages = messagesWithReceiver.sort((a, b) => b.timestamp - a.timestamp);
-              // Get the last message
-              const lastMessage = sortedMessages.length > 0 ? sortedMessages[0].message : '';
-              // Get the sender's ID of the last message
-              // Determine if the user has been clicked
-
-              return (
-                <div className="userChat" onClick={() => handleChoose(receiver?.id)} key={receiver?.id}>
-                  <Image src={receiver?.avatar} />
-                  <div className="userChatInfo">
-                    <p>{receiver?.fullname}</p>
-                    <p className="lastMessage">{lastMessage}</p>
-                  </div>
-                  {/* You can add the notification circle logic here */}
-                </div>
-              );
-            })}
           </div>
-
-          <div className="chat">
-            <div style={{
-              display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#F28290', height: '6vw'
-            }}
-            >
-              <Image src={user?.avatar} style={{ width: '4vw', height: '4vw', borderRadius: '50%' }} onClick={() => onClickUser(user.id)} />
-              <p style={{ color: 'white', marginLeft: '1vw' }} onClick={() => onClickUser(user.id)}>{user?.fullname}</p>
-            </div>
-            <div className="messages">
-              {/* Sort chats by timestamp before rendering */}
-              {chats
-                .filter((chat) => (chat.senderId === userId && chat.receiverId === user.id)
-      || (chat.senderId === user.id && chat.receiverId === userId))
-                .sort((a, b) => a.timestamp - b.timestamp)
-                .map((chat, index) => (
-                  <div key={index} className={`message ${chat.senderId === userId && 'owner'}`}>
-                    <div className="messageInfo">
-                      <Image src={chat.senderId === userId ? profile.avatar : user.avatar} alt="" />
-                    </div>
-                    <div className="messageContent">
-                      <p>{chat.message}</p>
-                    </div>
-                  </div>
-                ))}
-            </div>
-
-
-            <div className="input">
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                style={{
-                  width: '100%', height: '3vw', borderRadius: '1vw', fontSize: '1.2vw', resize: 'vertical'
-                }}
-              />
-              <Button
-                style={{
-                  borderRadius: '1vw', marginLeft: '1vw', display: 'flex', justifyContent: 'center', alignItems: 'center'
-                }}
-                className="creators-button"
-                onClick={handleSendMessage}
-              >
-                <p style={{ color: 'white' }}>Отправить</p>
-              </Button>
-            </div>
-          </div>
+          )}
         </div>
-      </div>
       )}
-    </div>
+    </>
   );
 };
 
