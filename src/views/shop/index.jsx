@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 import { ProductGrid } from '@/components/product';
 import {
   useDocumentTitle,
@@ -56,6 +58,7 @@ const Shop = () => {
   const onClickCharity = () => {
     history.push('/charityList');
   };
+  const [showVideo, setShowVideo] = useState(true);
 
   const store = useSelector(
     (state) => ({
@@ -69,6 +72,18 @@ const Shop = () => {
 
   return (
     <main className="content" style={{ marginTop: '2rem' }}>
+      {showVideo && (
+      <div className="video-player-container">
+        <FontAwesomeIcon icon={faX} className="close-button" onClick={() => setShowVideo(false)} />
+        <video autoPlay loop className="video-wrap">
+          <source
+            src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/videos%2FMARKETPLACE.MOV?alt=media&token=191a4f1a-080b-4b92-90ae-812a3c04e492"
+            type="video/mp4"
+            allowFullScreen
+          />
+        </video>
+      </div>
+      )}
       <div style={{ width: '100%' }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <h2 className="shop-title">Маркетплейс</h2>

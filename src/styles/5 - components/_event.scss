@@ -20,7 +20,24 @@
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
-
+.video-player-container {
+  position: fixed;
+  z-index: 9999;
+  display: flex;
+  flex-direction: row-reverse;
+  top:15rem;
+  right:6rem;
+}
+.video-wrap {
+  width: 20rem;
+  height: 20rem;
+  border-radius:50%;
+  object-fit: cover;
+}
+.close-button {
+  display: flex;
+font-weight: bolder;
+}
 .slick-prev:before {
   color: #1a1a1a;
 }
@@ -305,11 +322,24 @@
       left:0.7vw
     }
   }
+  .video-player-container {
+    top: 10rem;
+    right:2rem;
+  }
+  .video-wrap {
+    width:15rem;
+    height: 15rem;
+  }
+
 }
 
 @media (max-width: 400px) {
   .event-card-img {
     max-height: 20rem;
+  }
+  .video-wrap {
+    width:12rem;
+    height: 12rem;
   }
 }
 

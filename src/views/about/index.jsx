@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 import { useDocumentTitle, useScrollTop } from '@/hooks';
 import FirstRow from './FirstRow';
 import SecondRow from './SecondRow';
@@ -16,6 +18,7 @@ const About = () => {
   const [firstFloor, setFirstFloor] = useState(false);
   const [secondFloor, setSecondFloor] = useState(false);
   const [thirdFloor, setThirdFloor] = useState(false);
+  const [showVideo, setShowVideo] = useState(true);
 
   const toggleInfo = () => {
     setShowInfo(true);
@@ -64,6 +67,18 @@ const About = () => {
         marginTop: '3rem'
       }}
     >
+      {showVideo && (
+      <div className="video-player-container">
+        <FontAwesomeIcon icon={faX} className="close-button" onClick={() => setShowVideo(false)} />
+        <video autoPlay loop className="video-wrap">
+          <source
+            src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/videos%2FABOUT.MOV?alt=media&token=bba29c05-640e-4028-89d1-7049eca33300"
+            type="video/mp4"
+            allowFullScreen
+          />
+        </video>
+      </div>
+      )}
       <div className="education-container">
         {/* <div> */}
         <h2 className="education-title">О нас</h2>

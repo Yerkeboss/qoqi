@@ -6,6 +6,8 @@ import React, {
 import { useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 import { useDocumentTitle, useScrollTop } from '@/hooks';
 import { ImageLoader } from '@/components/common';
 import { ACCOUNT_EDIT, SAVED } from '@/constants/routes';
@@ -31,6 +33,7 @@ const UserAccount = () => {
   const handleWindowResize = () => {
     setWindowWidth(window.innerWidth);
   };
+  const [showVideo, setShowVideo] = useState(true);
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowResize);
@@ -42,6 +45,18 @@ const UserAccount = () => {
 
   return (
     <>
+      {showVideo && (
+      <div className="video-player-container">
+        <FontAwesomeIcon icon={faX} className="close-button" onClick={() => setShowVideo(false)} />
+        <video autoPlay loop className="video-wrap">
+          <source
+            src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/videos%2FPROFILE.MOV?alt=media&token=31fa0d9f-8f9e-408b-a07c-b4cff030f1ed"
+            type="video/mp4"
+            allowFullScreen
+          />
+        </video>
+      </div>
+      )}
       {windowWidth <= 767 ? (
         <div
           className="user-profile-container"

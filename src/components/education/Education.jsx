@@ -7,6 +7,8 @@ import 'firebase/firestore';
 import { useHistory } from 'react-router-dom';
 import Firebase from '../../services/firebase';
 import Courses from './Courses';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 
 const Education = () => {
   useDocumentTitle('Education | Qoqiqaz');
@@ -19,6 +21,7 @@ const Education = () => {
   const history = useHistory();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const userId = useUserId();
+  const [showVideo, setShowVideo] = useState(true);
 
   const toggleInfo = () => {
     setShowInfo(true);
@@ -101,6 +104,18 @@ const Education = () => {
         flexDirection: 'column'
       }}
     >
+      {showVideo && (
+      <div className="video-player-container">
+        <FontAwesomeIcon icon={faX} className="close-button" onClick={() => setShowVideo(false)} />
+        <video autoPlay loop className="video-wrap">
+          <source
+            src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/videos%2FEDUCATION.MOV?alt=media&token=bb0fc405-47a1-454e-b4e3-a3fc4923cdc6"
+            type="video/mp4"
+            allowFullScreen
+          />
+        </video>
+      </div>
+      )}
       <div className="education-container">
         <h2 className="education-title">Обучение</h2>
         <div className="toggle-btns">

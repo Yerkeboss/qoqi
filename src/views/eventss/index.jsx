@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { shallowEqual, useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import Carousel from 'react-grid-carousel';
+import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 import { MessageDisplay } from '@/components/common';
 import { useDocumentTitle, useScrollTop } from '@/hooks';
 import { selectFilterEvents } from '@/selectors/selectorEvent';
@@ -24,6 +27,7 @@ const Event = () => {
   const [numColumns, setNumColumns] = useState(3);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
   const [language, setLanguage] = useState('ru');
+  const [showVideo, setShowVideo] = useState(true);
 
   const store2 = useSelector(
     (state) => ({
@@ -97,6 +101,18 @@ const Event = () => {
   return (
     <main className="content">
       <div className="home">
+        {showVideo && (
+        <div className="video-player-container">
+          <FontAwesomeIcon icon={faX} className="close-button" onClick={() => setShowVideo(false)} />
+          <video autoPlay loop className="video-wrap">
+            <source
+              src="https://firebasestorage.googleapis.com/v0/b/qoqiqaz7.appspot.com/o/videos%2FEVENTS.MOV?alt=media&token=aeb62c1f-2e19-41e5-8e03-a5cba43acaef"
+              type="video/mp4"
+              allowFullScreen
+            />
+          </video>
+        </div>
+        )}
         <div className="scrollable-events">
           <h2 className="home-title" data-notranslate>
             {' '}
@@ -119,6 +135,7 @@ const Event = () => {
           )}
         </div>
       </div>
+
     </main>
   );
 };
